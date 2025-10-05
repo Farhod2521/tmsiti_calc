@@ -1146,7 +1146,7 @@
             try {
                 roomTypeSelect.innerHTML = '<option value="">Yuklanmoqda...</option>';
                 
-                const response = await fetch(`${API_BASE_URL}/room-categories/${categoryId}/`);
+                const response = await fetch(`${API_BASE_URL}/api/room-categories/${categoryId}/`);
                 if (!response.ok) {
                     throw new Error(`HTTP xatosi! Status: ${response.status}`);
                 }
