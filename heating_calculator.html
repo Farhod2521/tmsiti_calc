@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from madebydesignesia.com/themes/coolair/project-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Oct 2025 05:13:57 GMT -->
+<head>
+    <title>CoolAir — Air Conditioner & HVAC Repair Website Template</title>
+    <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
+    <meta content="CoolAir — Air Conditioner & HVAC Repair Website Template" name="description" >
+    <meta content="" name="keywords" >
+    <meta content="" name="author" >
+    <!-- CSS Files
+    ================================================== -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/plugins.css" rel="stylesheet" type="text/css" >
+    <link href="css/swiper.css" rel="stylesheet" type="text/css" >
+    <link href="css/style.css" rel="stylesheet" type="text/css" >
+    <link href="css/coloring.css" rel="stylesheet" type="text/css" >
+    <!-- color scheme -->
+    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .form-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .section-title {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            flex: 1;
+        }
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+        .step.active .step-icon {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .step.completed .step-icon {
+            background-color: #198754;
+            color: white;
+        }
+        .step-label {
+            font-size: 0.85rem;
+            text-align: center;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .step.active .step-label {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .step.completed .step-label {
+            color: #198754;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        .material-section {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .door-window-section {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ffeaa7;
+        }
+        .add-btn {
+            margin-top: 10px;
+        }
+        .door-window-item {
+            border-bottom: 1px dashed #dee2e6;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .door-window-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .remove-btn {
+            margin-top: 25px;
+        }
+        .area-display {
+            background-color: #d1edff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #0d6efd;
+        }
+        .area-value {
+            font-weight: bold;
+            color: #198754;
+            font-size: 1.1em;
+        }
+        .calculated-area {
+            background-color: #e7f7ef;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 3px solid #198754;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="float-text show-on-scroll">
+            <span><a href="#">Scroll to top</a></span>
+        </div>
+        <div class="scrollbar-v show-on-scroll"></div>
+        
+        <!-- page preloader begin -->
+        <div id="de-loader"></div>
+        <!-- page preloader close -->
+
+        <!-- header begin -->
+        <header class="header-light transparent scroll-light has-topbar">
+            <div id="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-between xs-hide">
+                                <div class="header-widget d-flex">
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-phone"></i>+929 333 9296</a></div>
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-envelope"></i>contact@coolair.com</a></div>
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-wall-clock"></i>Mon - Fri 08.00 - 18.00</a></div>
+                                </div>
+
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="de-flex sm-pt10">
+                            <div class="de-flex-col">
+                                <!-- logo begin -->
+                                <div id="logo">
+                                    <a href="index.html">
+                                        <img class="logo-main" src="images/logo-black.webp" alt="" >
+                                        <img class="logo-scroll" src="images/logo-black.webp" alt="" >
+                                        <img class="logo-mobile" src="images/logo-black.webp" alt="" >
+                                    </a>
+                                </div>
+                                <!-- logo close -->
+                            </div>
+                            <div class="de-flex-col header-col-mid">
+                                <ul id="mainmenu">
+                                    <li><a class="menu-item" href="#">Bosh sahifa</a>
+                             
+                                    </li>
+                      
+                                    <li><a class="menu-item" href="/">Biz haqimizda</a></li>
+                                    <li><a class="menu-item" href="/">Loyihalar</a>
+                          
+                                    </li>
+                                    <li><a class="menu-item" href="/">Blog</a></li>
+                       
+                                </ul>
+                            </div>
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">          
+                                    <a href="contact.html" class="btn-main bg-color-2">Schedule Now</a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+        <!-- content begin -->
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            <!-- section begin -->
+            <section id="subheader2">
+                <div class="container relative z-index">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 offset-lg-3 text-center">
+                
+                            <h1>Isitish kalkulyatori</h1>
+                            <p class="lead">Quyidagi formani to'ldirish orqali bino haqida ma'lumotlarni kiritishingiz mumkin</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="no-top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">                  
+                    <!-- Bosqichlar ko'rsatkichi -->
+                    <div class="step-indicator">
+                        <div class="step active" data-step="1">
+                            <div class="step-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="step-label">Hudud</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <div class="step-label">Bino Turi</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-icon">
+                                <i class="bi bi-aspect-ratio"></i>
+                            </div>
+                            <div class="step-label">Bino O'lchami</div>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-icon">
+                                <i class="bi bi-puzzle"></i>
+                            </div>
+                            <div class="step-label">Konstruksiyalar</div>
+                        </div>
+                        <div class="step" data-step="5">
+                            <div class="step-icon">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="step-label">Qo'shimcha</div>
+                        </div>
+                    </div>
+                    
+                    <form id="buildingForm">
+                        <!-- 1. Hudud tanlash bo'limi -->
+                        <div class="form-section active" id="step-1">
+                            <h3 class="section-title">
+                                <i class="bi bi-geo-alt"></i>
+                                Hudud
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="region" class="form-label required-field">Viloyat</label>
+                                    <select class="form-select" id="region" required>
+                                        <option value="" selected disabled>Viloyatni tanlang</option>
+                                        <!-- Viloyatlar JavaScript orqali yuklanadi -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="district" class="form-label required-field">Tuman</label>
+                                    <select class="form-select" id="district" required disabled>
+                                        <option value="" selected disabled>Avval viloyatni tanlang</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="navigation-buttons">
+                                <div></div> <!-- Bo'sh div chap tomonda -->
+                                <button type="button" class="btn btn-primary next-step" data-next="2">Keyingi <i class="bi bi-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- 2. Bino turi bo'limi -->
+                        <div class="form-section" id="step-2">
+                            <h3 class="section-title">
+                                <i class="bi bi-building"></i>
+                                Bino Turi
+                            </h3>
+                            <div class="mb-3">
+                                <label for="buildingType" class="form-label required-field">Bino turi</label>
+                                <select class="form-select" id="buildingType" required>
+                                    <option value="" selected disabled>Bino turini tanlang</option>
+                                    <option value="kasalxona">Kasalxona</option>
+                                    <option value="oshxona">Oshxona</option>
+                                    <option value="maktab">Maktab</option>
+                                    <option value="universitet">Universitet</option>
+                                    <option value="ofis">Ofis binosi</option>
+                                    <option value="do'kon">Do'kon</option>
+                                    <option value="turar-joy">Turar-joy binosi</option>
+                                    <option value="sanoat">Sanoat binosi</option>
+                                    <option value="sport">Sport majmuasi</option>
+                                    <option value="madaniyat">Madaniyat markazi</option>
+                                    <option value="boshqa">Boshqa</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="otherBuildingType" style="display: none;">
+                                <label for="customBuildingType" class="form-label">Bino turini kiriting</label>
+                                <input type="text" class="form-control" id="customBuildingType" placeholder="Bino turini kiriting">
+                            </div>
+                            <div class="navigation-buttons">
+                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                                <button type="button" class="btn btn-primary next-step" data-next="3">Keyingi <i class="bi bi-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Xona o'lchamlari bo'limi -->
+                        <div class="form-section" id="step-3">
+                            <h3 class="section-title">
+                                <i class="bi bi-aspect-ratio"></i>
+                                Bino O'lchami
+                            </h3>
+                            <div class="dimension-inputs">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="length" class="form-label required-field">Uzunlik (m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control dimension-input" id="length" min="0" step="0.1" required>
+                                            <span class="input-group-text">m</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="width" class="form-label required-field">Eni (m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control dimension-input" id="width" min="0" step="0.1" required>
+                                            <span class="input-group-text">m</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="height" class="form-label required-field">Balandligi (m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control dimension-input" id="height" min="0" step="0.1" required>
+                                            <span class="input-group-text">m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Avtomatik hisoblanadigan yuzalar -->
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="area-display text-center">
+                                            <h6>Devorlar Yuzasi</h6>
+                                            <div class="area-value" id="wallAreaDisplay">0 m²</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="area-display text-center">
+                                            <h6>Pol Yuzasi</h6>
+                                            <div class="area-value" id="floorAreaDisplay">0 m²</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="area-display text-center">
+                                            <h6>Tom Yuzasi</h6>
+                                            <div class="area-value" id="ceilingAreaDisplay">0 m²</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="navigation-buttons">
+                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                                <button type="button" class="btn btn-primary next-step" data-next="4">Keyingi <i class="bi bi-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Konstruksiyalar bo'limi -->
+                        <div class="form-section" id="step-4">
+                            <h3 class="section-title">
+                                <i class="bi bi-puzzle"></i>
+                                Konstruksiyalar
+                            </h3>
+                            
+                            <!-- Eshiklar qismi -->
+                            <div class="door-window-section">
+                                <h5 class="text-primary d-flex justify-content-between align-items-center">
+                                    <span>Eshiklar</span>
+                                    <button type="button" class="btn btn-sm btn-success add-btn" id="addDoor">
+                                        <i class="bi bi-plus"></i> Qo'shish
+                                    </button>
+                                </h5>
+                                <div id="doorsContainer">
+                                    <!-- Eshiklar bu yerda yuklanadi -->
+                                </div>
+                            </div>
+                            
+                            <!-- Derazalar qismi -->
+                            <div class="door-window-section">
+                                <h5 class="text-primary d-flex justify-content-between align-items-center">
+                                    <span>Derazalar</span>
+                                    <button type="button" class="btn btn-sm btn-success add-btn" id="addWindow">
+                                        <i class="bi bi-plus"></i> Qo'shish
+                                    </button>
+                                </h5>
+                                <div id="windowsContainer">
+                                    <!-- Derazalar bu yerda yuklanadi -->
+                                </div>
+                            </div>
+                            
+                            <!-- Materiallar -->
+                            <div class="material-section">
+                                <h5 class="text-primary">Devor</h5>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="wallThickness" class="form-label">Devor qalinligi (m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="wallThickness" min="0" step="0.01">
+                                            <span class="input-group-text">m</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 mb-3">
+                                        <label for="wallMaterial" class="form-label">Devor materiali</label>
+                                        <select class="form-select" id="wallMaterial">
+                                            <option value="" selected>Tanlang</option>
+                                            <option value="g'isht">G'isht</option>
+                                            <option value="beton">Beton</option>
+                                            <option value="paneli">Paneli</option>
+                                            <option value="yog'och">Yog'och</option>
+                                            <option value="gazobeton">Gazobeton</option>
+                                            <option value="boshqa">Boshqa</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="wallArea" class="form-label">Devor Yuzasi(m²)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="wallArea" readonly style="background-color: #e9ecef;">
+                                            <span class="input-group-text">m²</span>
+                                        </div>
+                                        <div class="calculated-area">
+                                            <small>Jami eshiklar yuzasi: <span id="totalDoorsArea">0</span> m²</small><br>
+                                            <small>Jami derazalar yuzasi: <span id="totalWindowsArea">0</span> m²</small><br>
+                                            <small>Yakuniy devor yuzasi: <span id="finalWallArea">0</span> m²</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="material-section">
+                                <h5 class="text-primary">Pol</h5>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="floorThickness" class="form-label">Pol qalinligi (m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="floorThickness" min="0" step="0.01">
+                                            <span class="input-group-text">m</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 mb-3">
+                                        <label for="floorMaterial" class="form-label">Pol materiali</label>
+                                        <select class="form-select" id="floorMaterial">
+                                            <option value="" selected>Tanlang</option>
+                                            <option value="beton">Beton</option>
+                                            <option value="parket">Parket</option>
+                                            <option value="laminat">Laminat</option>
+                                            <option value="plita">Plita</option>
+                                            <option value="keramika">Keramika</option>
+                                            <option value="boshqa">Boshqa</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="floorArea" class="form-label">Pol Yuzasi(m²)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="floorArea" readonly style="background-color: #e9ecef;">
+                                            <span class="input-group-text">m²</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="material-section">
+                                <h5 class="text-primary">Tom</h5>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="ceilingThickness" class="form-label">Tom qalinligi (m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01">
+                                            <span class="input-group-text">m</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 mb-3">
+                                        <label for="ceilingMaterial" class="form-label">Tom materiali</label>
+                                        <select class="form-select" id="ceilingMaterial">
+                                            <option value="" selected>Tanlang</option>
+                                            <option value="beton">Beton</option>
+                                            <option value="g'isht">G'isht</option>
+                                            <option value="metall">Metall</option>
+                                            <option value="yog'och">Yog'och</option>
+                                            <option value="plastik">Plastik</option>
+                                            <option value="boshqa">Boshqa</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="ceilingArea" class="form-label">Tom Yuzasi(m²)</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="ceilingArea" readonly style="background-color: #e9ecef;">
+                                            <span class="input-group-text">m²</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="navigation-buttons">
+                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                                <button type="button" class="btn btn-primary next-step" data-next="5">Keyingi <i class="bi bi-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- 5. Qo'shimcha ma'lumotlar -->
+                        <div class="form-section" id="step-5">
+                            <h3 class="section-title">
+                                <i class="bi bi-info-circle"></i>
+                                Qo'shimcha Ma'lumotlar
+                            </h3>
+                            <div class="mb-3">
+                                <label for="additionalInfo" class="form-label">Qo'shimcha ma'lumotlar</label>
+                                <textarea class="form-control" id="additionalInfo" rows="4" placeholder="Binoning qo'shimcha tavsifini kiriting..."></textarea>
+                            </div>
+                            <div class="navigation-buttons">
+                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                                <button type="submit" class="btn btn-success">Ma'lumotlarni Saqlash <i class="bi bi-check-lg"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JSON ma'lumotlar -->
+    <script>
+        // Viloyat va tumanlar ma'lumotlari
+        const regionsData = {
+            "toshkent": {
+                name: "Toshkent shahri",
+                districts: ["Olmazor tumani", "Bektemir tumani", "Mirobod tumani", "Mirzo Ulug'bek tumani", "Sergeli tumani", "Uchtepa tumani", "Shayxontohur tumani", "Yashnobod tumani", "Chilonzor tumani", "Yunusobod tumani", "Yakkasaroy tumani"]
+            },
+            "toshkent-viloyat": {
+                name: "Toshkent viloyati",
+                districts: ["Oqqo'rg'on tumani", "Ohangaron tumani", "Bekobod tumani", "Bo'stonliq tumani", "Bo'ka tumani", "Chinoz tumani", "Qibray tumani", "Ohangaron tumani", "O'rta Chirchiq tumani", "Parkent tumani", "Piskent tumani", "Quyi Chirchiq tumani", "Toshkent tumani", "Zangiota tumani", "Yangiyo'l tumani"]
+            },
+            "andijon": {
+                name: "Andijon viloyati",
+                districts: ["Andijon shahri", "Andijon tumani", "Asaka tumani", "Baliqchi tumani", "Bo'ston tumani", "Buloqboshi tumani", "Izboskan tumani", "Jalaquduq tumani", "Xo'jaobod tumani", "Qo'rg'ontepa tumani", "Marhamat tumani", "Oltinko'l tumani", "Paxtaobod tumani", "Shahrixon tumani", "Ulug'nor tumani"]
+            },
+            "buxoro": {
+                name: "Buxoro viloyati",
+                districts: ["Buxoro shahri", "Buxoro tumani", "Vobkent tumani", "G'ijduvon tumani", "Jondor tumani", "Kogon tumani", "Qorako'l tumani", "Qorovulbozor tumani", "Olot tumani", "Peshku tumani", "Romitan tumani", "Shofirkon tumani"]
+            },
+            "fargona": {
+                name: "Farg'ona viloyati",
+                districts: ["Farg'ona shahri", "Beshariq tumani", "Bog'dod tumani", "Buvayda tumani", "Dang'ara tumani", "Furqat tumani", "Qo'shtepa tumani", "Quva tumani", "Rishton tumani", "So'x tumani", "Toshloq tumani", "Uchko'prik tumani", "O'zbekiston tumani", "Yozyovon tumani"]
+            },
+            "jizzax": {
+                name: "Jizzax viloyati",
+                districts: ["Jizzax shahri", "Arnasoy tumani", "Baxmal tumani", "Do'stlik tumani", "Forish tumani", "G'allaorol tumani", "Sharof Rashidov tumani", "Mirzacho'l tumani", "Paxtakor tumani", "Yangiobod tumani", "Zomin tumani", "Zafarobod tumani", "Zarbdor tumani"]
+            },
+            "xorazm": {
+                name: "Xorazm viloyati",
+                districts: ["Urganch shahri", "Bog'ot tumani", "Gurlan tumani", "Xonqa tumani", "Xazorasp tumani", "Qo'shko'pir tumani", "Shovot tumani", "Urganch tumani", "Yangiariq tumani", "Yangibozor tumani"]
+            },
+            "namangan": {
+                name: "Namangan viloyati",
+                districts: ["Namangan shahri", "Kosonsoy tumani", "Mingbuloq tumani", "Namangan tumani", "Norin tumani", "Pop tumani", "To'raqo'rg'on tumani", "Uchqo'rg'on tumani", "Chortoq tumani", "Chust tumani", "Yangiqo'rg'on tumani"]
+            },
+            "navoiy": {
+                name: "Navoiy viloyati",
+                districts: ["Navoiy shahri", "Karmana tumani", "Konimex tumani", "Navbahor tumani", "Nurota tumani", "Tomdi tumani", "Uchquduq tumani", "Xatirchi tumani"]
+            },
+            "qashqadaryo": {
+                name: "Qashqadaryo viloyati",
+                districts: ["Qarshi shahri", "Dehqonobod tumani", "G'uzor tumani", "Qamashi tumani", "Qarshi tumani", "Koson tumani", "Kasbi tumani", "Kitob tumani", "Mirishkor tumani", "Muborak tumani", "Nishon tumani", "Chiroqchi tumani", "Shahrisabz tumani", "Yakkabog' tumani"]
+            },
+            "samarqand": {
+                name: "Samarqand viloyati",
+                districts: ["Samarqand shahri", "Bulung'ur tumani", "Ishtixon tumani", "Jomboy tumani", "Kattaqo'rg'on tumani", "Qo'shrabot tumani", "Narpay tumani", "Nurobod tumani", "Oqdaryo tumani", "Paxtachi tumani", "Payariq tumani", "Pastdarg'om tumani", "Samarqand tumani", "Toyloq tumani", "Urgut tumani"]
+            },
+            "sirdaryo": {
+                name: "Sirdaryo viloyati",
+                districts: ["Guliston shahri", "Boyovut tumani", "Guliston tumani", "Mirzaobod tumani", "Oqoltin tumani", "Sayxunobod tumani", "Sardoba tumani", "Xovos tumani", "Sirdaryo tumani", "Yangier shahri"]
+            },
+            "surxondaryo": {
+                name: "Surxondaryo viloyati",
+                districts: ["Termiz shahri", "Angor tumani", "Bandixon tumani", "Boysun tumani", "Denov tumani", "Jarqo'rg'on tumani", "Qiziriq tumani", "Qumqo'rg'on tumani", "Muzrabot tumani", "Oltinsoy tumani", "Sariosiyo tumani", "Termiz tumani", "Uzun tumani", "Sherobod tumani", "Sho'rchi tumani"]
+            },
+            "qoraqalpogiston": {
+                name: "Qoraqalpog'iston Respublikasi",
+                districts: ["Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Chimboy tumani", "Ellikqala tumani", "Kegeyli tumani", "Mo'ynoq tumani", "Nukus tumani", "Qonliko'l tumani", "Qo'ng'irot tumani", "Shumanay tumani", "Taxtako'pir tumani", "To'rtko'l tumani", "Xo'jayli tumani"]
+            }
+        };
+    </script>
+    
+    <script>
+        // DOM yuklanganda bajariladigan funksiyalar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Viloyatlarni ro'yxatga yuklash
+            const regionSelect = document.getElementById('region');
+            for (const key in regionsData) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = regionsData[key].name;
+                regionSelect.appendChild(option);
+            }
+            
+            // Viloyat tanlanganda tumanlarni yuklash
+            regionSelect.addEventListener('change', function() {
+                const districtSelect = document.getElementById('district');
+                const selectedRegion = this.value;
+                
+                // Tumanlar ro'yxatini tozalash
+                districtSelect.innerHTML = '';
+                
+                if (selectedRegion) {
+                    districtSelect.disabled = false;
+                    const districts = regionsData[selectedRegion].districts;
+                    
+                    districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+                        districtSelect.appendChild(option);
+                    });
+                } else {
+                    districtSelect.disabled = true;
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'Avval viloyatni tanlang';
+                    option.disabled = true;
+                    option.selected = true;
+                    districtSelect.appendChild(option);
+                }
+            });
+            
+            // Bino turi tanlanganda "Boshqa" tanlansa, qo'shimcha maydon ko'rsatish
+            document.getElementById('buildingType').addEventListener('change', function() {
+                const otherBuildingType = document.getElementById('otherBuildingType');
+                if (this.value === 'boshqa') {
+                    otherBuildingType.style.display = 'block';
+                } else {
+                    otherBuildingType.style.display = 'none';
+                }
+            });
+            
+            // Xona o'lchamlari o'zgarganda yuzalarni hisoblash
+            const dimensionInputs = document.querySelectorAll('.dimension-input');
+            dimensionInputs.forEach(input => {
+                input.addEventListener('input', calculateAreas);
+            });
+            
+            // Bosqichlar navigatsiyasi
+            const steps = document.querySelectorAll('.step');
+            const formSections = document.querySelectorAll('.form-section');
+            
+            // Bosqichlarga bosganda o'tish
+            steps.forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepNumber = this.getAttribute('data-step');
+                    goToStep(stepNumber);
+                });
+            });
+            
+            // Keyingi bosqich tugmasi
+            document.querySelectorAll('.next-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextStep = this.getAttribute('data-next');
+                    goToStep(nextStep);
+                });
+            });
+            
+            // Oldingi bosqich tugmasi
+            document.querySelectorAll('.prev-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevStep = this.getAttribute('data-prev');
+                    goToStep(prevStep);
+                });
+            });
+            
+            // Bosqichga o'tish funksiyasi
+            function goToStep(stepNumber) {
+                // Bosqichlarni yangilash
+                steps.forEach(step => {
+                    step.classList.remove('active', 'completed');
+                    const stepNum = step.getAttribute('data-step');
+                    if (stepNum < stepNumber) {
+                        step.classList.add('completed');
+                    } else if (stepNum == stepNumber) {
+                        step.classList.add('active');
+                    }
+                });
+                
+                // Form bo'limlarini yangilash
+                formSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(`step-${stepNumber}`).classList.add('active');
+            }
+            
+            // Eshik qo'shish
+            let doorCount = 0;
+            document.getElementById('addDoor').addEventListener('click', function() {
+                doorCount++;
+                addDoorItem(doorCount);
+            });
+            
+            // Deraza qo'shish
+            let windowCount = 0;
+            document.getElementById('addWindow').addEventListener('click', function() {
+                windowCount++;
+                addWindowItem(windowCount);
+            });
+            
+            // Dastlabki yuzalarni hisoblash
+            calculateAreas();
+            
+            // Dastlabki bir eshik va deraza qo'shish
+            addDoorItem(1);
+            addWindowItem(1);
+        });
+        
+        // Eshik qo'shish funksiyasi
+        function addDoorItem(id) {
+            const container = document.getElementById('doorsContainer');
+            const doorItem = document.createElement('div');
+            doorItem.className = 'door-window-item';
+            doorItem.innerHTML = `
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Eshik ${id} eni (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control door-width" min="0" step="0.01" value="0.9">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Eshik ${id} balandligi (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control door-height" min="0" step="0.01" value="2.1">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Eshik ${id} materiali</label>
+                        <select class="form-select door-material">
+                            <option value="yog'och">Yog'och</option>
+                            <option value="metall">Metall</option>
+                            <option value="plastik">Plastik</option>
+                            <option value="shisha">Shisha</option>
+                            <option value="boshqa">Boshqa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Yuzasi</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control door-area" readonly style="background-color: #e9ecef;">
+                            <span class="input-group-text">m²</span>
+                        </div>
+                        ${id > 1 ? `<button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
+                            <i class="bi bi-trash"></i> O'chirish
+                        </button>` : ''}
+                    </div>
+                </div>
+            `;
+            container.appendChild(doorItem);
+            
+            // Eshik o'lchamlari o'zgarganda yuzani hisoblash
+            const widthInput = doorItem.querySelector('.door-width');
+            const heightInput = doorItem.querySelector('.door-height');
+            const areaInput = doorItem.querySelector('.door-area');
+            
+            function calculateDoorArea() {
+                const width = parseFloat(widthInput.value) || 0;
+                const height = parseFloat(heightInput.value) || 0;
+                const area = width * height;
+                areaInput.value = area.toFixed(2);
+                calculateDoorWindowAreas();
+            }
+            
+            widthInput.addEventListener('input', calculateDoorArea);
+            heightInput.addEventListener('input', calculateDoorArea);
+            
+            // Dastlabki hisoblash
+            calculateDoorArea();
+        }
+        
+        // Deraza qo'shish funksiyasi
+        function addWindowItem(id) {
+            const container = document.getElementById('windowsContainer');
+            const windowItem = document.createElement('div');
+            windowItem.className = 'door-window-item';
+            windowItem.innerHTML = `
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Deraza ${id} eni (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control window-width" min="0" step="0.01" value="1.2">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Deraza ${id} balandligi (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control window-height" min="0" step="0.01" value="1.5">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Deraza ${id} materiali</label>
+                        <select class="form-select window-material">
+                            <option value="yog'och">Yog'och</option>
+                            <option value="metall">Metall</option>
+                            <option value="plastik">Plastik</option>
+                            <option value="alyuminiy">Alyuminiy</option>
+                            <option value="boshqa">Boshqa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Yuzasi</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control window-area" readonly style="background-color: #e9ecef;">
+                            <span class="input-group-text">m²</span>
+                        </div>
+                        ${id > 1 ? `<button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
+                            <i class="bi bi-trash"></i> O'chirish
+                        </button>` : ''}
+                    </div>
+                </div>
+            `;
+            container.appendChild(windowItem);
+            
+            // Deraza o'lchamlari o'zgarganda yuzani hisoblash
+            const widthInput = windowItem.querySelector('.window-width');
+            const heightInput = windowItem.querySelector('.window-height');
+            const areaInput = windowItem.querySelector('.window-area');
+            
+            function calculateWindowArea() {
+                const width = parseFloat(widthInput.value) || 0;
+                const height = parseFloat(heightInput.value) || 0;
+                const area = width * height;
+                areaInput.value = area.toFixed(2);
+                calculateDoorWindowAreas();
+            }
+            
+            widthInput.addEventListener('input', calculateWindowArea);
+            heightInput.addEventListener('input', calculateWindowArea);
+            
+            // Dastlabki hisoblash
+            calculateWindowArea();
+        }
+        
+        // Eshik va derazalarning umumiy yuzasini hisoblash
+        function calculateDoorWindowAreas() {
+            let totalDoorsArea = 0;
+            let totalWindowsArea = 0;
+            
+            // Eshiklarning yuzasini hisoblash
+            document.querySelectorAll('.door-area').forEach(areaInput => {
+                totalDoorsArea += parseFloat(areaInput.value) || 0;
+            });
+            
+            // Derazalarning yuzasini hisoblash
+            document.querySelectorAll('.window-area').forEach(areaInput => {
+                totalWindowsArea += parseFloat(areaInput.value) || 0;
+            });
+            
+            // Jami yuzalarni ko'rsatish
+            document.getElementById('totalDoorsArea').textContent = totalDoorsArea.toFixed(2);
+            document.getElementById('totalWindowsArea').textContent = totalWindowsArea.toFixed(2);
+            
+            // Yakuniy devor yuzasini hisoblash
+            const wallArea = parseFloat(document.getElementById('wallArea').value) || 0;
+            const finalWallArea = wallArea - totalDoorsArea - totalWindowsArea;
+            document.getElementById('finalWallArea').textContent = finalWallArea.toFixed(2);
+        }
+        
+        // Yuzalarni hisoblash funksiyasi
+        function calculateAreas() {
+            const length = parseFloat(document.getElementById('length').value) || 0;
+            const width = parseFloat(document.getElementById('width').value) || 0;
+            const height = parseFloat(document.getElementById('height').value) || 0;
+            
+            // Devorlar yuzasi (2*(uzunlik+eni)*balandlik)
+            const wallArea = 2 * (length + width) * height;
+            document.getElementById('wallArea').value = wallArea.toFixed(2);
+            document.getElementById('wallAreaDisplay').textContent = wallArea.toFixed(2) + ' m²';
+            
+            // Pol yuzasi (uzunlik * eni)
+            const floorArea = length * width;
+            document.getElementById('floorArea').value = floorArea.toFixed(2);
+            document.getElementById('floorAreaDisplay').textContent = floorArea.toFixed(2) + ' m²';
+            
+            // Tom yuzasi (uzunlik * eni)
+            const ceilingArea = length * width;
+            document.getElementById('ceilingArea').value = ceilingArea.toFixed(2);
+            document.getElementById('ceilingAreaDisplay').textContent = ceilingArea.toFixed(2) + ' m²';
+            
+            // Eshik va derazalarning yuzasini qayta hisoblash
+            calculateDoorWindowAreas();
+        }
+        
+        // Formani yuborish
+        document.getElementById('buildingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ma'lumotlarni yig'ish
+            const formData = {
+                region: document.getElementById('region').value,
+                district: document.getElementById('district').value,
+                buildingType: document.getElementById('buildingType').value,
+                customBuildingType: document.getElementById('customBuildingType').value,
+                length: document.getElementById('length').value,
+                width: document.getElementById('width').value,
+                height: document.getElementById('height').value,
+                wallArea: document.getElementById('wallArea').value,
+                floorArea: document.getElementById('floorArea').value,
+                ceilingArea: document.getElementById('ceilingArea').value,
+                wallThickness: document.getElementById('wallThickness').value,
+                wallMaterial: document.getElementById('wallMaterial').value,
+                floorThickness: document.getElementById('floorThickness').value,
+                floorMaterial: document.getElementById('floorMaterial').value,
+                ceilingThickness: document.getElementById('ceilingThickness').value,
+                ceilingMaterial: document.getElementById('ceilingMaterial').value,
+                additionalInfo: document.getElementById('additionalInfo').value
+            };
+            
+            // Eshik ma'lumotlarini yig'ish
+            formData.doors = [];
+            document.querySelectorAll('.door-window-item').forEach((item, index) => {
+                if (item.closest('#doorsContainer')) {
+                    const width = item.querySelector('.door-width').value;
+                    const height = item.querySelector('.door-height').value;
+                    const material = item.querySelector('.door-material').value;
+                    const area = item.querySelector('.door-area').value;
+                    
+                    formData.doors.push({
+                        id: index + 1,
+                        width: width,
+                        height: height,
+                        material: material,
+                        area: area
+                    });
+                }
+            });
+            
+            // Deraza ma'lumotlarini yig'ish
+            formData.windows = [];
+            document.querySelectorAll('.door-window-item').forEach((item, index) => {
+                if (item.closest('#windowsContainer')) {
+                    const width = item.querySelector('.window-width').value;
+                    const height = item.querySelector('.window-height').value;
+                    const material = item.querySelector('.window-material').value;
+                    const area = item.querySelector('.window-area').value;
+                    
+                    formData.windows.push({
+                        id: index + 1,
+                        width: width,
+                        height: height,
+                        material: material,
+                        area: area
+                    });
+                }
+            });
+            
+            // Bu yerda ma'lumotlarni serverga yuborish yoki boshqa amallar bajariladi
+            console.log('Form ma\'lumotlari:', formData);
+            
+            // Muvaffaqiyat xabari
+            alert('Ma\'lumotlar muvaffaqiyatli saqlandi!');
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        </div>
+        <!-- content close -->
+        <!-- footer begin -->
+        <footer class="section-dark">
+ 
+            <div class="subfooter">
+                <div class="container">
+
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+    </div>
+    
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+
+</body>
+
+
+<!-- Mirrored from madebydesignesia.com/themes/coolair/project-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Oct 2025 05:13:57 GMT -->
+</html>
