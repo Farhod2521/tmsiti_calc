@@ -1291,7 +1291,7 @@
             
             let html = '';
             lamps.forEach((lamp, index) => {
-                const luminousFluxMin = lamp.luminous_flux_min || 1;
+                const luminousFluxMin = lamp.luminous_flux_max || 1;
                 const lampsCount = totalLight > 0 ? Math.ceil(totalLight / luminousFluxMin) : 0;
                 
                 html += `
