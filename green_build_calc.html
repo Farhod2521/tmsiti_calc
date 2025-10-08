@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekologik Baholash Tizimi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #4caf50;
+            --accent-color: #8bc34a;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .control-panel {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .criteria-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .criteria-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .progress {
+            height: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .progress-bar {
+            border-radius: 10px;
+        }
+        
+        .criteria-icon {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+        
+        .criteria-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .criteria-title {
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        
+        .criteria-value {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .form-select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+        }
+        
+        .total-score {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .score-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .criteria-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .criteria-icon {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sarlavha qismi -->
+    <div class="header-section py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-5 fw-bold">Ekologik Baholash Tizimi</h1>
+                    <p class="lead">Binolarning ekologik barqarorligini 10 ta ko'rsatkich asosida baholash</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="total-score">
+                        <div class="score-label">Umumiy Baho</div>
+                        <div class="score-value">72%</div>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 72%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Boshqaruv paneli -->
+        <div class="control-panel">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-geo-alt me-2"></i>Hudud</label>
+                    <select class="form-select">
+                        <option selected>Tanlang...</option>
+                        <option>Toshkent</option>
+                        <option>Samarqand</option>
+                        <option>Buxoro</option>
+                        <option>Farg'ona</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-building me-2"></i>Bino Turi</label>
+                    <select class="form-select">
+                        <option selected>Tanlang...</option>
+                        <option>Turar-joy</option>
+                        <option>Ofis</option>
+                        <option>Sanoat</option>
+                        <option>Ta'lim</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-arrows-angle-expand me-2"></i>Bino O'lchami</label>
+                    <select class="form-select">
+                        <option selected>Tanlang...</option>
+                        <option>Kichik (1000 m² gacha)</option>
+                        <option>O'rta (1000-5000 m²)</option>
+                        <option>Katta (5000 m² dan ortiq)</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-tools me-2"></i>Konstruksiyalar</label>
+                    <select class="form-select">
+                        <option selected>Tanlang...</option>
+                        <option>Beton</option>
+                        <option>Po'lat</option>
+                        <option>Yog'och</option>
+                        <option>Arralash</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ekologik ko'rsatkichlar -->
+        <div class="row">
+            <!-- 1-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-tree criteria-icon"></i>
+                        <h3 class="criteria-title">Tashqi muhitning qulayligi va sifati</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">85%</span>
+                        <span>Yuqori</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-building criteria-icon"></i>
+                        <h3 class="criteria-title">Arxitektura sifati va ob'ektlarning joylashuvi</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">78%</span>
+                        <span>Yaxshi</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 78%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-house-door criteria-icon"></i>
+                        <h3 class="criteria-title">Ichki muhit ekologiyasi va qulayligi</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">65%</span>
+                        <span>O'rtacha</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 65%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 4-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-trash criteria-icon"></i>
+                        <h3 class="criteria-title">Salomatlikni muhofaza qilish va chiqindilarni yo'q qilish nazorati</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">70%</span>
+                        <span>Yaxshi</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-droplet criteria-icon"></i>
+                        <h3 class="criteria-title">Suvdan oqilona foydalanish</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">55%</span>
+                        <span>O'rtacha</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 55%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 6-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-lightning criteria-icon"></i>
+                        <h3 class="criteria-title">Energiyani tejamlik va energiya samaradorlik</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">80%</span>
+                        <span>Yuqori</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 7-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-sun criteria-icon"></i>
+                        <h3 class="criteria-title">Muqobil va qayta tiklanadigan energiya manbalaridan foydalanish</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">45%</span>
+                        <span>Past</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 45%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 8-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-recycle criteria-icon"></i>
+                        <h3 class="criteria-title">Ob'ektlarni yaratish, ishlatish va foydalanish ekologiyasi</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">60%</span>
+                        <span>O'rtacha</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 9-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-graph-up criteria-icon"></i>
+                        <h3 class="criteria-title">Iqtisodiy samaradorlik</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">75%</span>
+                        <span>Yaxshi</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 10-ko'rsatkich -->
+            <div class="col-md-6">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <i class="bi bi-clipboard-check criteria-icon"></i>
+                        <h3 class="criteria-title">Loyihani tayyorlash va boshqarish sifati</h3>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="criteria-value">82%</span>
+                        <span>Yuqori</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 82%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Qo'shimcha ma'lumotlar -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="control-panel">
+                    <h4 class="mb-3"><i class="bi bi-plus-circle me-2"></i>Qo'shimcha Ma'lumotlar</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Loyiha Nomi</label>
+                                <input type="text" class="form-control" placeholder="Loyiha nomini kiriting">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Baholash Sanasi</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Izohlar</label>
+                                <textarea class="form-control" rows="3" placeholder="Qo'shimcha izohlar..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2023 Ekologik Baholash Tizimi. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -270,432 +270,366 @@
 
 
 
-
-    <section class="no-top">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">                  
-                    <!-- Bosqichlar ko'rsatkichi -->
-                    <div class="step-indicator">
-                        <div class="step active" data-step="1">
-                            <div class="step-icon">
-                                <i class="bi bi-geo-alt"></i>
-                            </div>
-                            <div class="step-label">Hudud</div>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+             
+                <!-- Bosqichlar ko'rsatkichi -->
+                <div class="step-indicator">
+                    <div class="step active" data-step="1">
+                        <div class="step-icon">
+                            <i class="bi bi-geo-alt"></i>
                         </div>
-                        <div class="step" data-step="2">
-                            <div class="step-icon">
-                                <i class="bi bi-building"></i>
-                            </div>
-                            <div class="step-label">Bino Turi</div>
-                        </div>
-                        <div class="step" data-step="3">
-                            <div class="step-icon">
-                                <i class="bi bi-aspect-ratio"></i>
-                            </div>
-                            <div class="step-label">Bino O'lchami</div>
-                        </div>
-                        <div class="step" data-step="4">
-                            <div class="step-icon">
-                                <i class="bi bi-puzzle"></i>
-                            </div>
-                            <div class="step-label">Konstruksiyalar</div>
-                        </div>
-                        <div class="step" data-step="5">
-                            <div class="step-icon">
-                                <i class="bi bi-info-circle"></i>
-                            </div>
-                            <div class="step-label">Qo'shimcha</div>
-                        </div>
+                        <div class="step-label">Hudud va Bino</div>
                     </div>
-                    
-                    <form id="buildingForm">
-                        <!-- 1. Hudud tanlash bo'limi -->
-                        <div class="form-section active" id="step-1">
-                            <h3 class="section-title">
-                                <i class="bi bi-geo-alt"></i>
-                                Hudud
-                            </h3>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="region" class="form-label required-field">Viloyat</label>
-                                    <select class="form-select" id="region" required>
-                                        <option value="" selected disabled>Viloyatni tanlang</option>
-                                        <!-- Viloyatlar JavaScript orqali yuklanadi -->
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="district" class="form-label required-field">Tuman</label>
-                                    <select class="form-select" id="district" required disabled>
-                                        <option value="" selected disabled>Avval viloyatni tanlang</option>
-                                    </select>
-                                </div>
+                    <div class="step" data-step="2">
+                        <div class="step-icon">
+                            <i class="bi bi-aspect-ratio"></i>
+                        </div>
+                        <div class="step-label">Bino O'lchami</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-icon">
+                            <i class="bi bi-puzzle"></i>
+                        </div>
+                        <div class="step-label">Konstruksiyalar</div>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-icon">
+                            <i class="bi bi-calculator"></i>
+                        </div>
+                        <div class="step-label">Hisoblash</div>
+                    </div>
+                </div>
+                
+                <form id="buildingForm">
+                    <!-- 1. Hudud va bino turi bo'limi -->
+                    <div class="form-section active" id="step-1">
+                        <h3 class="section-title">
+                            <i class="bi bi-geo-alt"></i>
+                            Hudud va Bino Turi
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="region" class="form-label required-field">Viloyat</label>
+                                <select class="form-select" id="region" required>
+                                    <option value="" selected disabled>Viloyatni tanlang</option>
+                                    <!-- Viloyatlar API orqali yuklanadi -->
+                                </select>
                             </div>
-                            <div class="navigation-buttons">
-                                <div></div> <!-- Bo'sh div chap tomonda -->
-                                <button type="button" class="btn btn-primary next-step" data-next="2">Keyingi <i class="bi bi-arrow-right"></i></button>
+                            <div class="col-md-6 mb-3">
+                                <label for="district" class="form-label required-field">Tuman</label>
+                                <select class="form-select" id="district" required disabled>
+                                    <option value="" selected disabled>Avval viloyatni tanlang</option>
+                                </select>
                             </div>
                         </div>
 
-                        <!-- 2. Bino turi bo'limi -->
-                        <div class="form-section" id="step-2">
-                            <h3 class="section-title">
-                                <i class="bi bi-building"></i>
-                                Bino Turi
-                            </h3>
+                        <!-- Bino turi qismi -->
+                        <div class="building-type-section">
+                            <h5 class="text-primary mb-3">Bino Turi</h5>
                             <div class="mb-3">
                                 <label for="buildingType" class="form-label required-field">Bino turi</label>
                                 <select class="form-select" id="buildingType" required>
                                     <option value="" selected disabled>Bino turini tanlang</option>
-                                    <option value="kasalxona">Kasalxona</option>
-                                    <option value="oshxona">Oshxona</option>
-                                    <option value="maktab">Maktab</option>
-                                    <option value="universitet">Universitet</option>
-                                    <option value="ofis">Ofis binosi</option>
-                                    <option value="do'kon">Do'kon</option>
-                                    <option value="turar-joy">Turar-joy binosi</option>
-                                    <option value="sanoat">Sanoat binosi</option>
-                                    <option value="sport">Sport majmuasi</option>
-                                    <option value="madaniyat">Madaniyat markazi</option>
-                                    <option value="boshqa">Boshqa</option>
+                                    <option value="turar-joy" data-base-temp="21">Turar-joy binosi</option>
+                                    <option value="kasalxona" data-base-temp="19">Kasalxona</option>
+                                    <option value="oshxona" data-base-temp="18">Oshxona</option>
+                                    <option value="maktab" data-base-temp="20">Maktab</option>
+                                    <option value="universitet" data-base-temp="20">Universitet</option>
+                                    <option value="ofis" data-base-temp="20">Ofis binosi</option>
+                                    <option value="do'kon" data-base-temp="19">Do'kon</option>
+                                    <option value="sanoat" data-base-temp="18">Sanoat binosi</option>
+                                    <option value="sport" data-base-temp="19">Sport majmuasi</option>
+                                    <option value="madaniyat" data-base-temp="20">Madaniyat markazi</option>
+                                    <option value="boshqa" data-base-temp="20">Boshqa</option>
                                 </select>
                             </div>
                             <div class="mb-3" id="otherBuildingType" style="display: none;">
                                 <label for="customBuildingType" class="form-label">Bino turini kiriting</label>
                                 <input type="text" class="form-control" id="customBuildingType" placeholder="Bino turini kiriting">
                             </div>
-                            <div class="navigation-buttons">
-                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                                <button type="button" class="btn btn-primary next-step" data-next="3">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                        
+                        <!-- Hudud ma'lumotlari -->
+                        <div class="temperature-info" id="regionInfo" style="display: none;">
+                            <h6>Hudud ma'lumotlari:</h6>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <small>O'rtacha harorat: <span id="avgTempDisplay">-</span>°C</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Vaqt: <span id="timeDisplay">-</span></small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Baza harorat: <span id="baseTempDisplay">-</span>°C</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Hisob qiymati: <span id="calcValueDisplay">-</span></small>
+                                </div>
                             </div>
                         </div>
+                        
+                        <div class="navigation-buttons">
+                            <div></div>
+                            <button type="button" class="btn btn-primary next-step" data-next="2">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
 
-                        <!-- 3. Xona o'lchamlari bo'limi -->
-                        <div class="form-section" id="step-3">
-                            <h3 class="section-title">
-                                <i class="bi bi-aspect-ratio"></i>
-                                Bino O'lchami
-                            </h3>
-                            <div class="dimension-inputs">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="length" class="form-label required-field">Uzunlik (m)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control dimension-input" id="length" min="0" step="0.1" required>
-                                            <span class="input-group-text">m</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="width" class="form-label required-field">Eni (m)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control dimension-input" id="width" min="0" step="0.1" required>
-                                            <span class="input-group-text">m</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="height" class="form-label required-field">Balandligi (m)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control dimension-input" id="height" min="0" step="0.1" required>
-                                            <span class="input-group-text">m</span>
-                                        </div>
+                    <!-- 2. Xona o'lchamlari bo'limi -->
+                    <div class="form-section" id="step-2">
+                        <h3 class="section-title">
+                            <i class="bi bi-aspect-ratio"></i>
+                            Bino O'lchami
+                        </h3>
+                        <div class="dimension-inputs">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="length" class="form-label required-field">Uzunlik (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control dimension-input" id="length" min="0" step="0.1" required>
+                                        <span class="input-group-text">m</span>
                                     </div>
                                 </div>
-                                
-                                <!-- Avtomatik hisoblanadigan yuzalar -->
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="area-display text-center">
-                                            <h6>Devorlar Yuzasi</h6>
-                                            <div class="area-value" id="wallAreaDisplay">0 m²</div>
-                                        </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="width" class="form-label required-field">Eni (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control dimension-input" id="width" min="0" step="0.1" required>
+                                        <span class="input-group-text">m</span>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="area-display text-center">
-                                            <h6>Pol Yuzasi</h6>
-                                            <div class="area-value" id="floorAreaDisplay">0 m²</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="area-display text-center">
-                                            <h6>Tom Yuzasi</h6>
-                                            <div class="area-value" id="ceilingAreaDisplay">0 m²</div>
-                                        </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="height" class="form-label required-field">Balandligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control dimension-input" id="height" min="0" step="0.1" required>
+                                        <span class="input-group-text">m</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="navigation-buttons">
-                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                                <button type="button" class="btn btn-primary next-step" data-next="4">Keyingi <i class="bi bi-arrow-right"></i></button>
+                            
+                            <!-- Avtomatik hisoblanadigan yuzalar -->
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="area-display text-center">
+                                        <h6>Devorlar Yuzasi</h6>
+                                        <div class="area-value" id="wallAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="area-display text-center">
+                                        <h6>Pol Yuzasi</h6>
+                                        <div class="area-value" id="floorAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="area-display text-center">
+                                        <h6>Tom Yuzasi</h6>
+                                        <div class="area-value" id="ceilingAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                            <button type="button" class="btn btn-primary next-step" data-next="3">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
 
-                        <!-- 4. Konstruksiyalar bo'limi -->
-                        <div class="form-section" id="step-4">
-                            <h3 class="section-title">
-                                <i class="bi bi-puzzle"></i>
-                                Konstruksiyalar
-                            </h3>
-                            
-                            <!-- Eshiklar qismi -->
-                            <div class="door-window-section">
-                                <h5 class="text-primary d-flex justify-content-between align-items-center">
-                                    <span>Eshiklar</span>
-                                    <button type="button" class="btn btn-sm btn-success add-btn" id="addDoor">
-                                        <i class="bi bi-plus"></i> Qo'shish
-                                    </button>
-                                </h5>
-                                <div id="doorsContainer">
-                                    <!-- Eshiklar bu yerda yuklanadi -->
-                                </div>
-                            </div>
-                            
-                            <!-- Derazalar qismi -->
-                            <div class="door-window-section">
-                                <h5 class="text-primary d-flex justify-content-between align-items-center">
-                                    <span>Derazalar</span>
-                                    <button type="button" class="btn btn-sm btn-success add-btn" id="addWindow">
-                                        <i class="bi bi-plus"></i> Qo'shish
-                                    </button>
-                                </h5>
-                                <div id="windowsContainer">
-                                    <!-- Derazalar bu yerda yuklanadi -->
-                                </div>
-                            </div>
-                            
-                            <!-- Materiallar -->
-                            <div class="material-section">
-                                <h5 class="text-primary">Devor</h5>
-                                <div class="row">
-                                    <div class="col-md-5 mb-3">
-                                        <label for="wallThickness" class="form-label">Devor qalinligi (m)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="wallThickness" min="0" step="0.01">
-                                            <span class="input-group-text">m</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 mb-3">
-                                        <label for="wallMaterial" class="form-label">Devor materiali</label>
-                                        <select class="form-select" id="wallMaterial">
-                                            <option value="" selected>Tanlang</option>
-                                            <option value="g'isht">G'isht</option>
-                                            <option value="beton">Beton</option>
-                                            <option value="paneli">Paneli</option>
-                                            <option value="yog'och">Yog'och</option>
-                                            <option value="gazobeton">Gazobeton</option>
-                                            <option value="boshqa">Boshqa</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="wallArea" class="form-label">Devor Yuzasi(m²)</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="wallArea" readonly style="background-color: #e9ecef;">
-                                            <span class="input-group-text">m²</span>
-                                        </div>
-                                        <div class="calculated-area">
-                                            <small>Jami eshiklar yuzasi: <span id="totalDoorsArea">0</span> m²</small><br>
-                                            <small>Jami derazalar yuzasi: <span id="totalWindowsArea">0</span> m²</small><br>
-                                            <small>Yakuniy devor yuzasi: <span id="finalWallArea">0</span> m²</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="material-section">
-                                <h5 class="text-primary">Pol</h5>
-                                <div class="row">
-                                    <div class="col-md-5 mb-3">
-                                        <label for="floorThickness" class="form-label">Pol qalinligi (m)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="floorThickness" min="0" step="0.01">
-                                            <span class="input-group-text">m</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 mb-3">
-                                        <label for="floorMaterial" class="form-label">Pol materiali</label>
-                                        <select class="form-select" id="floorMaterial">
-                                            <option value="" selected>Tanlang</option>
-                                            <option value="beton">Beton</option>
-                                            <option value="parket">Parket</option>
-                                            <option value="laminat">Laminat</option>
-                                            <option value="plita">Plita</option>
-                                            <option value="keramika">Keramika</option>
-                                            <option value="boshqa">Boshqa</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="floorArea" class="form-label">Pol Yuzasi(m²)</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="floorArea" readonly style="background-color: #e9ecef;">
-                                            <span class="input-group-text">m²</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="material-section">
-                                <h5 class="text-primary">Tom</h5>
-                                <div class="row">
-                                    <div class="col-md-5 mb-3">
-                                        <label for="ceilingThickness" class="form-label">Tom qalinligi (m)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01">
-                                            <span class="input-group-text">m</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 mb-3">
-                                        <label for="ceilingMaterial" class="form-label">Tom materiali</label>
-                                        <select class="form-select" id="ceilingMaterial">
-                                            <option value="" selected>Tanlang</option>
-                                            <option value="beton">Beton</option>
-                                            <option value="g'isht">G'isht</option>
-                                            <option value="metall">Metall</option>
-                                            <option value="yog'och">Yog'och</option>
-                                            <option value="plastik">Plastik</option>
-                                            <option value="boshqa">Boshqa</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="ceilingArea" class="form-label">Tom Yuzasi(m²)</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="ceilingArea" readonly style="background-color: #e9ecef;">
-                                            <span class="input-group-text">m²</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="navigation-buttons">
-                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                                <button type="button" class="btn btn-primary next-step" data-next="5">Keyingi <i class="bi bi-arrow-right"></i></button>
+                    <!-- 3. Konstruksiyalar bo'limi -->
+                    <div class="form-section" id="step-3">
+                        <h3 class="section-title">
+                            <i class="bi bi-puzzle"></i>
+                            Konstruksiyalar
+                        </h3>
+                        
+                        <!-- Eshiklar qismi -->
+                        <div class="door-window-section">
+                            <h5 class="text-primary d-flex justify-content-between align-items-center">
+                                <span>Eshiklar</span>
+                                <button type="button" class="btn btn-sm btn-success add-btn" id="addDoor">
+                                    <i class="bi bi-plus"></i> Qo'shish
+                                </button>
+                            </h5>
+                            <div id="doorsContainer">
+                                <!-- Eshiklar bu yerda yuklanadi -->
                             </div>
                         </div>
+                        
+                        <!-- Derazalar qismi -->
+                        <div class="door-window-section">
+                            <h5 class="text-primary d-flex justify-content-between align-items-center">
+                                <span>Derazalar</span>
+                                <button type="button" class="btn btn-sm btn-success add-btn" id="addWindow">
+                                    <i class="bi bi-plus"></i> Qo'shish
+                                </button>
+                            </h5>
+                            <div id="windowsContainer">
+                                <!-- Derazalar bu yerda yuklanadi -->
+                            </div>
+                        </div>
+                        
+                        <!-- Materiallar -->
+                        <div class="material-section">
+                            <h5 class="text-primary">Devor</h5>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="wallThickness" class="form-label">Devor qalinligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="wallThickness" min="0" step="0.01">
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="wallMaterial" class="form-label">Devor materiali</label>
+                                    <select class="form-select" id="wallMaterial">
+                                        <option value="" selected>Tanlang</option>
+                                        <option value="g'isht">G'isht</option>
+                                        <option value="beton">Beton</option>
+                                        <option value="paneli">Paneli</option>
+                                        <option value="yog'och">Yog'och</option>
+                                        <option value="gazobeton">Gazobeton</option>
+                                        <option value="boshqa">Boshqa</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="wallArea" class="form-label">Devor Yuzasi(m²)</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="wallArea" readonly style="background-color: #e9ecef;">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                    <div class="calculated-area">
+                                        <small>Jami eshiklar yuzasi: <span id="totalDoorsArea">0</span> m²</small><br>
+                                        <small>Jami derazalar yuzasi: <span id="totalWindowsArea">0</span> m²</small><br>
+                                        <small>Yakuniy devor yuzasi: <span id="finalWallArea">0</span> m²</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="material-section">
+                            <h5 class="text-primary">Pol</h5>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="floorThickness" class="form-label">Pol qalinligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="floorThickness" min="0" step="0.01">
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="floorMaterial" class="form-label">Pol materiali</label>
+                                    <select class="form-select" id="floorMaterial">
+                                        <option value="" selected>Tanlang</option>
+                                        <option value="beton">Beton</option>
+                                        <option value="parket">Parket</option>
+                                        <option value="laminat">Laminat</option>
+                                        <option value="plita">Plita</option>
+                                        <option value="keramika">Keramika</option>
+                                        <option value="boshqa">Boshqa</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="floorArea" class="form-label">Pol Yuzasi(m²)</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="floorArea" readonly style="background-color: #e9ecef;">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="material-section">
+                            <h5 class="text-primary">Tom</h5>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="ceilingThickness" class="form-label">Tom qalinligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01">
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="ceilingMaterial" class="form-label">Tom materiali</label>
+                                    <select class="form-select" id="ceilingMaterial">
+                                        <option value="" selected>Tanlang</option>
+                                        <option value="beton">Beton</option>
+                                        <option value="g'isht">G'isht</option>
+                                        <option value="metall">Metall</option>
+                                        <option value="yog'och">Yog'och</option>
+                                        <option value="plastik">Plastik</option>
+                                        <option value="boshqa">Boshqa</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="ceilingArea" class="form-label">Tom Yuzasi(m²)</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="ceilingArea" readonly style="background-color: #e9ecef;">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                            <button type="button" class="btn btn-primary next-step" data-next="4">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
 
-                        <!-- 5. Qo'shimcha ma'lumotlar -->
-                        <div class="form-section" id="step-5">
-                            <h3 class="section-title">
-                                <i class="bi bi-info-circle"></i>
-                                Qo'shimcha Ma'lumotlar
-                            </h3>
-                            <div class="mb-3">
-                                <label for="additionalInfo" class="form-label">Qo'shimcha ma'lumotlar</label>
-                                <textarea class="form-control" id="additionalInfo" rows="4" placeholder="Binoning qo'shimcha tavsifini kiriting..."></textarea>
+                    <!-- 4. Hisoblash bo'limi -->
+                    <div class="form-section" id="step-4">
+                        <h3 class="section-title">
+                            <i class="bi bi-calculator"></i>
+                            Hisoblash Natijalari
+                        </h3>
+                        
+                        <!-- Hisoblash natijalari -->
+                        <div class="calculation-result" id="calculationResult">
+                            <h5 class="text-success">Hisoblash natijalari:</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Hudud:</strong> <span id="resultRegion">-</span>, <span id="resultDistrict">-</span></p>
+                                    <p><strong>Bino turi:</strong> <span id="resultBuildingType">-</span></p>
+                                    <p><strong>O'rtacha harorat:</strong> <span id="resultAvgTemp">-</span>°C</p>
+                                    <p><strong>Baza harorat:</strong> <span id="resultBaseTemp">-</span>°C</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Vaqt:</strong> <span id="resultTime">-</span></p>
+                                    <p><strong>Bino o'lchami:</strong> <span id="resultDimensions">-</span></p>
+                                    <p><strong>Devor yuzasi:</strong> <span id="resultWallArea">-</span> m²</p>
+                                    <p><strong>Pol yuzasi:</strong> <span id="resultFloorArea">-</span> m²</p>
+                                </div>
                             </div>
-                            <div class="navigation-buttons">
-                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                                <button type="submit" class="btn btn-success">Ma'lumotlarni Saqlash <i class="bi bi-check-lg"></i></button>
+                            <hr>
+                            <div class="text-center">
+                                <h4 class="text-primary">Isitish qiymati: <span id="resultHeatingValue">-</span></h4>
+                                <p class="text-muted">Formula: (Baza harorat - average_temperature) × time</p>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                            <button type="button" class="btn btn-success" id="calculateBtn">Hisoblash <i class="bi bi-calculator"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- JSON ma'lumotlar -->
     <script>
-        // Viloyat va tumanlar ma'lumotlari
-        const regionsData = {
-            "toshkent": {
-                name: "Toshkent shahri",
-                districts: ["Olmazor tumani", "Bektemir tumani", "Mirobod tumani", "Mirzo Ulug'bek tumani", "Sergeli tumani", "Uchtepa tumani", "Shayxontohur tumani", "Yashnobod tumani", "Chilonzor tumani", "Yunusobod tumani", "Yakkasaroy tumani"]
-            },
-            "toshkent-viloyat": {
-                name: "Toshkent viloyati",
-                districts: ["Oqqo'rg'on tumani", "Ohangaron tumani", "Bekobod tumani", "Bo'stonliq tumani", "Bo'ka tumani", "Chinoz tumani", "Qibray tumani", "Ohangaron tumani", "O'rta Chirchiq tumani", "Parkent tumani", "Piskent tumani", "Quyi Chirchiq tumani", "Toshkent tumani", "Zangiota tumani", "Yangiyo'l tumani"]
-            },
-            "andijon": {
-                name: "Andijon viloyati",
-                districts: ["Andijon shahri", "Andijon tumani", "Asaka tumani", "Baliqchi tumani", "Bo'ston tumani", "Buloqboshi tumani", "Izboskan tumani", "Jalaquduq tumani", "Xo'jaobod tumani", "Qo'rg'ontepa tumani", "Marhamat tumani", "Oltinko'l tumani", "Paxtaobod tumani", "Shahrixon tumani", "Ulug'nor tumani"]
-            },
-            "buxoro": {
-                name: "Buxoro viloyati",
-                districts: ["Buxoro shahri", "Buxoro tumani", "Vobkent tumani", "G'ijduvon tumani", "Jondor tumani", "Kogon tumani", "Qorako'l tumani", "Qorovulbozor tumani", "Olot tumani", "Peshku tumani", "Romitan tumani", "Shofirkon tumani"]
-            },
-            "fargona": {
-                name: "Farg'ona viloyati",
-                districts: ["Farg'ona shahri", "Beshariq tumani", "Bog'dod tumani", "Buvayda tumani", "Dang'ara tumani", "Furqat tumani", "Qo'shtepa tumani", "Quva tumani", "Rishton tumani", "So'x tumani", "Toshloq tumani", "Uchko'prik tumani", "O'zbekiston tumani", "Yozyovon tumani"]
-            },
-            "jizzax": {
-                name: "Jizzax viloyati",
-                districts: ["Jizzax shahri", "Arnasoy tumani", "Baxmal tumani", "Do'stlik tumani", "Forish tumani", "G'allaorol tumani", "Sharof Rashidov tumani", "Mirzacho'l tumani", "Paxtakor tumani", "Yangiobod tumani", "Zomin tumani", "Zafarobod tumani", "Zarbdor tumani"]
-            },
-            "xorazm": {
-                name: "Xorazm viloyati",
-                districts: ["Urganch shahri", "Bog'ot tumani", "Gurlan tumani", "Xonqa tumani", "Xazorasp tumani", "Qo'shko'pir tumani", "Shovot tumani", "Urganch tumani", "Yangiariq tumani", "Yangibozor tumani"]
-            },
-            "namangan": {
-                name: "Namangan viloyati",
-                districts: ["Namangan shahri", "Kosonsoy tumani", "Mingbuloq tumani", "Namangan tumani", "Norin tumani", "Pop tumani", "To'raqo'rg'on tumani", "Uchqo'rg'on tumani", "Chortoq tumani", "Chust tumani", "Yangiqo'rg'on tumani"]
-            },
-            "navoiy": {
-                name: "Navoiy viloyati",
-                districts: ["Navoiy shahri", "Karmana tumani", "Konimex tumani", "Navbahor tumani", "Nurota tumani", "Tomdi tumani", "Uchquduq tumani", "Xatirchi tumani"]
-            },
-            "qashqadaryo": {
-                name: "Qashqadaryo viloyati",
-                districts: ["Qarshi shahri", "Dehqonobod tumani", "G'uzor tumani", "Qamashi tumani", "Qarshi tumani", "Koson tumani", "Kasbi tumani", "Kitob tumani", "Mirishkor tumani", "Muborak tumani", "Nishon tumani", "Chiroqchi tumani", "Shahrisabz tumani", "Yakkabog' tumani"]
-            },
-            "samarqand": {
-                name: "Samarqand viloyati",
-                districts: ["Samarqand shahri", "Bulung'ur tumani", "Ishtixon tumani", "Jomboy tumani", "Kattaqo'rg'on tumani", "Qo'shrabot tumani", "Narpay tumani", "Nurobod tumani", "Oqdaryo tumani", "Paxtachi tumani", "Payariq tumani", "Pastdarg'om tumani", "Samarqand tumani", "Toyloq tumani", "Urgut tumani"]
-            },
-            "sirdaryo": {
-                name: "Sirdaryo viloyati",
-                districts: ["Guliston shahri", "Boyovut tumani", "Guliston tumani", "Mirzaobod tumani", "Oqoltin tumani", "Sayxunobod tumani", "Sardoba tumani", "Xovos tumani", "Sirdaryo tumani", "Yangier shahri"]
-            },
-            "surxondaryo": {
-                name: "Surxondaryo viloyati",
-                districts: ["Termiz shahri", "Angor tumani", "Bandixon tumani", "Boysun tumani", "Denov tumani", "Jarqo'rg'on tumani", "Qiziriq tumani", "Qumqo'rg'on tumani", "Muzrabot tumani", "Oltinsoy tumani", "Sariosiyo tumani", "Termiz tumani", "Uzun tumani", "Sherobod tumani", "Sho'rchi tumani"]
-            },
-            "qoraqalpogiston": {
-                name: "Qoraqalpog'iston Respublikasi",
-                districts: ["Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Chimboy tumani", "Ellikqala tumani", "Kegeyli tumani", "Mo'ynoq tumani", "Nukus tumani", "Qonliko'l tumani", "Qo'ng'irot tumani", "Shumanay tumani", "Taxtako'pir tumani", "To'rtko'l tumani", "Xo'jayli tumani"]
-            }
-        };
-    </script>
-    
-    <script>
+        // Global o'zgaruvchilar
+        let regionsData = [];
+        let selectedRegionData = null;
+        let selectedDistrictData = null;
+        let baseTemperature = 20; // Default baza harorati
+
         // DOM yuklanganda bajariladigan funksiyalar
         document.addEventListener('DOMContentLoaded', function() {
-            // Viloyatlarni ro'yxatga yuklash
-            const regionSelect = document.getElementById('region');
-            for (const key in regionsData) {
-                const option = document.createElement('option');
-                option.value = key;
-                option.textContent = regionsData[key].name;
-                regionSelect.appendChild(option);
-            }
-            
-            // Viloyat tanlanganda tumanlarni yuklash
-            regionSelect.addEventListener('change', function() {
-                const districtSelect = document.getElementById('district');
-                const selectedRegion = this.value;
-                
-                // Tumanlar ro'yxatini tozalash
-                districtSelect.innerHTML = '';
-                
-                if (selectedRegion) {
-                    districtSelect.disabled = false;
-                    const districts = regionsData[selectedRegion].districts;
-                    
-                    districts.forEach(district => {
-                        const option = document.createElement('option');
-                        option.value = district;
-                        option.textContent = district;
-                        districtSelect.appendChild(option);
-                    });
-                } else {
-                    districtSelect.disabled = true;
-                    const option = document.createElement('option');
-                    option.value = '';
-                    option.textContent = 'Avval viloyatni tanlang';
-                    option.disabled = true;
-                    option.selected = true;
-                    districtSelect.appendChild(option);
-                }
-            });
+            // API dan viloyatlarni yuklash
+            loadRegionsFromAPI();
             
             // Bino turi tanlanganda "Boshqa" tanlansa, qo'shimcha maydon ko'rsatish
             document.getElementById('buildingType').addEventListener('change', function() {
@@ -704,6 +638,15 @@
                     otherBuildingType.style.display = 'block';
                 } else {
                     otherBuildingType.style.display = 'none';
+                }
+                
+                // Baza haroratini yangilash
+                const selectedOption = this.options[this.selectedIndex];
+                baseTemperature = parseFloat(selectedOption.getAttribute('data-base-temp')) || 20;
+                
+                // Hudud ma'lumotlarini yangilash
+                if (selectedDistrictData) {
+                    displayRegionInfo();
                 }
             });
             
@@ -741,26 +684,6 @@
                 });
             });
             
-            // Bosqichga o'tish funksiyasi
-            function goToStep(stepNumber) {
-                // Bosqichlarni yangilash
-                steps.forEach(step => {
-                    step.classList.remove('active', 'completed');
-                    const stepNum = step.getAttribute('data-step');
-                    if (stepNum < stepNumber) {
-                        step.classList.add('completed');
-                    } else if (stepNum == stepNumber) {
-                        step.classList.add('active');
-                    }
-                });
-                
-                // Form bo'limlarini yangilash
-                formSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.getElementById(`step-${stepNumber}`).classList.add('active');
-            }
-            
             // Eshik qo'shish
             let doorCount = 0;
             document.getElementById('addDoor').addEventListener('click', function() {
@@ -775,6 +698,9 @@
                 addWindowItem(windowCount);
             });
             
+            // Hisoblash tugmasi
+            document.getElementById('calculateBtn').addEventListener('click', calculateHeating);
+            
             // Dastlabki yuzalarni hisoblash
             calculateAreas();
             
@@ -782,6 +708,138 @@
             addDoorItem(1);
             addWindowItem(1);
         });
+        
+        // API dan viloyatlarni yuklash
+        async function loadRegionsFromAPI() {
+            try {
+                const response = await fetch('https://calc.tmsiti.uz/api/v1/heating/api/regions-districts/');
+                const data = await response.json();
+                
+                if (data.regions) {
+                    regionsData = data.regions;
+                    populateRegionsSelect();
+                } else {
+                    console.error('API dan ma\'lumotlar olinmadi');
+                    // Agar API ishlamasa, fallback ma'lumotlarni yuklash
+                    loadFallbackData();
+                }
+            } catch (error) {
+                console.error('API dan ma\'lumotlar olishda xatolik:', error);
+                // Agar API ishlamasa, fallback ma'lumotlarni yuklash
+                loadFallbackData();
+            }
+        }
+        
+        // Fallback ma'lumotlar
+        function loadFallbackData() {
+            regionsData = [
+                {
+                    name: "Qoraqalpog'iston Respublikasi",
+                    districts: [
+                        { name: "Qoraqalpog", average_temperature: -2.4, time: 174 },
+                        { name: "Moynoq", average_temperature: -1.2, time: 167 },
+                        { name: "Nukus", average_temperature: -0.6, time: 143 },
+                        { name: "Chimboy", average_temperature: -1.3, time: 163 }
+                    ]
+                },
+                {
+                    name: "Toshkent viloyati",
+                    districts: [
+                        { name: "Toshkent", average_temperature: 2.7, time: 129 },
+                        { name: "Olmaliq", average_temperature: 3.2, time: 124 },
+                        { name: "Ohangaron", average_temperature: 2.9, time: 135 }
+                    ]
+                },
+                {
+                    name: "Farg'ona viloyati",
+                    districts: [
+                        { name: "Farg'ona", average_temperature: 1.8, time: 131 },
+                        { name: "Qo'qon", average_temperature: 1.9, time: 132 }
+                    ]
+                }
+            ];
+            populateRegionsSelect();
+        }
+        
+        // Viloyatlarni select elementiga yuklash
+        function populateRegionsSelect() {
+            const regionSelect = document.getElementById('region');
+            regionSelect.innerHTML = '<option value="" selected disabled>Viloyatni tanlang</option>';
+            
+            regionsData.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region.name;
+                option.textContent = region.name;
+                option.setAttribute('data-region', JSON.stringify(region));
+                regionSelect.appendChild(option);
+            });
+            
+            // Viloyat tanlanganda tumanlarni yuklash
+            regionSelect.addEventListener('change', function() {
+                const districtSelect = document.getElementById('district');
+                const selectedOption = this.options[this.selectedIndex];
+                
+                if (selectedOption.value) {
+                    selectedRegionData = JSON.parse(selectedOption.getAttribute('data-region'));
+                    districtSelect.innerHTML = '';
+                    districtSelect.disabled = false;
+                    
+                    selectedRegionData.districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.name;
+                        option.textContent = district.name;
+                        option.setAttribute('data-district', JSON.stringify(district));
+                        districtSelect.appendChild(option);
+                    });
+                    
+                    // Tuman tanlanganda ma'lumotlarni ko'rsatish
+                    districtSelect.addEventListener('change', function() {
+                        const selectedDistrictOption = this.options[this.selectedIndex];
+                        if (selectedDistrictOption.value) {
+                            selectedDistrictData = JSON.parse(selectedDistrictOption.getAttribute('data-district'));
+                            displayRegionInfo();
+                        }
+                    });
+                } else {
+                    districtSelect.disabled = true;
+                    document.getElementById('regionInfo').style.display = 'none';
+                }
+            });
+        }
+        
+        // Hudud ma'lumotlarini ko'rsatish
+        function displayRegionInfo() {
+            if (selectedDistrictData) {
+                document.getElementById('avgTempDisplay').textContent = selectedDistrictData.average_temperature;
+                document.getElementById('timeDisplay').textContent = selectedDistrictData.time;
+                document.getElementById('baseTempDisplay').textContent = baseTemperature;
+                
+                const calcValue = (baseTemperature - selectedDistrictData.average_temperature) * selectedDistrictData.time;
+                
+                document.getElementById('calcValueDisplay').textContent = calcValue.toFixed(2);
+                document.getElementById('regionInfo').style.display = 'block';
+            }
+        }
+        
+        // Bosqichga o'tish funksiyasi
+        function goToStep(stepNumber) {
+            // Bosqichlarni yangilash
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active', 'completed');
+                const stepNum = step.getAttribute('data-step');
+                if (stepNum < stepNumber) {
+                    step.classList.add('completed');
+                } else if (stepNum == stepNumber) {
+                    step.classList.add('active');
+                }
+            });
+            
+            // Form bo'limlarini yangilash
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+        }
         
         // Eshik qo'shish funksiyasi
         function addDoorItem(id) {
@@ -963,75 +1021,49 @@
             calculateDoorWindowAreas();
         }
         
-        // Formani yuborish
-        document.getElementById('buildingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Isitish qiymatini hisoblash
+        function calculateHeating() {
+            if (!selectedDistrictData) {
+                alert('Iltimos, avval hududni tanlang!');
+                goToStep(1);
+                return;
+            }
             
             // Ma'lumotlarni yig'ish
-            const formData = {
-                region: document.getElementById('region').value,
-                district: document.getElementById('district').value,
-                buildingType: document.getElementById('buildingType').value,
-                customBuildingType: document.getElementById('customBuildingType').value,
-                length: document.getElementById('length').value,
-                width: document.getElementById('width').value,
-                height: document.getElementById('height').value,
-                wallArea: document.getElementById('wallArea').value,
-                floorArea: document.getElementById('floorArea').value,
-                ceilingArea: document.getElementById('ceilingArea').value,
-                wallThickness: document.getElementById('wallThickness').value,
-                wallMaterial: document.getElementById('wallMaterial').value,
-                floorThickness: document.getElementById('floorThickness').value,
-                floorMaterial: document.getElementById('floorMaterial').value,
-                ceilingThickness: document.getElementById('ceilingThickness').value,
-                ceilingMaterial: document.getElementById('ceilingMaterial').value,
-                additionalInfo: document.getElementById('additionalInfo').value
-            };
+            const region = document.getElementById('region').value;
+            const district = document.getElementById('district').value;
+            const buildingType = document.getElementById('buildingType').value;
+            const customBuildingType = document.getElementById('customBuildingType').value;
+            const length = document.getElementById('length').value;
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
             
-            // Eshik ma'lumotlarini yig'ish
-            formData.doors = [];
-            document.querySelectorAll('.door-window-item').forEach((item, index) => {
-                if (item.closest('#doorsContainer')) {
-                    const width = item.querySelector('.door-width').value;
-                    const height = item.querySelector('.door-height').value;
-                    const material = item.querySelector('.door-material').value;
-                    const area = item.querySelector('.door-area').value;
-                    
-                    formData.doors.push({
-                        id: index + 1,
-                        width: width,
-                        height: height,
-                        material: material,
-                        area: area
-                    });
-                }
-            });
+            // Bino turi nomini olish
+            const buildingTypeSelect = document.getElementById('buildingType');
+            const selectedBuildingOption = buildingTypeSelect.options[buildingTypeSelect.selectedIndex];
+            const buildingTypeName = buildingType === 'boshqa' ? customBuildingType : selectedBuildingOption.textContent;
             
-            // Deraza ma'lumotlarini yig'ish
-            formData.windows = [];
-            document.querySelectorAll('.door-window-item').forEach((item, index) => {
-                if (item.closest('#windowsContainer')) {
-                    const width = item.querySelector('.window-width').value;
-                    const height = item.querySelector('.window-height').value;
-                    const material = item.querySelector('.window-material').value;
-                    const area = item.querySelector('.window-area').value;
-                    
-                    formData.windows.push({
-                        id: index + 1,
-                        width: width,
-                        height: height,
-                        material: material,
-                        area: area
-                    });
-                }
-            });
+            // Hisoblash formulasi
+            const heatingValue = (baseTemperature - selectedDistrictData.average_temperature) * selectedDistrictData.time;
             
-            // Bu yerda ma'lumotlarni serverga yuborish yoki boshqa amallar bajariladi
-            console.log('Form ma\'lumotlari:', formData);
+            // Natijalarni ko'rsatish
+            document.getElementById('resultRegion').textContent = region;
+            document.getElementById('resultDistrict').textContent = district;
+            document.getElementById('resultBuildingType').textContent = buildingTypeName;
+            document.getElementById('resultAvgTemp').textContent = selectedDistrictData.average_temperature;
+            document.getElementById('resultBaseTemp').textContent = baseTemperature;
+            document.getElementById('resultTime').textContent = selectedDistrictData.time;
+            document.getElementById('resultDimensions').textContent = `${length}m × ${width}m × ${height}m`;
+            document.getElementById('resultWallArea').textContent = document.getElementById('wallArea').value;
+            document.getElementById('resultFloorArea').textContent = document.getElementById('floorArea').value;
+            document.getElementById('resultHeatingValue').textContent = heatingValue.toFixed(2);
             
-            // Muvaffaqiyat xabari
-            alert('Ma\'lumotlar muvaffaqiyatli saqlandi!');
-        });
+            // Natijalarni ko'rsatish
+            document.getElementById('calculationResult').style.display = 'block';
+            
+            // Natijalarga scroll qilish
+            document.getElementById('calculationResult').scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
 
 
