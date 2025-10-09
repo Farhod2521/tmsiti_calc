@@ -157,6 +157,47 @@
             margin-top: 10px;
             border-left: 3px solid #198754;
         }
+        
+        /* Yangi qo'shilgan materiallar tizimi uchun style */
+        .layer-table {
+            margin-top: 15px;
+            display: none;
+        }
+        .layer-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 8px 0;
+        }
+        .layer-row:last-child {
+            border-bottom: none;
+        }
+        .material-modal .modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .material-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .material-item:hover {
+            background-color: #f8f9fa;
+        }
+        .material-item.selected {
+            background-color: #e3f2fd;
+            border-left: 4px solid #0d6efd;
+        }
+        .total-thickness {
+            font-weight: bold;
+            color: #198754;
+            margin-top: 10px;
+        }
+        .material-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        .material-input-group input {
+            flex: 1;
+        }
     </style>
 </head>
 
@@ -255,21 +296,6 @@
             </section>
             <!-- section close -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -356,16 +382,16 @@
                             <h6>Hudud ma'lumotlari:</h6>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <small>O'rtacha harorat: <span id="avgTempDisplay">-</span>°C</small>
+                                    <small>Issiqlik mavsumida o'rtacha havo harorati: <span id="avgTempDisplay">-</span>°C</small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Vaqt: <span id="timeDisplay">-</span></small>
+                                    <small>Isitish davrining davomiyligi: <span id="timeDisplay">-</span></small>
                                 </div>
                                 <div class="col-md-3">
                                     <small>Baza harorat: <span id="baseTempDisplay">-</span>°C</small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Hisob qiymati: <span id="calcValueDisplay">-</span></small>
+                                    <small>Isitish davrining daraja-kunlari soni (HDHP): <span id="calcValueDisplay">-</span></small>
                                 </div>
                             </div>
                         </div>
@@ -469,29 +495,27 @@
                         </div>
                         
                         <!-- Materiallar -->
+                        <!-- Devor qismi -->
                         <div class="material-section">
                             <h5 class="text-primary">Devor</h5>
                             <div class="row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="wallThickness" class="form-label">Devor qalinligi (m)</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="wallThickness" min="0" step="0.01">
+                                        <input type="number" class="form-control" id="wallThickness" min="0" step="0.01" readonly>
                                         <span class="input-group-text">m</span>
                                     </div>
                                 </div>
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="wallMaterial" class="form-label">Devor materiali</label>
-                                    <select class="form-select" id="wallMaterial">
-                                        <option value="" selected>Tanlang</option>
-                                        <option value="g'isht">G'isht</option>
-                                        <option value="beton">Beton</option>
-                                        <option value="paneli">Paneli</option>
-                                        <option value="yog'och">Yog'och</option>
-                                        <option value="gazobeton">Gazobeton</option>
-                                        <option value="boshqa">Boshqa</option>
-                                    </select>
+                                    <div class="material-input-group">
+                                        <input type="text" class="form-control" id="wallMaterialDisplay" readonly>
+                                        <button class="btn btn-outline-primary" type="button" id="wallMaterialBtn">
+                                            <i class="bi bi-plus"></i> Material qo'shish
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="wallArea" class="form-label">Devor Yuzasi(m²)</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="wallArea" readonly style="background-color: #e9ecef;">
@@ -504,31 +528,38 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Devor qatlamlari jadvali -->
+                            <div class="layer-table" id="wallLayerTable">
+                                <h6>Devor qatlamlari:</h6>
+                                <div id="wallLayersContainer">
+                                    <!-- Qatlamlar bu yerda yuklanadi -->
+                                </div>
+                                <div class="total-thickness" id="wallTotalThickness">Jami qalinlik: 0 m</div>
+                            </div>
                         </div>
                         
+                        <!-- Pol qismi -->
                         <div class="material-section">
                             <h5 class="text-primary">Pol</h5>
                             <div class="row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="floorThickness" class="form-label">Pol qalinligi (m)</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="floorThickness" min="0" step="0.01">
+                                        <input type="number" class="form-control" id="floorThickness" min="0" step="0.01" readonly>
                                         <span class="input-group-text">m</span>
                                     </div>
                                 </div>
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="floorMaterial" class="form-label">Pol materiali</label>
-                                    <select class="form-select" id="floorMaterial">
-                                        <option value="" selected>Tanlang</option>
-                                        <option value="beton">Beton</option>
-                                        <option value="parket">Parket</option>
-                                        <option value="laminat">Laminat</option>
-                                        <option value="plita">Plita</option>
-                                        <option value="keramika">Keramika</option>
-                                        <option value="boshqa">Boshqa</option>
-                                    </select>
+                                    <div class="material-input-group">
+                                        <input type="text" class="form-control" id="floorMaterialDisplay" readonly>
+                                        <button class="btn btn-outline-primary" type="button" id="floorMaterialBtn">
+                                            <i class="bi bi-plus"></i> Material qo'shish
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="floorArea" class="form-label">Pol Yuzasi(m²)</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="floorArea" readonly style="background-color: #e9ecef;">
@@ -536,37 +567,53 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Pol qatlamlari jadvali -->
+                            <div class="layer-table" id="floorLayerTable">
+                                <h6>Pol qatlamlari:</h6>
+                                <div id="floorLayersContainer">
+                                    <!-- Qatlamlar bu yerda yuklanadi -->
+                                </div>
+                                <div class="total-thickness" id="floorTotalThickness">Jami qalinlik: 0 m</div>
+                            </div>
                         </div>
                         
+                        <!-- Tom qismi -->
                         <div class="material-section">
                             <h5 class="text-primary">Tom</h5>
                             <div class="row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="ceilingThickness" class="form-label">Tom qalinligi (m)</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01">
+                                        <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01" readonly>
                                         <span class="input-group-text">m</span>
                                     </div>
                                 </div>
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="ceilingMaterial" class="form-label">Tom materiali</label>
-                                    <select class="form-select" id="ceilingMaterial">
-                                        <option value="" selected>Tanlang</option>
-                                        <option value="beton">Beton</option>
-                                        <option value="g'isht">G'isht</option>
-                                        <option value="metall">Metall</option>
-                                        <option value="yog'och">Yog'och</option>
-                                        <option value="plastik">Plastik</option>
-                                        <option value="boshqa">Boshqa</option>
-                                    </select>
+                                    <div class="material-input-group">
+                                        <input type="text" class="form-control" id="ceilingMaterialDisplay" readonly>
+                                        <button class="btn btn-outline-primary" type="button" id="ceilingMaterialBtn">
+                                            <i class="bi bi-plus"></i> Material qo'shish
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="ceilingArea" class="form-label">Tom Yuzasi(m²)</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="ceilingArea" readonly style="background-color: #e9ecef;">
                                         <span class="input-group-text">m²</span>
                                     </div>
                                 </div>
+                            </div>
+                            
+                            <!-- Tom qatlamlari jadvali -->
+                            <div class="layer-table" id="ceilingLayerTable">
+                                <h6>Tom qatlamlari:</h6>
+                                <div id="ceilingLayersContainer">
+                                    <!-- Qatlamlar bu yerda yuklanadi -->
+                                </div>
+                                <div class="total-thickness" id="ceilingTotalThickness">Jami qalinlik: 0 m</div>
                             </div>
                         </div>
                         <div class="navigation-buttons">
@@ -616,15 +663,93 @@
         </div>
     </div>
 
+    <!-- Material tanlash modali -->
+    <div class="modal fade material-modal" id="materialModal" tabindex="-1" aria-labelledby="materialModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="materialModalLabel">Material tanlash</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="materialSearch" placeholder="Material qidirish...">
+                        <button class="btn btn-outline-secondary" type="button" id="clearSearch">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                    <div id="materialList">
+                        <!-- Materiallar ro'yxati bu yerda yuklanadi -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                    <button type="button" class="btn btn-primary" id="selectMaterial">Tanlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // Materiallar ro'yxati
+        const materials = [
+            // Issiqlik izolyatsiyalash materiallari
+            "Yumshoq yog'och tolali taxta (MDF) 200 kg/m³",
+            "Yumshoq yog'och tolali taxta (MDF) 400 kg/m³",
+            "Qattiq tolali taxta (HDF) 600 kg/m³",
+            "Qattiq tolali taxta (HDF) 800 kg/m³",
+            "Yog'och tolali taxta (HDF) 1000 kg/m³",
+            "Portlend tsement tolali plitalar 300 kg/m³",
+            "Portlend tsement tolali plitalar 400 kg/m³",
+            "Portlend tsement tolali plitalar 600 kg/m³",
+            "Portlend tsement tolali plitalar 800 kg/m³",
+            "Zarrachalar plitalari 200 kg/m³",
+            "Zarrachalar plitalari 400 kg/m³",
+            "Zarrachalar plitalari 600 kg/m³",
+            "Zarrachalar plitalari 800 kg/m³",
+            "Zarrachalar plitalari 1000 kg/m³",
+            "Asbest-sement tekis plitalari 1600 kg/m³",
+            "Asbest-sement tekis plitalari 1800 kg/m³",
+            "Drywall (GKL)",
+            "Gips tolali qatlam (GVL)",
+            "Gipsli zarrachalar paneli (GSP)",
+            "Gips plitalari 1000 kg/m³",
+            "Gips plitalari 1200 kg/m³",
+            "Yuzli karton",
+            "Ko'p qatlamli qurilish karton",
+            "Yo'naltirilgan simli taxta (OSB-2, OSB-3)",
+            "Kontrplak",
+            "Tsement bilan biriktirilgan zarrachalar paneli (CBPB)",
+            
+            // Qo'shimcha materiallar
+            "G'isht",
+            "Beton",
+            "Paneli",
+            "Yog'och",
+            "Gazobeton",
+            "Parket",
+            "Laminat",
+            "Plita",
+            "Keramika",
+            "Metall",
+            "Plastik"
+        ];
+
         // Global o'zgaruvchilar
         let regionsData = [];
         let selectedRegionData = null;
         let selectedDistrictData = null;
         let baseTemperature = 20; // Default baza harorati
+        
+        // Materiallar tizimi uchun global o'zgaruvchilar
+        let currentSection = null;
+        let selectedMaterial = null;
+        let wallLayers = [];
+        let floorLayers = [];
+        let ceilingLayers = [];
 
         // DOM yuklanganda bajariladigan funksiyalar
         document.addEventListener('DOMContentLoaded', function() {
@@ -707,6 +832,79 @@
             // Dastlabki bir eshik va deraza qo'shish
             addDoorItem(1);
             addWindowItem(1);
+            
+            // Material tanlash tugmalari
+            document.getElementById('wallMaterialBtn').addEventListener('click', function() {
+                openMaterialModal('wall');
+            });
+            
+            document.getElementById('floorMaterialBtn').addEventListener('click', function() {
+                openMaterialModal('floor');
+            });
+            
+            document.getElementById('ceilingMaterialBtn').addEventListener('click', function() {
+                openMaterialModal('ceiling');
+            });
+            
+            // Modal elementlari
+            const materialModal = new bootstrap.Modal(document.getElementById('materialModal'));
+            const materialSearch = document.getElementById('materialSearch');
+            const materialList = document.getElementById('materialList');
+            const selectMaterialBtn = document.getElementById('selectMaterial');
+            const clearSearchBtn = document.getElementById('clearSearch');
+            
+            // Material ro'yxatini yuklash
+            loadMaterialList(materials);
+            
+            // Material qidirish
+            materialSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filteredMaterials = materials.filter(material => 
+                    material.toLowerCase().includes(searchTerm)
+                );
+                loadMaterialList(filteredMaterials);
+            });
+            
+            // Qidiruvni tozalash
+            clearSearchBtn.addEventListener('click', function() {
+                materialSearch.value = '';
+                loadMaterialList(materials);
+            });
+            
+            // Material tanlash
+            selectMaterialBtn.addEventListener('click', function() {
+                if (selectedMaterial && currentSection) {
+                    addMaterialToSection(currentSection, selectedMaterial);
+                    materialModal.hide();
+                }
+            });
+            
+            // Material ro'yxatini yuklash funksiyasi
+            function loadMaterialList(materialArray) {
+                materialList.innerHTML = '';
+                materialArray.forEach(material => {
+                    const materialItem = document.createElement('div');
+                    materialItem.className = 'material-item';
+                    materialItem.textContent = material;
+                    materialItem.addEventListener('click', function() {
+                        // Barcha materiallardan tanlangan klassni olib tashlash
+                        document.querySelectorAll('.material-item').forEach(item => {
+                            item.classList.remove('selected');
+                        });
+                        // Joriy materialga tanlangan klassni qo'shish
+                        this.classList.add('selected');
+                        selectedMaterial = material;
+                    });
+                    materialList.appendChild(materialItem);
+                });
+            }
+            
+            // Modal ochilganda
+            document.getElementById('materialModal').addEventListener('show.bs.modal', function() {
+                materialSearch.value = '';
+                selectedMaterial = null;
+                loadMaterialList(materials);
+            });
         });
         
         // API dan viloyatlarni yuklash
@@ -1063,6 +1261,176 @@
             
             // Natijalarga scroll qilish
             document.getElementById('calculationResult').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Material modalini ochish
+        function openMaterialModal(section) {
+            currentSection = section;
+            const modal = new bootstrap.Modal(document.getElementById('materialModal'));
+            modal.show();
+        }
+        
+        // Materialni qismga qo'shish
+        function addMaterialToSection(section, material) {
+            // Qatlam obyektini yaratish
+            const layer = {
+                id: Date.now(), // Unikal ID
+                name: material,
+                thickness: 0 // Boshlang'ich qalinlik
+            };
+            
+            // Tegishli qismga qo'shish
+            if (section === 'wall') {
+                wallLayers.push(layer);
+                updateLayerTable('wall', wallLayers);
+                document.getElementById('wallMaterialDisplay').value = `${wallLayers.length} ta material`;
+            } else if (section === 'floor') {
+                floorLayers.push(layer);
+                updateLayerTable('floor', floorLayers);
+                document.getElementById('floorMaterialDisplay').value = `${floorLayers.length} ta material`;
+            } else if (section === 'ceiling') {
+                ceilingLayers.push(layer);
+                updateLayerTable('ceiling', ceilingLayers);
+                document.getElementById('ceilingMaterialDisplay').value = `${ceilingLayers.length} ta material`;
+            }
+        }
+        
+        // Qatlamlar jadvalini yangilash
+        function updateLayerTable(section, layers) {
+            const containerId = `${section}LayersContainer`;
+            const tableId = `${section}LayerTable`;
+            const container = document.getElementById(containerId);
+            const table = document.getElementById(tableId);
+            
+            // Agar materiallar mavjud bo'lsa, jadvalni ko'rsatish
+            if (layers.length > 0) {
+                table.style.display = 'block';
+            } else {
+                table.style.display = 'none';
+            }
+            
+            // Jadvalni tozalash
+            container.innerHTML = '';
+            
+            // Har bir qatlam uchun qator yaratish
+            layers.forEach((layer, index) => {
+                const layerRow = document.createElement('div');
+                layerRow.className = 'layer-row row align-items-center';
+                layerRow.innerHTML = `
+                    <div class="col-md-6">
+                        <span>${layer.name}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control layer-thickness" 
+                                   data-id="${layer.id}" data-section="${section}"
+                                   min="0" step="0.01" value="${layer.thickness}">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-layer" 
+                                data-id="${layer.id}" data-section="${section}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(layerRow);
+            });
+            
+            // Qatlam qalinligini o'zgartirganda
+            document.querySelectorAll('.layer-thickness').forEach(input => {
+                input.addEventListener('input', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    const section = this.getAttribute('data-section');
+                    const thickness = parseFloat(this.value) || 0;
+                    
+                    updateLayerThickness(section, id, thickness);
+                });
+            });
+            
+            // Qatlamni o'chirish tugmasi
+            document.querySelectorAll('.remove-layer').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    const section = this.getAttribute('data-section');
+                    
+                    removeLayer(section, id);
+                });
+            });
+            
+            // Jami qalinlikni yangilash
+            updateTotalThickness(section);
+        }
+        
+        // Qatlam qalinligini yangilash
+        function updateLayerThickness(section, id, thickness) {
+            let layers;
+            if (section === 'wall') {
+                layers = wallLayers;
+            } else if (section === 'floor') {
+                layers = floorLayers;
+            } else if (section === 'ceiling') {
+                layers = ceilingLayers;
+            }
+            
+            // Qatlamni topish va yangilash
+            const layerIndex = layers.findIndex(layer => layer.id === id);
+            if (layerIndex !== -1) {
+                layers[layerIndex].thickness = thickness;
+                updateTotalThickness(section);
+            }
+        }
+        
+        // Qatlamni o'chirish
+        function removeLayer(section, id) {
+            let layers;
+            if (section === 'wall') {
+                layers = wallLayers;
+            } else if (section === 'floor') {
+                layers = floorLayers;
+            } else if (section === 'ceiling') {
+                layers = ceilingLayers;
+            }
+            
+            // Qatlamni olib tashlash
+            const layerIndex = layers.findIndex(layer => layer.id === id);
+            if (layerIndex !== -1) {
+                layers.splice(layerIndex, 1);
+                updateLayerTable(section, layers);
+                
+                // Material display ni yangilash
+                const displayId = `${section}MaterialDisplay`;
+                document.getElementById(displayId).value = layers.length > 0 ? `${layers.length} ta material` : '';
+            }
+        }
+        
+        // Jami qalinlikni yangilash
+        function updateTotalThickness(section) {
+            let layers, totalThicknessId, thicknessInputId;
+            
+            if (section === 'wall') {
+                layers = wallLayers;
+                totalThicknessId = 'wallTotalThickness';
+                thicknessInputId = 'wallThickness';
+            } else if (section === 'floor') {
+                layers = floorLayers;
+                totalThicknessId = 'floorTotalThickness';
+                thicknessInputId = 'floorThickness';
+            } else if (section === 'ceiling') {
+                layers = ceilingLayers;
+                totalThicknessId = 'ceilingTotalThickness';
+                thicknessInputId = 'ceilingThickness';
+            }
+            
+            // Jami qalinlikni hisoblash
+            const totalThickness = layers.reduce((sum, layer) => sum + (layer.thickness || 0), 0);
+            
+            // Jami qalinlikni ko'rsatish
+            document.getElementById(totalThicknessId).textContent = `Jami qalinlik: ${totalThickness.toFixed(2)} m`;
+            
+            // Qalinlik inputini yangilash
+            document.getElementById(thicknessInputId).value = totalThickness.toFixed(2);
         }
     </script>
 
