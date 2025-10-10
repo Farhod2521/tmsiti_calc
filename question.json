@@ -2,13 +2,13 @@
 {
     "category": [
         {
-        "name" :"Tashqi muhitning qulayligi va sifati", 
-        "input": [
+        "name" :"Tashqi muhitning qulayligi va sifati",
+        "select": [
             {
                 "question": "Jamoat transporti bekatlarigacha piyoda yurib boriladigan masofa",
-                "answer": [
+                "answer":[
                     {
-                        "name": "0-200", 
+                        "name":"<200",
                         "ball": 5
                     },
                     {
@@ -18,29 +18,25 @@
                     {
                         "name": "300-500", 
                         "ball": 1  
-                    },
-                    {
-                        "name": "500-10000000", 
-                        "ball": 0  
                     }
                 ]
             }
-        ], 
-        "input": [
+        ],
+        "select": [
             {
                 "question": "Chakana savdo, aloqa, maishiy, bank xizmatlari va dorixonalarning umumiy soni (binodan 400 t gacha radiusda), Sog‘liqni saqlash muassasalari (binodan 800 t gacha radiusda), va Taʼlim muassasalari (binodan 250 gacha radiusda).",
                 "answer": [
                     {
-                        "name": "7-100",
+                        "name": ">7",
                         "ball": 5
                     },
                     {
-                        "name": "7-100",
-                        "ball": 5
+                        "name": "5",
+                        "ball": 3
                     },
                     {
-                        "name": "7-100",
-                        "ball": 5
+                        "name": "3",
+                        "ball": 1
                     }
                 ]
             }
@@ -78,12 +74,12 @@
                 ]
             }
         ],
-        "input": [
+        "select": [
             {
                 "question": "Bino oldi hududining ko‘kalamzorlashtirilgan maydonini bino oldi hududining umumiy maydoniga nisbati, %",
                 "answer": [
                     {
-                        "name": "15-1000000000000",
+                        "name": "15<",
                         "ball": 7
                     },
                     {
@@ -130,7 +126,7 @@
                 ]
             }
         ],
-        "input": [
+        "select": [
             {
                 "question": "Yaqin atrofida botqoq bo‘lmagan tabiiy suv havzalarining mavjudligi, m",
                 "answer": [
@@ -143,7 +139,7 @@
                         "ball": 1
                     },
                     {
-                        "name": "500-10000000000000",
+                        "name": "500<",
                         "ball": 0
                     }
                 ]
@@ -201,12 +197,12 @@
                 ]
             }
         ], 
-        "input": [
+        "select": [
             {
                 "question": "Binoga tutash hududlarning insolyatsiyasi. Amaldagi normalarga muvofiq taʼminlanganlik foizi, %",
                 "answer": [
                     {
-                        "name": "120-10000000000000000000",
+                        "name": "120< ",
                         "ball": 7
                     },
                     {
@@ -239,7 +235,7 @@
                 ]
             }
         ], 
-        "input": [
+        "select": [
             {
                 "question": "Oktava diapazonidagi infratovush bosimining umumiy darajasi 2-16 Ng, 6V 1_1P, ko‘pi bilan, Kunduzi",
                 "answer": [
@@ -248,13 +244,13 @@
                         "ball": 1
                     },
                     {
-                        "name": "45-10000000000000000",
+                        "name": "45<",
                         "ball": 0
                     }
                 ]
             }
         ],
-        "input": [
+        "select": [
             {
                 "question": "Oktava diapazonidagi infratovush bosimining umumiy darajasi 2-16 Ng, 6V 1_1P, ko‘pi bilan, Kechasi",
                 "answer": [
@@ -263,7 +259,7 @@
                         "ball": 1
                     },
                     {
-                        "name": "35-10000000000000000",
+                        "name": "35<",
                         "ball": 0
                     }
                 ]
@@ -404,12 +400,12 @@
                 ]
             }
         ],
-        "input": [
+        "select": [
             {
                 "question": "Bino tomidagi bog‘ maydonining qismi yoki tomning ko‘kalamzorlashtirilgan umumiy maydoni, %",
                 "answer": [
                     {
-                        "name": "50-10000000000000000000",
+                        "name": "50<",
                         "ball": 7
                     },
                     {
@@ -1490,6 +1486,205 @@
                 ]
             }
         ],
+        "select": [
+            {
+                "question": "Obyektning hayotiy davri uchun kamaytirilgan umumiy xarajatlarning qiymati. Obyekt bo‘yicha muayyan kamaytirilgan umumiy xarajatlar ulushining qiymati, %",
+                "answer":[
+                    {
+                        "name":"<0,85",
+                        "ball": 25
+                    },
+                    {
+                        "name":"0,85-1,0",
+                        "ball": 15
+                    },
+                    {
+                        "name":"1,0-1,1",
+                        "ball": 10
+                    },
+                    {
+                        "name":"1.1-1,2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1.2-1,3",
+                        "ball": 1
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "name": "Loyihani tayyorlash va boshqarish sifati",        
+        "select": [
+            {
+                "question": "Yashil binolarni loyihalashda meʼmorlarning tajribasi. “Yashil qurilish” sohasida sertifikat olgan tugallangan loyihalar soni,dona.",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "select": [
+            {
+                "question": "Yashil qurilish tizimlarida akkreditatsiyadan o‘tgan mutaxassislar, shaxslar ishtirokida tayyorlangan loyiha hujjatlari.",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Loyihalash tashkiloti",
+                "answer": [
+                    {
+                        "name": "Loyihalash tashkiloti atrof-muhitni boshqarish sertifikatiga ega",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Loyihalash tashkiloti",
+                "answer": [
+                    {
+                        "name": "Loyihalash tashkiloti TSB (tizim sifatini boshqarish) sertifikatiga ega",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    }
+                ]
+            }
+        ],
+        "select": [
+            {
+                "question": "Yashil qurilish sertifikatlarini olgan qurib bitirlgan binolar soni, dona",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Quruvchi tashkilotning (bosh pudratchi) ‘yashil‘ binolarni qurish tajribasi",
+                "answer": [
+                    {
+                        "name": "Qurilish tashkilotida atrof-muhitni boshqarish sertifikati mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "select": [
+            {
+                "question": "“Yashil” (“ekologik barqaror”) qurilish sohasida sertifikati bo‘lgan xizmat ko‘rsatilayotgan binolar soni, dona.",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Boshqaruv kompaniyasining “yashil” binolarni ekspluatatsiya qilishdagi tajribasi.",
+                "answer": [
+                    {
+                        "name": "Boshqaruv tashkilotda atrof-muhitni boshqarish sertifikati mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Loyihani tayyorlash jarayonida tadqiqot va tajriba-konstruktorlik ishlarini olib borish.",
+                "answer": [
+                    {
+                        "name": "Binolarning energiya samaradorligini optimallashtirish bo‘yicha chora-tadbirlar simulyatsiyasini amalga oshirish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Yashash muhitining barqarorligini variantli tahlil qilish",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 12
+                    },
+                    {
+                        "status": 1,
+                        "ball": 24
+                    }
+                ]
+            }
+        ]
         }
     ] 
 } 
