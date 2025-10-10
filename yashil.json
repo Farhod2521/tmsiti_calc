@@ -1,0 +1,1577 @@
+
+{
+    "category": [
+
+        {
+        "name" :"Tashqi muhitning qulayligi va sifati",
+        "select": [
+            {
+                "question": "Jamoat transporti bekatlarigacha piyoda yurib boriladigan masofa",
+                "answer":[
+                    {
+                        "name":"<200",
+                        "ball": 5
+                    },
+                    {
+                        "name": "200-300", 
+                        "ball": 3  
+                    },
+                    {
+                        "name": "300-500", 
+                        "ball": 1  
+                    }
+                ]
+            },
+            {
+                "question": "Chakana savdo, aloqa, maishiy, bank xizmatlari va dorixonalarning umumiy soni (binodan 400 t gacha radiusda), Sog‘liqni saqlash muassasalari (binodan 800 t gacha radiusda), va Taʼlim muassasalari (binodan 250 gacha radiusda).",
+                "answer": [
+                    {
+                        "name": ">7",
+                        "ball": 5
+                    },
+                    {
+                        "name": "5",
+                        "ball": 3
+                    },
+                    {
+                        "name": "3",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Bino oldi hududining ko‘kalamzorlashtirilgan maydonini bino oldi hududining umumiy maydoniga nisbati, %",
+                "answer": [
+                    {
+                        "name": "15<",
+                        "ball": 7
+                    },
+                    {
+                        "name": "11-15",
+                        "ball": 5
+                    },
+                    {
+                        "name": "5-10",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Yaqin atrofida botqoq bo‘lmagan tabiiy suv havzalarining mavjudligi, m",
+                "answer": [
+                    {
+                        "name": "30-300",
+                        "ball": 3
+                    },
+                    {
+                        "name": "301-500",
+                        "ball": 1
+                    },
+                    {
+                        "name": "500<",
+                        "ball": 0
+                    }
+                ]
+            },
+            {
+                "question": "Suvli muhitning yaqinligi va ko‘rinishiVizual qulayligiEkspert bahosi",
+                "answer":[
+                    {
+                        "name":"A'lo",
+                        "ball": 3
+                    },
+                    {
+                        "name":"Yaxshi",
+                        "ball": 2
+                    },
+                    {
+                        "name":"Qoniqarli",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Binoga tutash hududlarning insolyatsiyasi. Amaldagi normalarga muvofiq taʼminlanganlik foizi, %",
+                "answer": [
+                    {
+                        "name": "120< ",
+                        "ball": 7
+                    },
+                    {
+                        "name": "111-120",
+                        "ball": 5
+                    },
+                    {
+                        "name": "105-110",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Bino hududining shovqin va infratovu shdan himoya qilinishi. Maksima l tovush darajasi SDmaks) 6VA, ko‘p bilan",
+                "answer":[
+                    {
+                        "name":"Kunduzi-35, Kechasi-25",
+                        "ball": 7
+                    },
+                    {
+                        "name":"Kunduzi-45, Kechasi-35",
+                        "ball": 5
+                    },
+                    {
+                        "name":"Kunduzi-50, Kechasi-40",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Oktava diapazonidagi infratovush bosimining umumiy darajasi 2-16 Ng, 6V 1_1P, ko‘pi bilan, Kunduzi",
+                "answer": [
+                    {
+                        "name": "0-45",
+                        "ball": 1
+                    },
+                    {
+                        "name": "45<",
+                        "ball": 0
+                    }
+                ]
+            },
+            {
+                "question": "Oktava diapazonidagi infratovush bosimining umumiy darajasi 2-16 Ng, 6V 1_1P, ko‘pi bilan, Kechasi",
+                "answer": [
+                    {
+                        "name": "0-35",
+                        "ball": 1
+                    },
+                    {
+                        "name": "35<",
+                        "ball": 0
+                    }
+                ]
+            },
+            {
+                "question": "Hududning ionlanish va elektromagnit nurlanishdan himoyalanganligi. Ekvivalent dozaning hajmi (EDX), hududdagi tashqi gamma nurlanishi, s8u/z dan ko‘p emas",
+                "answer":[
+                    {
+                        "name":"0,10",
+                        "ball": 7
+                    },
+                    {
+                        "name":"0,15",
+                        "ball": 5
+                    },
+                    {
+                        "name":"0,25",
+                        "ball": 3
+                    },
+                    {
+                        "name":"0,30",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Elektr maydon kuchlanganligining meʼyoriy darajasini pasaytirish E, %, dan ko‘proq",
+                "answer":[
+                    {
+                        "name":"20",
+                        "ball": 3
+                    },
+                    {
+                        "name":"10",
+                        "ball": 2
+                    },
+                    {
+                        "name":"5",
+                        "ball": 1
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Bino oldi hududlarining sport va dam olish maskanlari, sport inshootlari va maydonchalari bilan taʼminlanganligi ",
+                "answer": [
+                    {
+                        "name": "Yopiq suzish havzalari va o‘yin zallarining mavjudligi",
+                        "status": 1
+                    },
+                    {
+                        "name": "Ochiq jihozlangan sport maydonchalarining mavjudligi",
+                        "status": 1
+                    },
+                    {
+                        "name": "Bolalar maydonchalarining mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    },
+                    {
+                        "status": 2,
+                        "ball": 5
+                    },
+                    {
+                        "status": 3,
+                        "ball": 7
+                    }
+                ]
+            },
+            {
+                "question": "Ko‘kalamzorlashtirilga n hududning sug‘orilish imkoniyati mavjudligi",
+                "answer": [
+                    {
+                        "name": "Yomg‘ir suvlarini avtomatlashtirilgan yig‘ish tizimini qo‘llab sug‘orish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Yomg‘ir suvlarini yig‘adigan sug‘orish kranlari orqali sug‘orish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Sug‘orish kranlaridan foydalangan holda sug‘orish",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 1
+                    },
+                    {
+                        "status": 2,
+                        "ball": 3
+                    },
+                    {
+                        "status": 3,
+                        "ball": 5
+                    }
+                ]
+            },
+            {
+                "question": "Bino hududida sunʼiy suv havzalarining mavjudligi",
+                "answer": [
+                    {
+                        "name": "Ochiq hovuz",
+                        "status": 1
+                    },
+                    {
+                        "name": "Oqar suv bilan sunʼiy hovuz",
+                        "status": 1
+                    },
+                    {
+                        "name": "Favvora, dekorativ hovuz (sharshara)",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 1
+                    },
+                    {
+                        "status": 2,
+                        "ball": 2
+                    },
+                    {
+                        "status": 3,
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Ekologik transport infratuzilmasining mavjudligi",
+                "answer": [
+                    {
+                        "name": "Velosiped to‘xtash joyining mavjudligi",
+                        "status": 1
+                    },
+                    {
+                        "name": "Atrofdagi velosiped yo‘llarining mavjudligi",
+                        "status": 1
+                    },
+                    {
+                        "name": "Elektr transport vositalari uchun maxsus avtoturargohlarning mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    },
+                    {
+                        "status": 2,
+                        "ball": 4
+                    },
+                    {
+                        "status": 3,
+                        "ball": 6
+                    }
+                ]
+            }
+        ]
+        },
+                          
+        {
+        "name": "Arxitektura sifati va obyektlarning joylashuvi", 
+        "select": [
+            {
+                "question": "Binoning tashqi ko‘rinishi va atrofidagi qurilishlarga muvofiqligi, funksional maqsadi va estetik afzalliklari Ekspert bahosi:",
+                "answer":[
+                    {
+                        "name":"Aʼlo",
+                        "ball": 7
+                    },
+                    {
+                        "name":"Yaxshi",
+                        "ball": 5
+                    },
+                    {
+                        "name":"Qoniqarli",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Meʼmorchilikning o‘ziga xosligi, betakrorligi, yangiligi va estetik mukammalligi Ekspert bahosi:",
+                "answer":[
+                    {
+                        "name":"Aʼlo",
+                        "ball": 5
+                    },
+                    {
+                        "name":"Yaxshi",
+                        "ball": 3
+                    },
+                    {
+                        "name":"Qoniqarli",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Binoning tabiiy yorug‘lik bilan taʼminlanishi. Tabiiy yoritishning normativ koeffitsiyentidan (ortiqcha yoki kombinatsiyalangan yoritish bilan) ortiqcha, %",
+                "answer":[
+                    {
+                        "name":"20",
+                        "ball": 10
+                    },
+                    {
+                        "name":"10",
+                        "ball": 7
+                    },
+                    {
+                        "name":"5",
+                        "ball": 5
+                    }
+                ]
+            },
+            {
+                "question": "Bino tomidagi bog‘ maydonining qismi yoki tomning ko‘kalamzorlashtirilgan umumiy maydoni, %",
+                "answer": [
+                    {
+                        "name": "50<",
+                        "ball": 7
+                    },
+                    {
+                        "name": "31-49",
+                        "ball": 5
+                    },
+                    {
+                        "name": "10-30",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Foydalanishga yaroqli maydonning mavjudligi. Maxsus umumiy maydon, m 2/kishi.",
+                "answer":[
+                    {
+                        "name":"Turar- joy binosi 41 dan katta, Jamoat binosi 13 dan  katta",
+                        "ball": 5
+                    },
+                    {
+                        "name":"Turar- joy binosi 31-40, Jamoat binosi 11-12",
+                        "ball": 3
+                    },
+                    {
+                        "name":"Turar- joy binosi 25-30, Jamoat binosi 8-10",
+                        "ball": 2
+                    }
+                ]
+            },
+            {
+                "question": "Binoning xonalarining kamida 60% ining balandligi, m",
+                "answer":[
+                    {
+                        "name":"4,0 va undan ortiq",
+                        "ball": 3
+                    },
+                    {
+                        "name":"3,6-3,9",
+                        "ball": 2
+                    },
+                    {
+                        "name":"3,1-3,5",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Binodagi xonalarning 60% ining kengligiga _____  chuqurligiga nisbatan koefitsiyenti",
+                "answer":[
+                    {
+                        "name":"1,62-1,50",
+                        "ball": 2
+                    },
+                    {
+                        "name":"2,00-1,63",
+                        "ball": 1
+                    }
+                ]
+            }, 
+            {
+                "question": "Binoga ijtimoiy- maishiy obyektlar joylashtirilganligi. Bino va unga tutash hududlardagi savdo, aloqa, maishiy, bank xizmatlari, dorixonalar va boshqa xizmatlar obyektlari soni",
+                "answer":[
+                    {
+                        "name":"10 va undan ortiq",
+                        "ball": 3
+                    },
+                    {
+                        "name":"6-9",
+                        "ball": 2
+                    },
+                    {
+                        "name":"3-5",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Avtomobillar to‘xtash joyi taʼminlanganligi. Xonadonlar boshiga avtomashinalar soni, ko‘pi bilan, mashina- joy/kv (turar-joy binolari uchun)",
+                "answer":[
+                    {
+                        "name":"2",
+                        "ball": 3
+                    },
+                    {
+                        "name":"1.5",
+                        "ball": 2
+                    },
+                    {
+                        "name":"1",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Avtomobillar to‘xtash joyi taʼminlanganligi. 1 ta mashina-joyga xodimlar soni ko‘pi bilan, odam/mashina- joy",
+                "answer":[
+                    {
+                        "name":"3",
+                        "ball": 3
+                    },
+                    {
+                        "name":"5",
+                        "ball": 2
+                    },
+                    {
+                        "name":"7",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Bino shakli va gorizontga nisbatan yo‘nalishining maqbulligi. Binoning issiqlik samaradorligi ko‘rsatkichining haqiqiy va normallashtirilgan qiymatlari nisbati, koeffitsiyentda",
+                "answer":[
+                    {
+                        "name":"> 0,71",
+                        "ball": 7
+                    },
+                    {
+                        "name":"0,51-0,70",
+                        "ball": 5
+                    },
+                    {
+                        "name":"0,31-0,50",
+                        "ball": 3
+                    },
+                    {
+                        "name":"0,10-0,30",
+                        "ball": 1
+                    }
+                ]
+            }
+        ], 
+        "checkbox": [
+            {
+                "question": "Binoni ko‘kalamzorashtirilgan ligi",
+                "answer": [
+                    {
+                        "name": "Vertikal ko‘kalamzorlashtirish elementlarining mavjudligi (panjara, to‘rlar)",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    }
+                ]
+            },
+            {
+                "question": "Binoni ko‘kalamzorashtirilgan ligi",
+                "answer": [
+                    {
+                        "name": "“Qishki bog‘”ning mavjudligi, ko‘chma bog‘dorchilik elementlari (gulzorlar, gul idishlari)",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "name": "Ichki muhit ekologiyasi va qulayligi", 
+        "select": [
+            {
+                "question": "Mikroiqlim parametrlarini harorat, namlik, havo almashinuvi jihatidan optimallashtirish bo‘yicha choralar ko‘riladi:",
+                "answer":[
+                    {
+                        "name":"Individual yoki avtomatik tartibgasolish imkoniyati bilan;",
+                        "ball": 20
+                    },
+                    {
+                        "name":"Individual yoki avtomatik tartibga solish imkoniyati bo‘lmaganda",
+                        "ball": 10
+                    }
+                ]
+            },
+            {
+                "question": "Yoritilganlikning qulayligi. Sunʼiy yoritish normalariga muvofiqlik darajasi, %:",
+                "answer":[
+                    {
+                        "name":"120 dan ko‘p",
+                        "ball": 10
+                    },
+                    {
+                        "name":"I111-120",
+                        "ball": 7
+                    },
+                    {
+                        "name":"105-110",
+                        "ball": 5
+                    }
+                ]
+            },
+            {
+                "question": "Akustik qulaylik. a va ekvivalent tovush sathining pasayishi (Aekv.), 6VA dan ortiq tomonidan",
+                "answer":[
+                    {
+                        "name":"Kunduzi-7, Kechasi-10",
+                        "ball": 10
+                    },
+                    {
+                        "name":"Kunduzi-5, Kechasi-7",
+                        "ball": 7
+                    },
+                    {
+                        "name":"Kunduzi-3, Kechasi-5",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Oktava diapazonidagi infratovush bosimining umumiy darajasi 22-16 Ng, 6V 1_1P dan ko‘p emas",
+                "answer":[
+                    {
+                        "name":"Kunduzi-35, Kechasi-40",
+                        "ball": 3
+                    },
+                    {
+                        "name":"Kunduzi-25, Kechasi-30",
+                        "ball": 2
+                    }
+                ]
+            },
+            {
+                "question": "Zarba shovqinidan izolyatsiya qilish indeksi 1_pj 6V ko‘pi bilan",
+                "answer":[
+                    {
+                        "name":"50",
+                        "ball": 3
+                    },
+                    {
+                        "name":"55",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Bino xonalarining radon to‘planishidan himoya qilinganligi. Xonalardagi havoda radon va toriy mahsulotlarining o‘rtacha yillik ekvivalent muvozanat hajmi faolligi (RMHAEQRp+4,6RMHAEQ T), Vs/t3, dan ko‘p emas",
+                "answer":[
+                    {
+                        "name":"20",
+                        "ball": 10
+                    },
+                    {
+                        "name":"50",
+                        "ball": 5
+                    },
+                    {
+                        "name":"80",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Binolar muhan-dislik tizimlarining boshqarilishi va nazorat qilinishi. ",
+                "answer":[
+                    {
+                        "name":"Binolarni markazlashtirilgan boshqarish tizimi ((BME)ning mavjudligi va individual boshqarish mumkinligi",
+                        "ball": 15
+                    },
+                    {
+                        "name":"Muhandislik taʼminoti tizimlari uchun mahalliy avtomatlashtirish tizimlarining mavjudligi",
+                        "ball": 5
+                    }
+                ]
+            },
+            {
+                "question": "Havo muhitining nazorat qilinishi va kuzatilishi.",
+                "answer":[
+                    {
+                        "name":"Binoning barcha jamoat joylarida chekishni taqiqlash nazarda tutiladi",
+                        "ball": 10
+                    },
+                    {
+                        "name":"Maxsus chekish joylarining mavjudligi (konditsionerli)",
+                        "ball": 5
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Yoritilganlikning qulayligi.",
+                "answer": [
+                    {
+                        "name": "Sunʼiy yoritishda avtomatik boshqarishni qo‘llash",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Yoritilganlikning qulayligi.",
+                "answer": [
+                    {
+                        "name": "“Kompleks svetodiodli yoritishni qo‘llash",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "name": "Salomatlikni muhofaza qilish va chiqindilarni yo‘q qilish nazorati",
+        "checkbox": [
+            {
+                "question": "Sanitariya himoyasining sifati.",
+                "answer": [
+                    {
+                        "name": "Alohida mexanik shamollatiladigan bo‘linmalar va havo o‘tkazmaydigan (germetik) axlat kanallari",
+                        "status": 1
+                    },
+                    {
+                        "name": "Bakteriyalarni tozalashning avtomatlashtirilgan tizimlari taqdim etiladi (UB qurilmalari, ozonlash)",
+                        "status": 1
+                    },
+                    {
+                        "name": "Axlat qutilari, omborlar, podvallar va yer osti avtoturargohlarni kemiruvchilar va hasharotlardan himoya qilish uchun avtomatlashtirilgan tizimlar taqdim etiladi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    },
+                    {
+                        "status": 2,
+                        "ball": 10
+                    },
+                    {
+                        "status": 3,
+                        "ball": 15
+                    }
+                ]
+            },
+            {
+                "question": "Chiqindilar yig‘ilishi va yo‘q qilinishi tashkil etilganligi",
+                "answer": [
+                    {
+                        "name": "Birlamchi chiqindilarni saralashni tashkil etish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Ishlatilgan simobli chiqindilarni yo‘q qilish tizimi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    },
+                    {
+                        "status": 2,
+                        "ball": 10
+                    }
+                ]
+            }, 
+            {
+                "question": "Binoning suv taʼminoti.",
+                "answer": [
+                    {
+                        "name": "“Suv taʼminotini texnologik va ichimlik suviga bo‘lish",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    }
+                ]
+            },
+            {
+                "question": "Oqova suvlarining zararsizlantirilishi",
+                "answer": [
+                    {
+                        "name": "Unitaz va pissuardagi suvlarni chiqarishda “kulrang” drenajlarni qayta ishlatish ko‘zda tutilgan",
+                        "status": 1
+                    },
+                    {
+                        "name": "Yomg‘ir suvlarini yig‘ish, uni tozalash va foydalanish texnologik suv taʼminoti tizimida ko‘zda tutilgan",
+                        "status": 1
+                    },
+                    {
+                        "name": "Yomg‘ir suvlarini to‘plash atrofni sug‘orishda foydalanish uchun ko‘zda tutiladi (ko‘kalamzorlashtirilgan maydonni sug‘orish)",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    },
+                    {
+                        "status": 2,
+                        "ball": 10
+                    },
+                    {
+                        "status": 3,
+                        "ball": 15
+                    }
+                ]
+            },
+            {
+                "question": "Suv tejaladigan armatura",
+                "answer": [
+                    {
+                        "name": "Oxirgi foydalanuvchiga suv bosimini nazorat qilish va tartibga solish tizimi taqdim etiladi",
+                        "status": 1
+                    },
+                    {
+                        "name": "Oxirgi foydalanuvchilar uchun suv isteʼmolini hisobga olish tizimi taqdim etiladi",
+                        "status": 1
+                    },
+                    {
+                        "name": "Oxirgi foydalanuvchilar uchun suv isteʼmolini hisobga olish tizimi taqdim etiladi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    },
+                    {
+                        "status": 2,
+                        "ball": 10
+                    },
+                    {
+                        "status": 3,
+                        "ball": 15
+                    }
+                ]
+            }
+        ],
+        "select": [
+            {
+                "question": "Binoning suv taʼminoti. Normativlar bilan taqqoslaganda, yiliga bir kishi uchun suv sarfi kamayadi (aylanma suv taʼminoti tizimlari, “kulrang” drenajlar va yomg‘ir suvlarining suv sarfi bundan mustasno), %",
+                "answer":[
+                    {
+                        "name":"20",
+                        "ball": 5
+                    },
+                    {
+                        "name":"10",
+                        "ball": 3
+                    },
+                    {
+                        "name":"5",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Qayta ishlangan suv taʼminotining umumiy suv sarfidagi ulushi, %, kamida",
+                "answer":[
+                    {
+                        "name":"20",
+                        "ball": 3
+                    },
+                    {
+                        "name":"10",
+                        "ball": 2
+                    },
+                    {
+                        "name":"5",
+                        "ball": 1
+                    }
+                ]
+            }
+        ]
+
+        },
+        {
+        "name":"Energiyani tejash va energiya samaradorlik",
+        "select": [
+            {
+                "question": "Binolarni isitish va shamollatish uchun issiqlik sarfi. Isitish uchun issiqlik energiyasining asosiy, umumiy sarfini kamaytirish*, %",
+                "answer":[
+                    {
+                        "name":"> 60",
+                        "ball": 25
+                    },
+                    {
+                        "name":"40-59",
+                        "ball": 20
+                    },
+                    {
+                        "name":"20-39",
+                        "ball": 15
+                    },
+                    {
+                        "name":"10-19",
+                        "ball": 10
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 5
+                    }
+                ]
+            }, 
+            {
+                "question": "Issiq suv taʼminoti uchun issiqlik energiyasi sarfi. Issiq suv taʼminoti uchun issiqlik energiyasining asosiy umumiy sarfini kamaytirish, %",
+                "answer":[
+                    {
+                        "name":"> 60",
+                        "ball": 20
+                    },
+                    {
+                        "name":"40-59",
+                        "ball": 15
+                    },
+                    {
+                        "name":"20-39",
+                        "ball": 10
+                    },
+                    {
+                        "name":"10-19",
+                        "ball": 5
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Yoritishning maxsus bazaviy quvvat sarfini kamaytirish, %",
+                "answer":[
+                    {
+                        "name":"> 60",
+                        "ball": 15
+                    },
+                    {
+                        "name":"40-59",
+                        "ball": 10
+                    },
+                    {
+                        "name":"20-39",
+                        "ball": 7
+                    },
+                    {
+                        "name":"10-19",
+                        "ball": 5
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Muhandislik taʼminoti tizimlarining maxsus bazaviy quvvat sarfini kamaytirish, %",
+                "answer":[
+                    {
+                        "name":"> 60",
+                        "ball": 15
+                    },
+                    {
+                        "name":"40-59",
+                        "ball": 10
+                    },
+                    {
+                        "name":"20-39",
+                        "ball": 7
+                    },
+                    {
+                        "name":"10-19",
+                        "ball": 5
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Konditsiyalash tizimi uchun maxsus bazaviy quvvat sarfini kamaytirish, %",
+                "answer":[
+                    {
+                        "name":"> 60",
+                        "ball": 15
+                    },
+                    {
+                        "name":"40-59",
+                        "ball": 10
+                    },
+                    {
+                        "name":"20-39",
+                        "ball": 7
+                    },
+                    {
+                        "name":"10-19",
+                        "ball": 5
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Muhandislik taʼminoti tizimlari uchun muhim umumiy energiya sarfi. Binoning muhim bazaviy ekspluatatsion energiya intensivligini kamaytirish, %",
+                "answer":[
+                    {
+                        "name":"> 60",
+                        "ball": 20
+                    },
+                    {
+                        "name":"40-59",
+                        "ball": 15
+                    },
+                    {
+                        "name":"20-39",
+                        "ball": 10
+                    },
+                    {
+                        "name":"10-19",
+                        "ball": 5
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Binoning suv taʼminoti.",
+                "answer": [
+                    {
+                        "name": "“Yorug‘lik diodli (YEE) yoritish manbalari o‘rnatilgan",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 5
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "name": "Muqobil va qayta tiklanadigan energiya manbalaridan foydalanish",
+        "select": [
+            {
+                "question": "Ikkilamchi energiya resurslaridan foydalanilganligi. Obyektning yillik energiya balansida ikkilamchi energiyaning ulushi, %",
+                "answer":[
+                    {
+                        "name":"> 21",
+                        "ball": 30
+                    },
+                    {
+                        "name":"15-20",
+                        "ball": 20
+                    },
+                    {
+                        "name":"10-14",
+                        "ball": 10
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1-4",
+                        "ball": 1
+                    }
+                ]
+            }, 
+            {
+                "question": "Qayta tiklanuvchi energiya manbalaridan foydalanilganligi. Obyektlarning yillik energiya balansida qayta tiklanadigan energiyaning ulushi, %",
+                "answer":[
+                    {
+                        "name":"> 21",
+                        "ball": 30
+                    },
+                    {
+                        "name":"15-20",
+                        "ball": 20
+                    },
+                    {
+                        "name":"10-14",
+                        "ball": 10
+                    },
+                    {
+                        "name":"5-9",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1-4",
+                        "ball": 1
+                    }
+                ]
+            }
+        ]
+        }, 
+        {
+        "name": "Obyektlarni yaratish, ishlatish va foydalanish ekologiyasi",
+        "select": [
+            {
+                "question": "Qurilishda ishlatiladigan materiallarning atrof-muhit va ekologiyaga taʼsiri minimallashtiril- ganligi. Qurilishda foydalaniladigan, ekologik sertifikatlangan qurilish materiallari va konstruksiyalarinin g ulushi, %, ko‘pi bilan",
+                "answer":[
+                    {
+                        "name":"50",
+                        "ball": 7
+                    },
+                    {
+                        "name":"40",
+                        "ball": 6
+                    },
+                    {
+                        "name":"30",
+                        "ball": 5
+                    },
+                    {
+                        "name":"20",
+                        "ball": 4
+                    },
+                    {
+                        "name":"10",
+                        "ball": 3
+                    },
+                    {
+                        "name":"5",
+                        "ball": 1
+                    }
+                ]
+            }, 
+            {
+                "question": "Mahalliy qurilish materiallaridan foydalanish, %, dan ko‘p",
+                "answer":[
+                    {
+                        "name":"75",
+                        "ball": 5
+                    },
+                    {
+                        "name":"65",
+                        "ball": 4
+                    },
+                    {
+                        "name":"50",
+                        "ball": 3
+                    },
+                    {
+                        "name":"35",
+                        "ball": 2
+                    },
+                    {
+                        "name":"25",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Qurilish ishlari vaqtida chiqindilar minimallashti- rilganligi. Chiqindilarni qayta ishlash yoki ulardan foydalanish (shisha, shisha tolali, beton, ohak, g‘isht, yog‘och, qora va rangli metallar), %, ko‘p bilan",
+                "answer":[
+                    {
+                        "name":"70",
+                        "ball": 10
+                    },
+                    {
+                        "name":"50",
+                        "ball": 5
+                    },
+                    {
+                        "name":"30",
+                        "ball": 3
+                    },
+                    {
+                        "name":"10",
+                        "ball": 1
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Qurilishda ishlatiladigan materiallarning atrof-muhit va ekologiyaga taʼsiri minimallashtiril- ganligi",
+                "answer": [
+                    {
+                        "name": "Ikkilamchi xom ashyo va materiallardan, shuningdek o‘simlik xom ashyosidan olingan mahsulotlardan foydalanish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Tabiiy materiallar asosida pardozlash materiallari, bo‘yoqlar, qoplamalarni qo‘llash",
+                        "status": 1
+                    },
+                    {
+                        "name": "Tabiiy materiallar (bazalt, qum, yog‘och) asosida issiqlik izolyatsiyasini qo‘llash",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    },
+                    {
+                        "status": 2,
+                        "ball": 4
+                    },
+                    {
+                        "status": 3,
+                        "ball": 6
+                    }
+                ]
+            }, 
+            {
+                "question": "Qurilish paytida atrof muhitni muhofaza qilish va tiklash choralari ko‘rilganligi",
+                "answer": [
+                    {
+                        "name": "Tuproq qatlamlarini keyinchalik ulardan foyalanish uchun qurilishdan xoli uchastkada saqlash",
+                        "status": 1
+                    },
+                    {
+                        "name": "Qayta ishlangan suv taʼminoti",
+                        "status": 1
+                    },
+                    {
+                        "name": "Yomg‘ir suvlarini bir joyga yig‘ish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Oqava suvlarni tozalash",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    },
+                    {
+                        "status": 2,
+                        "ball": 6
+                    },
+                    {
+                        "status": 3,
+                        "ball": 9
+                    },
+                    {
+                        "status": 4,
+                        "ball": 12
+                    }
+                ]
+            },
+            {
+                "question": "Qurilish paytida atrof muhitni muhofaza qilish va tiklash choralari ko‘rilganligi",
+                "answer": [
+                    {
+                        "name": "Changni bostirish, transportni yuvish va tozalash",
+                        "status": 1
+                    },
+                    {
+                        "name": "Daraxt va butalarning tanasi va ildiz tizimini himoya qilish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Unumdor tuproq yordamida maydonni tiklash (rekultivatsiya)",
+                        "status": 1
+                    },
+                    {
+                        "name": "Qurilish jarayonida olib tashlangan daraxt ko‘chatlarini 100% dan ortig‘i miqdorida kompensatsiyalovchi ko‘kalamzorlashtirish",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    },
+                    {
+                        "status": 2,
+                        "ball": 4
+                    },
+                    {
+                        "status": 3,
+                        "ball": 6
+                    },
+                    {
+                        "status": 4,
+                        "ball": 8
+                    }
+                ]
+            }, 
+            {
+                "question": "Bino foydalanilishida zararli taʼsirlar minimallashtiri-lishi ",
+                "answer": [
+                    {
+                        "name": "Bog‘dorchilik uchun o‘g‘itlar va tozalash vositalaridan, ekologik neytral va muzlashga qarshi vositalardan ekspluatatsiya tashkilotlari tomonidan foydalanish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Tarkibida simob bo‘lgan lampalardan foydalanishni man etish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Bino qurilishi uchun mashina va mexanizmlarni ishlatishda elektr energiyasidan yoki ekologik toza yoqilg‘idan foydalanish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Binoda ishlatiladigan muhandislik uskunalari uchun ekologik sertifikatlarning mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    },
+                    {
+                        "status": 2,
+                        "ball": 6
+                    },
+                    {
+                        "status": 3,
+                        "ball": 9
+                    },
+                    {
+                        "status": 4,
+                        "ball": 12
+                    }
+                ]
+            }, 
+            {
+                "question": "Bino foydalanilishida zararli taʼsirlar minimallashtiri-lishi ",
+                "answer": [
+                    {
+                        "name": "Ozon qatlami uchun xavfsiz sovitgichlardan foydalanish",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 4
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "name": "Iqtisodiy samaradorlik",
+        "select": [
+            {
+                "question": "Pasaytirilgan investitsiya xarajatlari qiymati. Obyektning investitsiya qiymatining minimal zarur talablarga javob beradigan, o‘xshash obyekt qiymatiga nisbati, %",
+                "answer":[
+                    {
+                        "name":" < 100",
+                        "ball": 20
+                    },
+                    {
+                        "name":"109-100",
+                        "ball": 15
+                    },
+                    {
+                        "name":"119-110",
+                        "ball": 10
+                    },
+                    {
+                        "name":"130-120",
+                        "ball": 5
+                    }
+                ]
+            }, 
+            {
+                "question": "Yillik ekspluatatsion xarajatlar qiymati. Anʼanaviy analog- obyektlar uchun (energiya, suv, texnik xizmat ko‘rsatish, taʼmirlash) shunga o‘xshash xarajatlarga obyektning o‘rtacha yillik xarajatlarining nisbati, %",
+                "answer":[
+                    {
+                        "name":"<0,80",
+                        "ball": 20
+                    },
+                    {
+                        "name":"0,80-0,85",
+                        "ball": 15
+                    },
+                    {
+                        "name":"0,85-0,90",
+                        "ball": 10
+                    },
+                    {
+                        "name":"0,90-0,95",
+                        "ball": 5
+                    },
+                    {
+                        "name":"0,95-1,0",
+                        "ball": 1
+                    }
+                ]
+            },
+            {
+                "question": "Obyektning hayotiy davri uchun kamaytirilgan umumiy xarajatlarning qiymati. Obyekt bo‘yicha muayyan kamaytirilgan umumiy xarajatlar ulushining qiymati, %",
+                "answer":[
+                    {
+                        "name":"<0,85",
+                        "ball": 25
+                    },
+                    {
+                        "name":"0,85-1,0",
+                        "ball": 15
+                    },
+                    {
+                        "name":"1,0-1,1",
+                        "ball": 10
+                    },
+                    {
+                        "name":"1.1-1,2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1.2-1,3",
+                        "ball": 1
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "name": "Loyihani tayyorlash va boshqarish sifati",        
+        "select": [
+            {
+                "question": "Yashil binolarni loyihalashda meʼmorlarning tajribasi. “Yashil qurilish” sohasida sertifikat olgan tugallangan loyihalar soni,dona.",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Yashil qurilish tizimlarida akkreditatsiyadan o‘tgan mutaxassislar, shaxslar ishtirokida tayyorlangan loyiha hujjatlari.",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Yashil qurilish sertifikatlarini olgan qurib bitirlgan binolar soni, dona",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            },
+           {
+                "question": "“Yashil” (“ekologik barqaror”) qurilish sohasida sertifikati bo‘lgan xizmat ko‘rsatilayotgan binolar soni, dona.",
+                "answer":[
+                    {
+                        "name":"> 3",
+                        "ball": 7
+                    },
+                    {
+                        "name":"2",
+                        "ball": 5
+                    },
+                    {
+                        "name":"1",
+                        "ball": 3
+                    }
+                ]
+            }
+        ],
+        "checkbox": [
+            {
+                "question": "Loyihalash tashkiloti",
+                "answer": [
+                    {
+                        "name": "Loyihalash tashkiloti atrof-muhitni boshqarish sertifikatiga ega",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Loyihalash tashkiloti",
+                "answer": [
+                    {
+                        "name": "Loyihalash tashkiloti TSB (tizim sifatini boshqarish) sertifikatiga ega",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    }
+                ]
+            },
+            {
+                "question": "Quruvchi tashkilotning (bosh pudratchi) ‘yashil‘ binolarni qurish tajribasi",
+                "answer": [
+                    {
+                        "name": "Qurilish tashkilotida atrof-muhitni boshqarish sertifikati mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 3
+                    }
+                ]
+            },
+            {
+                "question": "Boshqaruv kompaniyasining “yashil” binolarni ekspluatatsiya qilishdagi tajribasi.",
+                "answer": [
+                    {
+                        "name": "Boshqaruv tashkilotda atrof-muhitni boshqarish sertifikati mavjudligi",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 2
+                    }
+                ]
+            },
+            {
+                "question": "Loyihani tayyorlash jarayonida tadqiqot va tajriba-konstruktorlik ishlarini olib borish.",
+                "answer": [
+                    {
+                        "name": "Binolarning energiya samaradorligini optimallashtirish bo‘yicha chora-tadbirlar simulyatsiyasini amalga oshirish",
+                        "status": 1
+                    },
+                    {
+                        "name": "Yashash muhitining barqarorligini variantli tahlil qilish",
+                        "status": 1
+                    }
+                ],
+                "ball": [
+                    {
+                        "status": 1,
+                        "ball": 12
+                    },
+                    {
+                        "status": 1,
+                        "ball": 24
+                    }
+                ]
+            }
+        ]
+        }
+    ] 
+} 
