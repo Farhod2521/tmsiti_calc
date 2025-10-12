@@ -1374,21 +1374,6 @@
     // preloader
     // --------------------------------------------------
 
-    function copyText(element) {
-      var $copyText = jQuery(element).text();
-      var button = jQuery('#btn_copy');
-      navigator.clipboard.writeText($copyText).then(function() {
-        var originalText = button.text();
-        button.html('Copied!');        
-        button.addClass('clicked');
-        setTimeout(function(){
-          button.html(originalText);
-          button.removeClass('clicked');
-          }, 750);
-      }, function() {
-        button.html('Error');
-      });
-    } 
 
     // --------------------------------------------------
     // custom dropdown
