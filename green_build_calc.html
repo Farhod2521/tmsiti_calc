@@ -476,9 +476,10 @@
                         
                         stepsHtml += `
                             <div style="position: relative; left: ${stepProgress}%;">
-                                <div class="progress-step ${stepClass}">
+                                <div class="progress-step ${stepClass}" onclick="goToCategory(${i})">
                                     ${i + 1}
                                 </div>
+                                
                             </div>
                         `;
                     }
@@ -498,10 +499,20 @@
                     `;
                 }
         
+                function goToCategory(categoryIndex) {
+                    saveCurrentAnswer();
+                    currentCategoryIndex = categoryIndex;
+                    currentQuestionIndex = 0;
+                    renderQuestion();
+                }
+        
                 function renderQuestion() {
                     const category = getCurrentCategory();
                     const question = getCurrentQuestion();
                     const isSelect = category.select.includes(question);
+                    
+                    const questionKey = `q${currentQuestionIndex}`;
+                    const savedAnswer = categoryAnswers[currentCategoryIndex][questionKey];
                     
                     let questionHtml = '';
                     
@@ -509,28 +520,34 @@
                         questionHtml = `
                             <div class="mb-4">
                                 <label class="question-text mb-3">${question.question}</label>
-                                ${question.answer.map((ans, idx) => `
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="answer-radio" id="radio-${idx}" value="${idx}">
-                                        <label class="form-check-label" for="radio-${idx}">
-                                            ${ans.name}
-                                        </label>
-                                    </div>
-                                `).join('')}
+                                ${question.answer.map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer === idx ? 'checked' : '';
+                                    return `
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="answer-radio" id="radio-${idx}" value="${idx}" ${isChecked}>
+                                            <label class="form-check-label" for="radio-${idx}">
+                                                ${ans.name}
+                                            </label>
+                                        </div>
+                                    `;
+                                }).join('')}
                             </div>
                         `;
                     } else {
                         questionHtml = `
                             <div class="mb-4">
                                 <label class="question-text mb-3">${question.question}</label>
-                                ${question.answer.map((ans, idx) => `
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="check-${idx}" value="${idx}">
-                                        <label class="form-check-label" for="check-${idx}">
-                                            ${ans.name}
-                                        </label>
-                                    </div>
-                                `).join('')}
+                                ${question.answer.map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer.includes(idx) ? 'checked' : '';
+                                    return `
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check-${idx}" value="${idx}" ${isChecked}>
+                                            <label class="form-check-label" for="check-${idx}">
+                                                ${ans.name}
+                                            </label>
+                                        </div>
+                                    `;
+                                }).join('')}
                             </div>
                         `;
                     }
@@ -617,11 +634,48 @@
                     return 0;
                 }
         
+                function saveCurrentAnswer() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
+                    const isSelect = category.select.includes(question);
+                    
+                    const questionKey = `q${currentQuestionIndex}`;
+                    
+                    if (isSelect) {
+                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
+                        if (selectedRadio) {
+                            const selectedIndex = parseInt(selectedRadio.value);
+                            categoryAnswers[currentCategoryIndex][questionKey] = {
+                                type: 'select',
+                                answer: selectedIndex,
+                                ball: question.answer[selectedIndex].ball
+                            };
+                        }
+                    } else {
+                        const checkedIndices = [];
+                        question.answer.forEach((ans, idx) => {
+                            const checkbox = document.getElementById(`check-${idx}`);
+                            if (checkbox && checkbox.checked) {
+                                checkedIndices.push(idx);
+                            }
+                        });
+                        
+                        const checkedCount = checkedIndices.length;
+                        const ballConfig = question.ball.find(b => b.status === checkedCount);
+                        const ball = ballConfig ? ballConfig.ball : 0;
+                        
+                        categoryAnswers[currentCategoryIndex][questionKey] = {
+                            type: 'checkbox',
+                            answer: checkedIndices,
+                            ball: ball
+                        };
+                    }
+                }
+        
                 function nextQuestion() {
                     if (!checkIfAnswered()) return;
                     
-                    const score = calculateScore();
-                    totalScore += score;
+                    saveCurrentAnswer();
                     
                     const totalQuestions = getTotalQuestions();
                     
@@ -638,13 +692,16 @@
                 }
         
                 function prevQuestion() {
+                    saveCurrentAnswer();
+                    
                     if (currentQuestionIndex > 0) {
                         currentQuestionIndex--;
                         renderQuestion();
                     } else if (currentCategoryIndex > 0) {
                         currentCategoryIndex--;
-                        const questions = getAllQuestions();
-                        currentQuestionIndex = questions.length - 1;
+                        const prevCategory = getCurrentCategory();
+                        const prevQuestions = [...prevCategory.select, ...prevCategory.checkbox];
+                        currentQuestionIndex = prevQuestions.length - 1;
                         renderQuestion();
                     }
                 }
@@ -673,6 +730,14 @@
                 }
         
                 function showResults() {
+                    // Barcha belgilangan javoblardan umumiy ballni hisoblash
+                    totalScore = 0;
+                    categoryAnswers.forEach(categoryAnswer => {
+                        Object.values(categoryAnswer).forEach(answer => {
+                            totalScore += answer.ball;
+                        });
+                    });
+        
                     const grade = getGrade(totalScore);
                     const gradeColor = getGradeColor(grade);
                     const needleRotation = -90 + (totalScore / 650) * 180;
@@ -700,7 +765,8 @@
                                           stroke-linecap="round"/>
                                 </svg>
                                 <div class="gauge-needle" id="gaugeNeedle"></div>
-                                <div class="gauge-score" id="scoreDisplay">0</div>
+                                <div class="gauge-score" style='margin-bottom:50px;' id="scoreDisplay">0</div>
+                                <br><br>
                                 <div class="gauge-grade" style="color: ${gradeColor}; border-color: ${gradeColor};" id="gradeDisplay">-</div>
                             </div>
         
