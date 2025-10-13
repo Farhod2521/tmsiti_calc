@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from madebydesignesia.com/themes/coolair/project-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Oct 2025 05:13:57 GMT -->
 <head>
-    <title>CoolAir — Air Conditioner & HVAC Repair Website Template</title>
+    <title>CoolAir — Yashil qurilish kalkulyatori</title>
     <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
-    <meta content="CoolAir — Air Conditioner & HVAC Repair Website Template" name="description" >
-    <meta content="" name="keywords" >
-    <meta content="" name="author" >
-    <!-- CSS Files
-    ================================================== -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="CoolAir — Yashil qurilish kalkulyatori" name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="author">
+    <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-    <link href="css/plugins.css" rel="stylesheet" type="text/css" >
-    <link href="css/swiper.css" rel="stylesheet" type="text/css" >
-    <link href="css/style.css" rel="stylesheet" type="text/css" >
-    <link href="css/coloring.css" rel="stylesheet" type="text/css" >
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/coloring.css" rel="stylesheet" type="text/css">
     <!-- color scheme -->
-    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
+    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         .container {
@@ -30,7 +27,6 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-           
         }
         .custom-progress {
             height: 8px;
@@ -294,6 +290,14 @@
             font-weight: 600;
             margin-bottom: 20px;
         }
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 
@@ -304,10 +308,6 @@
         </div>
         <div class="scrollbar-v show-on-scroll"></div>
         
-        <!-- page preloader begin -->
-        
-        <!-- page preloader close -->
-
         <!-- header begin -->
         <header class="header-light transparent scroll-light has-topbar">
             <div id="topbar">
@@ -342,25 +342,19 @@
                                 <!-- logo begin -->
                                 <div id="logo">
                                     <a href="index.html">
-                                        <img class="logo-main" src="images/logo-black.webp" alt="" >
-                                        <img class="logo-scroll" src="images/logo-black.webp" alt="" >
-                                        <img class="logo-mobile" src="images/logo-black.webp" alt="" >
+                                        <img class="logo-main" src="images/logo-black.webp" alt="">
+                                        <img class="logo-scroll" src="images/logo-black.webp" alt="">
+                                        <img class="logo-mobile" src="images/logo-black.webp" alt="">
                                     </a>
                                 </div>
                                 <!-- logo close -->
                             </div>
                             <div class="de-flex-col header-col-mid">
                                 <ul id="mainmenu">
-                                    <li><a class="menu-item" href="#">Bosh sahifa</a>
-                             
-                                    </li>
-                      
+                                    <li><a class="menu-item" href="#">Bosh sahifa</a></li>
                                     <li><a class="menu-item" href="/">Biz haqimizda</a></li>
-                                    <li><a class="menu-item" href="/">Loyihalar</a>
-                          
-                                    </li>
+                                    <li><a class="menu-item" href="/">Loyihalar</a></li>
                                     <li><a class="menu-item" href="/">Blog</a></li>
-                       
                                 </ul>
                             </div>
                             <div class="de-flex-col">
@@ -383,7 +377,6 @@
                 <div class="container relative z-index">
                     <div class="row align-items-center">
                         <div class="col-lg-12 offset-lg-3 text-center">
-                
                             <h1 style="
                                     font-family: 'Inter', 'Arial', sans-serif;
                                     font-size: 32px;
@@ -400,7 +393,6 @@
                 </div>
             </section>
             <!-- section close -->
-
 
             <div class="container">
                 <div id="app"></div>
@@ -435,31 +427,50 @@
                             throw new Error('JSON faylni yuklashda xatolik');
                         }
                         surveyData = await response.json();
+                        
+                        // JSON ma'lumotlarini tekshirish
+                        if (!surveyData || !surveyData.category || !Array.isArray(surveyData.category)) {
+                            throw new Error('JSON strukturasi noto\'g\'ri');
+                        }
+                        
                         categoryAnswers = surveyData.category.map(() => ({}));
                         renderQuestion();
                     } catch (error) {
+                        console.error('Xatolik:', error);
                         appDiv.innerHTML = `
-                            <div class="alert alert-danger" role="alert">
-                                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>Xatolik!</h4>
+                            <div class="error-message">
+                                <h4><i class="fas fa-exclamation-triangle me-2"></i>Xatolik!</h4>
                                 <p>JSON faylni yuklab bo'lmadi: ${error.message}</p>
-                                <hr>
-                                <p class="mb-0">Iltimos, <strong>yashil.json</strong> fayli to'g'ri joyda ekanligiga ishonch hosil qiling.</p>
+                                <p><strong>yashil.json</strong> fayli to'g'ri joyda ekanligiga ishonch hosil qiling.</p>
                             </div>
                         `;
                     }
                 }
         
                 function getCurrentCategory() {
+                    if (!surveyData || !surveyData.category || !surveyData.category[currentCategoryIndex]) {
+                        console.error('Current category not found:', currentCategoryIndex);
+                        return null;
+                    }
                     return surveyData.category[currentCategoryIndex];
                 }
         
                 function getAllQuestions() {
                     const category = getCurrentCategory();
-                    return [...category.select, ...category.checkbox];
+                    if (!category) return [];
+                    
+                    const selectQuestions = category.select || [];
+                    const checkboxQuestions = category.checkbox || [];
+                    return [...selectQuestions, ...checkboxQuestions];
                 }
         
                 function getCurrentQuestion() {
-                    return getAllQuestions()[currentQuestionIndex];
+                    const questions = getAllQuestions();
+                    if (questions.length === 0 || currentQuestionIndex >= questions.length) {
+                        console.error('Current question not found:', currentQuestionIndex);
+                        return null;
+                    }
+                    return questions[currentQuestionIndex];
                 }
         
                 function getTotalQuestions() {
@@ -467,6 +478,8 @@
                 }
         
                 function renderProgressBar() {
+                    if (!surveyData || !surveyData.category) return '';
+                    
                     const totalCategories = surveyData.category.length;
                     const progress = ((currentCategoryIndex + 1) / totalCategories) * 100;
                     
@@ -481,7 +494,7 @@
                             stepClass = 'active';
                         }
                         
-                        const categoryName = surveyData.category[i].name;
+                        const categoryName = surveyData.category[i].name || `Bo'lim ${i+1}`;
                         const shortName = categoryName.length > 15 ? categoryName.substring(0, 15) + '...' : categoryName;
                         
                         stepsHtml += `
@@ -489,7 +502,7 @@
                                 <div class="progress-step ${stepClass}" onclick="goToCategory(${i})">
                                     ${i + 1}
                                 </div>
-                                
+                               
                             </div>
                         `;
                     }
@@ -510,6 +523,11 @@
                 }
         
                 function goToCategory(categoryIndex) {
+                    if (categoryIndex < 0 || categoryIndex >= surveyData.category.length) {
+                        console.error('Invalid category index:', categoryIndex);
+                        return;
+                    }
+                    
                     saveCurrentAnswer();
                     currentCategoryIndex = categoryIndex;
                     currentQuestionIndex = 0;
@@ -519,7 +537,21 @@
                 function renderQuestion() {
                     const category = getCurrentCategory();
                     const question = getCurrentQuestion();
-                    const isSelect = category.select.includes(question);
+                    
+                    if (!category || !question) {
+                        document.getElementById('app').innerHTML = `
+                            <div class="error-message">
+                                <h4>Xatolik!</h4>
+                                <p>Savol ma'lumotlari topilmadi. Iltimos, qaytadan urinib ko'ring.</p>
+                                <button class="btn btn-next mt-3" onclick="resetSurvey()">
+                                    <i class="fas fa-redo me-2"></i>Qayta boshlash
+                                </button>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    const isSelect = category.select && category.select.includes(question);
                     
                     const questionKey = `q${currentQuestionIndex}`;
                     const savedAnswer = categoryAnswers[currentCategoryIndex][questionKey];
@@ -530,13 +562,13 @@
                         questionHtml = `
                             <div class="mb-4">
                                 <label class="question-text mb-3">${question.question}</label>
-                                ${question.answer.map((ans, idx) => {
+                                ${(question.answer || []).map((ans, idx) => {
                                     const isChecked = savedAnswer && savedAnswer.answer === idx ? 'checked' : '';
                                     return `
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="answer-radio" id="radio-${idx}" value="${idx}" ${isChecked}>
                                             <label class="form-check-label" for="radio-${idx}">
-                                                ${ans.name}
+                                                ${ans.name || 'Javob'}
                                             </label>
                                         </div>
                                     `;
@@ -547,13 +579,13 @@
                         questionHtml = `
                             <div class="mb-4">
                                 <label class="question-text mb-3">${question.question}</label>
-                                ${question.answer.map((ans, idx) => {
-                                    const isChecked = savedAnswer && savedAnswer.answer.includes(idx) ? 'checked' : '';
+                                ${(question.answer || []).map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer && savedAnswer.answer.includes(idx) ? 'checked' : '';
                                     return `
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="check-${idx}" value="${idx}" ${isChecked}>
                                             <label class="form-check-label" for="check-${idx}">
-                                                ${ans.name}
+                                                ${ans.name || 'Javob'}
                                             </label>
                                         </div>
                                     `;
@@ -563,6 +595,7 @@
                     }
         
                     const isLastQuestion = currentQuestionIndex === getTotalQuestions() - 1;
+                    const isLastCategory = currentCategoryIndex === surveyData.category.length - 1;
                     const canGoNext = checkIfAnswered();
         
                     const html = `
@@ -575,7 +608,7 @@
                                     <i class="fas fa-arrow-left me-2"></i>Orqaga
                                 </button>
                                 <button class="btn btn-next" onclick="nextQuestion()" ${!canGoNext ? 'disabled' : ''} id="nextBtn">
-                                    ${isLastQuestion && currentCategoryIndex === surveyData.category.length - 1 ? 'Yakunlash' : isLastQuestion ? 'Keyingi bo\'lim' : 'Keyingisi'}
+                                    ${isLastQuestion && isLastCategory ? 'Yakunlash' : isLastQuestion ? 'Keyingi bo\'lim' : 'Keyingisi'}
                                     <i class="fas fa-arrow-right ms-2"></i>
                                 </button>
                             </div>
@@ -602,7 +635,10 @@
                 function checkIfAnswered() {
                     const category = getCurrentCategory();
                     const question = getCurrentQuestion();
-                    const isSelect = category.select.includes(question);
+                    
+                    if (!category || !question) return false;
+                    
+                    const isSelect = category.select && category.select.includes(question);
                     
                     if (isSelect) {
                         const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
@@ -623,22 +659,24 @@
                 function calculateScore() {
                     const category = getCurrentCategory();
                     const question = getCurrentQuestion();
-                    const isSelect = category.select.includes(question);
+                    
+                    if (!category || !question) return 0;
+                    
+                    const isSelect = category.select && category.select.includes(question);
                     
                     if (isSelect) {
                         const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
                         if (selectedRadio) {
                             const selectedIndex = parseInt(selectedRadio.value);
-                            return question.answer[selectedIndex].ball;
+                            return (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0;
                         }
                     } else {
-                        const checkedCount = question.answer.filter((ans, idx) => {
-                            const checkbox = document.getElementById(`check-${idx}`);
-                            return checkbox && checkbox.checked;
-                        }).length;
+                        const checkedCount = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).length;
                         
-                        const ballConfig = question.ball.find(b => b.status === checkedCount);
-                        return ballConfig ? ballConfig.ball : 0;
+                        if (question.ball && Array.isArray(question.ball)) {
+                            const ballConfig = question.ball.find(b => b.status === checkedCount);
+                            return ballConfig ? ballConfig.ball : 0;
+                        }
                     }
                     
                     return 0;
@@ -647,7 +685,10 @@
                 function saveCurrentAnswer() {
                     const category = getCurrentCategory();
                     const question = getCurrentQuestion();
-                    const isSelect = category.select.includes(question);
+                    
+                    if (!category || !question) return;
+                    
+                    const isSelect = category.select && category.select.includes(question);
                     
                     const questionKey = `q${currentQuestionIndex}`;
                     
@@ -658,12 +699,12 @@
                             categoryAnswers[currentCategoryIndex][questionKey] = {
                                 type: 'select',
                                 answer: selectedIndex,
-                                ball: question.answer[selectedIndex].ball
+                                ball: (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0
                             };
                         }
                     } else {
                         const checkedIndices = [];
-                        question.answer.forEach((ans, idx) => {
+                        (question.answer || []).forEach((ans, idx) => {
                             const checkbox = document.getElementById(`check-${idx}`);
                             if (checkbox && checkbox.checked) {
                                 checkedIndices.push(idx);
@@ -671,8 +712,12 @@
                         });
                         
                         const checkedCount = checkedIndices.length;
-                        const ballConfig = question.ball.find(b => b.status === checkedCount);
-                        const ball = ballConfig ? ballConfig.ball : 0;
+                        let ball = 0;
+                        
+                        if (question.ball && Array.isArray(question.ball)) {
+                            const ballConfig = question.ball.find(b => b.status === checkedCount);
+                            ball = ballConfig ? ballConfig.ball : 0;
+                        }
                         
                         categoryAnswers[currentCategoryIndex][questionKey] = {
                             type: 'checkbox',
@@ -710,7 +755,7 @@
                     } else if (currentCategoryIndex > 0) {
                         currentCategoryIndex--;
                         const prevCategory = getCurrentCategory();
-                        const prevQuestions = [...prevCategory.select, ...prevCategory.checkbox];
+                        const prevQuestions = getAllQuestions();
                         currentQuestionIndex = prevQuestions.length - 1;
                         renderQuestion();
                     }
@@ -744,10 +789,10 @@
                     totalScore = 0;
                     categoryAnswers.forEach(categoryAnswer => {
                         Object.values(categoryAnswer).forEach(answer => {
-                            totalScore += answer.ball;
+                            totalScore += answer.ball || 0;
                         });
                     });
-        
+
                     const grade = getGrade(totalScore);
                     const gradeColor = getGradeColor(grade);
                     const needleRotation = -90 + (totalScore / 650) * 180;
@@ -834,7 +879,9 @@
                         const scoreDisplay = document.getElementById('scoreDisplay');
                         const gradeDisplay = document.getElementById('gradeDisplay');
                         
-                        needle.style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
+                        if (needle) {
+                            needle.style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
+                        }
                         
                         let currentScore = 0;
                         const increment = totalScore / 100;
@@ -844,10 +891,14 @@
                                 currentScore = totalScore;
                                 clearInterval(timer);
                                 setTimeout(() => {
-                                    gradeDisplay.textContent = grade;
+                                    if (gradeDisplay) {
+                                        gradeDisplay.textContent = grade;
+                                    }
                                 }, 500);
                             }
-                            scoreDisplay.textContent = Math.round(currentScore);
+                            if (scoreDisplay) {
+                                scoreDisplay.textContent = Math.round(currentScore);
+                            }
                         }, 20);
                     }, 100);
                 }
@@ -862,53 +913,20 @@
         
                 init();
             </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
         </div>
         <!-- content close -->
         <!-- footer begin -->
         <footer class="section-dark">
- 
             <div class="subfooter">
                 <div class="container">
-
+                    <!-- Footer content here -->
                 </div>
             </div>
         </footer>
         <!-- footer close -->
     </div>
     
-    <!-- Javascript Files
-    ================================================== -->
-
+    <!-- Javascript Files -->
     <script src="js/designesia.js"></script>
-
 </body>
-
-
-<!-- Mirrored from madebydesignesia.com/themes/coolair/project-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Oct 2025 05:13:57 GMT -->
 </html>
