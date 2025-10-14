@@ -6,18 +6,18 @@
         "name" :"Tashqi muhitning qulayligi va sifati",
         "select": [
             {
-                "question": "Jamoat transporti bekatlarigacha piyoda yurib boriladigan masofa",
+                "question": "Jamoat transporti bekatlarigacha piyoda yurib boriladigan masofa m",
                 "answer":[
                     {
-                        "name":"<200",
+                        "name":"<200 m",
                         "ball": 5
                     },
                     {
-                        "name": "200-300", 
+                        "name": "200-300 m", 
                         "ball": 3  
                     },
                     {
-                        "name": "300-500", 
+                        "name": "300-500 m", 
                         "ball": 1  
                     }
                 ]
