@@ -1,0 +1,299 @@
+[
+  {
+    "category_name": "Betonlar va qorishmalar",
+    "subcategories": [
+      {
+        "subcategory": "Tabniy zich to'ldirgichlardagi betonlar",
+        "items": [
+          {
+            "name": "Temirbeton",
+            "l": 1.92
+          },
+          {
+            "name": "Tabiiy toshdan iborat bo'lgan chaqiq tosh yoqi shag'al asosidagi beton",
+            "l": 1.74
+          }
+        ]
+      },
+      {
+        "subcategory": "Tabiiy g'ovakli to'ldirgichlar asosidagi betonlar",
+        "items": [
+          {
+            "name": "Tuf-beton-1800",
+            "l": 0.87
+          },
+          {
+            "name": "Tuf-beton-1600",
+            "l": 0.7
+          },
+          {
+            "name": "Tuf-beton-1400",
+            "l": 0.52
+          },
+          {
+            "name": "Tuf-beton-1200",
+            "l": 0.41
+          },
+          {
+            "name": "Pemza - beton-1600",
+            "l": 0.62
+          },
+          {
+            "name": "Pemza - beton-1400",
+            "l": 0.49
+          },
+          {
+            "name": "Pemza - beton-1200",
+            "l": 0.4
+          },
+          {
+            "name": "Pemza - beton-1000",
+            "l": 0.3
+          },
+          {
+            "name": "Pemza - beton-800",
+            "l": 0.22
+          }
+        ]
+      },
+      {
+        "subcategory": "Yacheykali beton",
+        "items": [
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-1000",
+            "l": 0.41
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-800",
+            "l": 0.33
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-600",
+            "l": 0.22
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-400",
+            "l": 0.14
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-300",
+            "l": 0.11
+          }
+        ]
+      },
+      {
+        "subcategory": "Sementli, ohakli va gipsli qorishmalar",
+        "items": [
+          {
+            "name": "Sement-qumli",
+            "l": 0.76
+          },
+          {
+            "name": "Murakkab (qum, ohak, sement)",
+            "l": 0.7
+          },
+          {
+            "name": "Ohak-qumli",
+            "l": 0.7
+          },
+          {
+            "name": "Sement-shlakli-1400",
+            "l": 0.52
+          },
+          {
+            "name": "Sement-shlakli-1200",
+            "l": 0.47
+          },
+          {
+            "name": "Sement-perlitli-1000",
+            "l": 0.26
+          },
+          {
+            "name": "Sement-perlitli-800",
+            "l": 0.21
+          },
+          {
+            "name": "Gips-perlitli",
+            "l": 0.19
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Tabiiy toshdan qoplama qilish va g'isht terish",
+    "subcategories": [
+      {
+        "subcategory": "Yaxlit g'ishtdan g'isht terish",
+        "items": [
+          {
+            "name": "Sement-shlakli qorishmada oddiy gilli (GOST 530-80)",
+            "l": 0.7
+          },
+          {
+            "name": "Sement-shlakli qorishmada oddiy gilli-1700",
+            "l": 0.64
+          },
+          {
+            "name": "Sement-perlitli qorishmada oddiy gilli-1600",
+            "l": 0.58
+          },
+          {
+            "name": "Sement-qumli qorishmada silikatli (GOST 379-79)",
+            "l": 0.76
+          },
+          {
+            "name": "Sement-qumli qorishmada trepellli (GOST 648-73)",
+            "l": 0.47
+          }
+        ]
+      },
+      {
+        "subcategory": "Keramika va silikatli ichi bo'sh g'ishtdan g'isht terish",
+        "items": [
+          {
+            "name": "Sement-qumli qorishmada zichligi 1400 kg/m3 (brutto) ichi bo'sh keramikali",
+            "l": 0.58
+          },
+          {
+            "name": "Sement-qumli qorishmada zichligi 1300 kg/m3 (brutto) ichi bo'sh keramikali",
+            "l": 0.52
+          },
+          {
+            "name": "Sement-qumli qorishmada zichligi 1000 kg/m3 (brutto) ichi bo'sh keramikali",
+            "l": 0.47
+          },
+          {
+            "name": "Sement-qumli qorishmada o'n bir qovakli silikatli",
+            "l": 0.7
+          },
+          {
+            "name": "Sement-qumli qorishmada o'n to'rt qovakli silikatli",
+            "l": 0.64
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
+    "subcategories": [
+      {
+        "subcategory": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
+        "items": [
+          {
+            "name": "Qarag'ay va tolariga ko'ndalang qoraqarag'ay (GOST 8486-66**, GOST 9463-72)",
+            "l": 0.14
+          },
+          {
+            "name": "Qarag'ay va tolariga bo'yicha bo'lgan qoraqarag'ay",
+            "l": 0.29
+          },
+          {
+            "name": "Tolariga ko'ndalang dub (GOST 9462-71*,",
+            "l": 0.18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Issiqlikni izolyatsiyalovchi materiallar",
+    "subcategories": [
+      {
+        "subcategory": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
+        "items": [
+          {
+            "name": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
+            "l": 0.064
+          }
+        ]
+      },
+      {
+        "subcategory": "Penopolistirol 2500S-da",
+        "items": [
+          {
+            "name": "114b. Shu kabi, 2800S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144v. Shu kabi, 3035S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144g. Shu kabi, 4000S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144d. Shu kabi, 5000S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144e. Penopolistirol PS15",
+            "l": 0.04
+          },
+          {
+            "name": "144j. Shu kabi, PS20",
+            "l": 0.038
+          },
+          {
+            "name": "144z. Shu kabi, PS30",
+            "l": 0.036
+          },
+          {
+            "name": "144i. Ekstruziyalangan",
+            "l": 0.03
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Pollar uchun rulonli, qoplamali, gidroizolyatsiyali va tomga oid materiallar",
+    "subcategories": [
+      {
+        "subcategory": "Asbest-sementli",
+        "items": [
+          {
+            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1800",
+            "l": 0.47
+          },
+          {
+            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1600",
+            "l": 0.35
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Metallar va shisha",
+    "subcategories": [
+      {
+        "subcategory": "Metallar va shisha",
+        "items": [
+          {
+            "name": "Sterjenli armaturaali po'lat (GOST 10884-81)",
+            "l": 58
+          },
+          {
+            "name": "Cho'yan",
+            "l": 50
+          },
+          {
+            "name": "Alyuminiy (GOST 22233-83)",
+            "l": 221
+          },
+          {
+            "name": "Mis (GOST 859-78*)",
+            "l": 407
+          },
+          {
+            "name": "Oynaga oid shisha (GOST 111-78)",
+            "l": 0.76
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -198,6 +198,45 @@
         .material-input-group input {
             flex: 1;
         }
+        
+        /* Eshik/Deraza soni uchun counter */
+        .counter-input {
+            display: flex;
+            align-items: center;
+        }
+        .counter-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ced4da;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .counter-btn:hover {
+            background-color: #e9ecef;
+        }
+        .counter-value {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #ced4da;
+            border-left: none;
+            border-right: none;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Resistance ko'rsatish uchun */
+        .resistance-display {
+            background-color: #fff3cd;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 3px solid #ffc107;
+        }
     </style>
 </head>
 
@@ -307,7 +346,7 @@
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-             
+       
                 <!-- Bosqichlar ko'rsatkichi -->
                 <div class="step-indicator">
                     <div class="step active" data-step="1">
@@ -396,10 +435,10 @@
                                     <small>Isitish davrining davomiyligi: <span id="timeDisplay">-</span></small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Baza harorat: <span id="baseTempDisplay">-</span>°C</small>
+                                    <small>Noramtiv harorat: <span id="baseTempDisplay">-</span>°C</small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Isitish davrining daraja-kunlari soni (HDHP): <span id="calcValueDisplay">-</span></small>
+                                    <small>Isitish davrining daraja-kunlari soni (Degree days): <span id="calcValueDisplay">-</span></small>
                                 </div>
                             </div>
                         </div>
@@ -544,6 +583,9 @@
                                     <!-- Qatlamlar bu yerda yuklanadi -->
                                 </div>
                                 <div class="total-thickness" id="wallTotalThickness">Jami qalinlik: 0 m</div>
+                                <div class="resistance-display" id="wallResistanceDisplay">
+                                    <strong>Umumiy qarshilik (R): <span id="wallTotalResistance">0</span></strong>
+                                </div>
                             </div>
                         </div>
                         
@@ -583,6 +625,9 @@
                                     <!-- Qatlamlar bu yerda yuklanadi -->
                                 </div>
                                 <div class="total-thickness" id="floorTotalThickness">Jami qalinlik: 0 m</div>
+                                <div class="resistance-display" id="floorResistanceDisplay">
+                                    <strong>Umumiy qarshilik (R): <span id="floorTotalResistance">0</span> m²·K/W</strong>
+                                </div>
                             </div>
                         </div>
                         
@@ -622,6 +667,9 @@
                                     <!-- Qatlamlar bu yerda yuklanadi -->
                                 </div>
                                 <div class="total-thickness" id="ceilingTotalThickness">Jami qalinlik: 0 m</div>
+                                <div class="resistance-display" id="ceilingResistanceDisplay">
+                                    <strong>Umumiy qarshilik (R): <span id="ceilingTotalResistance">0</span> m²·K/W</strong>
+                                </div>
                             </div>
                         </div>
                         <div class="navigation-buttons">
@@ -654,6 +702,14 @@
                                     <p><strong>Pol yuzasi:</strong> <span id="resultFloorArea">-</span> m²</p>
                                 </div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h6 class="text-primary">Material qarshiliklari:</h6>
+                                    <p><strong>Devor qarshiligi:</strong> <span id="resultWallResistance">-</span> m²·K/W</p>
+                                    <p><strong>Pol qarshiligi:</strong> <span id="resultFloorResistance">-</span> m²·K/W</p>
+                                    <p><strong>Tom qarshiligi:</strong> <span id="resultCeilingResistance">-</span> m²·K/W</p>
+                                </div>
+                            </div>
                             <hr>
                             <div class="text-center">
                                 <h4 class="text-primary">Isitish qiymati: <span id="resultHeatingValue">-</span></h4>
@@ -680,11 +736,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="materialSearch" placeholder="Material qidirish...">
-                        <button class="btn btn-outline-secondary" type="button" id="clearSearch">
-                            <i class="bi bi-x"></i>
-                        </button>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select" id="categorySelect">
+                                <option value="">Barcha kategoriyalar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="materialSearch" placeholder="Material qidirish...">
+                                <button class="btn btn-outline-secondary" type="button" id="clearSearch">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div id="materialList">
                         <!-- Materiallar ro'yxati bu yerda yuklanadi -->
@@ -702,48 +767,305 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Materiallar ro'yxati
-        const materials = [
-            // Issiqlik izolyatsiyalash materiallari
-            "Yumshoq yog'och tolali taxta (MDF) 200 kg/m³",
-            "Yumshoq yog'och tolali taxta (MDF) 400 kg/m³",
-            "Qattiq tolali taxta (HDF) 600 kg/m³",
-            "Qattiq tolali taxta (HDF) 800 kg/m³",
-            "Yog'och tolali taxta (HDF) 1000 kg/m³",
-            "Portlend tsement tolali plitalar 300 kg/m³",
-            "Portlend tsement tolali plitalar 400 kg/m³",
-            "Portlend tsement tolali plitalar 600 kg/m³",
-            "Portlend tsement tolali plitalar 800 kg/m³",
-            "Zarrachalar plitalari 200 kg/m³",
-            "Zarrachalar plitalari 400 kg/m³",
-            "Zarrachalar plitalari 600 kg/m³",
-            "Zarrachalar plitalari 800 kg/m³",
-            "Zarrachalar plitalari 1000 kg/m³",
-            "Asbest-sement tekis plitalari 1600 kg/m³",
-            "Asbest-sement tekis plitalari 1800 kg/m³",
-            "Drywall (GKL)",
-            "Gips tolali qatlam (GVL)",
-            "Gipsli zarrachalar paneli (GSP)",
-            "Gips plitalari 1000 kg/m³",
-            "Gips plitalari 1200 kg/m³",
-            "Yuzli karton",
-            "Ko'p qatlamli qurilish karton",
-            "Yo'naltirilgan simli taxta (OSB-2, OSB-3)",
-            "Kontrplak",
-            "Tsement bilan biriktirilgan zarrachalar paneli (CBPB)",
-            
-            // Qo'shimcha materiallar
-            "G'isht",
-            "Beton",
-            "Paneli",
-            "Yog'och",
-            "Gazobeton",
-            "Parket",
-            "Laminat",
-            "Plita",
-            "Keramika",
-            "Metall",
-            "Plastik"
+        // Materiallar JSON ma'lumotlari
+        const materialData = [
+  {
+    "category_name": "Betonlar va qorishmalar",
+    "subcategories": [
+      {
+        "subcategory": "Tabniy zich to'ldirgichlardagi betonlar",
+        "items": [
+          {
+            "name": "Temirbeton",
+            "l": 1.92
+          },
+          {
+            "name": "Tabiiy toshdan iborat bo'lgan chaqiq tosh yoqi shag'al asosidagi beton",
+            "l": 1.74
+          }
+        ]
+      },
+      {
+        "subcategory": "Tabiiy g'ovakli to'ldirgichlar asosidagi betonlar",
+        "items": [
+          {
+            "name": "Tuf-beton-1800",
+            "l": 0.87
+          },
+          {
+            "name": "Tuf-beton-1600",
+            "l": 0.7
+          },
+          {
+            "name": "Tuf-beton-1400",
+            "l": 0.52
+          },
+          {
+            "name": "Tuf-beton-1200",
+            "l": 0.41
+          },
+          {
+            "name": "Pemza - beton-1600",
+            "l": 0.62
+          },
+          {
+            "name": "Pemza - beton-1400",
+            "l": 0.49
+          },
+          {
+            "name": "Pemza - beton-1200",
+            "l": 0.4
+          },
+          {
+            "name": "Pemza - beton-1000",
+            "l": 0.3
+          },
+          {
+            "name": "Pemza - beton-800",
+            "l": 0.22
+          }
+        ]
+      },
+      {
+        "subcategory": "Yacheykali beton",
+        "items": [
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-1000",
+            "l": 0.41
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-800",
+            "l": 0.33
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-600",
+            "l": 0.22
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-400",
+            "l": 0.14
+          },
+          {
+            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-300",
+            "l": 0.11
+          }
+        ]
+      },
+      {
+        "subcategory": "Sementli, ohakli va gipsli qorishmalar",
+        "items": [
+          {
+            "name": "Sement-qumli",
+            "l": 0.76
+          },
+          {
+            "name": "Murakkab (qum, ohak, sement)",
+            "l": 0.7
+          },
+          {
+            "name": "Ohak-qumli",
+            "l": 0.7
+          },
+          {
+            "name": "Sement-shlakli-1400",
+            "l": 0.52
+          },
+          {
+            "name": "Sement-shlakli-1200",
+            "l": 0.47
+          },
+          {
+            "name": "Sement-perlitli-1000",
+            "l": 0.26
+          },
+          {
+            "name": "Sement-perlitli-800",
+            "l": 0.21
+          },
+          {
+            "name": "Gips-perlitli",
+            "l": 0.19
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Tabiiy toshdan qoplama qilish va g'isht terish",
+    "subcategories": [
+      {
+        "subcategory": "Yaxlit g'ishtdan g'isht terish",
+        "items": [
+          {
+            "name": "Sement-shlakli qorishmada oddiy gilli (GOST 530-80)",
+            "l": 0.7
+          },
+          {
+            "name": "Sement-shlakli qorishmada oddiy gilli-1700",
+            "l": 0.64
+          },
+          {
+            "name": "Sement-perlitli qorishmada oddiy gilli-1600",
+            "l": 0.58
+          },
+          {
+            "name": "Sement-qumli qorishmada silikatli (GOST 379-79)",
+            "l": 0.76
+          },
+          {
+            "name": "Sement-qumli qorishmada trepellli (GOST 648-73)",
+            "l": 0.47
+          }
+        ]
+      },
+      {
+        "subcategory": "Keramika va silikatli ichi bo'sh g'ishtdan g'isht terish",
+        "items": [
+          {
+            "name": "Sement-qumli qorishmada zichligi 1400 kg/m3 (brutto) ichi bo'sh keramikali",
+            "l": 0.58
+          },
+          {
+            "name": "Sement-qumli qorishmada zichligi 1300 kg/m3 (brutto) ichi bo'sh keramikali",
+            "l": 0.52
+          },
+          {
+            "name": "Sement-qumli qorishmada zichligi 1000 kg/m3 (brutto) ichi bo'sh keramikali",
+            "l": 0.47
+          },
+          {
+            "name": "Sement-qumli qorishmada o'n bir qovakli silikatli",
+            "l": 0.7
+          },
+          {
+            "name": "Sement-qumli qorishmada o'n to'rt qovakli silikatli",
+            "l": 0.64
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
+    "subcategories": [
+      {
+        "subcategory": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
+        "items": [
+          {
+            "name": "Qarag'ay va tolariga ko'ndalang qoraqarag'ay (GOST 8486-66**, GOST 9463-72)",
+            "l": 0.14
+          },
+          {
+            "name": "Qarag'ay va tolariga bo'yicha bo'lgan qoraqarag'ay",
+            "l": 0.29
+          },
+          {
+            "name": "Tolariga ko'ndalang dub (GOST 9462-71*,",
+            "l": 0.18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Issiqlikni izolyatsiyalovchi materiallar",
+    "subcategories": [
+      {
+        "subcategory": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
+        "items": [
+          {
+            "name": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
+            "l": 0.064
+          }
+        ]
+      },
+      {
+        "subcategory": "Penopolistirol 2500S-da",
+        "items": [
+          {
+            "name": "114b. Shu kabi, 2800S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144v. Shu kabi, 3035S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144g. Shu kabi, 4000S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144d. Shu kabi, 5000S-da",
+            "l": 0.031
+          },
+          {
+            "name": "144e. Penopolistirol PS15",
+            "l": 0.04
+          },
+          {
+            "name": "144j. Shu kabi, PS20",
+            "l": 0.038
+          },
+          {
+            "name": "144z. Shu kabi, PS30",
+            "l": 0.036
+          },
+          {
+            "name": "144i. Ekstruziyalangan",
+            "l": 0.03
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Pollar uchun rulonli, qoplamali, gidroizolyatsiyali va tomga oid materiallar",
+    "subcategories": [
+      {
+        "subcategory": "Asbest-sementli",
+        "items": [
+          {
+            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1800",
+            "l": 0.47
+          },
+          {
+            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1600",
+            "l": 0.35
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Metallar va shisha",
+    "subcategories": [
+      {
+        "subcategory": "Metallar va shisha",
+        "items": [
+          {
+            "name": "Sterjenli armaturaali po'lat (GOST 10884-81)",
+            "l": 58
+          },
+          {
+            "name": "Cho'yan",
+            "l": 50
+          },
+          {
+            "name": "Alyuminiy (GOST 22233-83)",
+            "l": 221
+          },
+          {
+            "name": "Mis (GOST 859-78*)",
+            "l": 407
+          },
+          {
+            "name": "Oynaga oid shisha (GOST 111-78)",
+            "l": 0.76
+          }
+        ]
+      }
+    ]
+  }
         ];
 
         // Global o'zgaruvchilar
@@ -857,26 +1179,31 @@
             // Modal elementlari
             const materialModal = new bootstrap.Modal(document.getElementById('materialModal'));
             const materialSearch = document.getElementById('materialSearch');
+            const categorySelect = document.getElementById('categorySelect');
             const materialList = document.getElementById('materialList');
             const selectMaterialBtn = document.getElementById('selectMaterial');
             const clearSearchBtn = document.getElementById('clearSearch');
             
+            // Kategoriyalarni yuklash
+            populateCategories();
+            
             // Material ro'yxatini yuklash
-            loadMaterialList(materials);
+            loadMaterialList(materialData);
             
             // Material qidirish
             materialSearch.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const filteredMaterials = materials.filter(material => 
-                    material.toLowerCase().includes(searchTerm)
-                );
-                loadMaterialList(filteredMaterials);
+                filterMaterials();
+            });
+            
+            // Kategoriya tanlash
+            categorySelect.addEventListener('change', function() {
+                filterMaterials();
             });
             
             // Qidiruvni tozalash
             clearSearchBtn.addEventListener('click', function() {
                 materialSearch.value = '';
-                loadMaterialList(materials);
+                filterMaterials();
             });
             
             // Material tanlash
@@ -887,33 +1214,120 @@
                 }
             });
             
-            // Material ro'yxatini yuklash funksiyasi
-            function loadMaterialList(materialArray) {
-                materialList.innerHTML = '';
-                materialArray.forEach(material => {
-                    const materialItem = document.createElement('div');
-                    materialItem.className = 'material-item';
-                    materialItem.textContent = material;
-                    materialItem.addEventListener('click', function() {
-                        // Barcha materiallardan tanlangan klassni olib tashlash
-                        document.querySelectorAll('.material-item').forEach(item => {
-                            item.classList.remove('selected');
-                        });
-                        // Joriy materialga tanlangan klassni qo'shish
-                        this.classList.add('selected');
-                        selectedMaterial = material;
-                    });
-                    materialList.appendChild(materialItem);
-                });
-            }
-            
             // Modal ochilganda
             document.getElementById('materialModal').addEventListener('show.bs.modal', function() {
                 materialSearch.value = '';
+                categorySelect.value = '';
                 selectedMaterial = null;
-                loadMaterialList(materials);
+                loadMaterialList(materialData);
             });
         });
+        
+        // Kategoriyalarni to'ldirish
+        function populateCategories() {
+            const categorySelect = document.getElementById('categorySelect');
+            materialData.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.category_name;
+                option.textContent = category.category_name;
+                categorySelect.appendChild(option);
+            });
+        }
+        
+        // Material ro'yxatini yuklash funksiyasi
+        function loadMaterialList(materialArray) {
+            materialList.innerHTML = '';
+            
+            materialArray.forEach(category => {
+                // Kategoriya sarlavhasi
+                const categoryHeader = document.createElement('div');
+                // categoryHeader.className = 'category-header fw-bold mt-3 mb-2 text-primary';
+                // categoryHeader.textContent = category.category_name;
+                // materialList.appendChild(categoryHeader);
+                
+                // Subkategoriyalar
+                category.subcategories.forEach(subcategory => {
+                    // Subkategoriya sarlavhasi
+                    const subcategoryHeader = document.createElement('div');
+                    // subcategoryHeader.className = 'subcategory-header fw-semibold mt-2 mb-1 ps-2';
+                    // subcategoryHeader.textContent = subcategory.subcategory;
+                    // materialList.appendChild(subcategoryHeader);
+                    
+                    // Materiallar
+                    subcategory.items.forEach(material => {
+                        const materialItem = document.createElement('div');
+                        materialItem.className = 'material-item';
+                        materialItem.innerHTML = `
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    ${material.name}
+                                    
+                                </div>
+                                <div class="text-end">
+                                    <small class="text-muted">${category.category_name}</small>
+                                </div>
+                            </div>
+                        `;
+                        materialItem.dataset.material = JSON.stringify(material);
+                        materialItem.dataset.category = category.category_name;
+                        materialItem.dataset.subcategory = subcategory.subcategory;
+                        
+                        materialItem.addEventListener('click', function() {
+                            // Barcha materiallardan tanlangan klassni olib tashlash
+                            document.querySelectorAll('.material-item').forEach(item => {
+                                item.classList.remove('selected');
+                            });
+                            // Joriy materialga tanlangan klassni qo'shish
+                            this.classList.add('selected');
+                            selectedMaterial = JSON.parse(this.dataset.material);
+                        });
+                        materialList.appendChild(materialItem);
+                    });
+                });
+            });
+        }
+        
+        // Materiallarni filtrlash
+        function filterMaterials() {
+            const searchTerm = materialSearch.value.toLowerCase();
+            const selectedCategory = categorySelect.value;
+            
+            let filteredData = [];
+            
+            if (selectedCategory) {
+                // Faqat tanlangan kategoriyani qo'shish
+                const category = materialData.find(cat => cat.category_name === selectedCategory);
+                if (category) {
+                    filteredData.push(category);
+                }
+            } else {
+                // Barcha kategoriyalarni qo'shish
+                filteredData = [...materialData];
+            }
+            
+            // Agar qidiruv so'zi bo'lsa, filtrlash
+            if (searchTerm) {
+                filteredData = filteredData.map(category => {
+                    const filteredSubcategories = category.subcategories.map(subcategory => {
+                        const filteredItems = subcategory.items.filter(item => 
+                            item.name.toLowerCase().includes(searchTerm)
+                        );
+                        return {
+                            ...subcategory,
+                            items: filteredItems
+                        };
+                    }).filter(subcategory => subcategory.items.length > 0);
+                    
+                    return {
+                        ...category,
+                        subcategories: filteredSubcategories
+                    };
+                }).filter(category => category.subcategories.length > 0);
+            }
+            
+            // Filtrlangan materiallarni yuklash
+            loadMaterialList(filteredData);
+        }
         
         // API dan viloyatlarni yuklash
         async function loadRegionsFromAPI() {
@@ -1068,7 +1482,15 @@
                             <span class="input-group-text">m</span>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Soni</label>
+                        <div class="counter-input">
+                            <div class="counter-btn minus-btn">-</div>
+                            <div class="counter-value">1</div>
+                            <div class="counter-btn plus-btn">+</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <label class="form-label">Eshik ${id} materiali</label>
                         <select class="form-select door-material">
                             <option value="yog'och">Yog'och</option>
@@ -1078,7 +1500,7 @@
                             <option value="boshqa">Boshqa</option>
                         </select>
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-1 mb-3">
                         <label class="form-label">Yuzasi</label>
                         <div class="input-group">
                             <input type="text" class="form-control door-area" readonly style="background-color: #e9ecef;">
@@ -1092,6 +1514,27 @@
             `;
             container.appendChild(doorItem);
             
+            // Counter funksiyallari
+            const minusBtn = doorItem.querySelector('.minus-btn');
+            const plusBtn = doorItem.querySelector('.plus-btn');
+            const counterValue = doorItem.querySelector('.counter-value');
+            
+            let count = 1;
+            
+            minusBtn.addEventListener('click', function() {
+                if (count > 1) {
+                    count--;
+                    counterValue.textContent = count;
+                    calculateDoorArea();
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                count++;
+                counterValue.textContent = count;
+                calculateDoorArea();
+            });
+            
             // Eshik o'lchamlari o'zgarganda yuzani hisoblash
             const widthInput = doorItem.querySelector('.door-width');
             const heightInput = doorItem.querySelector('.door-height');
@@ -1100,7 +1543,7 @@
             function calculateDoorArea() {
                 const width = parseFloat(widthInput.value) || 0;
                 const height = parseFloat(heightInput.value) || 0;
-                const area = width * height;
+                const area = width * height * count;
                 areaInput.value = area.toFixed(2);
                 calculateDoorWindowAreas();
             }
@@ -1133,7 +1576,15 @@
                             <span class="input-group-text">m</span>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Soni</label>
+                        <div class="counter-input">
+                            <div class="counter-btn minus-btn">-</div>
+                            <div class="counter-value">1</div>
+                            <div class="counter-btn plus-btn">+</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <label class="form-label">Deraza ${id} materiali</label>
                         <select class="form-select window-material">
                             <option value="yog'och">Yog'och</option>
@@ -1143,7 +1594,7 @@
                             <option value="boshqa">Boshqa</option>
                         </select>
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-1 mb-3">
                         <label class="form-label">Yuzasi</label>
                         <div class="input-group">
                             <input type="text" class="form-control window-area" readonly style="background-color: #e9ecef;">
@@ -1157,6 +1608,27 @@
             `;
             container.appendChild(windowItem);
             
+            // Counter funksiyallari
+            const minusBtn = windowItem.querySelector('.minus-btn');
+            const plusBtn = windowItem.querySelector('.plus-btn');
+            const counterValue = windowItem.querySelector('.counter-value');
+            
+            let count = 1;
+            
+            minusBtn.addEventListener('click', function() {
+                if (count > 1) {
+                    count--;
+                    counterValue.textContent = count;
+                    calculateWindowArea();
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                count++;
+                counterValue.textContent = count;
+                calculateWindowArea();
+            });
+            
             // Deraza o'lchamlari o'zgarganda yuzani hisoblash
             const widthInput = windowItem.querySelector('.window-width');
             const heightInput = windowItem.querySelector('.window-height');
@@ -1165,7 +1637,7 @@
             function calculateWindowArea() {
                 const width = parseFloat(widthInput.value) || 0;
                 const height = parseFloat(heightInput.value) || 0;
-                const area = width * height;
+                const area = width * height * count;
                 areaInput.value = area.toFixed(2);
                 calculateDoorWindowAreas();
             }
@@ -1189,7 +1661,6 @@
             
             // Derazalarning yuzasini hisoblash
             document.querySelectorAll('.window-area').forEach(areaInput => {
-                
                 totalWindowsArea += parseFloat(areaInput.value) || 0;
             });
             
@@ -1263,6 +1734,9 @@
             document.getElementById('resultDimensions').textContent = `${length}m × ${width}m × ${height}m`;
             document.getElementById('resultWallArea').textContent = document.getElementById('wallArea').value;
             document.getElementById('resultFloorArea').textContent = document.getElementById('floorArea').value;
+            document.getElementById('resultWallResistance').textContent = document.getElementById('wallTotalResistance').textContent;
+            document.getElementById('resultFloorResistance').textContent = document.getElementById('floorTotalResistance').textContent;
+            document.getElementById('resultCeilingResistance').textContent = document.getElementById('ceilingTotalResistance').textContent;
             document.getElementById('resultHeatingValue').textContent = heatingValue.toFixed(2);
             
             // Natijalarni ko'rsatish
@@ -1284,8 +1758,9 @@
             // Qatlam obyektini yaratish
             const layer = {
                 id: Date.now(), // Unikal ID
-                name: material,
-                thickness: 0 // Boshlang'ich qalinlik
+                name: material.name,
+                l: material.l, // Issiqlik o'tkazuvchanlik koeffitsienti
+                thickness: 0.1 // Boshlang'ich qalinlik (0.1 m)
             };
             
             // Tegishli qismga qo'shish
@@ -1326,10 +1801,13 @@
                 const layerRow = document.createElement('div');
                 layerRow.className = 'layer-row row align-items-center';
                 layerRow.innerHTML = `
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <span>${layer.name}</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <small class="text-muted">l = ${layer.l}</small>
+                    </div>
+                    <div class="col-md-3">
                         <div class="input-group input-group-sm">
                             <input type="number" class="form-control layer-thickness" 
                                    data-id="${layer.id}" data-section="${section}"
@@ -1370,6 +1848,8 @@
             
             // Jami qalinlikni yangilash
             updateTotalThickness(section);
+            // Qarshilikni yangilash
+            updateResistance(section);
         }
         
         // Qatlam qalinligini yangilash
@@ -1388,6 +1868,7 @@
             if (layerIndex !== -1) {
                 layers[layerIndex].thickness = thickness;
                 updateTotalThickness(section);
+                updateResistance(section);
             }
         }
         
@@ -1411,6 +1892,9 @@
                 // Material display ni yangilash
                 const displayId = `${section}MaterialDisplay`;
                 document.getElementById(displayId).value = layers.length > 0 ? `${layers.length} ta material` : '';
+                
+                // Qarshilikni yangilash
+                updateResistance(section);
             }
         }
         
@@ -1441,51 +1925,34 @@
             // Qalinlik inputini yangilash
             document.getElementById(thicknessInputId).value = totalThickness.toFixed(2);
         }
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        // Qarshilikni hisoblash va yangilash
+        function updateResistance(section) {
+            let layers, resistanceDisplayId;
             
-        </div>
-        <!-- content close -->
-        <!-- footer begin -->
-        <footer class="section-dark">
- 
-            <div class="subfooter">
-                <div class="container">
-
-                </div>
-            </div>
-        </footer>
-        <!-- footer close -->
-    </div>
-    
-    <!-- Javascript Files
-    ================================================== -->
-   
-    <script src="js/designesia.js"></script>
+            if (section === 'wall') {
+                layers = wallLayers;
+                resistanceDisplayId = 'wallTotalResistance';
+            } else if (section === 'floor') {
+                layers = floorLayers;
+                resistanceDisplayId = 'floorTotalResistance';
+            } else if (section === 'ceiling') {
+                layers = ceilingLayers;
+                resistanceDisplayId = 'ceilingTotalResistance';
+            }
+            
+            // Umumiy qarshilikni hisoblash: R = thickness1/l1 + thickness2/l2 + ...
+            let totalResistance = 0;
+            layers.forEach(layer => {
+                if (layer.thickness > 0 && layer.l > 0) {
+                    totalResistance += layer.thickness / layer.l;
+                }
+            });
+            
+            // Qarshilikni ko'rsatish
+            document.getElementById(resistanceDisplayId).textContent = totalResistance.toFixed(3);
+        }
+    </script>
 
 </body>
 
