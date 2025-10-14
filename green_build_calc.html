@@ -597,11 +597,11 @@
                     const isLastQuestion = currentQuestionIndex === getTotalQuestions() - 1;
                     const isLastCategory = currentCategoryIndex === surveyData.category.length - 1;
                     const canGoNext = checkIfAnswered();
-        
+            // <h3 class="question-title">Savol ${currentQuestionIndex + 1}</h3>
                     const html = `
                         ${renderProgressBar()}
                         <div class="question-card">
-                            <h3 class="question-title">Savol ${currentQuestionIndex + 1}</h3>
+                        
                             ${questionHtml}
                             <div class="d-flex justify-content-between mt-4">
                                 <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestionIndex === 0 && currentCategoryIndex === 0 ? 'disabled' : ''}>
