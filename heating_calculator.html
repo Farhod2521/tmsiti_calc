@@ -1,26 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from madebydesignesia.com/themes/coolair/project-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Oct 2025 05:13:57 GMT -->
 <head>
-    <title>TMSITI</title>
+    <title>TMSITI - Isitish Kalkulyatori</title>
     <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
-    <meta content="CoolAir — Air Conditioner & HVAC Repair Website Template" name="description" >
-    <meta content="" name="keywords" >
-    <meta content="" name="author" >
-    <!-- CSS Files
-    ================================================== -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-    <link href="css/plugins.css" rel="stylesheet" type="text/css" >
-    <link href="css/swiper.css" rel="stylesheet" type="text/css" >
-    <link href="css/style.css" rel="stylesheet" type="text/css" >
-    <link href="css/coloring.css" rel="stylesheet" type="text/css" >
-    <!-- color scheme -->
-    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="CoolAir — Air Conditioner & HVAC Repair Website Template" name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="author">
+    <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         .form-section {
             background-color: #f8f9fa;
@@ -157,8 +147,6 @@
             margin-top: 10px;
             border-left: 3px solid #198754;
         }
-        
-        /* Yangi qo'shilgan materiallar tizimi uchun style */
         .layer-table {
             margin-top: 15px;
             display: none;
@@ -198,8 +186,6 @@
         .material-input-group input {
             flex: 1;
         }
-        
-        /* Eshik/Deraza soni uchun counter */
         .counter-input {
             display: flex;
             align-items: center;
@@ -228,8 +214,6 @@
             align-items: center;
             justify-content: center;
         }
-        
-        /* Resistance ko'rsatish uchun */
         .resistance-display {
             background-color: #fff3cd;
             border-radius: 6px;
@@ -237,186 +221,81 @@
             margin-top: 10px;
             border-left: 3px solid #ffc107;
         }
-
-
-
-#logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 20px;
-
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  max-width: 500px;
-  margin: 10px auto;
-}
-
-#logo a {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-}
-
-.logo-main {
-  width: 50px;
-  height: 50px;
-  padding: 6px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  flex-shrink: 0;
-}
-
-#logo h6 {
-  color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.3;
-  margin: 0;
-  text-align: left;
-  flex: 1;
-}
-
-.logo-scroll, .logo-mobile {
-  display: none;
-}
-
-/* Mobil uchun */
-@media (max-width: 768px) {
-  #logo {
-    padding: 10px 15px;
-    max-width: 90%;
-  }
-  
-  .logo-main {
-    width: 45px;
-    height: 45px;
-  }
-  
-  #logo h6 {
-    font-size: 12px;
-    line-height: 1.2;
-  }
-}
+        .volume-display {
+            background-color: #e7f7ef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #198754;
+        }
+        .result-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #0d6efd;
+        }
+        .q-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #198754;
+        }
+        #logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            max-width: 500px;
+            margin: 10px auto;
+        }
+        #logo a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+        .logo-main {
+            width: 50px;
+            height: 50px;
+            padding: 6px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
+        #logo h6 {
+            color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+            text-align: left;
+            flex: 1;
+        }
+        @media (max-width: 768px) {
+            #logo {
+                padding: 10px 15px;
+                max-width: 90%;
+            }
+            .logo-main {
+                width: 45px;
+                height: 45px;
+            }
+            #logo h6 {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+        }
     </style>
 </head>
-
 <body>
-    <div id="wrapper">
-        <div class="float-text show-on-scroll">
-            <span><a href="#">Scroll to top</a></span>
-        </div>
-        <div class="scrollbar-v show-on-scroll"></div>
-        
-        <!-- page preloader begin -->
-      
-        <!-- page preloader close -->
-
-        <!-- header begin -->
-        <header class="header-light transparent scroll-light has-topbar">
-            <div id="topbar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="d-flex justify-content-between xs-hide">
-                                <div class="header-widget d-flex">
-                                    <div class="topbar-widget"><a href="#"><i class="icofont-phone"></i>+998 71 244-51-84</a></div>
-                                    <div class="topbar-widget"><a href="#"><i class="icofont-envelope"></i>info@tmsiti.uz</a></div>
-                                </div>
-
-                                <div class="social-icons">
-                                    <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="de-flex sm-pt10">
-                            <div class="de-flex-col">
-                                <!-- logo begin -->
-                                    <div id="logo">
-                                    <a href="index.html">
-                                        <img class="logo-main" src="https://tmsiti.uz/icons/brand.svg" alt="Institut Logosi">
-
-                                        <img class="logo-scroll" src="https://tmsiti.uz/icons/brand.svg" alt="">
-                                                                                <h6>
-                                        Texnik me'yorlash va<br>
-                                        standartlashtirish<br>
-                                        ilmiy-tadqiqot instituti
-                                        </h6>
-                                        <img class="logo-mobile" src="images/logo-black.webp" alt="">
-                                    </a>
-                                    </div>
-                                <!-- logo close -->
-                            </div>
-                            <div class="de-flex-col header-col-mid">
-                                <ul id="mainmenu">
-                                    <li><a class="menu-item" href="#">Bosh sahifa</a>
-                             
-                                    </li>
-                      
-                                    <li><a class="menu-item" href="/">Biz haqimizda</a></li>
-                                    <li><a class="menu-item" href="/">Loyihalar</a>
-                          
-                                    </li>
-                                    <li><a class="menu-item" href="/">Blog</a></li>
-                       
-                                </ul>
-                            </div>
-                            <div class="de-flex-col">
-                                <div class="menu_side_area">          
-                                    <a href="/" class="btn-main bg-color-2">Bog'lanish</a>
-                                    <span id="menu-btn"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- header close -->
-        <!-- content begin -->
-        <div class="no-bottom no-top" id="content">
-            <div id="top"></div>
-            <!-- section begin -->
-            <section id="subheader2">
-                <div class="container relative z-index">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 offset-lg-3 text-center">
-                
-                            <h1 style="
-                            font-family: 'Inter', 'Arial', sans-serif;
-                            font-size: 32px;
-                            font-weight: 700;
-                            color: #1a1a1a;
-                            line-height: 1.3;
-                            margin: 20px 0;
-                         
-                            ">Isitish kalkulyatori</h1>
-                            <p class="lead">Quyidagi formani to'ldirish orqali bino haqida ma'lumotlarni kiritishingiz mumkin</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- section close -->
-
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-       
                 <!-- Bosqichlar ko'rsatkichi -->
                 <div class="step-indicator">
                     <div class="step active" data-step="1">
@@ -457,7 +336,6 @@
                                 <label for="region" class="form-label required-field">Viloyat</label>
                                 <select class="form-select" id="region" required>
                                     <option value="" selected disabled>Viloyatni tanlang</option>
-                                    <!-- Viloyatlar API orqali yuklanadi -->
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -505,10 +383,10 @@
                                     <small>Isitish davrining davomiyligi: <span id="timeDisplay">-</span></small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Noramtiv harorat: <span id="baseTempDisplay">-</span>°C</small>
+                                    <small>Normativ harorat: <span id="baseTempDisplay">-</span>°C</small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Isitish davrining daraja-kunlari soni (Degree days): <span id="calcValueDisplay">-</span></small>
+                                    <small>Isitish davrining daraja-kunlari soni: <span id="calcValueDisplay">-</span></small>
                                 </div>
                             </div>
                         </div>
@@ -552,22 +430,28 @@
                             
                             <!-- Avtomatik hisoblanadigan yuzalar -->
                             <div class="row mt-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="area-display text-center">
                                         <h6>Devorlar Yuzasi</h6>
                                         <div class="area-value" id="wallAreaDisplay">0 m²</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="area-display text-center">
                                         <h6>Pol Yuzasi</h6>
                                         <div class="area-value" id="floorAreaDisplay">0 m²</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="area-display text-center">
                                         <h6>Tom Yuzasi</h6>
                                         <div class="area-value" id="ceilingAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="volume-display text-center">
+                                        <h6>Bino Hajmi</h6>
+                                        <div class="area-value" id="volumeDisplay">0 m³</div>
                                     </div>
                                 </div>
                             </div>
@@ -654,7 +538,7 @@
                                 </div>
                                 <div class="total-thickness" id="wallTotalThickness">Jami qalinlik: 0 m</div>
                                 <div class="resistance-display" id="wallResistanceDisplay">
-                                    <strong>Umumiy qarshilik (R): <span id="wallTotalResistance">0</span></strong>
+                                    <strong>Umumiy qarshilik (R): <span id="wallTotalResistance">0</span> m²·°C/W</strong>
                                 </div>
                             </div>
                         </div>
@@ -696,7 +580,7 @@
                                 </div>
                                 <div class="total-thickness" id="floorTotalThickness">Jami qalinlik: 0 m</div>
                                 <div class="resistance-display" id="floorResistanceDisplay">
-                                    <strong>Umumiy qarshilik (R): <span id="floorTotalResistance">0</span></strong>
+                                    <strong>Umumiy qarshilik (R): <span id="floorTotalResistance">0</span> m²·°C/W</strong>
                                 </div>
                             </div>
                         </div>
@@ -738,7 +622,7 @@
                                 </div>
                                 <div class="total-thickness" id="ceilingTotalThickness">Jami qalinlik: 0 m</div>
                                 <div class="resistance-display" id="ceilingResistanceDisplay">
-                                    <strong>Umumiy qarshilik (R): <span id="ceilingTotalResistance">0</span></strong>
+                                    <strong>Umumiy qarshilik (R): <span id="ceilingTotalResistance">0</span> m²·°C/W</strong>
                                 </div>
                             </div>
                         </div>
@@ -768,22 +652,42 @@
                                 <div class="col-md-6">
                                     <p><strong>Vaqt:</strong> <span id="resultTime">-</span></p>
                                     <p><strong>Bino o'lchami:</strong> <span id="resultDimensions">-</span></p>
-                                    <p><strong>Devor yuzasi:</strong> <span id="resultWallArea">-</span> m²</p>
-                                    <p><strong>Pol yuzasi:</strong> <span id="resultFloorArea">-</span> m²</p>
+                                    <p><strong>Bino hajmi:</strong> <span id="resultVolume">-</span> m³</p>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <h6 class="text-primary">Material qarshiliklari:</h6>
-                                    <p><strong>Devor qarshiligi:</strong> <span id="resultWallResistance">-</span></p>
-                                    <p><strong>Pol qarshiligi:</strong> <span id="resultFloorResistance">-</span></p>
-                                    <p><strong>Tom qarshiligi:</strong> <span id="resultCeilingResistance">-</span></p>
+                                    <p><strong>Devor qarshiligi:</strong> <span id="resultWallResistance">-</span> m²·°C/W</p>
+                                    <p><strong>Pol qarshiligi:</strong> <span id="resultFloorResistance">-</span> m²·°C/W</p>
+                                    <p><strong>Tom qarshiligi:</strong> <span id="resultCeilingResistance">-</span> m²·°C/W</p>
+                                    <p><strong>Eshik qarshiligi:</strong> <span id="resultDoorResistance">0.6</span> m²·°C/W</p>
+                                    <p><strong>Deraza qarshiligi:</strong> <span id="resultWindowResistance">0.6</span> m²·°C/W</p>
                                 </div>
                             </div>
                             <hr>
-                            <div class="text-center">
-                                <h4 class="text-primary">Isitish qiymati: <span id="resultHeatingValue">-</span></h4>
-                                <p class="text-muted">Formula: (Baza harorat - average_temperature) × time</p>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h6 class="text-primary">Issiqlik yo'qotilishi (Q):</h6>
+                                    <div class="result-box">
+                                        <p><strong>Devor orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultWallQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Pol orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultFloorQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Tom orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultCeilingQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Eshiklar orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultDoorQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Derazalar orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultWindowQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box bg-success text-white">
+                                        <h5><strong>Umumiy issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultTotalQ" style="color: #fff3cd;">-</span> kW h/m²y</h5>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -840,296 +744,430 @@
         // Materiallar JSON ma'lumotlari
         const materialData = [
   {
-    "category_name": "Betonlar va qorishmalar",
+    "category_name": "Бетонлар ва қоришмалар",
     "subcategories": [
       {
-        "subcategory": "Tabniy zich to'ldirgichlardagi betonlar",
+        "subcategory": "Табний зич тўлдиргичлардаги бетонлар",
         "items": [
           {
-            "name": "Temirbeton",
+            "name": "Темирбетон",
             "l": 1.92
           },
           {
-            "name": "Tabiiy toshdan iborat bo'lgan chaqiq tosh yoqi shag'al asosidagi beton",
+            "name": "Табиий тошдан иборат бўлган чақиқ тош ёқи шағал асосидаги бетон",
             "l": 1.74
           }
         ]
       },
       {
-        "subcategory": "Tabiiy g'ovakli to'ldirgichlar asosidagi betonlar",
+        "subcategory": "Ячейкали бетон",
         "items": [
           {
-            "name": "Tuf-beton-1800",
-            "l": 0.87
-          },
-          {
-            "name": "Tuf-beton-1600",
-            "l": 0.7
-          },
-          {
-            "name": "Tuf-beton-1400",
-            "l": 0.52
-          },
-          {
-            "name": "Tuf-beton-1200",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-1000",
             "l": 0.41
           },
           {
-            "name": "Pemza - beton-1600",
-            "l": 0.62
-          },
-          {
-            "name": "Pemza - beton-1400",
-            "l": 0.49
-          },
-          {
-            "name": "Pemza - beton-1200",
-            "l": 0.4
-          },
-          {
-            "name": "Pemza - beton-1000",
-            "l": 0.3
-          },
-          {
-            "name": "Pemza - beton-800",
-            "l": 0.22
-          }
-        ]
-      },
-      {
-        "subcategory": "Yacheykali beton",
-        "items": [
-          {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-1000",
-            "l": 0.41
-          },
-          {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-800",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-800",
             "l": 0.33
           },
           {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-600",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-600",
             "l": 0.22
           },
           {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-400",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-400",
             "l": 0.14
           },
           {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-300",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-300",
             "l": 0.11
+          },
+          {
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-1200",
+            "l": 0.52
           }
         ]
       },
       {
-        "subcategory": "Sementli, ohakli va gipsli qorishmalar",
+        "subcategory": "Цементли, оҳакли ва гипсли қоришмалар",
         "items": [
           {
-            "name": "Sement-qumli",
+            "name": "Цемент-қумли",
             "l": 0.76
           },
           {
-            "name": "Murakkab (qum, ohak, sement)",
+            "name": "Мураккаб (кум, оҳак, цемент)",
             "l": 0.7
           },
           {
-            "name": "Ohak-qumli",
+            "name": "Оҳак-қумли",
             "l": 0.7
           },
           {
-            "name": "Sement-shlakli-1400",
+            "name": "Цемент-шлакли-1400",
             "l": 0.52
           },
           {
-            "name": "Sement-shlakli-1200",
+            "name": "Цемент-шлакли-1200",
             "l": 0.47
           },
           {
-            "name": "Sement-perlitli-1000",
+            "name": "Цемент-перлитли-1000",
             "l": 0.26
           },
           {
-            "name": "Sement-perlitli-800",
+            "name": "Цемент-перлитли-800",
             "l": 0.21
           },
           {
-            "name": "Gips-perlitli",
+            "name": "Гипс-перлитли",
             "l": 0.19
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Tabiiy toshdan qoplama qilish va g'isht terish",
-    "subcategories": [
-      {
-        "subcategory": "Yaxlit g'ishtdan g'isht terish",
-        "items": [
-          {
-            "name": "Sement-shlakli qorishmada oddiy gilli (GOST 530-80)",
-            "l": 0.7
           },
           {
-            "name": "Sement-shlakli qorishmada oddiy gilli-1700",
-            "l": 0.64
+            "name": "Ғоваклантирилган гипс-перлитли-500",
+            "l": 0.15
           },
           {
-            "name": "Sement-perlitli qorishmada oddiy gilli-1600",
-            "l": 0.58
+            "name": "Ғоваклантирилган гипс-перлитли-400",
+            "l": 0.13
           },
           {
-            "name": "Sement-qumli qorishmada silikatli (GOST 379-79)",
-            "l": 0.76
+            "name": "Гипсли плиталар-1200",
+            "l": 0.41
           },
           {
-            "name": "Sement-qumli qorishmada trepellli (GOST 648-73)",
-            "l": 0.47
-          }
-        ]
-      },
-      {
-        "subcategory": "Keramika va silikatli ichi bo'sh g'ishtdan g'isht terish",
-        "items": [
-          {
-            "name": "Sement-qumli qorishmada zichligi 1400 kg/m3 (brutto) ichi bo'sh keramikali",
-            "l": 0.58
-          },
-          {
-            "name": "Sement-qumli qorishmada zichligi 1300 kg/m3 (brutto) ichi bo'sh keramikali",
-            "l": 0.52
-          },
-          {
-            "name": "Sement-qumli qorishmada zichligi 1000 kg/m3 (brutto) ichi bo'sh keramikali",
-            "l": 0.47
-          },
-          {
-            "name": "Sement-qumli qorishmada o'n bir qovakli silikatli",
-            "l": 0.7
-          },
-          {
-            "name": "Sement-qumli qorishmada o'n to'rt qovakli silikatli",
-            "l": 0.64
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
-    "subcategories": [
-      {
-        "subcategory": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
-        "items": [
-          {
-            "name": "Qarag'ay va tolariga ko'ndalang qoraqarag'ay (GOST 8486-66**, GOST 9463-72)",
-            "l": 0.14
-          },
-          {
-            "name": "Qarag'ay va tolariga bo'yicha bo'lgan qoraqarag'ay",
+            "name": "Гипсли плиталар-1000",
             "l": 0.29
           },
           {
-            "name": "Tolariga ko'ndalang dub (GOST 9462-71*,",
-            "l": 0.18
+            "name": "Гипсли плиталар-1100",
+            "l": 0.35
+          },
+          {
+            "name": "Гипсли плиталар-1350",
+            "l": 0.5
+          },
+          {
+            "name": "Гипс қопламали листлар (қуруқ сувоқ)-800",
+            "l": 0.19
+          },
+          {
+            "name": "Гипс қопламали листлар (қуруқ сувоқ)-1050",
+            "l": 0.34
           }
         ]
       }
     ]
   },
   {
-    "category_name": "Issiqlikni izolyatsiyalovchi materiallar",
+    "category_name": "Табиий тошдан қоплама қилиш ва ғишт териш",
     "subcategories": [
       {
-        "subcategory": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
+        "subcategory": "Яхлит ғиштдан ғишт териш",
         "items": [
           {
-            "name": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
-            "l": 0.064
+            "name": "Цемент-шлакли қоришмада оддий гилли (ГОСТ 530-80)-1800",
+            "l": 0.7
+          },
+          {
+            "name": "Цемент-шлакли қоришмада оддий гилли-1700",
+            "l": 0.64
+          },
+          {
+            "name": "Цемент-перлитли қоришмада оддий гилли-1600",
+            "l": 0.58
+          },
+          {
+            "name": "Цемент-қумли қоришмада силикатли (ГОСТ 379-79)-1800",
+            "l": 0.76
+          },
+          {
+            "name": "Цемент-қумли қоришмада трепелли (ГОСТ 648-73)-1200",
+            "l": 0.47
+          },
+          {
+            "name": "Цемент-қумли қоришмада трепелли-1000",
+            "l": 0.41
+          },
+          {
+            "name": "Цемент-қумли қоришмада шлакли-1500",
+            "l": 0.64
           }
         ]
       },
       {
-        "subcategory": "Penopolistirol 2500S-da",
+        "subcategory": "Керамика ва силикатли ичи бўш ғиштдан ғишт териш",
         "items": [
           {
-            "name": "114b. Shu kabi, 2800S-da",
-            "l": 0.031
+            "name": "Цемент-қумли қоришмада зичлиги 1400 кг/м3 (брутто) ичи бўш керамикали",
+            "l": 0.58
           },
           {
-            "name": "144v. Shu kabi, 3035S-da",
-            "l": 0.031
+            "name": "Цемент-қумли қоришмада зичлиги 1300 кг/м3 (брутто) ичи бўш керамикали",
+            "l": 0.52
           },
           {
-            "name": "144g. Shu kabi, 4000S-da",
-            "l": 0.031
-          },
-          {
-            "name": "144d. Shu kabi, 5000S-da",
-            "l": 0.031
-          },
-          {
-            "name": "144e. Penopolistirol PS15",
-            "l": 0.04
-          },
-          {
-            "name": "144j. Shu kabi, PS20",
-            "l": 0.038
-          },
-          {
-            "name": "144z. Shu kabi, PS30",
-            "l": 0.036
-          },
-          {
-            "name": "144i. Ekstruziyalangan",
-            "l": 0.03
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Pollar uchun rulonli, qoplamali, gidroizolyatsiyali va tomga oid materiallar",
-    "subcategories": [
-      {
-        "subcategory": "Asbest-sementli",
-        "items": [
-          {
-            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1800",
+            "name": "Цемент-қумли қоришмада зичлиги 1000 кг/м3 (брутто) ичи бўш керамикали",
             "l": 0.47
           },
           {
-            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1600",
-            "l": 0.35
+            "name": "Цемент-қумли қоришмада ўн бир қовакли силикатли-1500",
+            "l": 0.7
+          },
+          {
+            "name": "Цемент-қумли қоришмада ўн тўрт қовакли силикатли-1400",
+            "l": 0.64
           }
         ]
       }
     ]
   },
   {
-    "category_name": "Metallar va shisha",
+    "category_name": "Ёғоч, узндан ва бошқа табиий органиқ материаллардан тайёрланган буюмлар",
     "subcategories": [
       {
-        "subcategory": "Metallar va shisha",
+        "subcategory": "Ёғоч, узндан ва бошқа табиий органиқ материаллардан тайёрланган буюмлар",
         "items": [
           {
-            "name": "Sterjenli armaturaali po'lat (GOST 10884-81)",
+            "name": "Қарағай ва толаларига кўндаланг қорақарағай (ГОСТ 8486-66**, ГОСТ 9463-72)",
+            "l": 0.14
+          },
+          {
+            "name": "Қарағай ва толалари бўйича бўлган қорақарағай",
+            "l": 0.29
+          },
+          {
+            "name": "Толаларига кўндаланг дуб (ГОСТ 9462-71*,",
+            "l": 0.18
+          },
+          {
+            "name": "Толалари бўйича дуб",
+            "l": 0.35
+          },
+          {
+            "name": "Елимланган фанера",
+            "l": 0.15
+          },
+          {
+            "name": "Қопламали картон",
+            "l": 0.21
+          },
+          {
+            "name": "Қўп қаватли",
+            "l": 0.15
+          },
+          {
+            "name": "Ёғоч толали ва ёғоч қипигли плиталар (ДСП) (ГОСТ 4598-74*,",
+            "l": 0.23
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Иссиқликни изоляцияловчи материаллар",
+    "subcategories": [
+      {
+        "subcategory": "Минерал мамиқли ва шиша толали минерал момиқли бордонлар (матлар)",
+        "items": [
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-125",
+            "l": 0.064
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-125",
+            "l": 0.061
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-100",
+            "l": 0.06
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-75",
+            "l": 0.052
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-225",
+            "l": 0.072
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-175",
+            "l": 0.066
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-125",
+            "l": 0.064
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-75",
+            "l": 0.058
+          },
+          {
+            "name": "Битумли боғловчи ва синтетик асосидаги",
+            "l": 0.09
+          }
+        ]
+      },
+      {
+        "subcategory": "Полимерли",
+        "items": [
+          {
+            "name": "Пенополистирол",
+            "l": 0.052
+          }
+        ]
+      },
+      {
+        "subcategory": "Пенополистирол 2500С-да",
+        "items": [
+          {
+            "name": "Пенополистирол 2800С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол 3035С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол 4000С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол 5000С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол РS15",
+            "l": 0.04
+          },
+          {
+            "name": "Пенополистирол РS20",
+            "l": 0.038
+          },
+          {
+            "name": "Пенополистирол РS30",
+            "l": 0.036
+          },
+          {
+            "name": "Экструзияланган",
+            "l": 0.03
+          }
+        ]
+      },
+      {
+        "subcategory": "Кўпик шиша ёки газ шиша",
+        "items": [
+          {
+            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-400",
+            "l": 400
+          },
+          {
+            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-300",
+            "l": 300
+          },
+          {
+            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-200",
+            "l": 200
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Поллар учун рулонли, қопламали, гидроизоляцицияли ва томга оид материаллар",
+    "subcategories": [
+      {
+        "subcategory": "Асбест-цементли",
+        "items": [
+          {
+            "name": "Юпқа асбест-цементли листлар (тахталар) (ГОСТ 18124-75*)-1800",
+            "l": 0.47
+          },
+          {
+            "name": "Юпқа асбест-цементли листлар (тахталар) (ГОСТ 18124-75*)-1600",
+            "l": 0.35
+          },
+          {
+            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1400",
+            "l": 0.27
+          },
+          {
+            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1200",
+            "l": 0.22
+          },
+          {
+            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1000",
+            "l": 0.17
+          },
+          {
+            "name": "Асфальт-бетон (ГОСТ 9128-84)",
+            "l": 1.05
+          },
+          {
+            "name": "Битумли боғловчи асосдаги шиширилган перлитдан иборат буюмлар (ГОСТ 16136-80)",
+            "l": 0.12
+          },
+          {
+            "name": "Битум боғловчили шиширилган перлитдан буюмлар",
+            "l": 0.09
+          }
+        ]
+      },
+      {
+        "subcategory": "Линолеумлар",
+        "items": [
+          {
+            "name": "Кўп қаватли поливинилхлоридли линолеум (ГОСТ 14632-79)-1800",
+            "l": 0.38
+          },
+          {
+            "name": "Кўп қаватли поливинилхлоридли линолеум (ГОСТ 14632-79)-1600",
+            "l": 0.33
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1800",
+            "l": 0.35
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1600",
+            "l": 0.29
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1400",
+            "l": 0.29
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1200",
+            "l": 0.23
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Металлар ва шиша",
+    "subcategories": [
+      {
+        "subcategory": "Металлар ва шиша",
+        "items": [
+          {
+            "name": "Стерженли арматурали пўлат (ГОСТ 10884-81)",
             "l": 58
           },
           {
-            "name": "Cho'yan",
+            "name": "Чўян",
             "l": 50
           },
           {
-            "name": "Alyuminiy (GOST 22233-83)",
+            "name": "Алюминий (ГОСТ 22233-83)",
             "l": 221
           },
           {
-            "name": "Mis (GOST 859-78*)",
+            "name": "Мис (ГОСТ 859-78*)",
             "l": 407
           },
           {
-            "name": "Oynaga oid shisha (GOST 111-78)",
+            "name": "Ойнага оид шиша (ГОСТ 111-78)",
             "l": 0.76
           }
         ]
@@ -1311,14 +1349,14 @@
             materialArray.forEach(category => {
                 // Kategoriya sarlavhasi
                 const categoryHeader = document.createElement('div');
-                // categoryHeader.className = 'category-header fw-bold mt-3 mb-2 text-primary';
-                // categoryHeader.textContent = category.category_name;
-                // materialList.appendChild(categoryHeader);
+                categoryHeader.className = 'category-header fw-bold mt-3 mb-2 text-primary';
+                categoryHeader.textContent = category.category_name;
+                materialList.appendChild(categoryHeader);
                 
                 // Subkategoriyalar
                 category.subcategories.forEach(subcategory => {
                     // Subkategoriya sarlavhasi
-                    const subcategoryHeader = document.createElement('div');
+                    // const subcategoryHeader = document.createElement('div');
                     // subcategoryHeader.className = 'subcategory-header fw-semibold mt-2 mb-1 ps-2';
                     // subcategoryHeader.textContent = subcategory.subcategory;
                     // materialList.appendChild(subcategoryHeader);
@@ -1331,7 +1369,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     ${material.name}
-                                    
+                                    <br><small class="text-muted">Issiqlik o'tkazuvchanlik koeffitsienti: ${material.l} W/(m·°C)</small>
                                 </div>
                                 <div class="text-end">
                                     <small class="text-muted">${category.category_name}</small>
@@ -1576,9 +1614,9 @@
                             <input type="text" class="form-control door-area" readonly style="background-color: #e9ecef;">
                             <span class="input-group-text">m²</span>
                         </div>
-                        ${id > 1 ? `<button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
+                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
                             <i class="bi bi-trash"></i> O'chirish
-                        </button>` : ''}
+                        </button>
                     </div>
                 </div>
             `;
@@ -1670,9 +1708,9 @@
                             <input type="text" class="form-control window-area" readonly style="background-color: #e9ecef;">
                             <span class="input-group-text">m²</span>
                         </div>
-                        ${id > 1 ? `<button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
+                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
                             <i class="bi bi-trash"></i> O'chirish
-                        </button>` : ''}
+                        </button>
                     </div>
                 </div>
             `;
@@ -1765,6 +1803,10 @@
             document.getElementById('ceilingArea').value = ceilingArea.toFixed(2);
             document.getElementById('ceilingAreaDisplay').textContent = ceilingArea.toFixed(2) + ' m²';
             
+            // Bino hajmi (uzunlik * eni * balandlik)
+            const volume = length * width * height;
+            document.getElementById('volumeDisplay').textContent = volume.toFixed(2) + ' m³';
+            
             // Eshik va derazalarning yuzasini qayta hisoblash
             calculateDoorWindowAreas();
         }
@@ -1791,8 +1833,40 @@
             const selectedBuildingOption = buildingTypeSelect.options[buildingTypeSelect.selectedIndex];
             const buildingTypeName = buildingType === 'boshqa' ? customBuildingType : selectedBuildingOption.textContent;
             
-            // Hisoblash formulasi
-            const heatingValue = (baseTemperature - selectedDistrictData.average_temperature) * selectedDistrictData.time;
+            // Bino hajmini hisoblash
+            const volume = (parseFloat(length) || 0) * (parseFloat(width) || 0) * (parseFloat(height) || 0);
+            
+            // Qarshiliklarni olish
+            const wallResistance = parseFloat(document.getElementById('wallTotalResistance').textContent) || 0;
+            const floorResistance = parseFloat(document.getElementById('floorTotalResistance').textContent) || 0;
+            const ceilingResistance = parseFloat(document.getElementById('ceilingTotalResistance').textContent) || 0;
+            
+            // Eshik va derazalar uchun qarshilik (0.6)
+            const doorResistance = 0.6;
+            const windowResistance = 0.6;
+            
+            // Yuzalarni olish
+            const wallArea = parseFloat(document.getElementById('finalWallArea').textContent) || 0;
+            const floorArea = parseFloat(document.getElementById('floorArea').value) || 0;
+            const ceilingArea = parseFloat(document.getElementById('ceilingArea').value) || 0;
+            
+            // Eshik va derazalar yuzasi
+            const totalDoorsArea = parseFloat(document.getElementById('totalDoorsArea').textContent) || 0;
+            const totalWindowsArea = parseFloat(document.getElementById('totalWindowsArea').textContent) || 0;
+            
+            // Harorat farqi
+            const tempDifference = baseTemperature - selectedDistrictData.average_temperature;
+            
+            // Q qiymatlarini hisoblash: Q = (1/R) * (joy - average_temperature) * time * 24
+            const time = selectedDistrictData.time;
+            const wallQ = (1 / (wallResistance || 1)) * tempDifference * time * 24 * wallArea;
+            const floorQ = (1 / (floorResistance || 1)) * tempDifference * time * 24 * floorArea;
+            const ceilingQ = (1 / (ceilingResistance || 1)) * tempDifference * time * 24 * ceilingArea;
+            const doorQ = (1 / doorResistance) * tempDifference * time * 24 * totalDoorsArea;
+            const windowQ = (1 / windowResistance) * tempDifference * time * 24 * totalWindowsArea;
+            
+            // Umumiy issiqlik yo'qotilishi
+            const totalQ = wallQ + floorQ + ceilingQ + doorQ + windowQ;
             
             // Natijalarni ko'rsatish
             document.getElementById('resultRegion').textContent = region;
@@ -1802,12 +1876,18 @@
             document.getElementById('resultBaseTemp').textContent = baseTemperature;
             document.getElementById('resultTime').textContent = selectedDistrictData.time;
             document.getElementById('resultDimensions').textContent = `${length}m × ${width}m × ${height}m`;
-            document.getElementById('resultWallArea').textContent = document.getElementById('wallArea').value;
-            document.getElementById('resultFloorArea').textContent = document.getElementById('floorArea').value;
-            document.getElementById('resultWallResistance').textContent = document.getElementById('wallTotalResistance').textContent;
-            document.getElementById('resultFloorResistance').textContent = document.getElementById('floorTotalResistance').textContent;
-            document.getElementById('resultCeilingResistance').textContent = document.getElementById('ceilingTotalResistance').textContent;
-            document.getElementById('resultHeatingValue').textContent = heatingValue.toFixed(2);
+            document.getElementById('resultVolume').textContent = volume.toFixed(2);
+            document.getElementById('resultWallResistance').textContent = wallResistance.toFixed(3);
+            document.getElementById('resultFloorResistance').textContent = floorResistance.toFixed(3);
+            document.getElementById('resultCeilingResistance').textContent = ceilingResistance.toFixed(3);
+            
+            // Q qiymatlarini ko'rsatish
+            document.getElementById('resultWallQ').textContent = wallQ.toFixed(2);
+            document.getElementById('resultFloorQ').textContent = floorQ.toFixed(2);
+            document.getElementById('resultCeilingQ').textContent = ceilingQ.toFixed(2);
+            document.getElementById('resultDoorQ').textContent = doorQ.toFixed(2);
+            document.getElementById('resultWindowQ').textContent = windowQ.toFixed(2);
+            document.getElementById('resultTotalQ').textContent = totalQ.toFixed(2);
             
             // Natijalarni ko'rsatish
             document.getElementById('calculationResult').style.display = 'block';
@@ -2023,9 +2103,5 @@
             document.getElementById(resistanceDisplayId).textContent = totalResistance.toFixed(3);
         }
     </script>
-
 </body>
-
-
-<!-- Mirrored from madebydesignesia.com/themes/coolair/project-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Oct 2025 05:13:57 GMT -->
 </html>

@@ -1,295 +1,429 @@
 [
   {
-    "category_name": "Betonlar va qorishmalar",
+    "category_name": "Бетонлар ва қоришмалар",
     "subcategories": [
       {
-        "subcategory": "Tabniy zich to'ldirgichlardagi betonlar",
+        "subcategory": "Табний зич тўлдиргичлардаги бетонлар",
         "items": [
           {
-            "name": "Temirbeton",
+            "name": "Темирбетон",
             "l": 1.92
           },
           {
-            "name": "Tabiiy toshdan iborat bo'lgan chaqiq tosh yoqi shag'al asosidagi beton",
+            "name": "Табиий тошдан иборат бўлган чақиқ тош ёқи шағал асосидаги бетон",
             "l": 1.74
           }
         ]
       },
       {
-        "subcategory": "Tabiiy g'ovakli to'ldirgichlar asosidagi betonlar",
+        "subcategory": "Ячейкали бетон",
         "items": [
           {
-            "name": "Tuf-beton-1800",
-            "l": 0.87
-          },
-          {
-            "name": "Tuf-beton-1600",
-            "l": 0.7
-          },
-          {
-            "name": "Tuf-beton-1400",
-            "l": 0.52
-          },
-          {
-            "name": "Tuf-beton-1200",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-1000",
             "l": 0.41
           },
           {
-            "name": "Pemza - beton-1600",
-            "l": 0.62
-          },
-          {
-            "name": "Pemza - beton-1400",
-            "l": 0.49
-          },
-          {
-            "name": "Pemza - beton-1200",
-            "l": 0.4
-          },
-          {
-            "name": "Pemza - beton-1000",
-            "l": 0.3
-          },
-          {
-            "name": "Pemza - beton-800",
-            "l": 0.22
-          }
-        ]
-      },
-      {
-        "subcategory": "Yacheykali beton",
-        "items": [
-          {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-1000",
-            "l": 0.41
-          },
-          {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-800",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-800",
             "l": 0.33
           },
           {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-600",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-600",
             "l": 0.22
           },
           {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-400",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-400",
             "l": 0.14
           },
           {
-            "name": "Gaz- va ko'pik-beton, gaz- va ko'pik-silikat beton-300",
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-300",
             "l": 0.11
+          },
+          {
+            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-1200",
+            "l": 0.52
           }
         ]
       },
       {
-        "subcategory": "Sementli, ohakli va gipsli qorishmalar",
+        "subcategory": "Цементли, оҳакли ва гипсли қоришмалар",
         "items": [
           {
-            "name": "Sement-qumli",
+            "name": "Цемент-қумли",
             "l": 0.76
           },
           {
-            "name": "Murakkab (qum, ohak, sement)",
+            "name": "Мураккаб (кум, оҳак, цемент)",
             "l": 0.7
           },
           {
-            "name": "Ohak-qumli",
+            "name": "Оҳак-қумли",
             "l": 0.7
           },
           {
-            "name": "Sement-shlakli-1400",
+            "name": "Цемент-шлакли-1400",
             "l": 0.52
           },
           {
-            "name": "Sement-shlakli-1200",
+            "name": "Цемент-шлакли-1200",
             "l": 0.47
           },
           {
-            "name": "Sement-perlitli-1000",
+            "name": "Цемент-перлитли-1000",
             "l": 0.26
           },
           {
-            "name": "Sement-perlitli-800",
+            "name": "Цемент-перлитли-800",
             "l": 0.21
           },
           {
-            "name": "Gips-perlitli",
+            "name": "Гипс-перлитли",
             "l": 0.19
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Tabiiy toshdan qoplama qilish va g'isht terish",
-    "subcategories": [
-      {
-        "subcategory": "Yaxlit g'ishtdan g'isht terish",
-        "items": [
-          {
-            "name": "Sement-shlakli qorishmada oddiy gilli (GOST 530-80)",
-            "l": 0.7
           },
           {
-            "name": "Sement-shlakli qorishmada oddiy gilli-1700",
-            "l": 0.64
+            "name": "Ғоваклантирилган гипс-перлитли-500",
+            "l": 0.15
           },
           {
-            "name": "Sement-perlitli qorishmada oddiy gilli-1600",
-            "l": 0.58
+            "name": "Ғоваклантирилган гипс-перлитли-400",
+            "l": 0.13
           },
           {
-            "name": "Sement-qumli qorishmada silikatli (GOST 379-79)",
-            "l": 0.76
+            "name": "Гипсли плиталар-1200",
+            "l": 0.41
           },
           {
-            "name": "Sement-qumli qorishmada trepellli (GOST 648-73)",
-            "l": 0.47
-          }
-        ]
-      },
-      {
-        "subcategory": "Keramika va silikatli ichi bo'sh g'ishtdan g'isht terish",
-        "items": [
-          {
-            "name": "Sement-qumli qorishmada zichligi 1400 kg/m3 (brutto) ichi bo'sh keramikali",
-            "l": 0.58
-          },
-          {
-            "name": "Sement-qumli qorishmada zichligi 1300 kg/m3 (brutto) ichi bo'sh keramikali",
-            "l": 0.52
-          },
-          {
-            "name": "Sement-qumli qorishmada zichligi 1000 kg/m3 (brutto) ichi bo'sh keramikali",
-            "l": 0.47
-          },
-          {
-            "name": "Sement-qumli qorishmada o'n bir qovakli silikatli",
-            "l": 0.7
-          },
-          {
-            "name": "Sement-qumli qorishmada o'n to'rt qovakli silikatli",
-            "l": 0.64
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
-    "subcategories": [
-      {
-        "subcategory": "Yog'och, uzundan va boshqa tabiiy organik materiallardan tayyorlangan buyumlar",
-        "items": [
-          {
-            "name": "Qarag'ay va tolariga ko'ndalang qoraqarag'ay (GOST 8486-66**, GOST 9463-72)",
-            "l": 0.14
-          },
-          {
-            "name": "Qarag'ay va tolariga bo'yicha bo'lgan qoraqarag'ay",
+            "name": "Гипсли плиталар-1000",
             "l": 0.29
           },
           {
-            "name": "Tolariga ko'ndalang dub (GOST 9462-71*,",
-            "l": 0.18
+            "name": "Гипсли плиталар-1100",
+            "l": 0.35
+          },
+          {
+            "name": "Гипсли плиталар-1350",
+            "l": 0.5
+          },
+          {
+            "name": "Гипс қопламали листлар (қуруқ сувоқ)-800",
+            "l": 0.19
+          },
+          {
+            "name": "Гипс қопламали листлар (қуруқ сувоқ)-1050",
+            "l": 0.34
           }
         ]
       }
     ]
   },
   {
-    "category_name": "Issiqlikni izolyatsiyalovchi materiallar",
+    "category_name": "Табиий тошдан қоплама қилиш ва ғишт териш",
     "subcategories": [
       {
-        "subcategory": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
+        "subcategory": "Яхлит ғиштдан ғишт териш",
         "items": [
           {
-            "name": "Mineral mamikli va shisha tolali mineral momikli bordondar (matlar)",
-            "l": 0.064
+            "name": "Цемент-шлакли қоришмада оддий гилли (ГОСТ 530-80)-1800",
+            "l": 0.7
+          },
+          {
+            "name": "Цемент-шлакли қоришмада оддий гилли-1700",
+            "l": 0.64
+          },
+          {
+            "name": "Цемент-перлитли қоришмада оддий гилли-1600",
+            "l": 0.58
+          },
+          {
+            "name": "Цемент-қумли қоришмада силикатли (ГОСТ 379-79)-1800",
+            "l": 0.76
+          },
+          {
+            "name": "Цемент-қумли қоришмада трепелли (ГОСТ 648-73)-1200",
+            "l": 0.47
+          },
+          {
+            "name": "Цемент-қумли қоришмада трепелли-1000",
+            "l": 0.41
+          },
+          {
+            "name": "Цемент-қумли қоришмада шлакли-1500",
+            "l": 0.64
           }
         ]
       },
       {
-        "subcategory": "Penopolistirol 2500S-da",
+        "subcategory": "Керамика ва силикатли ичи бўш ғиштдан ғишт териш",
         "items": [
           {
-            "name": "114b. Shu kabi, 2800S-da",
-            "l": 0.031
+            "name": "Цемент-қумли қоришмада зичлиги 1400 кг/м3 (брутто) ичи бўш керамикали",
+            "l": 0.58
           },
           {
-            "name": "144v. Shu kabi, 3035S-da",
-            "l": 0.031
+            "name": "Цемент-қумли қоришмада зичлиги 1300 кг/м3 (брутто) ичи бўш керамикали",
+            "l": 0.52
           },
           {
-            "name": "144g. Shu kabi, 4000S-da",
-            "l": 0.031
-          },
-          {
-            "name": "144d. Shu kabi, 5000S-da",
-            "l": 0.031
-          },
-          {
-            "name": "144e. Penopolistirol PS15",
-            "l": 0.04
-          },
-          {
-            "name": "144j. Shu kabi, PS20",
-            "l": 0.038
-          },
-          {
-            "name": "144z. Shu kabi, PS30",
-            "l": 0.036
-          },
-          {
-            "name": "144i. Ekstruziyalangan",
-            "l": 0.03
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Pollar uchun rulonli, qoplamali, gidroizolyatsiyali va tomga oid materiallar",
-    "subcategories": [
-      {
-        "subcategory": "Asbest-sementli",
-        "items": [
-          {
-            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1800",
+            "name": "Цемент-қумли қоришмада зичлиги 1000 кг/м3 (брутто) ичи бўш керамикали",
             "l": 0.47
           },
           {
-            "name": "Yupqa asbest-sementli listlar (taxtalar) (GOST 18124-75*)-1600",
-            "l": 0.35
+            "name": "Цемент-қумли қоришмада ўн бир қовакли силикатли-1500",
+            "l": 0.7
+          },
+          {
+            "name": "Цемент-қумли қоришмада ўн тўрт қовакли силикатли-1400",
+            "l": 0.64
           }
         ]
       }
     ]
   },
   {
-    "category_name": "Metallar va shisha",
+    "category_name": "Ёғоч, узндан ва бошқа табиий органиқ материаллардан тайёрланган буюмлар",
     "subcategories": [
       {
-        "subcategory": "Metallar va shisha",
+        "subcategory": "Ёғоч, узндан ва бошқа табиий органиқ материаллардан тайёрланган буюмлар",
         "items": [
           {
-            "name": "Sterjenli armaturaali po'lat (GOST 10884-81)",
+            "name": "Қарағай ва толаларига кўндаланг қорақарағай (ГОСТ 8486-66**, ГОСТ 9463-72)",
+            "l": 0.14
+          },
+          {
+            "name": "Қарағай ва толалари бўйича бўлган қорақарағай",
+            "l": 0.29
+          },
+          {
+            "name": "Толаларига кўндаланг дуб (ГОСТ 9462-71*,",
+            "l": 0.18
+          },
+          {
+            "name": "Толалари бўйича дуб",
+            "l": 0.35
+          },
+          {
+            "name": "Елимланган фанера",
+            "l": 0.15
+          },
+          {
+            "name": "Қопламали картон",
+            "l": 0.21
+          },
+          {
+            "name": "Қўп қаватли",
+            "l": 0.15
+          },
+          {
+            "name": "Ёғоч толали ва ёғоч қипигли плиталар (ДСП) (ГОСТ 4598-74*,",
+            "l": 0.23
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Иссиқликни изоляцияловчи материаллар",
+    "subcategories": [
+      {
+        "subcategory": "Минерал мамиқли ва шиша толали минерал момиқли бордонлар (матлар)",
+        "items": [
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-125",
+            "l": 0.064
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-125",
+            "l": 0.061
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-100",
+            "l": 0.06
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-75",
+            "l": 0.052
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-225",
+            "l": 0.072
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-175",
+            "l": 0.066
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-125",
+            "l": 0.064
+          },
+          {
+            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-75",
+            "l": 0.058
+          },
+          {
+            "name": "Битумли боғловчи ва синтетик асосидаги",
+            "l": 0.09
+          }
+        ]
+      },
+      {
+        "subcategory": "Полимерли",
+        "items": [
+          {
+            "name": "Пенополистирол",
+            "l": 0.052
+          }
+        ]
+      },
+      {
+        "subcategory": "Пенополистирол 2500С-да",
+        "items": [
+          {
+            "name": "Пенополистирол 2800С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол 3035С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол 4000С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол 5000С-да",
+            "l": 0.031
+          },
+          {
+            "name": "Пенополистирол РS15",
+            "l": 0.04
+          },
+          {
+            "name": "Пенополистирол РS20",
+            "l": 0.038
+          },
+          {
+            "name": "Пенополистирол РS30",
+            "l": 0.036
+          },
+          {
+            "name": "Экструзияланган",
+            "l": 0.03
+          }
+        ]
+      },
+      {
+        "subcategory": "Кўпик шиша ёки газ шиша",
+        "items": [
+          {
+            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-400",
+            "l": 400
+          },
+          {
+            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-300",
+            "l": 300
+          },
+          {
+            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-200",
+            "l": 200
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Поллар учун рулонли, қопламали, гидроизоляцицияли ва томга оид материаллар",
+    "subcategories": [
+      {
+        "subcategory": "Асбест-цементли",
+        "items": [
+          {
+            "name": "Юпқа асбест-цементли листлар (тахталар) (ГОСТ 18124-75*)-1800",
+            "l": 0.47
+          },
+          {
+            "name": "Юпқа асбест-цементли листлар (тахталар) (ГОСТ 18124-75*)-1600",
+            "l": 0.35
+          },
+          {
+            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1400",
+            "l": 0.27
+          },
+          {
+            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1200",
+            "l": 0.22
+          },
+          {
+            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1000",
+            "l": 0.17
+          },
+          {
+            "name": "Асфальт-бетон (ГОСТ 9128-84)",
+            "l": 1.05
+          },
+          {
+            "name": "Битумли боғловчи асосдаги шиширилган перлитдан иборат буюмлар (ГОСТ 16136-80)",
+            "l": 0.12
+          },
+          {
+            "name": "Битум боғловчили шиширилган перлитдан буюмлар",
+            "l": 0.09
+          }
+        ]
+      },
+      {
+        "subcategory": "Линолеумлар",
+        "items": [
+          {
+            "name": "Кўп қаватли поливинилхлоридли линолеум (ГОСТ 14632-79)-1800",
+            "l": 0.38
+          },
+          {
+            "name": "Кўп қаватли поливинилхлоридли линолеум (ГОСТ 14632-79)-1600",
+            "l": 0.33
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1800",
+            "l": 0.35
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1600",
+            "l": 0.29
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1400",
+            "l": 0.29
+          },
+          {
+            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1200",
+            "l": 0.23
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category_name": "Металлар ва шиша",
+    "subcategories": [
+      {
+        "subcategory": "Металлар ва шиша",
+        "items": [
+          {
+            "name": "Стерженли арматурали пўлат (ГОСТ 10884-81)",
             "l": 58
           },
           {
-            "name": "Cho'yan",
+            "name": "Чўян",
             "l": 50
           },
           {
-            "name": "Alyuminiy (GOST 22233-83)",
+            "name": "Алюминий (ГОСТ 22233-83)",
             "l": 221
           },
           {
-            "name": "Mis (GOST 859-78*)",
+            "name": "Мис (ГОСТ 859-78*)",
             "l": 407
           },
           {
-            "name": "Oynaga oid shisha (GOST 111-78)",
+            "name": "Ойнага оид шиша (ГОСТ 111-78)",
             "l": 0.76
           }
         ]
