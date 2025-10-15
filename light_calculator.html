@@ -1068,7 +1068,11 @@ function updateRecommendedLamps() {
     lamps.forEach(lamp => {
         const luminousFluxMin = lamp.luminous_flux_max || 1;
         if (luminousFluxMin > 0) {
-            const lampsCount = Math.ceil(totalLight / luminousFluxMin);
+            let lampsCount = totalLight / luminousFluxMin;
+            
+            // Yaxlitlash qoidasi: faqat juft sonlar
+            lampsCount = roundToEven(lampsCount);
+            
             const power = parseFloat(lamp.power) || 0;
             const totalPower = lampsCount * power;
             
@@ -1126,6 +1130,25 @@ function updateRecommendedLamps() {
         recommendedLampsContainer.style.display = 'block';
     } else {
         recommendedLampsContainer.style.display = 'none';
+    }
+}
+// Juft songa yaxlitlash funksiyasi
+function roundToEven(number) {
+    const rounded = Math.round(number * 10) / 10; // Bir xona aniqlikda yaxlitlash
+    const decimal = rounded % 1;
+    const integer = Math.floor(rounded);
+    
+    // Agar butun qismi toq bo'lsa
+    if (integer % 2 !== 0) {
+        return integer + 1; // Keyingi juft son
+    }
+    // Agar butun qismi juft bo'lsa
+    else {
+        if (decimal <= 0.5) {
+            return integer; // O'zi
+        } else {
+            return integer + 2; // Keyingi juft son
+        }
     }
 }
         // Batafsil tugmasi bosilganda
@@ -1515,7 +1538,12 @@ function updateRecommendedLamps() {
             let html = '';
             lamps.forEach((lamp, index) => {
                 const luminousFluxMin = lamp.luminous_flux_max || 1;
-                const lampsCount = totalLight > 0 ? Math.ceil(totalLight / luminousFluxMin) : 0;
+                let lampsCount = totalLight > 0 ? totalLight / luminousFluxMin : 0;
+                
+                // Juft songa yaxlitlash
+                if (lampsCount > 0) {
+                    lampsCount = roundToEven(lampsCount);
+                }
                 
                 html += `
                     <tr data-luminous-flux-min="${luminousFluxMin}">
@@ -1534,7 +1562,7 @@ function updateRecommendedLamps() {
                             ${lampsCount > 0 ? 
                                 `<button class="btn-details" onclick="showPlacementModal(${JSON.stringify(lamp).replace(/"/g, '&quot;')}, ${lampsCount})">
                                     Batafsil
-                                 </button>` : 
+                                </button>` : 
                                 '-'
                             }
                         </td>
