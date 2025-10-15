@@ -385,6 +385,39 @@
             border-color: #1a3668;
         }
         
+        /* Tavsiya qilingan lampochkalar uchun yangi stillar */
+        .recommended-lamps-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 2px solid #234982;
+        }
+        
+        .recommended-lamps-title {
+            color: #234982;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        /* Modal o'rtada turishi uchun */
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s ease-out;
+            transform: translate(0, -50px);
+        }
+        
+        .modal.show .modal-dialog {
+            transform: translate(0, 0);
+        }
+        
+        .modal-xl {
+            max-width: 90%;
+            margin: 1.75rem auto;
+        }
+        
         @media (max-width: 768px) {
             .main-container {
                 padding: 20px;
@@ -405,74 +438,74 @@
             .lamp-category-card {
                 margin-bottom: 15px;
             }
+            
+            .modal-xl {
+                max-width: 95%;
+                margin: 0.5rem auto;
+            }
         }
 
+        #logo {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 12px 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+          max-width: 500px;
+          margin: 10px auto;
+        }
 
+        #logo a {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          text-decoration: none;
+          color: inherit;
+          width: 100%;
+        }
 
+        .logo-main {
+          width: 50px;
+          height: 50px;
+          padding: 6px;
+          background: white;
+          border-radius: 50%;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+          flex-shrink: 0;
+        }
 
+        #logo h6 {
+          color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+          font-size: 13px;
+          font-weight: 600;
+          line-height: 1.3;
+          margin: 0;
+          text-align: left;
+          flex: 1;
+        }
 
-#logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 20px;
+        .logo-scroll, .logo-mobile {
+          display: none;
+        }
 
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  max-width: 500px;
-  margin: 10px auto;
-}
-
-#logo a {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-}
-
-.logo-main {
-  width: 50px;
-  height: 50px;
-  padding: 6px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  flex-shrink: 0;
-}
-
-#logo h6 {
-  color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.3;
-  margin: 0;
-  text-align: left;
-  flex: 1;
-}
-
-.logo-scroll, .logo-mobile {
-  display: none;
-}
-
-/* Mobil uchun */
-@media (max-width: 768px) {
-  #logo {
-    padding: 10px 15px;
-    max-width: 90%;
-  }
-  
-  .logo-main {
-    width: 45px;
-    height: 45px;
-  }
-  
-  #logo h6 {
-    font-size: 12px;
-    line-height: 1.2;
-  }
-}
+        /* Mobil uchun */
+        @media (max-width: 768px) {
+          #logo {
+            padding: 10px 15px;
+            max-width: 90%;
+          }
+          
+          .logo-main {
+            width: 45px;
+            height: 45px;
+          }
+          
+          #logo h6 {
+            font-size: 12px;
+            line-height: 1.2;
+          }
+        }
     </style>
 </head>
 
@@ -521,9 +554,8 @@
                                     <div id="logo">
                                     <a href="index.html">
                                         <img class="logo-main" src="https://tmsiti.uz/icons/brand.svg" alt="Institut Logosi">
-
                                         <img class="logo-scroll" src="https://tmsiti.uz/icons/brand.svg" alt="">
-                                                                                <h6>
+                                        <h6>
                                         Texnik me'yorlash va<br>
                                         standartlashtirish<br>
                                         ilmiy-tadqiqot instituti
@@ -535,18 +567,11 @@
                             </div>
                             <div class="de-flex-col header-col-mid">
                                 <ul id="mainmenu">
-                                    <li><a class="menu-item" href="#">Bosh sahifa</a>
-                             
-                                    </li>
-                      
+                                    <li><a class="menu-item" href="#">Bosh sahifa</a></li>
                                     <li><a class="menu-item" href="/">Biz haqimizda</a></li>
-                                    <li><a class="menu-item" href="/">Loyihalar</a>
-                          
-                                    </li>
+                                    <li><a class="menu-item" href="/">Loyihalar</a></li>
                                     <li><a class="menu-item" href="/">Blog</a></li>
-                       
                                 </ul>
-
                             </div>
                             <div class="de-flex-col">
                                 <div class="menu_side_area">          
@@ -750,6 +775,36 @@
                             </div>
                         </div>
                         
+                        <!-- Tavsiya qilingan lampochkalar -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="recommended-lamps-container" id="recommendedLampsContainer" style="display: none;">
+                                    <h5 class="recommended-lamps-title">TAVSIYA QILINGAN LAMPOCHKALAR</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered mb-0 lamp-details-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nomi</th>
+                                                    <th>Quvvat (W)</th>
+                                                    <th>Rang harorati</th>
+                                                    <th>Kuchlanish</th>
+                                                    <th>Yorug'lik oqimi (lm)</th>
+                                                    <th>Minimal yorug'lik oqimi (lm)</th>
+                                                    <th>Samaradorlik (lm/W)</th>
+                                                    <th>Rang uzatish indeksi</th>
+                                                    <th>Kerakli lampa soni</th>
+                                                    <th>Joylashuv</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="recommendedLampsContent">
+                                                <!-- Tavsiya qilingan lampochkalar bu yerda ko'rsatiladi -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Tanlangan lampochka tafsilotlari -->
                         <div class="row mt-4">
                             <div class="col-12">
@@ -758,7 +813,7 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered mb-0 lamp-details-table">
                                             <thead>
-                                                <tr >
+                                                <tr>
                                                     <th>Nomi</th>
                                                     <th>Quvvat (W)</th>
                                                     <th>Rang harorati</th>
@@ -787,11 +842,9 @@
         <!-- content close -->
         <!-- footer begin -->
         <footer class="section-dark">
-   
             <div class="subfooter">
                 <div class="container">
-
-                    </div>
+                    <!-- Footer content -->
                 </div>
             </div>
         </footer>
@@ -804,7 +857,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="placementModalLabel" style="color: #fff;">Lampochkalarni Joylashtirish</h5>
-                    <button type="button"  style="color: #fff;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" style="color: #fff;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -872,6 +925,8 @@
         const lampCategories = document.getElementById('lampCategories');
         const lampDetailsContainer = document.getElementById('lampDetailsContainer');
         const lampDetailsContent = document.getElementById('lampDetailsContent');
+        const recommendedLampsContainer = document.getElementById('recommendedLampsContainer');
+        const recommendedLampsContent = document.getElementById('recommendedLampsContent');
         
         // Modal uchun o'zgaruvchilar
         let currentLampData = null;
@@ -986,8 +1041,93 @@
                     }
                 }
             });
+            
+            // Tavsiya qilingan lampochkalarni yangilash
+            updateRecommendedLamps();
         }
         
+        // Tavsiya qilingan lampochkalarni yangilash
+// Tavsiya qilingan lampochkalarni yangilash
+function updateRecommendedLamps() {
+    const totalLight = parseFloat(totalLightValue.textContent) || 0;
+    
+    if (totalLight <= 0 || !currentLampCategory) {
+        recommendedLampsContainer.style.display = 'none';
+        return;
+    }
+    
+    // Tanlangan kategoriyadagi lampochkalarni olish
+    const lamps = lampCategoriesMap.get(currentLampCategory);
+    if (!lamps || lamps.length === 0) {
+        recommendedLampsContainer.style.display = 'none';
+        return;
+    }
+    
+    // Barcha lampochkalar uchun kerakli sonni hisoblash
+    const lampCalculations = [];
+    lamps.forEach(lamp => {
+        const luminousFluxMin = lamp.luminous_flux_max || 1;
+        if (luminousFluxMin > 0) {
+            const lampsCount = Math.ceil(totalLight / luminousFluxMin);
+            const power = parseFloat(lamp.power) || 0;
+            const totalPower = lampsCount * power;
+            
+            lampCalculations.push({
+                lamp: lamp,
+                count: lampsCount,
+                power: power,
+                totalPower: totalPower,
+                efficiency: lamp.efficiency || 0
+            });
+        }
+    });
+    
+    // Eng kam UMUMIY QUVVAT (lampochka soni * quvvat) bo'yicha saralash
+    lampCalculations.sort((a, b) => {
+        // Birinchi navbatda eng kam umumiy quvvat
+        if (a.totalPower !== b.totalPower) {
+            return a.totalPower - b.totalPower;
+        }
+        // Agar umumiy quvvat bir xil bo'lsa, eng kam lampochka soni
+        return a.count - b.count;
+    });
+    
+    // Eng yaxshi 2 ta variantni olish
+    const bestLamps = lampCalculations.slice(0, 2);
+    
+    // Tavsiya qilingan lampochkalarni ko'rsatish
+    if (bestLamps.length > 0) {
+        let html = '';
+        bestLamps.forEach((item, index) => {
+            const lamp = item.lamp;
+            html += `
+                <tr data-luminous-flux-min="${lamp.luminous_flux_max || 1}">
+                    <td>${lamp.name || 'Noma\'lum'}</td>
+                    <td>${lamp.power || 'Noma\'lum'}</td>
+                    <td>${lamp.color_temperature || 'Noma\'lum'}</td>
+                    <td>${lamp.voltage || 'Noma\'lum'}</td>
+                    <td>${lamp.luminous_flux || 'Noma\'lum'}</td>
+                    <td>${lamp.luminous_flux_max || 'Noma\'lum'}</td>
+                    <td>${lamp.efficiency || 'Noma\'lum'}</td>
+                    <td>${lamp.color_rendering_index || 'Noma\'lum'}</td>
+                    <td class="lamps-count">
+                        <span class="lamps-count-badge">${item.count} ta</span>
+                    </td>
+                    <td>
+                        <button class="btn-details" onclick="showPlacementModal(${JSON.stringify(lamp).replace(/"/g, '&quot;')}, ${item.count})">
+                            Batafsil
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        recommendedLampsContent.innerHTML = html;
+        recommendedLampsContainer.style.display = 'block';
+    } else {
+        recommendedLampsContainer.style.display = 'none';
+    }
+}
         // Batafsil tugmasi bosilganda
         function showPlacementModal(lampData, lampsCount) {
             currentLampData = lampData;
@@ -1254,6 +1394,7 @@
                 totalLightDisplay.style.display = 'none';
                 lampCategoriesContainer.style.display = 'none';
                 lampDetailsContainer.style.display = 'none';
+                recommendedLampsContainer.style.display = 'none';
                 currentRoomData = null;
                 return;
             }
@@ -1335,7 +1476,6 @@
                             <div class="lamp-category-card" onclick="selectLampCategory('${name}')">
                                 <img src="${lamps[0].image || 'https://via.placeholder.com/80'}" alt="${name}" class="lamp-category-image">
                                 <div class="lamp-category-name">${name}</div>
-                               
                             </div>
                         </div>
                     `;
@@ -1364,6 +1504,9 @@
             // Tanlangan kategoriyadagi lampochkalarni ko'rsatish
             const lamps = lampCategoriesMap.get(categoryName);
             showLampDetails(lamps);
+            
+            // Tavsiya qilingan lampochkalarni yangilash
+            updateRecommendedLamps();
         }
         
         function showLampDetails(lamps) {
