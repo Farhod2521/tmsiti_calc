@@ -1356,10 +1356,10 @@
                 // Subkategoriyalar
                 category.subcategories.forEach(subcategory => {
                     // Subkategoriya sarlavhasi
-                    const subcategoryHeader = document.createElement('div');
-                    subcategoryHeader.className = 'subcategory-header fw-semibold mt-2 mb-1 ps-2';
-                    subcategoryHeader.textContent = subcategory.subcategory;
-                    materialList.appendChild(subcategoryHeader);
+                    // const subcategoryHeader = document.createElement('div');
+                    // subcategoryHeader.className = 'subcategory-header fw-semibold mt-2 mb-1 ps-2';
+                    // subcategoryHeader.textContent = subcategory.subcategory;
+                    // materialList.appendChild(subcategoryHeader);
                     
                     // Materiallar
                     subcategory.items.forEach(material => {
@@ -1857,7 +1857,7 @@
             // Harorat farqi
             const tempDifference = baseTemperature - selectedDistrictData.average_temperature;
             
-            // Q qiymatlarini hisoblash: Q = (1/R) * (joy - average_temperature) * time * 24
+            // Q qiymatlarini hisoblash: Q = (1/R) * (joy - average_temperature) * time * 24 * S
             const time = selectedDistrictData.time;
             const wallQ = (1 / (wallResistance || 1)) * tempDifference * time * 24 * wallArea;
             const floorQ = (1 / (floorResistance || 1)) * tempDifference * time * 24 * floorArea;
