@@ -1,0 +1,147 @@
+[
+  {
+    "region_name": "Namangan viloyati",
+    "districts": [
+      {
+        "name": "Pop tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Yangikoʻrgʻon tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Chortoq tumani",
+        "K": 0.7,
+        "H": 0.38
+      }
+    ]
+  },
+  {
+    "region_name": "Toshkent viloyati",
+    "districts": [
+      {
+        "name": "Ohangaron tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Boʻstonliq tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Qibray tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Toshkent tumani",
+        "K": 0.7,
+        "H": 0.38
+      }
+    ]
+  },
+  {
+    "region_name": "Fargʻona viloyati",
+    "districts": [
+      {
+        "name": "Quva tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Soh tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Fargʻona tumani",
+        "K": 0.7,
+        "H": 0.38
+      }
+    ]
+  },
+  {
+    "region_name": "Qashqadaryo viloyati",
+    "districts": [
+      {
+        "name": "Dexqonobod tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Qamashi tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Kitob tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Shahrisabz tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Yakkabog tumani",
+        "K": 0.7,
+        "H": 0.38
+      }
+    ]
+  },
+  {
+    "region_name": "Samarqand viloyati",
+    "districts": [
+      {
+        "name": "Nurabod tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Samarqand tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Urgut tumani",
+        "K": 0.7,
+        "H": 0.38
+      }
+    ]
+  },
+  {
+    "region_name": "Surxondaryo viloyati",
+    "districts": [
+      {
+        "name": "Oltinsoy tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Boysun tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Sariosiyo tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Sherobod tumani",
+        "K": 0.7,
+        "H": 0.38
+      },
+      {
+        "name": "Uzun tumani",
+        "K": 0.7,
+        "H": 0.38
+      }
+    ]
+  }
+]
