@@ -2015,7 +2015,7 @@
             
             // Havo almashinuv orqali issiqlik yo'qotilishi
             const floorAreaValue = parseFloat(document.getElementById('floorArea').value) || 0;
-            const airExchangeQ = (floorAreaValue * 4 * 24 * time * 0.01 * 0.15) / 1000;
+            const airExchangeQ = ((baseTemperature * floorAreaValue * 4 * 24 * time)/ (width / 0.01 * 0.15)) / 1000;
             
             // Umumiy issiqlik yo'qotilishi
             const totalQ = wallQ + floorQ + ceilingQ + doorQ + windowQ + airExchangeQ;
