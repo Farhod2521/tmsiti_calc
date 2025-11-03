@@ -250,6 +250,39 @@
             font-weight: bold;
             color: #198754;
         }
+        .r-subscript {
+            font-size: 0.8em;
+            vertical-align: sub;
+        }
+        .q-ha {
+            background-color: #e7f7ef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #198754;
+        }
+        .heater-type {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .heater-type h6 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        .heater-count {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #fff3cd;
+        }
+        .alert-warning {
+            font-size: 0.85em;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
         #logo {
             display: flex;
             align-items: center;
@@ -285,17 +318,6 @@
             margin: 0;
             text-align: left;
             flex: 1;
-        }
-        .r-subscript {
-            font-size: 0.8em;
-            vertical-align: sub;
-        }
-        .q-ha {
-            background-color: #e7f7ef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border-left: 4px solid #198754;
         }
         @media (max-width: 768px) {
             #logo {
@@ -827,6 +849,9 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Radiator hisobi (bu qism avtomatik to'ldiriladi) -->
+                            <div id="heaterResults"></div>
                         </div>
                         
                         <div class="navigation-buttons">
@@ -1318,7 +1343,7 @@
         let regionsData = [];
         let selectedRegionData = null;
         let selectedDistrictData = null;
-        let baseTemperature = 20; // Default baza harorati
+        let baseTemperature = 20;
         
         // Materiallar tizimi uchun global o'zgaruvchilar
         let currentSection = null;
@@ -1400,7 +1425,10 @@
             });
             
             // Hisoblash tugmasi
-            document.getElementById('calculateBtn').addEventListener('click', calculateHeating);
+            document.getElementById('calculateBtn').addEventListener('click', function() {
+                calculateHeating();
+                setTimeout(calculateHeaters, 100);
+            });
             
             // Dastlabki yuzalarni hisoblash
             calculateAreas();
@@ -1468,7 +1496,370 @@
                 loadMaterialList(materialData);
             });
         });
-        
+
+        // ========== YANGI FUNKSIYALAR ==========
+
+        // 1. Umumiy Issiqlik (Qum) avtomatik hisoblash
+        function calculateQForSection(section, resistance) {
+            if (!selectedDistrictData || resistance === 0) return;
+            
+            const tempDifference = baseTemperature - selectedDistrictData.average_temperature;
+            const time = selectedDistrictData.time;
+            
+            let area = 0;
+            let qDisplayId = '';
+            
+            if (section === 'wall') {
+                area = parseFloat(document.getElementById('finalWallArea').textContent) || 0;
+                qDisplayId = 'wallTotalQ';
+            } else if (section === 'floor') {
+                area = parseFloat(document.getElementById('floorArea').value) || 0;
+                qDisplayId = 'floorTotalQ';
+            } else if (section === 'ceiling') {
+                area = parseFloat(document.getElementById('ceilingArea').value) || 0;
+                qDisplayId = 'ceilingTotalQ';
+            }
+            
+            // Q = (1/R) * (t_ichki - t_tashqi) * vaqt * 24 * yuzasi / 1000
+            const Q = (1 / resistance) * tempDifference * time * 24 * area / 1000;
+            
+            document.getElementById(qDisplayId).textContent = Q.toFixed(2);
+        }
+
+        // 2. Qarshilik cheklovi va ogohlantirish
+        function checkResistanceLimits(section, resistance) {
+            const minResistance = 2.0;
+            const warningElements = {
+                'wall': 'wallResistanceWarning',
+                'floor': 'floorResistanceWarning', 
+                'ceiling': 'ceilingResistanceWarning'
+            };
+            
+            let warningElement = document.getElementById(warningElements[section]);
+            
+            // Agar ogohlantirish elementi mavjud bo'lmasa, yaratamiz
+            if (!warningElement) {
+                const resistanceDisplay = document.getElementById(`${section}ResistanceDisplay`);
+                warningElement = document.createElement('div');
+                warningElement.id = warningElements[section];
+                warningElement.className = 'alert alert-warning mt-2';
+                warningElement.style.display = 'none';
+                resistanceDisplay.parentNode.insertBefore(warningElement, resistanceDisplay.nextSibling);
+            }
+            
+            // Qarshilikni tekshirish
+            if (resistance < minResistance && resistance > 0) {
+                const sectionName = section === 'wall' ? 'Devor' : section === 'floor' ? 'Pol' : 'Tom';
+                warningElement.innerHTML = `
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <strong>Diqqat!</strong> ${sectionName} uchun qarshilik (${resistance.toFixed(3)} m²·°C/W) 
+                    talab qilinadigan minimal qarshilikdan (${minResistance} m²·°C/W) past.
+                    Issiqlik izolyatsiyasini kuchaytirish tavsiya etiladi.
+                `;
+                warningElement.style.display = 'block';
+            } else {
+                warningElement.style.display = 'none';
+            }
+        }
+
+        // 3. Isitish radiatorlari sonini hisoblash
+        function calculateHeaters() {
+            const totalQ = parseFloat(document.getElementById('resultTotalQ').textContent) || 0;
+            const totalWindows = document.querySelectorAll('.window-item').length || 1;
+            
+            // Har bir deraza uchun issiqlik talabi
+            const heatPerWindow = totalQ / totalWindows;
+            
+            // Radiator turlari
+            const heaterTypes = {
+                'aluminum': 200,   // Vt/soat
+                'cast_iron': 175   // Vt/soat  
+            };
+            
+            let heaterResults = '';
+            
+            for (const [type, power] of Object.entries(heaterTypes)) {
+                const heatersNeeded = Math.ceil(heatPerWindow * 1000 / power);
+                const typeName = type === 'aluminum' ? 'Alyuminiy' : 'Chugun';
+                
+                heaterResults += `
+                    <div class="heater-type">
+                        <h6>${typeName} radiatorlar (${power} W/soat)</h6>
+                        <p>Har bir deraza uchun: <span class="heater-count">${heatersNeeded} ta radiator</span></p>
+                        <p>Jami: <span class="heater-count">${heatersNeeded * totalWindows} ta radiator</span></p>
+                        <small>Har bir radiator: ${power} Vt quvvat</small>
+                    </div>
+                `;
+            }
+            
+            // Natijalarni ko'rsatish
+            const heaterSection = document.createElement('div');
+            heaterSection.id = 'heaterResults';
+            heaterSection.innerHTML = `
+                <hr>
+                <h5 class="text-primary">Isitish Radiatorlari Hisobi</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Umumiy issiqlik yo'qotilishi:</strong> ${totalQ.toFixed(2)} kW h/m²y</p>
+                        <p><strong>Derazalar soni:</strong> ${totalWindows} ta</p>
+                        <p><strong>Har bir deraza uchun issiqlik:</strong> ${heatPerWindow.toFixed(2)} kW</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        ${heaterResults}
+                    </div>
+                </div>
+            `;
+            
+            // Eskisi bo'lsa olib tashlaymiz
+            const existingHeaterSection = document.getElementById('heaterResults');
+            if (existingHeaterSection) {
+                existingHeaterSection.remove();
+            }
+            
+            // Yangi natijani qo'shamiz
+            document.getElementById('calculationResult').appendChild(heaterSection);
+        }
+
+        // ========== MAVJUD FUNKSIYALARNI YANGILASH ==========
+
+        // Qarshilikni hisoblash va yangilash (YANGILANGAN)
+        function updateResistance(section) {
+            let layers, resistanceDisplayId, qDisplayId;
+            
+            if (section === 'wall') {
+                layers = wallLayers;
+                resistanceDisplayId = 'wallTotalResistance';
+                qDisplayId = 'wallTotalQ';
+            } else if (section === 'floor') {
+                layers = floorLayers;
+                resistanceDisplayId = 'floorTotalResistance';
+                qDisplayId = 'floorTotalQ';
+            } else if (section === 'ceiling') {
+                layers = ceilingLayers;
+                resistanceDisplayId = 'ceilingTotalResistance';
+                qDisplayId = 'ceilingTotalQ';
+            }
+            
+            let totalResistance = 0;
+            layers.forEach(layer => {
+                if (layer.thickness > 0 && layer.l > 0) {
+                    totalResistance += layer.thickness / layer.l;
+                }
+            });
+            
+            document.getElementById(resistanceDisplayId).textContent = totalResistance.toFixed(3);
+            
+            // Qarshilik cheklovini tekshirish (YANGI QO'SHILGAN)
+            if (section !== 'door' && section !== 'window') {
+                checkResistanceLimits(section, totalResistance);
+            }
+            
+            // Q ni avtomatik hisoblash (YANGI QO'SHILGAN)
+            calculateQForSection(section, totalResistance);
+        }
+
+        // Eshik qo'shish (YANGILANGAN)
+        function addDoorItem(id) {
+            const container = document.getElementById('doorsContainer');
+            const doorItem = document.createElement('div');
+            doorItem.className = 'door-window-item door-item';
+            doorItem.innerHTML = `
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Eshik ${id} eni (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control door-width" min="0" step="0.01" value="0.9">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Eshik ${id} balandligi (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control door-height" min="0" step="0.01" value="2.1">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Soni</label>
+                        <div class="counter-input">
+                            <div class="counter-btn minus-btn">-</div>
+                            <div class="counter-value">1</div>
+                            <div class="counter-btn plus-btn">+</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Eshik ${id} materiali</label>
+                        <select class="form-select door-material">
+                            <option value="yog'och">Yog'och</option>
+                            <option value="metall">Metall</option>
+                            <option value="plastik">Plastik</option>
+                            <option value="shisha">Shisha</option>
+                            <option value="boshqa">Boshqa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label class="form-label">Yuzasi</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control door-area" readonly style="background-color: #e9ecef;">
+                            <span class="input-group-text">m²</span>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
+                            <i class="bi bi-trash"></i> O'chirish
+                        </button>
+                    </div>
+                </div>
+                <div class="resistance-display">
+                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span class="door-resistance">0.6</span> m²·°C/W</strong>
+                    <br>
+                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span class="door-q">0</span> kW h/m²y</strong>
+                </div>
+            `;
+            container.appendChild(doorItem);
+            
+            // Counter funksiyallari
+            const minusBtn = doorItem.querySelector('.minus-btn');
+            const plusBtn = doorItem.querySelector('.plus-btn');
+            const counterValue = doorItem.querySelector('.counter-value');
+            
+            let count = 1;
+            
+            minusBtn.addEventListener('click', function() {
+                if (count > 1) {
+                    count--;
+                    counterValue.textContent = count;
+                    calculateDoorArea();
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                count++;
+                counterValue.textContent = count;
+                calculateDoorArea();
+            });
+            
+            // Eshik o'lchamlari o'zgarganda yuzani hisoblash
+            const widthInput = doorItem.querySelector('.door-width');
+            const heightInput = doorItem.querySelector('.door-height');
+            const areaInput = doorItem.querySelector('.door-area');
+            
+            function calculateDoorArea() {
+                const width = parseFloat(widthInput.value) || 0;
+                const height = parseFloat(heightInput.value) || 0;
+                const area = width * height * count;
+                areaInput.value = area.toFixed(2);
+                calculateDoorWindowAreas();
+            }
+            
+            widthInput.addEventListener('input', calculateDoorArea);
+            heightInput.addEventListener('input', calculateDoorArea);
+            
+            // Dastlabki hisoblash
+            calculateDoorArea();
+        }
+
+        // Deraza qo'shish (YANGILANGAN)
+        function addWindowItem(id) {
+            const container = document.getElementById('windowsContainer');
+            const windowItem = document.createElement('div');
+            windowItem.className = 'door-window-item window-item';
+            windowItem.innerHTML = `
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Deraza ${id} eni (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control window-width" min="0" step="0.01" value="1.2">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Deraza ${id} balandligi (m)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control window-height" min="0" step="0.01" value="1.5">
+                            <span class="input-group-text">m</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Soni</label>
+                        <div class="counter-input">
+                            <div class="counter-btn minus-btn">-</div>
+                            <div class="counter-value">1</div>
+                            <div class="counter-btn plus-btn">+</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Deraza ${id} materiali</label>
+                        <select class="form-select window-material">
+                            <option value="yog'och">Yog'och</option>
+                            <option value="metall">Metall</option>
+                            <option value="plastik">Plastik</option>
+                            <option value="alyuminiy">Alyuminiy</option>
+                            <option value="boshqa">Boshqa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label class="form-label">Yuzasi</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control window-area" readonly style="background-color: #e9ecef;">
+                            <span class="input-group-text">m²</span>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
+                            <i class="bi bi-trash"></i> O'chirish
+                        </button>
+                    </div>
+                </div>
+                <div class="resistance-display">
+                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span class="window-resistance">0.6</span> m²·°C/W</strong>
+                    <br>
+                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span class="window-q">0</span> kW h/m²y</strong>
+                </div>
+            `;
+            container.appendChild(windowItem);
+            
+            // Counter funksiyallari
+            const minusBtn = windowItem.querySelector('.minus-btn');
+            const plusBtn = windowItem.querySelector('.plus-btn');
+            const counterValue = windowItem.querySelector('.counter-value');
+            
+            let count = 1;
+            
+            minusBtn.addEventListener('click', function() {
+                if (count > 1) {
+                    count--;
+                    counterValue.textContent = count;
+                    calculateWindowArea();
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                count++;
+                counterValue.textContent = count;
+                calculateWindowArea();
+            });
+            
+            // Deraza o'lchamlari o'zgarganda yuzani hisoblash
+            const widthInput = windowItem.querySelector('.window-width');
+            const heightInput = windowItem.querySelector('.window-height');
+            const areaInput = windowItem.querySelector('.window-area');
+            
+            function calculateWindowArea() {
+                const width = parseFloat(widthInput.value) || 0;
+                const height = parseFloat(heightInput.value) || 0;
+                const area = width * height * count;
+                areaInput.value = area.toFixed(2);
+                calculateDoorWindowAreas();
+            }
+            
+            widthInput.addEventListener('input', calculateWindowArea);
+            heightInput.addEventListener('input', calculateWindowArea);
+            
+            // Dastlabki hisoblash
+            calculateWindowArea();
+        }
+
+        // ========== MAVJUD FUNKSIYALAR ==========
+
         // Kategoriyalarni to'ldirish
         function populateCategories() {
             const categorySelect = document.getElementById('categorySelect');
@@ -1493,12 +1884,6 @@
                 
                 // Subkategoriyalar
                 category.subcategories.forEach(subcategory => {
-                    // Subkategoriya sarlavhasi
-                    // const subcategoryHeader = document.createElement('div');
-                    // subcategoryHeader.className = 'subcategory-header fw-semibold mt-2 mb-1 ps-2';
-                    // subcategoryHeader.textContent = subcategory.subcategory;
-                    // materialList.appendChild(subcategoryHeader);
-                    
                     // Materiallar
                     subcategory.items.forEach(material => {
                         const materialItem = document.createElement('div');
@@ -1707,204 +2092,6 @@
             document.getElementById(`step-${stepNumber}`).classList.add('active');
         }
         
-        // Eshik qo'shish funksiyasi
-        function addDoorItem(id) {
-            const container = document.getElementById('doorsContainer');
-            const doorItem = document.createElement('div');
-            doorItem.className = 'door-window-item';
-            doorItem.innerHTML = `
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Eshik ${id} eni (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control door-width" min="0" step="0.01" value="0.9">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Eshik ${id} balandligi (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control door-height" min="0" step="0.01" value="2.1">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label class="form-label">Soni</label>
-                        <div class="counter-input">
-                            <div class="counter-btn minus-btn">-</div>
-                            <div class="counter-value">1</div>
-                            <div class="counter-btn plus-btn">+</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Eshik ${id} materiali</label>
-                        <select class="form-select door-material">
-                            <option value="yog'och">Yog'och</option>
-                            <option value="metall">Metall</option>
-                            <option value="plastik">Plastik</option>
-                            <option value="shisha">Shisha</option>
-                            <option value="boshqa">Boshqa</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1 mb-3">
-                        <label class="form-label">Yuzasi</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control door-area" readonly style="background-color: #e9ecef;">
-                            <span class="input-group-text">m²</span>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
-                            <i class="bi bi-trash"></i> O'chirish
-                        </button>
-                    </div>
-                </div>
-                <div class="resistance-display">
-                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span class="door-resistance">0.6</span> m²·°C/W</strong>
-                    <br>
-                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span class="door-q">0</span> kW h/m²y</strong>
-                </div>
-            `;
-            container.appendChild(doorItem);
-            
-            // Counter funksiyallari
-            const minusBtn = doorItem.querySelector('.minus-btn');
-            const plusBtn = doorItem.querySelector('.plus-btn');
-            const counterValue = doorItem.querySelector('.counter-value');
-            
-            let count = 1;
-            
-            minusBtn.addEventListener('click', function() {
-                if (count > 1) {
-                    count--;
-                    counterValue.textContent = count;
-                    calculateDoorArea();
-                }
-            });
-            
-            plusBtn.addEventListener('click', function() {
-                count++;
-                counterValue.textContent = count;
-                calculateDoorArea();
-            });
-            
-            // Eshik o'lchamlari o'zgarganda yuzani hisoblash
-            const widthInput = doorItem.querySelector('.door-width');
-            const heightInput = doorItem.querySelector('.door-height');
-            const areaInput = doorItem.querySelector('.door-area');
-            
-            function calculateDoorArea() {
-                const width = parseFloat(widthInput.value) || 0;
-                const height = parseFloat(heightInput.value) || 0;
-                const area = width * height * count;
-                areaInput.value = area.toFixed(2);
-                calculateDoorWindowAreas();
-            }
-            
-            widthInput.addEventListener('input', calculateDoorArea);
-            heightInput.addEventListener('input', calculateDoorArea);
-            
-            // Dastlabki hisoblash
-            calculateDoorArea();
-        }
-        
-        // Deraza qo'shish funksiyasi
-        function addWindowItem(id) {
-            const container = document.getElementById('windowsContainer');
-            const windowItem = document.createElement('div');
-            windowItem.className = 'door-window-item';
-            windowItem.innerHTML = `
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Deraza ${id} eni (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control window-width" min="0" step="0.01" value="1.2">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Deraza ${id} balandligi (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control window-height" min="0" step="0.01" value="1.5">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label class="form-label">Soni</label>
-                        <div class="counter-input">
-                            <div class="counter-btn minus-btn">-</div>
-                            <div class="counter-value">1</div>
-                            <div class="counter-btn plus-btn">+</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Deraza ${id} materiali</label>
-                        <select class="form-select window-material">
-                            <option value="yog'och">Yog'och</option>
-                            <option value="metall">Metall</option>
-                            <option value="plastik">Plastik</option>
-                            <option value="alyuminiy">Alyuminiy</option>
-                            <option value="boshqa">Boshqa</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1 mb-3">
-                        <label class="form-label">Yuzasi</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control window-area" readonly style="background-color: #e9ecef;">
-                            <span class="input-group-text">m²</span>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
-                            <i class="bi bi-trash"></i> O'chirish
-                        </button>
-                    </div>
-                </div>
-                <div class="resistance-display">
-                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span class="window-resistance">0.6</span> m²·°C/W</strong>
-                    <br>
-                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span class="window-q">0</span> kW h/m²y</strong>
-                </div>
-            `;
-            container.appendChild(windowItem);
-            
-            // Counter funksiyallari
-            const minusBtn = windowItem.querySelector('.minus-btn');
-            const plusBtn = windowItem.querySelector('.plus-btn');
-            const counterValue = windowItem.querySelector('.counter-value');
-            
-            let count = 1;
-            
-            minusBtn.addEventListener('click', function() {
-                if (count > 1) {
-                    count--;
-                    counterValue.textContent = count;
-                    calculateWindowArea();
-                }
-            });
-            
-            plusBtn.addEventListener('click', function() {
-                count++;
-                counterValue.textContent = count;
-                calculateWindowArea();
-            });
-            
-            // Deraza o'lchamlari o'zgarganda yuzani hisoblash
-            const widthInput = windowItem.querySelector('.window-width');
-            const heightInput = windowItem.querySelector('.window-height');
-            const areaInput = windowItem.querySelector('.window-area');
-            
-            function calculateWindowArea() {
-                const width = parseFloat(widthInput.value) || 0;
-                const height = parseFloat(heightInput.value) || 0;
-                const area = width * height * count;
-                areaInput.value = area.toFixed(2);
-                calculateDoorWindowAreas();
-            }
-            
-            widthInput.addEventListener('input', calculateWindowArea);
-            heightInput.addEventListener('input', calculateWindowArea);
-            
-            // Dastlabki hisoblash
-            calculateWindowArea();
-        }
-        
         // Eshik va derazalarning umumiy yuzasini hisoblash
         function calculateDoorWindowAreas() {
             let totalDoorsArea = 0;
@@ -2074,10 +2261,10 @@
         function addMaterialToSection(section, material) {
             // Qatlam obyektini yaratish
             const layer = {
-                id: Date.now(), // Unikal ID
+                id: Date.now(),
                 name: material.name,
-                l: material.l, // Issiqlik o'tkazuvchanlik koeffitsienti
-                thickness: 0.1 // Boshlang'ich qalinlik (0.1 m)
+                l: material.l,
+                thickness: 0.1
             };
             
             // Tegishli qismga qo'shish
@@ -2241,33 +2428,6 @@
             
             // Qalinlik inputini yangilash
             document.getElementById(thicknessInputId).value = totalThickness.toFixed(2);
-        }
-        
-        // Qarshilikni hisoblash va yangilash
-        function updateResistance(section) {
-            let layers, resistanceDisplayId;
-            
-            if (section === 'wall') {
-                layers = wallLayers;
-                resistanceDisplayId = 'wallTotalResistance';
-            } else if (section === 'floor') {
-                layers = floorLayers;
-                resistanceDisplayId = 'floorTotalResistance';
-            } else if (section === 'ceiling') {
-                layers = ceilingLayers;
-                resistanceDisplayId = 'ceilingTotalResistance';
-            }
-            
-            // Umumiy qarshilikni hisoblash: R = thickness1/l1 + thickness2/l2 + ...
-            let totalResistance = 0;
-            layers.forEach(layer => {
-                if (layer.thickness > 0 && layer.l > 0) {
-                    totalResistance += layer.thickness / layer.l;
-                }
-            });
-            
-            // Qarshilikni ko'rsatish
-            document.getElementById(resistanceDisplayId).textContent = totalResistance.toFixed(3);
         }
     </script>
 
