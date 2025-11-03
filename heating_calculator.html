@@ -1572,8 +1572,8 @@
             
             // Radiator turlari
             const heaterTypes = {
-                'aluminum': 200,   // Vt/soat
-                'cast_iron': 175   // Vt/soat  
+                'aluminum': 619200,   // Vt/soat
+                'cast_iron': 90300  // Vt/soat  
             };
             
             let heaterResults = '';
@@ -1584,7 +1584,7 @@
                 
                 heaterResults += `
                     <div class="heater-type">
-                        <h6>${typeName} radiatorlar (${power} W/soat)</h6>
+                        <h6>${typeName} radiatorlar (${power} W/yillik)</h6>
                         <p>Har bir deraza uchun: <span class="heater-count">${heatersNeeded} ta radiator</span></p>
                         <p>Jami: <span class="heater-count">${heatersNeeded * totalWindows} ta radiator</span></p>
                         <small>Har bir radiator: ${power} Vt quvvat</small>
@@ -2202,7 +2202,7 @@
             
             // Havo almashinuv orqali issiqlik yo'qotilishi
             const floorAreaValue = parseFloat(document.getElementById('floorArea').value) || 0;
-            const airExchangeQ = ((baseTemperature * floorAreaValue * 4 * 24 * time)/ (width / 0.01 * 0.15)) / 1000;
+            const airExchangeQ = ((floorAreaValue * 4 * 24 * time * 1.2*0.35)*(tempDifference))/ 1000;
             
             // Umumiy issiqlik yo'qotilishi
             const totalQ = wallQ + floorQ + ceilingQ + doorQ + windowQ + airExchangeQ;
