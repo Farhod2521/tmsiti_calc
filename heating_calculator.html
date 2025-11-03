@@ -1527,40 +1527,48 @@
         }
 
         // 2. Qarshilik cheklovi va ogohlantirish
-        function checkResistanceLimits(section, resistance) {
-            const minResistance = 2.0;
-            const warningElements = {
-                'wall': 'wallResistanceWarning',
-                'floor': 'floorResistanceWarning', 
-                'ceiling': 'ceilingResistanceWarning'
-            };
-            
-            let warningElement = document.getElementById(warningElements[section]);
-            
-            // Agar ogohlantirish elementi mavjud bo'lmasa, yaratamiz
-            if (!warningElement) {
-                const resistanceDisplay = document.getElementById(`${section}ResistanceDisplay`);
-                warningElement = document.createElement('div');
-                warningElement.id = warningElements[section];
-                warningElement.className = 'alert alert-warning mt-2';
-                warningElement.style.display = 'none';
-                resistanceDisplay.parentNode.insertBefore(warningElement, resistanceDisplay.nextSibling);
-            }
-            
-            // Qarshilikni tekshirish
-            if (resistance < minResistance && resistance > 0) {
-                const sectionName = section === 'wall' ? 'Devor' : section === 'floor' ? 'Pol' : 'Tom';
-                warningElement.innerHTML = `
-                    <i class="bi bi-exclamation-triangle"></i>
-                    <strong>Diqqat!</strong> ${sectionName} uchun qarshilik (${resistance.toFixed(3)} m²·°C/W) 
-                    talab qilinadigan minimal qarshilikdan (${minResistance} m²·°C/W) past.
-                    Issiqlik izolyatsiyasini kuchaytirish tavsiya etiladi.
-                `;
-                warningElement.style.display = 'block';
-            } else {
-                warningElement.style.display = 'none';
-            }
-        }
+// 2. Qarshilik cheklovi va ogohlantirish
+function checkResistanceLimits(section, resistance) {
+    // Har bir konstruksiya uchun alohida minimal qarshiliklar
+    const minResistances = {
+        'wall': 2.2,     // Devor uchun 2.2 m²·°C/W
+        'floor': 3.2,    // Pol uchun 3.2 m²·°C/W
+        'ceiling': 3.7   // Tom uchun 3.7 m²·°C/W
+    };
+    
+    const minResistance = minResistances[section];
+    const warningElements = {
+        'wall': 'wallResistanceWarning',
+        'floor': 'floorResistanceWarning', 
+        'ceiling': 'ceilingResistanceWarning'
+    };
+    
+    let warningElement = document.getElementById(warningElements[section]);
+    
+    // Agar ogohlantirish elementi mavjud bo'lmasa, yaratamiz
+    if (!warningElement) {
+        const resistanceDisplay = document.getElementById(`${section}ResistanceDisplay`);
+        warningElement = document.createElement('div');
+        warningElement.id = warningElements[section];
+        warningElement.className = 'alert alert-warning mt-2';
+        warningElement.style.display = 'none';
+        resistanceDisplay.parentNode.insertBefore(warningElement, resistanceDisplay.nextSibling);
+    }
+    
+    // Qarshilikni tekshirish
+    if (resistance < minResistance && resistance > 0) {
+        const sectionName = section === 'wall' ? 'Devor' : section === 'floor' ? 'Pol' : 'Tom';
+        warningElement.innerHTML = `
+            <i class="bi bi-exclamation-triangle"></i>
+            <strong>Diqqat!</strong> ${sectionName} uchun qarshilik (${resistance.toFixed(3)} m²·°C/W) 
+            talab qilinadigan minimal qarshilikdan (${minResistance} m²·°C/W) past.
+            Issiqlik izolyatsiyasini kuchaytirish tavsiya etiladi.
+        `;
+        warningElement.style.display = 'block';
+    } else {
+        warningElement.style.display = 'none';
+    }
+}
 
         // 3. Isitish radiatorlari sonini hisoblash
         function calculateHeaters() {
