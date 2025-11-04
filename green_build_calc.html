@@ -299,70 +299,67 @@
             border: 1px solid #f5c6cb;
         }
 
+        #logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            max-width: 500px;
+            margin: 10px auto;
+        }
 
+        #logo a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
 
-#logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 20px;
+        .logo-main {
+            width: 50px;
+            height: 50px;
+            padding: 6px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
 
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  max-width: 500px;
-  margin: 10px auto;
-}
+        #logo h6 {
+            color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+            text-align: left;
+            flex: 1;
+        }
 
-#logo a {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-}
+        .logo-scroll, .logo-mobile {
+            display: none;
+        }
 
-.logo-main {
-  width: 50px;
-  height: 50px;
-  padding: 6px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  flex-shrink: 0;
-}
-
-#logo h6 {
-  color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.3;
-  margin: 0;
-  text-align: left;
-  flex: 1;
-}
-
-.logo-scroll, .logo-mobile {
-  display: none;
-}
-
-/* Mobil uchun */
-@media (max-width: 768px) {
-  #logo {
-    padding: 10px 15px;
-    max-width: 90%;
-  }
-  
-  .logo-main {
-    width: 45px;
-    height: 45px;
-  }
-  
-  #logo h6 {
-    font-size: 12px;
-    line-height: 1.2;
-  }
-}
+        /* Mobil uchun */
+        @media (max-width: 768px) {
+            #logo {
+                padding: 10px 15px;
+                max-width: 90%;
+            }
+            
+            .logo-main {
+                width: 45px;
+                height: 45px;
+            }
+            
+            #logo h6 {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+        }
     </style>
 </head>
 
@@ -404,19 +401,18 @@
                         <div class="de-flex sm-pt10">
                             <div class="de-flex-col">
                                 <!-- logo begin -->
-                                    <div id="logo">
+                                <div id="logo">
                                     <a href="index.html">
                                         <img class="logo-main" src="https://tmsiti.uz/icons/brand.svg" alt="Institut Logosi">
-
                                         <img class="logo-scroll" src="https://tmsiti.uz/icons/brand.svg" alt="">
-                                                                                <h6>
-                                        Texnik me'yorlash va<br>
-                                        standartlashtirish<br>
-                                        ilmiy-tadqiqot instituti
+                                        <h6>
+                                            Texnik me'yorlash va<br>
+                                            standartlashtirish<br>
+                                            ilmiy-tadqiqot instituti
                                         </h6>
                                         <img class="logo-mobile" src="https://tmsiti.uz/icons/brand.svg" alt="">
                                     </a>
-                                    </div>
+                                </div>
                                 <!-- logo close -->
                             </div>
                             <div class="de-flex-col header-col-mid">
@@ -666,18 +662,17 @@
         
                     const isLastQuestion = currentQuestionIndex === getTotalQuestions() - 1;
                     const isLastCategory = currentCategoryIndex === surveyData.category.length - 1;
-                    const canGoNext = checkIfAnswered();
-            // <h3 class="question-title">Savol ${currentQuestionIndex + 1}</h3>
+                    
+                    // Keyingi tugma har doim faol bo'ladi
                     const html = `
                         ${renderProgressBar()}
                         <div class="question-card">
-                        
                             ${questionHtml}
                             <div class="d-flex justify-content-between mt-4">
                                 <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestionIndex === 0 && currentCategoryIndex === 0 ? 'disabled' : ''}>
                                     <i class="fas fa-arrow-left me-2"></i>Orqaga
                                 </button>
-                                <button class="btn btn-next" onclick="nextQuestion()" ${!canGoNext ? 'disabled' : ''} id="nextBtn">
+                                <button class="btn btn-next" onclick="nextQuestion()" id="nextBtn">
                                     ${isLastQuestion && isLastCategory ? 'Yakunlash' : isLastQuestion ? 'Keyingi bo\'lim' : 'Keyingisi'}
                                     <i class="fas fa-arrow-right ms-2"></i>
                                 </button>
@@ -686,44 +681,6 @@
                     `;
         
                     document.getElementById('app').innerHTML = html;
-                    addAnswerListeners();
-                }
-        
-                function addAnswerListeners() {
-                    const radioButtons = document.querySelectorAll('input[name="answer-radio"]');
-                    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                    
-                    radioButtons.forEach(radio => {
-                        radio.addEventListener('change', updateNextButton);
-                    });
-                    
-                    checkboxes.forEach(checkbox => {
-                        checkbox.addEventListener('change', updateNextButton);
-                    });
-                }
-        
-                function checkIfAnswered() {
-                    const category = getCurrentCategory();
-                    const question = getCurrentQuestion();
-                    
-                    if (!category || !question) return false;
-                    
-                    const isSelect = category.select && category.select.includes(question);
-                    
-                    if (isSelect) {
-                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
-                        return selectedRadio !== null;
-                    } else {
-                        const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                        return checkedBoxes.length > 0;
-                    }
-                }
-        
-                function updateNextButton() {
-                    const nextBtn = document.getElementById('nextBtn');
-                    if (nextBtn) {
-                        nextBtn.disabled = !checkIfAnswered();
-                    }
                 }
         
                 function calculateScore() {
@@ -743,12 +700,13 @@
                     } else {
                         const checkedCount = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).length;
                         
-                        if (question.ball && Array.isArray(question.ball)) {
+                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
                             const ballConfig = question.ball.find(b => b.status === checkedCount);
                             return ballConfig ? ballConfig.ball : 0;
                         }
                     }
                     
+                    // Agar javob belgilanmagan bo'lsa, 0 ball
                     return 0;
                 }
         
@@ -771,6 +729,13 @@
                                 answer: selectedIndex,
                                 ball: (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0
                             };
+                        } else {
+                            // Agar javob belgilanmagan bo'lsa, 0 ball bilan saqlaymiz
+                            categoryAnswers[currentCategoryIndex][questionKey] = {
+                                type: 'select',
+                                answer: null,
+                                ball: 0
+                            };
                         }
                     } else {
                         const checkedIndices = [];
@@ -784,7 +749,8 @@
                         const checkedCount = checkedIndices.length;
                         let ball = 0;
                         
-                        if (question.ball && Array.isArray(question.ball)) {
+                        // Faqat belgilangan javoblar bo'lsa ball hisoblanadi
+                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
                             const ballConfig = question.ball.find(b => b.status === checkedCount);
                             ball = ballConfig ? ballConfig.ball : 0;
                         }
@@ -798,8 +764,6 @@
                 }
         
                 function nextQuestion() {
-                    if (!checkIfAnswered()) return;
-                    
                     saveCurrentAnswer();
                     
                     const totalQuestions = getTotalQuestions();

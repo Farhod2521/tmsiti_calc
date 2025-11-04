@@ -1,278 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TMSITI - Isitish Kalkulyatori</title>
+    <title>TMSITI — Yashil qurilish kalkulyatori</title>
     <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="CoolAir — Air Conditioner & HVAC Repair Website Template" name="description">
+    <meta content="CoolAir — Yashil qurilish kalkulyatori" name="description">
     <meta content="" name="keywords">
     <meta content="" name="author">
     <!-- CSS Files -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/coloring.css" rel="stylesheet" type="text/css">
+    <!-- color scheme -->
+    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-        .form-section {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            display: none;
+        .container {
+            max-width: 900px;
         }
-        .form-section.active {
-            display: block;
-        }
-        .section-title {
-            color: #0d6efd;
-            border-bottom: 2px solid #0d6efd;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .required-field::after {
-            content: " *";
-            color: red;
-        }
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
             margin-bottom: 30px;
-            position: relative;
         }
-        .step-indicator::before {
-            content: '';
+        .custom-progress {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            position: relative;
+            margin: 30px 0;
+        }
+        .progress-bar-custom {
+            height: 100%;
+            background: #234982;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        .progress-step {
             position: absolute;
-            top: 25px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background-color: #e9ecef;
-            z-index: 1;
-        }
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            cursor: pointer;
-            flex: 1;
-        }
-        .step-icon {
+            top: 50%;
+            transform: translate(-50%, -50%);
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: #e9ecef;
+            background: white;
+            border: 3px solid #e9ecef;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
-            font-size: 1.2rem;
+            font-weight: bold;
+            font-size: 14px;
             color: #6c757d;
+            transition: all 0.5s ease;
+            z-index: 2;
+            cursor: pointer;
+        }
+        .progress-step.active {
+            border-color: #234982;
+            background: #234982;
+            color: white;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        .progress-step.completed {
+            border-color: #28a745;
+            background: #28a745;
+            color: white;
+        }
+        .progress-step-label {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            white-space: nowrap;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
             transition: all 0.3s ease;
         }
-        .step.active .step-icon {
-            background-color: #0d6efd;
-            color: white;
+        .progress-step.active + .progress-step-label {
+            color: #234982;
+            font-size: 13px;
         }
-        .step.completed .step-icon {
-            background-color: #198754;
-            color: white;
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
         }
-        .step-label {
-            font-size: 0.85rem;
-            text-align: center;
-            color: #6c757d;
-            font-weight: 500;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .step.active .step-label {
-            color: #0d6efd;
+        .question-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 25px;
+        }
+        .question-text {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .form-check {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+        }
+        .form-check:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+        .form-check-input:checked ~ .form-check-label {
+            color: #234982;
             font-weight: 600;
         }
-        .step.completed .step-label {
-            color: #198754;
-        }
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-        }
-        .material-section {
-            background-color: #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        .door-window-section {
-            background-color: #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #ffeaa7;
-        }
-        .add-btn {
-            margin-top: 10px;
-        }
-        .door-window-item {
-            border-bottom: 1px dashed #dee2e6;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-        .door-window-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        .remove-btn {
-            margin-top: 25px;
-        }
-        .area-display {
-            background-color: #d1edff;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border-left: 4px solid #0d6efd;
-        }
-        .area-value {
-            font-weight: bold;
-            color: #198754;
-            font-size: 1.1em;
-        }
-        .calculated-area {
-            background-color: #e7f7ef;
-            border-radius: 6px;
-            padding: 10px;
-            margin-top: 10px;
-            border-left: 3px solid #198754;
-        }
-        .layer-table {
-            margin-top: 15px;
-            display: none;
-        }
-        .layer-row {
-            border-bottom: 1px solid #dee2e6;
-            padding: 8px 0;
-        }
-        .layer-row:last-child {
-            border-bottom: none;
-        }
-        .material-modal .modal-body {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .material-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.25em;
             cursor: pointer;
         }
-        .material-item:hover {
-            background-color: #f8f9fa;
+        .form-check-input:checked {
+            background-color: #234982;
+            border-color: #234982;
         }
-        .material-item.selected {
-            background-color: #e3f2fd;
-            border-left: 4px solid #0d6efd;
-        }
-        .total-thickness {
-            font-weight: bold;
-            color: #198754;
-            margin-top: 10px;
-        }
-        .material-input-group {
-            display: flex;
-            gap: 10px;
-        }
-        .material-input-group input {
-            flex: 1;
-        }
-        .counter-input {
-            display: flex;
-            align-items: center;
-        }
-        .counter-btn {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #ced4da;
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .form-check-label {
+            font-size: 16px;
+            color: #4a5568;
             cursor: pointer;
+            margin-left: 10px;
         }
-        .counter-btn:hover {
-            background-color: #e9ecef;
+        .btn-next, .btn-prev {
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
-        .counter-value {
-            width: 60px;
+        .btn-next {
+            background: #234982;
+            border: none;
+            color: white;
+        }
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-next:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .btn-prev {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #4a5568;
+        }
+        .btn-prev:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
             text-align: center;
-            border: 1px solid #ced4da;
-            border-left: none;
-            border-right: none;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: scaleIn 0.6s ease;
         }
-        .resistance-display {
-            background-color: #fff3cd;
-            border-radius: 6px;
-            padding: 10px;
-            margin-top: 10px;
-            border-left: 3px solid #ffc107;
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        .volume-display {
-            background-color: #e7f7ef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border-left: 4px solid #198754;
+        .gauge-container {
+            position: relative;
+            width: 400px;
+            height: 250px;
+            margin: 30px auto;
         }
-        .result-box {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #0d6efd;
+        .gauge {
+            width: 100%;
+            height: 100%;
         }
-        .q-value {
-            font-size: 1.2em;
+        .gauge-needle {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 4px;
+            height: 140px;
+            background: #2d3748;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(-90deg);
+            transition: transform 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 3;
+            border-radius: 2px;
+        }
+        .gauge-needle::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 25px;
+            background: #2d3748;
+            border-radius: 50%;
+            border: 4px solid white;
+        }
+        .gauge-score {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 56px;
             font-weight: bold;
-            color: #198754;
+            color: #2d3748;
+            animation: countUp 2s ease-out;
         }
-        .r-subscript {
-            font-size: 0.8em;
-            vertical-align: sub;
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
-        .q-ha {
-            background-color: #e7f7ef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border-left: 4px solid #198754;
-        }
-        .heater-type {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        .heater-type h6 {
-            color: white;
-            margin-bottom: 10px;
-        }
-        .heater-count {
-            font-size: 1.3em;
+        .gauge-grade {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 42px;
             font-weight: bold;
-            color: #fff3cd;
+            color: #718096;
+            background: #e2e8f0;
+            width: 100px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 10px;
+            animation: fadeInUp 1s ease 1.5s both;
         }
-        .alert-warning {
-            font-size: 0.85em;
-            padding: 10px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        .grade-table {
+            margin-top: 80px;
+            animation: fadeIn 1s ease 2s both;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #234982;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
             border-radius: 5px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
         }
+
         #logo {
             display: flex;
             align-items: center;
@@ -283,6 +309,7 @@
             max-width: 500px;
             margin: 10px auto;
         }
+
         #logo a {
             display: flex;
             align-items: center;
@@ -291,6 +318,7 @@
             color: inherit;
             width: 100%;
         }
+
         .logo-main {
             width: 50px;
             height: 50px;
@@ -300,6 +328,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.25);
             flex-shrink: 0;
         }
+
         #logo h6 {
             color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             font-size: 13px;
@@ -309,15 +338,23 @@
             text-align: left;
             flex: 1;
         }
+
+        .logo-scroll, .logo-mobile {
+            display: none;
+        }
+
+        /* Mobil uchun */
         @media (max-width: 768px) {
             #logo {
                 padding: 10px 15px;
                 max-width: 90%;
             }
+            
             .logo-main {
                 width: 45px;
                 height: 45px;
             }
+            
             #logo h6 {
                 font-size: 12px;
                 line-height: 1.2;
@@ -327,1991 +364,603 @@
 </head>
 
 <body>
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <!-- Bosqichlar ko'rsatkichi -->
-                <div class="step-indicator">
-                    <div class="step active" data-step="1">
-                        <div class="step-icon">
-                            <i class="bi bi-geo-alt"></i>
-                        </div>
-                        <div class="step-label">Hudud va Bino</div>
-                    </div>
-                    <div class="step" data-step="2">
-                        <div class="step-icon">
-                            <i class="bi bi-aspect-ratio"></i>
-                        </div>
-                        <div class="step-label">Bino O'lchami</div>
-                    </div>
-                    <div class="step" data-step="3">
-                        <div class="step-icon">
-                            <i class="bi bi-puzzle"></i>
-                        </div>
-                        <div class="step-label">Konstruksiyalar</div>
-                    </div>
-                    <div class="step" data-step="4">
-                        <div class="step-icon">
-                            <i class="bi bi-calculator"></i>
-                        </div>
-                        <div class="step-label">Hisoblash</div>
-                    </div>
-                </div>
-                
-                <form id="buildingForm">
-                    <!-- 1. Hudud va bino turi bo'limi -->
-                    <div class="form-section active" id="step-1">
-                        <h3 class="section-title">
-                            <i class="bi bi-geo-alt"></i>
-                            Hudud va Bino Turi
-                        </h3>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="region" class="form-label required-field">Viloyat</label>
-                                <select class="form-select" id="region" required>
-                                    <option value="" selected disabled>Viloyatni tanlang</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="district" class="form-label required-field">Tuman</label>
-                                <select class="form-select" id="district" required disabled>
-                                    <option value="" selected disabled>Avval viloyatni tanlang</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Bino turi qismi -->
-                        <div class="building-type-section">
-                            <h5 class="text-primary mb-3">Bino Turi</h5>
-                            <div class="mb-3">
-                                <label for="buildingType" class="form-label required-field">Bino turi</label>
-                                <select class="form-select" id="buildingType" required>
-                                    <option value="" selected disabled>Bino turini tanlang</option>
-                                    <option value="turar-joy" data-base-temp="21">Turar-joy binosi</option>
-                                    <option value="kasalxona" data-base-temp="19">Kasalxona</option>
-                                    <option value="oshxona" data-base-temp="18">Oshxona</option>
-                                    <option value="maktab" data-base-temp="20">Maktab</option>
-                                    <option value="universitet" data-base-temp="20">Universitet</option>
-                                    <option value="ofis" data-base-temp="20">Ofis binosi</option>
-                                    <option value="do'kon" data-base-temp="19">Do'kon</option>
-                                    <option value="sanoat" data-base-temp="18">Sanoat binosi</option>
-                                    <option value="sport" data-base-temp="19">Sport majmuasi</option>
-                                    <option value="madaniyat" data-base-temp="20">Madaniyat markazi</option>
-                                    <option value="boshqa" data-base-temp="20">Boshqa</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" id="otherBuildingType" style="display: none;">
-                                <label for="customBuildingType" class="form-label">Bino turini kiriting</label>
-                                <input type="text" class="form-control" id="customBuildingType" placeholder="Bino turini kiriting">
-                            </div>
-                        </div>
-                        
-                        <!-- Hudud ma'lumotlari -->
-                        <div class="temperature-info" id="regionInfo" style="display: none;">
-                            <h6>Hudud ma'lumotlari:</h6>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <small>Issiqlik mavsumida o'rtacha havo harorati: <span id="avgTempDisplay">-</span>°C</small>
-                                </div>
-                                <div class="col-md-3">
-                                    <small>Isitish davrining davomiyligi: <span id="timeDisplay">-</span></small>
-                                </div>
-                                <div class="col-md-3">
-                                    <small>Normativ harorat: <span id="baseTempDisplay">-</span>°C</small>
-                                </div>
-                                <div class="col-md-3">
-                                    <small>Isitish davrining daraja-kunlari soni: <span id="calcValueDisplay">-</span></small>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="navigation-buttons">
-                            <div></div>
-                            <button type="button" class="btn btn-primary next-step" data-next="2">Keyingi <i class="bi bi-arrow-right"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- 2. Xona o'lchamlari bo'limi -->
-                    <div class="form-section" id="step-2">
-                        <h3 class="section-title">
-                            <i class="bi bi-aspect-ratio"></i>
-                            Bino O'lchami
-                        </h3>
-                        <div class="dimension-inputs">
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="length" class="form-label required-field">Uzunlik (m)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control dimension-input" id="length" min="0" step="0.1" required>
-                                        <span class="input-group-text">m</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="width" class="form-label required-field">Eni (m)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control dimension-input" id="width" min="0" step="0.1" required>
-                                        <span class="input-group-text">m</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="height" class="form-label required-field">Balandligi (m)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control dimension-input" id="height" min="0" step="0.1" required>
-                                        <span class="input-group-text">m</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Avtomatik hisoblanadigan yuzalar -->
-                            <div class="row mt-3">
-                                <div class="col-md-3">
-                                    <div class="area-display text-center">
-                                        <h6>Devorlar Yuzasi</h6>
-                                        <div class="area-value" id="wallAreaDisplay">0 m²</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="area-display text-center">
-                                        <h6>Pol Yuzasi</h6>
-                                        <div class="area-value" id="floorAreaDisplay">0 m²</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="area-display text-center">
-                                        <h6>Tom Yuzasi</h6>
-                                        <div class="area-value" id="ceilingAreaDisplay">0 m²</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="volume-display text-center">
-                                        <h6>Bino Hajmi</h6>
-                                        <div class="area-value" id="volumeDisplay">0 m³</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                            <button type="button" class="btn btn-primary next-step" data-next="3">Keyingi <i class="bi bi-arrow-right"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- 3. Konstruksiyalar bo'limi -->
-                    <div class="form-section" id="step-3">
-                        <h3 class="section-title">
-                            <i class="bi bi-puzzle"></i>
-                            Konstruksiyalar
-                        </h3>
-                        
-                        <!-- Eshiklar qismi -->
-                        <div class="door-window-section">
-                            <h5 class="text-primary d-flex justify-content-between align-items-center">
-                                <span>Eshiklar</span>
-                                <button type="button" class="btn btn-sm btn-success add-btn" id="addDoor">
-                                    <i class="bi bi-plus"></i> Qo'shish
-                                </button>
-                            </h5>
-                            <div id="doorsContainer">
-                                <!-- Eshiklar bu yerda yuklanadi -->
-                            </div>
-                        </div>
-                        
-                        <!-- Derazalar qismi -->
-                        <div class="door-window-section">
-                            <h5 class="text-primary d-flex justify-content-between align-items-center">
-                                <span>Derazalar</span>
-                                <button type="button" class="btn btn-sm btn-success add-btn" id="addWindow">
-                                    <i class="bi bi-plus"></i> Qo'shish
-                                </button>
-                            </h5>
-                            <div id="windowsContainer">
-                                <!-- Derazalar bu yerda yuklanadi -->
-                            </div>
-                        </div>
-                        
-                        <!-- Materiallar -->
-                        <!-- Devor qismi -->
-                        <div class="material-section">
-                            <h5 class="text-primary">Devor</h5>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="wallThickness" class="form-label">Devor qalinligi (m)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="wallThickness" min="0" step="0.01" readonly>
-                                        <span class="input-group-text">m</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="wallMaterial" class="form-label">Devor materiali</label>
-                                    <div class="material-input-group">
-                                        <input type="text" class="form-control" id="wallMaterialDisplay" readonly>
-                                        <button class="btn btn-outline-primary" type="button" id="wallMaterialBtn">
-                                            <i class="bi bi-plus"></i> Material qo'shish
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="wallArea" class="form-label">Devor Yuzasi(m²)</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="wallArea" readonly style="background-color: #e9ecef;">
-                                        <span class="input-group-text">m²</span>
-                                    </div>
-                                    <div class="calculated-area">
-                                        <small>Jami eshiklar yuzasi: <span id="totalDoorsArea">0</span> m²</small><br>
-                                        <small>Jami derazalar yuzasi: <span id="totalWindowsArea">0</span> m²</small><br>
-                                        <small>Yakuniy devor yuzasi: <span id="finalWallArea">0</span> m²</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Devor qatlamlari jadvali -->
-                            <div class="layer-table" id="wallLayerTable">
-                                <h6>Devor qatlamlari:</h6>
-                                <div id="wallLayersContainer">
-                                    <!-- Qatlamlar bu yerda yuklanadi -->
-                                </div>
-                                <div class="total-thickness" id="wallTotalThickness">Jami qalinlik: 0 m</div>
-                                <div class="resistance-display" id="wallResistanceDisplay">
-                                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span id="wallTotalResistance">0</span> m²·°C/W</strong>
-                                    <br>
-                                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span id="wallTotalQ">0</span> kW h/m²y</strong>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Pol qismi -->
-                        <div class="material-section">
-                            <h5 class="text-primary">Pol</h5>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="floorThickness" class="form-label">Pol qalinligi (m)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="floorThickness" min="0" step="0.01" readonly>
-                                        <span class="input-group-text">m</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="floorMaterial" class="form-label">Pol materiali</label>
-                                    <div class="material-input-group">
-                                        <input type="text" class="form-control" id="floorMaterialDisplay" readonly>
-                                        <button class="btn btn-outline-primary" type="button" id="floorMaterialBtn">
-                                            <i class="bi bi-plus"></i> Material qo'shish
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="floorArea" class="form-label">Pol Yuzasi(m²)</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="floorArea" readonly style="background-color: #e9ecef;">
-                                        <span class="input-group-text">m²</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Pol qatlamlari jadvali -->
-                            <div class="layer-table" id="floorLayerTable">
-                                <h6>Pol qatlamlari:</h6>
-                                <div id="floorLayersContainer">
-                                    <!-- Qatlamlar bu yerda yuklanadi -->
-                                </div>
-                                <div class="total-thickness" id="floorTotalThickness">Jami qalinlik: 0 m</div>
-                                <div class="resistance-display" id="floorResistanceDisplay">
-                                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span id="floorTotalResistance">0</span> m²·°C/W</strong>
-                                    <br>
-                                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span id="floorTotalQ">0</span> kW h/m²y</strong>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Tom qismi -->
-                        <div class="material-section">
-                            <h5 class="text-primary">Tom</h5>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="ceilingThickness" class="form-label">Tom qalinligi (m)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01" readonly>
-                                        <span class="input-group-text">m</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="ceilingMaterial" class="form-label">Tom materiali</label>
-                                    <div class="material-input-group">
-                                        <input type="text" class="form-control" id="ceilingMaterialDisplay" readonly>
-                                        <button class="btn btn-outline-primary" type="button" id="ceilingMaterialBtn">
-                                            <i class="bi bi-plus"></i> Material qo'shish
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="ceilingArea" class="form-label">Tom Yuzasi(m²)</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="ceilingArea" readonly style="background-color: #e9ecef;">
-                                        <span class="input-group-text">m²</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Tom qatlamlari jadvali -->
-                            <div class="layer-table" id="ceilingLayerTable">
-                                <h6>Tom qatlamlari:</h6>
-                                <div id="ceilingLayersContainer">
-                                    <!-- Qatlamlar bu yerda yuklanadi -->
-                                </div>
-                                <div class="total-thickness" id="ceilingTotalThickness">Jami qalinlik: 0 m</div>
-                                <div class="resistance-display" id="ceilingResistanceDisplay">
-                                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span id="ceilingTotalResistance">0</span> m²·°C/W</strong>
-                                    <br>
-                                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span id="ceilingTotalQ">0</span> kW h/m²y</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                            <button type="button" class="btn btn-primary next-step" data-next="4">Keyingi <i class="bi bi-arrow-right"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- 4. Hisoblash bo'limi -->
-                    <div class="form-section" id="step-4">
-                        <h3 class="section-title">
-                            <i class="bi bi-calculator"></i>
-                            Hisoblash Natijalari
-                        </h3>
-                        
-                        <!-- Hisoblash natijalari -->
-                        <div class="calculation-result" id="calculationResult">
-                            <h5 class="text-success">Hisoblash natijalari:</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><strong>Hudud:</strong> <span id="resultRegion">-</span>, <span id="resultDistrict">-</span></p>
-                                    <p><strong>Bino turi:</strong> <span id="resultBuildingType">-</span></p>
-                                    <p><strong>O'rtacha harorat:</strong> <span id="resultAvgTemp">-</span>°C</p>
-                                    <p><strong>Baza harorat:</strong> <span id="resultBaseTemp">-</span>°C</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><strong>Vaqt:</strong> <span id="resultTime">-</span></p>
-                                    <p><strong>Bino o'lchami:</strong> <span id="resultDimensions">-</span></p>
-                                    <p><strong>Bino hajmi:</strong> <span id="resultVolume">-</span> m³</p>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <h6 class="text-primary">Material qarshiliklari:</h6>
-                                    <p><strong>Devor qarshiligi:</strong> <span id="resultWallResistance">-</span> m²·°C/W</p>
-                                    <p><strong>Pol qarshiligi:</strong> <span id="resultFloorResistance">-</span> m²·°C/W</p>
-                                    <p><strong>Tom qarshiligi:</strong> <span id="resultCeilingResistance">-</span> m²·°C/W</p>
-                                    <p><strong>Eshik qarshiligi:</strong> <span id="resultDoorResistance">0.6</span> m²·°C/W</p>
-                                    <p><strong>Deraza qarshiligi:</strong> <span id="resultWindowResistance">0.6</span> m²·°C/W</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <h6 class="text-primary">Issiqlik yo'qotilishi (Q):</h6>
-                                    <div class="result-box">
-                                        <p><strong>Devor orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultWallQ">-</span> kW h/m²y</p>
-                                    </div>
-                                    <div class="result-box">
-                                        <p><strong>Pol orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultFloorQ">-</span> kW h/m²y</p>
-                                    </div>
-                                    <div class="result-box">
-                                        <p><strong>Tom orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultCeilingQ">-</span> kW h/m²y</p>
-                                    </div>
-                                    <div class="result-box">
-                                        <p><strong>Eshiklar orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultDoorQ">-</span> kW h/m²y</p>
-                                    </div>
-                                    <div class="result-box">
-                                        <p><strong>Derazalar orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultWindowQ">-</span> kW h/m²y</p>
-                                    </div>
-                                    <div class="q-ha">
-                                        <p><strong>Havo almashinuv orqali issiqlik yo'qotilishi (Q<span class="r-subscript">H.A</span>):</strong> <span class="q-value" id="resultAirExchangeQ">-</span> kW h/m²y</p>
-                                    </div>
-                                    <div class="result-box bg-success text-white">
-                                        <h5><strong>Umumiy issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultTotalQ" style="color: #fff3cd;">-</span> kW h/m²y</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Radiator hisobi (bu qism avtomatik to'ldiriladi) -->
-                            <div id="heaterResults"></div>
-                        </div>
-                        
-                        <div class="navigation-buttons">
-                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3"><i class="bi bi-arrow-left"></i> Oldingi</button>
-                            <button type="button" class="btn btn-success" id="calculateBtn">Hisoblash <i class="bi bi-calculator"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div id="wrapper">
+        <div class="float-text show-on-scroll">
+            <span><a href="#">Scroll to top</a></span>
         </div>
-    </div>
+        <div class="scrollbar-v show-on-scroll"></div>
+        
+        <!-- header begin -->
+        <header class="header-light transparent scroll-light has-topbar">
+            <div id="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-between xs-hide">
+                                <div class="header-widget d-flex">
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-phone"></i>+998 71 244-51-84</a></div>
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-envelope"></i>info@tmsiti.uz</a></div>
+                                </div>
 
-    <!-- Material tanlash modali -->
-    <div class="modal fade material-modal" id="materialModal" tabindex="-1" aria-labelledby="materialModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="materialModalLabel">Material tanlash</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <select class="form-select" id="categorySelect">
-                                <option value="">Barcha kategoriyalar</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="materialSearch" placeholder="Material qidirish...">
-                                <button class="btn btn-outline-secondary" type="button" id="clearSearch">
-                                    <i class="bi bi-x"></i>
-                                </button>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id="materialList">
-                        <!-- Materiallar ro'yxati bu yerda yuklanadi -->
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
-                    <button type="button" class="btn btn-primary" id="selectMaterial">Tanlash</button>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Materiallar JSON ma'lumotlari
-        const materialData = [
-  {
-    "category_name": "Бетонлар ва қоришмалар",
-    "subcategories": [
-      {
-        "subcategory": "Табний зич тўлдиргичлардаги бетонлар",
-        "items": [
-          {
-            "name": "Темирбетон",
-            "l": 1.92
-          },
-          {
-            "name": "Табиий тошдан иборат бўлган чақиқ тош ёқи шағал асосидаги бетон",
-            "l": 1.74
-          }
-        ]
-      },
-      {
-        "subcategory": "Ячейкали бетон",
-        "items": [
-          {
-            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-1000",
-            "l": 0.41
-          },
-          {
-            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-800",
-            "l": 0.33
-          },
-          {
-            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-600",
-            "l": 0.22
-          },
-          {
-            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-400",
-            "l": 0.14
-          },
-          {
-            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-300",
-            "l": 0.11
-          },
-          {
-            "name": "Газ- ва кўпик-бетон, газ- ва кўпик-силикат бетон-1200",
-            "l": 0.52
-          }
-        ]
-      },
-      {
-        "subcategory": "Цементли, оҳакли ва гипсли қоришмалар",
-        "items": [
-          {
-            "name": "Цемент-қумли",
-            "l": 0.76
-          },
-          {
-            "name": "Мураккаб (кум, оҳак, цемент)",
-            "l": 0.7
-          },
-          {
-            "name": "Оҳак-қумли",
-            "l": 0.7
-          },
-          {
-            "name": "Цемент-шлакли-1400",
-            "l": 0.52
-          },
-          {
-            "name": "Цемент-шлакли-1200",
-            "l": 0.47
-          },
-          {
-            "name": "Цемент-перлитли-1000",
-            "l": 0.26
-          },
-          {
-            "name": "Цемент-перлитли-800",
-            "l": 0.21
-          },
-          {
-            "name": "Гипс-перлитли",
-            "l": 0.19
-          },
-          {
-            "name": "Ғоваклантирилган гипс-перлитли-500",
-            "l": 0.15
-          },
-          {
-            "name": "Ғоваклантирилган гипс-перлитли-400",
-            "l": 0.13
-          },
-          {
-            "name": "Гипсли плиталар-1200",
-            "l": 0.41
-          },
-          {
-            "name": "Гипсли плиталар-1000",
-            "l": 0.29
-          },
-          {
-            "name": "Гипсли плиталар-1100",
-            "l": 0.35
-          },
-          {
-            "name": "Гипсли плиталар-1350",
-            "l": 0.5
-          },
-          {
-            "name": "Гипс қопламали листлар (қуруқ сувоқ)-800",
-            "l": 0.19
-          },
-          {
-            "name": "Гипс қопламали листлар (қуруқ сувоқ)-1050",
-            "l": 0.34
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Табиий тошдан қоплама қилиш ва ғишт териш",
-    "subcategories": [
-      {
-        "subcategory": "Яхлит ғиштдан ғишт териш",
-        "items": [
-          {
-            "name": "Цемент-шлакли қоришмада оддий гилли (ГОСТ 530-80)-1800",
-            "l": 0.7
-          },
-          {
-            "name": "Цемент-шлакли қоришмада оддий гилли-1700",
-            "l": 0.64
-          },
-          {
-            "name": "Цемент-перлитли қоришмада оддий гилли-1600",
-            "l": 0.58
-          },
-          {
-            "name": "Цемент-қумли қоришмада силикатли (ГОСТ 379-79)-1800",
-            "l": 0.76
-          },
-          {
-            "name": "Цемент-қумли қоришмада трепелли (ГОСТ 648-73)-1200",
-            "l": 0.47
-          },
-          {
-            "name": "Цемент-қумли қоришмада трепелли-1000",
-            "l": 0.41
-          },
-          {
-            "name": "Цемент-қумли қоришмада шлакли-1500",
-            "l": 0.64
-          }
-        ]
-      },
-      {
-        "subcategory": "Керамика ва силикатли ичи бўш ғиштдан ғишт териш",
-        "items": [
-          {
-            "name": "Цемент-қумли қоришмада зичлиги 1400 кг/м3 (брутто) ичи бўш керамикали",
-            "l": 0.58
-          },
-          {
-            "name": "Цемент-қумли қоришмада зичлиги 1300 кг/м3 (брутто) ичи бўш керамикали",
-            "l": 0.52
-          },
-          {
-            "name": "Цемент-қумли қоришмада зичлиги 1000 кг/м3 (брутто) ичи бўш керамикали",
-            "l": 0.47
-          },
-          {
-            "name": "Цемент-қумли қоришмада ўн бир қовакли силикатли-1500",
-            "l": 0.7
-          },
-          {
-            "name": "Цемент-қумли қоришмада ўн тўрт қовакли силикатли-1400",
-            "l": 0.64
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Ёғоч, узндан ва бошқа табиий органиқ материаллардан тайёрланган буюмлар",
-    "subcategories": [
-      {
-        "subcategory": "Ёғоч, узндан ва бошқа табиий органиқ материаллардан тайёрланган буюмлар",
-        "items": [
-          {
-            "name": "Қарағай ва толаларига кўндаланг қорақарағай (ГОСТ 8486-66**, ГОСТ 9463-72)",
-            "l": 0.14
-          },
-          {
-            "name": "Қарағай ва толалари бўйича бўлган қорақарағай",
-            "l": 0.29
-          },
-          {
-            "name": "Толаларига кўндаланг дуб (ГОСТ 9462-71*,",
-            "l": 0.18
-          },
-          {
-            "name": "Толалаи бўйича дуб",
-            "l": 0.35
-          },
-          {
-            "name": "Елимланган фанера",
-            "l": 0.15
-          },
-          {
-            "name": "Қопламали картон",
-            "l": 0.21
-          },
-          {
-            "name": "Қўп қаватли",
-            "l": 0.15
-          },
-          {
-            "name": "Ёғоч толали ва ёғоч қипигли плиталар (ДСП) (ГОСТ 4598-74*,",
-            "l": 0.23
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Иссиқликни изоляцияловчи материаллар",
-    "subcategories": [
-      {
-        "subcategory": "Минерал мамиқли ва шиша толали минерал момиқли бордонлар (матлар)",
-        "items": [
-          {
-            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-125",
-            "l": 0.064
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-125",
-            "l": 0.061
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-100",
-            "l": 0.06
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи (ГОСТ 9573-82) ва тиқилган минерал момиқли бордонлар (матлар) (ГОСТ 21880-76)-75",
-            "l": 0.052
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-225",
-            "l": 0.072
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-175",
-            "l": 0.066
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-125",
-            "l": 0.064
-          },
-          {
-            "name": "Синтетик боғловчи асосидағи минерал момиқли бордонлар (матлар)-75",
-            "l": 0.058
-          },
-          {
-            "name": "Битумли боғловчи ва синтетик асосидаги",
-            "l": 0.09
-          }
-        ]
-      },
-      {
-        "subcategory": "Полимерли",
-        "items": [
-          {
-            "name": "Пенополистирол",
-            "l": 0.052
-          }
-        ]
-      },
-      {
-        "subcategory": "Пенополистирол 2500С-да",
-        "items": [
-          {
-            "name": "Пенополистирол 2800С-да",
-            "l": 0.031
-          },
-          {
-            "name": "Пенополистирол 3035С-да",
-            "l": 0.031
-          },
-          {
-            "name": "Пенополистирол 4000С-да",
-            "l": 0.031
-          },
-          {
-            "name": "Пенополистирол 5000С-да",
-            "l": 0.031
-          },
-          {
-            "name": "Пенополистирол РS15",
-            "l": 0.04
-          },
-          {
-            "name": "Пенополистирол РS20",
-            "l": 0.038
-          },
-          {
-            "name": "Пенополистирол РS30",
-            "l": 0.036
-          },
-          {
-            "name": "Экструзияланган",
-            "l": 0.03
-          }
-        ]
-      },
-      {
-        "subcategory": "Кўпик шиша ёки газ шиша",
-        "items": [
-          {
-            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-400",
-            "l": 400
-          },
-          {
-            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-300",
-            "l": 300
-          },
-          {
-            "name": "Кўпик шиша ёки газ шиша (ТУ 21-БССР-86-73)-200",
-            "l": 200
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Поллар учун рулонли, қопламали, гидроизоляцицияли ва томга оид материаллар",
-    "subcategories": [
-      {
-        "subcategory": "Асбест-цементли",
-        "items": [
-          {
-            "name": "Юпқа асбест-цементли листлар (тахталар) (ГОСТ 18124-75*)-1800",
-            "l": 0.47
-          },
-          {
-            "name": "Юпқа асбест-цементли листлар (тахталар) (ГОСТ 18124-75*)-1600",
-            "l": 0.35
-          },
-          {
-            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1400",
-            "l": 0.27
-          },
-          {
-            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1200",
-            "l": 0.22
-          },
-          {
-            "name": "Қурилишга ва томга оид нефт битумлари (ГОСТ 6617-76*, ГОСТ 9548-74*)-1000",
-            "l": 0.17
-          },
-          {
-            "name": "Асфальт-бетон (ГОСТ 9128-84)",
-            "l": 1.05
-          },
-          {
-            "name": "Битумли боғловчи асосдаги шиширилган перлитдан иборат буюмлар (ГОСТ 16136-80)",
-            "l": 0.12
-          },
-          {
-            "name": "Битум боғловчили шиширилган перлитдан буюмлар",
-            "l": 0.09
-          }
-        ]
-      },
-      {
-        "subcategory": "Линолеумлар",
-        "items": [
-          {
-            "name": "Кўп қаватли поливинилхлоридли линолеум (ГОСТ 14632-79)-1800",
-            "l": 0.38
-          },
-          {
-            "name": "Кўп қаватли поливинилхлоридли линолеум (ГОСТ 14632-79)-1600",
-            "l": 0.33
-          },
-          {
-            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1800",
-            "l": 0.35
-          },
-          {
-            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1600",
-            "l": 0.29
-          },
-          {
-            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1400",
-            "l": 0.29
-          },
-          {
-            "name": "Мато асоидаги поливинилхлоридли линолеум (ГОСТ 7251-77)-1200",
-            "l": 0.23
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category_name": "Металлар ва шиша",
-    "subcategories": [
-      {
-        "subcategory": "Металлар ва шиша",
-        "items": [
-          {
-            "name": "Стерженли арматурали пўлат (ГОСТ 10884-81)",
-            "l": 58
-          },
-          {
-            "name": "Чўян",
-            "l": 50
-          },
-          {
-            "name": "Алюминий (ГОСТ 22233-83)",
-            "l": 221
-          },
-          {
-            "name": "Мис (ГОСТ 859-78*)",
-            "l": 407
-          },
-          {
-            "name": "Ойнага оид шиша (ГОСТ 111-78)",
-            "l": 0.76
-          }
-        ]
-      }
-    ]
-  }
-        ];
-
-        // Global o'zgaruvchilar
-        let regionsData = [];
-        let selectedRegionData = null;
-        let selectedDistrictData = null;
-        let baseTemperature = 20;
-        
-        // Materiallar tizimi uchun global o'zgaruvchilar
-        let currentSection = null;
-        let selectedMaterial = null;
-        let wallLayers = [];
-        let floorLayers = [];
-        let ceilingLayers = [];
-
-        // DOM yuklanganda bajariladigan funksiyalar
-        document.addEventListener('DOMContentLoaded', function() {
-            // API dan viloyatlarni yuklash
-            loadRegionsFromAPI();
-            
-            // Bino turi tanlanganda "Boshqa" tanlansa, qo'shimcha maydon ko'rsatish
-            document.getElementById('buildingType').addEventListener('change', function() {
-                const otherBuildingType = document.getElementById('otherBuildingType');
-                if (this.value === 'boshqa') {
-                    otherBuildingType.style.display = 'block';
-                } else {
-                    otherBuildingType.style.display = 'none';
-                }
-                
-                // Baza haroratini yangilash
-                const selectedOption = this.options[this.selectedIndex];
-                baseTemperature = parseFloat(selectedOption.getAttribute('data-base-temp')) || 20;
-                
-                // Hudud ma'lumotlarini yangilash
-                if (selectedDistrictData) {
-                    displayRegionInfo();
-                }
-            });
-            
-            // Xona o'lchamlari o'zgarganda yuzalarni hisoblash
-            const dimensionInputs = document.querySelectorAll('.dimension-input');
-            dimensionInputs.forEach(input => {
-                input.addEventListener('input', calculateAreas);
-            });
-            
-            // Bosqichlar navigatsiyasi
-            const steps = document.querySelectorAll('.step');
-            const formSections = document.querySelectorAll('.form-section');
-            
-            // Bosqichlarga bosganda o'tish
-            steps.forEach(step => {
-                step.addEventListener('click', function() {
-                    const stepNumber = this.getAttribute('data-step');
-                    goToStep(stepNumber);
-                });
-            });
-            
-            // Keyingi bosqich tugmasi
-            document.querySelectorAll('.next-step').forEach(button => {
-                button.addEventListener('click', function() {
-                    const nextStep = this.getAttribute('data-next');
-                    goToStep(nextStep);
-                });
-            });
-            
-            // Oldingi bosqich tugmasi
-            document.querySelectorAll('.prev-step').forEach(button => {
-                button.addEventListener('click', function() {
-                    const prevStep = this.getAttribute('data-prev');
-                    goToStep(prevStep);
-                });
-            });
-            
-            // Eshik qo'shish
-            let doorCount = 0;
-            document.getElementById('addDoor').addEventListener('click', function() {
-                doorCount++;
-                addDoorItem(doorCount);
-            });
-            
-            // Deraza qo'shish
-            let windowCount = 0;
-            document.getElementById('addWindow').addEventListener('click', function() {
-                windowCount++;
-                addWindowItem(windowCount);
-            });
-            
-            // Hisoblash tugmasi
-            document.getElementById('calculateBtn').addEventListener('click', function() {
-                calculateHeating();
-                setTimeout(calculateHeaters, 100);
-            });
-            
-            // Dastlabki yuzalarni hisoblash
-            calculateAreas();
-            
-            // Dastlabki bir eshik va deraza qo'shish
-            addDoorItem(1);
-            addWindowItem(1);
-            
-            // Material tanlash tugmalari
-            document.getElementById('wallMaterialBtn').addEventListener('click', function() {
-                openMaterialModal('wall');
-            });
-            
-            document.getElementById('floorMaterialBtn').addEventListener('click', function() {
-                openMaterialModal('floor');
-            });
-            
-            document.getElementById('ceilingMaterialBtn').addEventListener('click', function() {
-                openMaterialModal('ceiling');
-            });
-            
-            // Modal elementlari
-            const materialModal = new bootstrap.Modal(document.getElementById('materialModal'));
-            const materialSearch = document.getElementById('materialSearch');
-            const categorySelect = document.getElementById('categorySelect');
-            const materialList = document.getElementById('materialList');
-            const selectMaterialBtn = document.getElementById('selectMaterial');
-            const clearSearchBtn = document.getElementById('clearSearch');
-            
-            // Kategoriyalarni yuklash
-            populateCategories();
-            
-            // Material ro'yxatini yuklash
-            loadMaterialList(materialData);
-            
-            // Material qidirish
-            materialSearch.addEventListener('input', function() {
-                filterMaterials();
-            });
-            
-            // Kategoriya tanlash
-            categorySelect.addEventListener('change', function() {
-                filterMaterials();
-            });
-            
-            // Qidiruvni tozalash
-            clearSearchBtn.addEventListener('click', function() {
-                materialSearch.value = '';
-                filterMaterials();
-            });
-            
-            // Material tanlash
-            selectMaterialBtn.addEventListener('click', function() {
-                if (selectedMaterial && currentSection) {
-                    addMaterialToSection(currentSection, selectedMaterial);
-                    materialModal.hide();
-                }
-            });
-            
-            // Modal ochilganda
-            document.getElementById('materialModal').addEventListener('show.bs.modal', function() {
-                materialSearch.value = '';
-                categorySelect.value = '';
-                selectedMaterial = null;
-                loadMaterialList(materialData);
-            });
-        });
-
-        // ========== YANGI FUNKSIYALAR ==========
-
-        // 1. Umumiy Issiqlik (Qum) avtomatik hisoblash
-        function calculateQForSection(section, resistance) {
-            if (!selectedDistrictData || resistance === 0) return;
-            
-            const tempDifference = baseTemperature - selectedDistrictData.average_temperature;
-            const time = selectedDistrictData.time;
-            
-            let area = 0;
-            let qDisplayId = '';
-            
-            if (section === 'wall') {
-                area = parseFloat(document.getElementById('finalWallArea').textContent) || 0;
-                qDisplayId = 'wallTotalQ';
-            } else if (section === 'floor') {
-                area = parseFloat(document.getElementById('floorArea').value) || 0;
-                qDisplayId = 'floorTotalQ';
-            } else if (section === 'ceiling') {
-                area = parseFloat(document.getElementById('ceilingArea').value) || 0;
-                qDisplayId = 'ceilingTotalQ';
-            }
-            
-            // Q = (1/R) * (t_ichki - t_tashqi) * vaqt * 24 * yuzasi / 1000
-            const Q = (1 / resistance) * tempDifference * time * 24 * area / 1000;
-            
-            document.getElementById(qDisplayId).textContent = Q.toFixed(2);
-        }
-
-        // 2. Qarshilik cheklovi va ogohlantirish
-        function checkResistanceLimits(section, resistance) {
-            const minResistance = 2.0;
-            const warningElements = {
-                'wall': 'wallResistanceWarning',
-                'floor': 'floorResistanceWarning', 
-                'ceiling': 'ceilingResistanceWarning'
-            };
-            
-            let warningElement = document.getElementById(warningElements[section]);
-            
-            // Agar ogohlantirish elementi mavjud bo'lmasa, yaratamiz
-            if (!warningElement) {
-                const resistanceDisplay = document.getElementById(`${section}ResistanceDisplay`);
-                warningElement = document.createElement('div');
-                warningElement.id = warningElements[section];
-                warningElement.className = 'alert alert-warning mt-2';
-                warningElement.style.display = 'none';
-                resistanceDisplay.parentNode.insertBefore(warningElement, resistanceDisplay.nextSibling);
-            }
-            
-            // Qarshilikni tekshirish
-            if (resistance < minResistance && resistance > 0) {
-                const sectionName = section === 'wall' ? 'Devor' : section === 'floor' ? 'Pol' : 'Tom';
-                warningElement.innerHTML = `
-                    <i class="bi bi-exclamation-triangle"></i>
-                    <strong>Diqqat!</strong> ${sectionName} uchun qarshilik (${resistance.toFixed(3)} m²·°C/W) 
-                    talab qilinadigan minimal qarshilikdan (${minResistance} m²·°C/W) past.
-                    Issiqlik izolyatsiyasini kuchaytirish tavsiya etiladi.
-                `;
-                warningElement.style.display = 'block';
-            } else {
-                warningElement.style.display = 'none';
-            }
-        }
-
-        // 3. Isitish radiatorlari sonini hisoblash
-        function calculateHeaters() {
-            const totalQ = parseFloat(document.getElementById('resultTotalQ').textContent) || 0;
-            const totalWindows = document.querySelectorAll('.window-item').length || 1;
-            
-            // Har bir deraza uchun issiqlik talabi
-            const heatPerWindow = totalQ / totalWindows;
-            
-            // Radiator turlari
-            const heaterTypes = {
-                'aluminum': 200,   // Vt/soat
-                'cast_iron': 175   // Vt/soat  
-            };
-            
-            let heaterResults = '';
-            
-            for (const [type, power] of Object.entries(heaterTypes)) {
-                const heatersNeeded = Math.ceil(heatPerWindow * 1000 / power);
-                const typeName = type === 'aluminum' ? 'Alyuminiy' : 'Chugun';
-                
-                heaterResults += `
-                    <div class="heater-type">
-                        <h6>${typeName} radiatorlar (${power} W/soat)</h6>
-                        <p>Har bir deraza uchun: <span class="heater-count">${heatersNeeded} ta radiator</span></p>
-                        <p>Jami: <span class="heater-count">${heatersNeeded * totalWindows} ta radiator</span></p>
-                        <small>Har bir radiator: ${power} Vt quvvat</small>
-                    </div>
-                `;
-            }
-            
-            // Natijalarni ko'rsatish
-            const heaterSection = document.createElement('div');
-            heaterSection.id = 'heaterResults';
-            heaterSection.innerHTML = `
-                <hr>
-                <h5 class="text-primary">Isitish Radiatorlari Hisobi</h5>
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Umumiy issiqlik yo'qotilishi:</strong> ${totalQ.toFixed(2)} kW h/m²y</p>
-                        <p><strong>Derazalar soni:</strong> ${totalWindows} ta</p>
-                        <p><strong>Har bir deraza uchun issiqlik:</strong> ${heatPerWindow.toFixed(2)} kW</p>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        ${heaterResults}
-                    </div>
-                </div>
-            `;
-            
-            // Eskisi bo'lsa olib tashlaymiz
-            const existingHeaterSection = document.getElementById('heaterResults');
-            if (existingHeaterSection) {
-                existingHeaterSection.remove();
-            }
-            
-            // Yangi natijani qo'shamiz
-            document.getElementById('calculationResult').appendChild(heaterSection);
-        }
-
-        // ========== MAVJUD FUNKSIYALARNI YANGILASH ==========
-
-        // Qarshilikni hisoblash va yangilash (YANGILANGAN)
-        function updateResistance(section) {
-            let layers, resistanceDisplayId, qDisplayId;
-            
-            if (section === 'wall') {
-                layers = wallLayers;
-                resistanceDisplayId = 'wallTotalResistance';
-                qDisplayId = 'wallTotalQ';
-            } else if (section === 'floor') {
-                layers = floorLayers;
-                resistanceDisplayId = 'floorTotalResistance';
-                qDisplayId = 'floorTotalQ';
-            } else if (section === 'ceiling') {
-                layers = ceilingLayers;
-                resistanceDisplayId = 'ceilingTotalResistance';
-                qDisplayId = 'ceilingTotalQ';
-            }
-            
-            let totalResistance = 0;
-            layers.forEach(layer => {
-                if (layer.thickness > 0 && layer.l > 0) {
-                    totalResistance += layer.thickness / layer.l;
-                }
-            });
-            
-            document.getElementById(resistanceDisplayId).textContent = totalResistance.toFixed(3);
-            
-            // Qarshilik cheklovini tekshirish (YANGI QO'SHILGAN)
-            if (section !== 'door' && section !== 'window') {
-                checkResistanceLimits(section, totalResistance);
-            }
-            
-            // Q ni avtomatik hisoblash (YANGI QO'SHILGAN)
-            calculateQForSection(section, totalResistance);
-        }
-
-        // Eshik qo'shish (YANGILANGAN)
-        function addDoorItem(id) {
-            const container = document.getElementById('doorsContainer');
-            const doorItem = document.createElement('div');
-            doorItem.className = 'door-window-item door-item';
-            doorItem.innerHTML = `
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Eshik ${id} eni (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control door-width" min="0" step="0.01" value="0.9">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Eshik ${id} balandligi (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control door-height" min="0" step="0.01" value="2.1">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label class="form-label">Soni</label>
-                        <div class="counter-input">
-                            <div class="counter-btn minus-btn">-</div>
-                            <div class="counter-value">1</div>
-                            <div class="counter-btn plus-btn">+</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Eshik ${id} materiali</label>
-                        <select class="form-select door-material">
-                            <option value="yog'och">Yog'och</option>
-                            <option value="metall">Metall</option>
-                            <option value="plastik">Plastik</option>
-                            <option value="shisha">Shisha</option>
-                            <option value="boshqa">Boshqa</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1 mb-3">
-                        <label class="form-label">Yuzasi</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control door-area" readonly style="background-color: #e9ecef;">
-                            <span class="input-group-text">m²</span>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
-                            <i class="bi bi-trash"></i> O'chirish
-                        </button>
-                    </div>
-                </div>
-                <div class="resistance-display">
-                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span class="door-resistance">0.6</span> m²·°C/W</strong>
-                    <br>
-                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span class="door-q">0</span> kW h/m²y</strong>
-                </div>
-            `;
-            container.appendChild(doorItem);
-            
-            // Counter funksiyallari
-            const minusBtn = doorItem.querySelector('.minus-btn');
-            const plusBtn = doorItem.querySelector('.plus-btn');
-            const counterValue = doorItem.querySelector('.counter-value');
-            
-            let count = 1;
-            
-            minusBtn.addEventListener('click', function() {
-                if (count > 1) {
-                    count--;
-                    counterValue.textContent = count;
-                    calculateDoorArea();
-                }
-            });
-            
-            plusBtn.addEventListener('click', function() {
-                count++;
-                counterValue.textContent = count;
-                calculateDoorArea();
-            });
-            
-            // Eshik o'lchamlari o'zgarganda yuzani hisoblash
-            const widthInput = doorItem.querySelector('.door-width');
-            const heightInput = doorItem.querySelector('.door-height');
-            const areaInput = doorItem.querySelector('.door-area');
-            
-            function calculateDoorArea() {
-                const width = parseFloat(widthInput.value) || 0;
-                const height = parseFloat(heightInput.value) || 0;
-                const area = width * height * count;
-                areaInput.value = area.toFixed(2);
-                calculateDoorWindowAreas();
-            }
-            
-            widthInput.addEventListener('input', calculateDoorArea);
-            heightInput.addEventListener('input', calculateDoorArea);
-            
-            // Dastlabki hisoblash
-            calculateDoorArea();
-        }
-
-        // Deraza qo'shish (YANGILANGAN)
-        function addWindowItem(id) {
-            const container = document.getElementById('windowsContainer');
-            const windowItem = document.createElement('div');
-            windowItem.className = 'door-window-item window-item';
-            windowItem.innerHTML = `
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Deraza ${id} eni (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control window-width" min="0" step="0.01" value="1.2">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Deraza ${id} balandligi (m)</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control window-height" min="0" step="0.01" value="1.5">
-                            <span class="input-group-text">m</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label class="form-label">Soni</label>
-                        <div class="counter-input">
-                            <div class="counter-btn minus-btn">-</div>
-                            <div class="counter-value">1</div>
-                            <div class="counter-btn plus-btn">+</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label">Deraza ${id} materiali</label>
-                        <select class="form-select window-material">
-                            <option value="yog'och">Yog'och</option>
-                            <option value="metall">Metall</option>
-                            <option value="plastik">Plastik</option>
-                            <option value="alyuminiy">Alyuminiy</option>
-                            <option value="boshqa">Boshqa</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1 mb-3">
-                        <label class="form-label">Yuzasi</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control window-area" readonly style="background-color: #e9ecef;">
-                            <span class="input-group-text">m²</span>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-danger remove-btn w-100 mt-2" onclick="this.closest('.door-window-item').remove(); calculateDoorWindowAreas();">
-                            <i class="bi bi-trash"></i> O'chirish
-                        </button>
-                    </div>
-                </div>
-                <div class="resistance-display">
-                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span class="window-resistance">0.6</span> m²·°C/W</strong>
-                    <br>
-                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span class="window-q">0</span> kW h/m²y</strong>
-                </div>
-            `;
-            container.appendChild(windowItem);
-            
-            // Counter funksiyallari
-            const minusBtn = windowItem.querySelector('.minus-btn');
-            const plusBtn = windowItem.querySelector('.plus-btn');
-            const counterValue = windowItem.querySelector('.counter-value');
-            
-            let count = 1;
-            
-            minusBtn.addEventListener('click', function() {
-                if (count > 1) {
-                    count--;
-                    counterValue.textContent = count;
-                    calculateWindowArea();
-                }
-            });
-            
-            plusBtn.addEventListener('click', function() {
-                count++;
-                counterValue.textContent = count;
-                calculateWindowArea();
-            });
-            
-            // Deraza o'lchamlari o'zgarganda yuzani hisoblash
-            const widthInput = windowItem.querySelector('.window-width');
-            const heightInput = windowItem.querySelector('.window-height');
-            const areaInput = windowItem.querySelector('.window-area');
-            
-            function calculateWindowArea() {
-                const width = parseFloat(widthInput.value) || 0;
-                const height = parseFloat(heightInput.value) || 0;
-                const area = width * height * count;
-                areaInput.value = area.toFixed(2);
-                calculateDoorWindowAreas();
-            }
-            
-            widthInput.addEventListener('input', calculateWindowArea);
-            heightInput.addEventListener('input', calculateWindowArea);
-            
-            // Dastlabki hisoblash
-            calculateWindowArea();
-        }
-
-        // ========== MAVJUD FUNKSIYALAR ==========
-
-        // Kategoriyalarni to'ldirish
-        function populateCategories() {
-            const categorySelect = document.getElementById('categorySelect');
-            materialData.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.category_name;
-                option.textContent = category.category_name;
-                categorySelect.appendChild(option);
-            });
-        }
-        
-        // Material ro'yxatini yuklash funksiyasi
-        function loadMaterialList(materialArray) {
-            materialList.innerHTML = '';
-            
-            materialArray.forEach(category => {
-                // Kategoriya sarlavhasi
-                const categoryHeader = document.createElement('div');
-                categoryHeader.className = 'category-header fw-bold mt-3 mb-2 text-primary';
-                categoryHeader.textContent = category.category_name;
-                materialList.appendChild(categoryHeader);
-                
-                // Subkategoriyalar
-                category.subcategories.forEach(subcategory => {
-                    // Materiallar
-                    subcategory.items.forEach(material => {
-                        const materialItem = document.createElement('div');
-                        materialItem.className = 'material-item';
-                        materialItem.innerHTML = `
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    ${material.name}
-                                    <br><small class="text-muted">Issiqlik o'tkazuvchanlik koeffitsienti: ${material.l} W/(m·°C)</small>
+                    <div class="col-md-12">
+                        <div class="de-flex sm-pt10">
+                            <div class="de-flex-col">
+                                <!-- logo begin -->
+                                <div id="logo">
+                                    <a href="index.html">
+                                        <img class="logo-main" src="https://tmsiti.uz/icons/brand.svg" alt="Institut Logosi">
+                                        <img class="logo-scroll" src="https://tmsiti.uz/icons/brand.svg" alt="">
+                                        <h6>
+                                            Texnik me'yorlash va<br>
+                                            standartlashtirish<br>
+                                            ilmiy-tadqiqot instituti
+                                        </h6>
+                                        <img class="logo-mobile" src="https://tmsiti.uz/icons/brand.svg" alt="">
+                                    </a>
                                 </div>
-                                <div class="text-end">
-                                    <small class="text-muted">${category.category_name}</small>
+                                <!-- logo close -->
+                            </div>
+                            <div class="de-flex-col header-col-mid">
+                                <ul id="mainmenu">
+                                    <li><a class="menu-item" href="#">Bosh sahifa</a></li>
+                                    <li><a class="menu-item" href="/">Biz haqimizda</a></li>
+                                    <li><a class="menu-item" href="/">Loyihalar</a></li>
+                                    <li><a class="menu-item" href="/">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">          
+                                    <a href="/" class="btn-main bg-color-2">Bog'lanish</a>
+                                    <span id="menu-btn"></span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+        <!-- content begin -->
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            <!-- section begin -->
+            <section id="subheader2">
+                <div class="container relative z-index">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 offset-lg-3 text-center">
+                            <h1 style="
+                                    font-family: 'Inter', 'Arial', sans-serif;
+                                    font-size: 32px;
+                                    font-weight: 700;
+                                    color: #1a1a1a;
+                                    line-height: 1.3;
+                                    margin: 20px 0;
+                                    text-align: left;
+                                    ">
+                                    Yashil qurilish kalkulyatori
+                                    </h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+            <div class="container">
+                <div id="app"></div>
+            </div>
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+            <script>
+                let surveyData = null;
+                let currentCategoryIndex = 0;
+                let currentQuestionIndex = 0;
+                let totalScore = 0;
+                let categoryAnswers = [];
+        
+                function init() {
+                    loadData();
+                }
+        
+                async function loadData() {
+                    const appDiv = document.getElementById('app');
+                    appDiv.innerHTML = `
+                        <div class="text-center text-white">
+                            <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+                                <span class="visually-hidden">Yuklanmoqda...</span>
+                            </div>
+                            <p class="mt-3 fs-5">Ma'lumotlar yuklanmoqda...</p>
+                        </div>
+                    `;
+        
+                    try {
+                        const response = await fetch('yashil.json');
+                        if (!response.ok) {
+                            throw new Error('JSON faylni yuklashda xatolik');
+                        }
+                        surveyData = await response.json();
+                        
+                        // JSON ma'lumotlarini tekshirish
+                        if (!surveyData || !surveyData.category || !Array.isArray(surveyData.category)) {
+                            throw new Error('JSON strukturasi noto\'g\'ri');
+                        }
+                        
+                        categoryAnswers = surveyData.category.map(() => ({}));
+                        renderQuestion();
+                    } catch (error) {
+                        console.error('Xatolik:', error);
+                        appDiv.innerHTML = `
+                            <div class="error-message">
+                                <h4><i class="fas fa-exclamation-triangle me-2"></i>Xatolik!</h4>
+                                <p>JSON faylni yuklab bo'lmadi: ${error.message}</p>
+                                <p><strong>yashil.json</strong> fayli to'g'ri joyda ekanligiga ishonch hosil qiling.</p>
                             </div>
                         `;
-                        materialItem.dataset.material = JSON.stringify(material);
-                        materialItem.dataset.category = category.category_name;
-                        materialItem.dataset.subcategory = subcategory.subcategory;
-                        
-                        materialItem.addEventListener('click', function() {
-                            // Barcha materiallardan tanlangan klassni olib tashlash
-                            document.querySelectorAll('.material-item').forEach(item => {
-                                item.classList.remove('selected');
-                            });
-                            // Joriy materialga tanlangan klassni qo'shish
-                            this.classList.add('selected');
-                            selectedMaterial = JSON.parse(this.dataset.material);
-                        });
-                        materialList.appendChild(materialItem);
-                    });
-                });
-            });
-        }
-        
-        // Materiallarni filtrlash
-        function filterMaterials() {
-            const searchTerm = materialSearch.value.toLowerCase();
-            const selectedCategory = categorySelect.value;
-            
-            let filteredData = [];
-            
-            if (selectedCategory) {
-                // Faqat tanlangan kategoriyani qo'shish
-                const category = materialData.find(cat => cat.category_name === selectedCategory);
-                if (category) {
-                    filteredData.push(category);
+                    }
                 }
-            } else {
-                // Barcha kategoriyalarni qo'shish
-                filteredData = [...materialData];
-            }
-            
-            // Agar qidiruv so'zi bo'lsa, filtrlash
-            if (searchTerm) {
-                filteredData = filteredData.map(category => {
-                    const filteredSubcategories = category.subcategories.map(subcategory => {
-                        const filteredItems = subcategory.items.filter(item => 
-                            item.name.toLowerCase().includes(searchTerm)
-                        );
-                        return {
-                            ...subcategory,
-                            items: filteredItems
-                        };
-                    }).filter(subcategory => subcategory.items.length > 0);
-                    
-                    return {
-                        ...category,
-                        subcategories: filteredSubcategories
-                    };
-                }).filter(category => category.subcategories.length > 0);
-            }
-            
-            // Filtrlangan materiallarni yuklash
-            loadMaterialList(filteredData);
-        }
         
-        // API dan viloyatlarni yuklash
-        async function loadRegionsFromAPI() {
-            try {
-                const response = await fetch('https://calc.tmsiti.uz/api/v1/heating/api/regions-districts/');
-                const data = await response.json();
-                
-                if (data.regions) {
-                    regionsData = data.regions;
-                    populateRegionsSelect();
-                } else {
-                    console.error('API dan ma\'lumotlar olinmadi');
-                    // Agar API ishlamasa, fallback ma'lumotlarni yuklash
-                    loadFallbackData();
+                function getCurrentCategory() {
+                    if (!surveyData || !surveyData.category || !surveyData.category[currentCategoryIndex]) {
+                        console.error('Current category not found:', currentCategoryIndex);
+                        return null;
+                    }
+                    return surveyData.category[currentCategoryIndex];
                 }
-            } catch (error) {
-                console.error('API dan ma\'lumotlar olishda xatolik:', error);
-                // Agar API ishlamasa, fallback ma'lumotlarni yuklash
-                loadFallbackData();
-            }
-        }
         
-        // Fallback ma'lumotlar
-        function loadFallbackData() {
-            regionsData = [
-                {
-                    name: "Qoraqalpog'iston Respublikasi",
-                    districts: [
-                        { name: "Qoraqalpog", average_temperature: -2.4, time: 174 },
-                        { name: "Moynoq", average_temperature: -1.2, time: 167 },
-                        { name: "Nukus", average_temperature: -0.6, time: 143 },
-                        { name: "Chimboy", average_temperature: -1.3, time: 163 }
-                    ]
-                },
-                {
-                    name: "Toshkent viloyati",
-                    districts: [
-                        { name: "Toshkent", average_temperature: 2.7, time: 129 },
-                        { name: "Olmaliq", average_temperature: 3.2, time: 124 },
-                        { name: "Ohangaron", average_temperature: 2.9, time: 135 }
-                    ]
-                },
-                {
-                    name: "Farg'ona viloyati",
-                    districts: [
-                        { name: "Farg'ona", average_temperature: 1.8, time: 131 },
-                        { name: "Qo'qon", average_temperature: 1.9, time: 132 }
-                    ]
+                function getAllQuestions() {
+                    const category = getCurrentCategory();
+                    if (!category) return [];
+                    
+                    const selectQuestions = category.select || [];
+                    const checkboxQuestions = category.checkbox || [];
+                    return [...selectQuestions, ...checkboxQuestions];
                 }
-            ];
-            populateRegionsSelect();
-        }
         
-        // Viloyatlarni select elementiga yuklash
-        function populateRegionsSelect() {
-            const regionSelect = document.getElementById('region');
-            regionSelect.innerHTML = '<option value="" selected disabled>Viloyatni tanlang</option>';
-            
-            regionsData.forEach(region => {
-                const option = document.createElement('option');
-                option.value = region.name;
-                option.textContent = region.name;
-                option.setAttribute('data-region', JSON.stringify(region));
-                regionSelect.appendChild(option);
-            });
-            
-            // Viloyat tanlanganda tumanlarni yuklash
-            regionSelect.addEventListener('change', function() {
-                const districtSelect = document.getElementById('district');
-                const selectedOption = this.options[this.selectedIndex];
-                
-                if (selectedOption.value) {
-                    selectedRegionData = JSON.parse(selectedOption.getAttribute('data-region'));
-                    districtSelect.innerHTML = '';
-                    districtSelect.disabled = false;
+                function getCurrentQuestion() {
+                    const questions = getAllQuestions();
+                    if (questions.length === 0 || currentQuestionIndex >= questions.length) {
+                        console.error('Current question not found:', currentQuestionIndex);
+                        return null;
+                    }
+                    return questions[currentQuestionIndex];
+                }
+        
+                function getTotalQuestions() {
+                    return getAllQuestions().length;
+                }
+        
+                function renderProgressBar() {
+                    if (!surveyData || !surveyData.category) return '';
                     
-                    selectedRegionData.districts.forEach(district => {
-                        const option = document.createElement('option');
-                        option.value = district.name;
-                        option.textContent = district.name;
-                        option.setAttribute('data-district', JSON.stringify(district));
-                        districtSelect.appendChild(option);
-                    });
+                    const totalCategories = surveyData.category.length;
+                    const progress = ((currentCategoryIndex + 1) / totalCategories) * 100;
                     
-                    // Tuman tanlanganda ma'lumotlarni ko'rsatish
-                    districtSelect.addEventListener('change', function() {
-                        const selectedDistrictOption = this.options[this.selectedIndex];
-                        if (selectedDistrictOption.value) {
-                            selectedDistrictData = JSON.parse(selectedDistrictOption.getAttribute('data-district'));
-                            displayRegionInfo();
+                    let stepsHtml = '';
+                    
+                    for (let i = 0; i < totalCategories; i++) {
+                        const stepProgress = ((i + 1) / totalCategories) * 100;
+                        let stepClass = '';
+                        if (i < currentCategoryIndex) {
+                            stepClass = 'completed';
+                        } else if (i === currentCategoryIndex) {
+                            stepClass = 'active';
                         }
-                    });
-                } else {
-                    districtSelect.disabled = true;
-                    document.getElementById('regionInfo').style.display = 'none';
-                }
-            });
-        }
+                        
+                        const categoryName = surveyData.category[i].name || `Bo'lim ${i+1}`;
+                        const shortName = categoryName.length > 15 ? categoryName.substring(0, 15) + '...' : categoryName;
+                        
+                        stepsHtml += `
+                            <div style="position: relative; left: ${stepProgress}%;">
+                                <div class="progress-step ${stepClass}" onclick="goToCategory(${i})">
+                                    ${i + 1}
+                                </div>
+                               
+                            </div>
+                        `;
+                    }
         
-        // Hudud ma'lumotlarini ko'rsatish
-        function displayRegionInfo() {
-            if (selectedDistrictData) {
-                document.getElementById('avgTempDisplay').textContent = selectedDistrictData.average_temperature;
-                document.getElementById('timeDisplay').textContent = selectedDistrictData.time;
-                document.getElementById('baseTempDisplay').textContent = baseTemperature;
-                
-                const calcValue = (baseTemperature - selectedDistrictData.average_temperature) * selectedDistrictData.time;
-                
-                document.getElementById('calcValueDisplay').textContent = calcValue.toFixed(2);
-                document.getElementById('regionInfo').style.display = 'block';
-            }
-        }
-        
-        // Bosqichga o'tish funksiyasi
-        function goToStep(stepNumber) {
-            // Bosqichlarni yangilash
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active', 'completed');
-                const stepNum = step.getAttribute('data-step');
-                if (stepNum < stepNumber) {
-                    step.classList.add('completed');
-                } else if (stepNum == stepNumber) {
-                    step.classList.add('active');
-                }
-            });
-            
-            // Form bo'limlarini yangilash
-            document.querySelectorAll('.form-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(`step-${stepNumber}`).classList.add('active');
-        }
-        
-        // Eshik va derazalarning umumiy yuzasini hisoblash
-        function calculateDoorWindowAreas() {
-            let totalDoorsArea = 0;
-            let totalWindowsArea = 0;
-            
-            // Eshiklarning yuzasini hisoblash
-            document.querySelectorAll('.door-area').forEach(areaInput => {
-                totalDoorsArea += parseFloat(areaInput.value) || 0;
-            });
-            
-            // Derazalarning yuzasini hisoblash
-            document.querySelectorAll('.window-area').forEach(areaInput => {
-                totalWindowsArea += parseFloat(areaInput.value) || 0;
-            });
-            
-            // Jami yuzalarni ko'rsatish
-            document.getElementById('totalDoorsArea').textContent = totalDoorsArea.toFixed(2);
-            document.getElementById('totalWindowsArea').textContent = totalWindowsArea.toFixed(2);
-            
-            // Yakuniy devor yuzasini hisoblash
-            const wallArea = parseFloat(document.getElementById('wallArea').value) || 0;
-            const finalWallArea = wallArea - totalDoorsArea - totalWindowsArea;
-            document.getElementById('finalWallArea').textContent = finalWallArea.toFixed(2);
-        }
-        
-        // Yuzalarni hisoblash funksiyasi
-        function calculateAreas() {
-            const length = parseFloat(document.getElementById('length').value) || 0;
-            const width = parseFloat(document.getElementById('width').value) || 0;
-            const height = parseFloat(document.getElementById('height').value) || 0;
-            
-            // Devorlar yuzasi (2*(uzunlik+eni)*balandlik)
-            const wallArea = 2 * (length + width) * height;
-            document.getElementById('wallArea').value = wallArea.toFixed(2);
-            document.getElementById('wallAreaDisplay').textContent = wallArea.toFixed(2) + ' m²';
-            
-            // Pol yuzasi (uzunlik * eni)
-            const floorArea = length * width;
-            document.getElementById('floorArea').value = floorArea.toFixed(2);
-            document.getElementById('floorAreaDisplay').textContent = floorArea.toFixed(2) + ' m²';
-            
-            // Tom yuzasi (uzunlik * eni)
-            const ceilingArea = length * width;
-            document.getElementById('ceilingArea').value = ceilingArea.toFixed(2);
-            document.getElementById('ceilingAreaDisplay').textContent = ceilingArea.toFixed(2) + ' m²';
-            
-            // Bino hajmi (uzunlik * eni * balandlik)
-            const volume = length * width * height;
-            document.getElementById('volumeDisplay').textContent = volume.toFixed(2) + ' m³';
-            
-            // Eshik va derazalarning yuzasini qayta hisoblash
-            calculateDoorWindowAreas();
-        }
-        
-        // Isitish qiymatini hisoblash
-        function calculateHeating() {
-            if (!selectedDistrictData) {
-                alert('Iltimos, avval hududni tanlang!');
-                goToStep(1);
-                return;
-            }
-            
-            // Ma'lumotlarni yig'ish
-            const region = document.getElementById('region').value;
-            const district = document.getElementById('district').value;
-            const buildingType = document.getElementById('buildingType').value;
-            const customBuildingType = document.getElementById('customBuildingType').value;
-            const length = document.getElementById('length').value;
-            const width = document.getElementById('width').value;
-            const height = document.getElementById('height').value;
-            
-            // Bino turi nomini olish
-            const buildingTypeSelect = document.getElementById('buildingType');
-            const selectedBuildingOption = buildingTypeSelect.options[buildingTypeSelect.selectedIndex];
-            const buildingTypeName = buildingType === 'boshqa' ? customBuildingType : selectedBuildingOption.textContent;
-            
-            // Bino hajmini hisoblash
-            const volume = (parseFloat(length) || 0) * (parseFloat(width) || 0) * (parseFloat(height) || 0);
-            
-            // Qarshiliklarni olish
-            const wallResistance = parseFloat(document.getElementById('wallTotalResistance').textContent) || 0;
-            const floorResistance = parseFloat(document.getElementById('floorTotalResistance').textContent) || 0;
-            const ceilingResistance = parseFloat(document.getElementById('ceilingTotalResistance').textContent) || 0;
-            
-            // Eshik va derazalar uchun qarshilik (0.6)
-            const doorResistance = 0.6;
-            const windowResistance = 0.6;
-            
-            // Yuzalarni olish
-            const wallArea = parseFloat(document.getElementById('finalWallArea').textContent) || 0;
-            const floorArea = parseFloat(document.getElementById('floorArea').value) || 0;
-            const ceilingArea = parseFloat(document.getElementById('ceilingArea').value) || 0;
-            
-            // Eshik va derazalar yuzasi
-            const totalDoorsArea = parseFloat(document.getElementById('totalDoorsArea').textContent) || 0;
-            const totalWindowsArea = parseFloat(document.getElementById('totalWindowsArea').textContent) || 0;
-            
-            // Harorat farqi
-            const tempDifference = baseTemperature - selectedDistrictData.average_temperature;
-            
-            // Q qiymatlarini hisoblash: Q = (1/R) * (joy - average_temperature) * time * 24 * S
-            const time = selectedDistrictData.time;
-            const wallQ = (1 / (wallResistance || 1)) * tempDifference * time * 24 * wallArea;
-            const floorQ = (1 / (floorResistance || 1)) * tempDifference * time * 24 * floorArea;
-            const ceilingQ = (1 / (ceilingResistance || 1)) * tempDifference * time * 24 * ceilingArea;
-            const doorQ = (1 / doorResistance) * tempDifference * time * 24 * totalDoorsArea;
-            const windowQ = (1 / windowResistance) * tempDifference * time * 24 * totalWindowsArea;
-            
-            // Havo almashinuv orqali issiqlik yo'qotilishi
-            const floorAreaValue = parseFloat(document.getElementById('floorArea').value) || 0;
-            const airExchangeQ = ((baseTemperature * floorAreaValue * 4 * 24 * time)/ (width / 0.01 * 0.15)) / 1000;
-            
-            // Umumiy issiqlik yo'qotilishi
-            const totalQ = wallQ + floorQ + ceilingQ + doorQ + windowQ + airExchangeQ;
-            
-            // Natijalarni ko'rsatish
-            document.getElementById('resultRegion').textContent = region;
-            document.getElementById('resultDistrict').textContent = district;
-            document.getElementById('resultBuildingType').textContent = buildingTypeName;
-            document.getElementById('resultAvgTemp').textContent = selectedDistrictData.average_temperature;
-            document.getElementById('resultBaseTemp').textContent = baseTemperature;
-            document.getElementById('resultTime').textContent = selectedDistrictData.time;
-            document.getElementById('resultDimensions').textContent = `${length}m × ${width}m × ${height}m`;
-            document.getElementById('resultVolume').textContent = volume.toFixed(2);
-            document.getElementById('resultWallResistance').textContent = wallResistance.toFixed(3);
-            document.getElementById('resultFloorResistance').textContent = floorResistance.toFixed(3);
-            document.getElementById('resultCeilingResistance').textContent = ceilingResistance.toFixed(3);
-            
-            // Q qiymatlarini ko'rsatish
-            document.getElementById('resultWallQ').textContent = (wallQ / 1000).toFixed(2);
-            document.getElementById('resultFloorQ').textContent = (floorQ / 1000).toFixed(2);
-            document.getElementById('resultCeilingQ').textContent = (ceilingQ / 1000).toFixed(2);
-            document.getElementById('resultDoorQ').textContent = (doorQ / 1000).toFixed(2);
-            document.getElementById('resultWindowQ').textContent = (windowQ / 1000).toFixed(2);
-            document.getElementById('resultAirExchangeQ').textContent = airExchangeQ.toFixed(2);
-            document.getElementById('resultTotalQ').textContent = (totalQ / 1000).toFixed(2);
-            
-            // Material qismlarida Q qiymatlarini yangilash
-            document.getElementById('wallTotalQ').textContent = (wallQ / 1000).toFixed(2);
-            document.getElementById('floorTotalQ').textContent = (floorQ / 1000).toFixed(2);
-            document.getElementById('ceilingTotalQ').textContent = (ceilingQ / 1000).toFixed(2);
-            
-            // Eshik va derazalarda Q qiymatlarini yangilash
-            document.querySelectorAll('.door-q').forEach(element => {
-                element.textContent = (doorQ / 1000).toFixed(2);
-            });
-            
-            document.querySelectorAll('.window-q').forEach(element => {
-                element.textContent = (windowQ / 1000).toFixed(2);
-            });
-            
-            // Natijalarni ko'rsatish
-            document.getElementById('calculationResult').style.display = 'block';
-            
-            // Natijalarga scroll qilish
-            document.getElementById('calculationResult').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Material modalini ochish
-        function openMaterialModal(section) {
-            currentSection = section;
-            const modal = new bootstrap.Modal(document.getElementById('materialModal'));
-            modal.show();
-        }
-        
-        // Materialni qismga qo'shish
-        function addMaterialToSection(section, material) {
-            // Qatlam obyektini yaratish
-            const layer = {
-                id: Date.now(),
-                name: material.name,
-                l: material.l,
-                thickness: 0.1
-            };
-            
-            // Tegishli qismga qo'shish
-            if (section === 'wall') {
-                wallLayers.push(layer);
-                updateLayerTable('wall', wallLayers);
-                document.getElementById('wallMaterialDisplay').value = `${wallLayers.length} ta material`;
-            } else if (section === 'floor') {
-                floorLayers.push(layer);
-                updateLayerTable('floor', floorLayers);
-                document.getElementById('floorMaterialDisplay').value = `${floorLayers.length} ta material`;
-            } else if (section === 'ceiling') {
-                ceilingLayers.push(layer);
-                updateLayerTable('ceiling', ceilingLayers);
-                document.getElementById('ceilingMaterialDisplay').value = `${ceilingLayers.length} ta material`;
-            }
-        }
-        
-        // Qatlamlar jadvalini yangilash
-        function updateLayerTable(section, layers) {
-            const containerId = `${section}LayersContainer`;
-            const tableId = `${section}LayerTable`;
-            const container = document.getElementById(containerId);
-            const table = document.getElementById(tableId);
-            
-            // Agar materiallar mavjud bo'lsa, jadvalni ko'rsatish
-            if (layers.length > 0) {
-                table.style.display = 'block';
-            } else {
-                table.style.display = 'none';
-            }
-            
-            // Jadvalni tozalash
-            container.innerHTML = '';
-            
-            // Har bir qatlam uchun qator yaratish
-            layers.forEach((layer, index) => {
-                const layerRow = document.createElement('div');
-                layerRow.className = 'layer-row row align-items-center';
-                layerRow.innerHTML = `
-                    <div class="col-md-5">
-                        <span>${layer.name}</span>
-                    </div>
-                    <div class="col-md-2">
-                        <small class="text-muted">l = ${layer.l}</small>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group input-group-sm">
-                            <input type="number" class="form-control layer-thickness" 
-                                   data-id="${layer.id}" data-section="${section}"
-                                   min="0" step="0.01" value="${layer.thickness}">
-                            <span class="input-group-text">m</span>
+                    return `
+                        <div class="progress-container">
+                            <h5 class="text-center mb-3">Bo'lim ${currentCategoryIndex + 1} / ${totalCategories}</h5>
+                            <div class="custom-progress" style="margin-bottom: 80px;">
+                                <div class="progress-bar-custom" style="width: ${progress}%"></div>
+                                ${stepsHtml}
+                            </div>
+                            <div class="text-center">
+                                <div class="category-badge">${surveyData.category[currentCategoryIndex].name}</div>
+                                <p class="text-muted">Savol ${currentQuestionIndex + 1} / ${getTotalQuestions()}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-sm btn-outline-danger remove-layer" 
-                                data-id="${layer.id}" data-section="${section}">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(layerRow);
-            });
-            
-            // Qatlam qalinligini o'zgartirganda
-            document.querySelectorAll('.layer-thickness').forEach(input => {
-                input.addEventListener('input', function() {
-                    const id = parseInt(this.getAttribute('data-id'));
-                    const section = this.getAttribute('data-section');
-                    const thickness = parseFloat(this.value) || 0;
+                    `;
+                }
+        
+                function goToCategory(categoryIndex) {
+                    if (categoryIndex < 0 || categoryIndex >= surveyData.category.length) {
+                        console.error('Invalid category index:', categoryIndex);
+                        return;
+                    }
                     
-                    updateLayerThickness(section, id, thickness);
-                });
-            });
-            
-            // Qatlamni o'chirish tugmasi
-            document.querySelectorAll('.remove-layer').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-id'));
-                    const section = this.getAttribute('data-section');
+                    saveCurrentAnswer();
+                    currentCategoryIndex = categoryIndex;
+                    currentQuestionIndex = 0;
+                    renderQuestion();
+                }
+        
+                function renderQuestion() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
                     
-                    removeLayer(section, id);
-                });
-            });
-            
-            // Jami qalinlikni yangilash
-            updateTotalThickness(section);
-            // Qarshilikni yangilash
-            updateResistance(section);
-        }
+                    if (!category || !question) {
+                        document.getElementById('app').innerHTML = `
+                            <div class="error-message">
+                                <h4>Xatolik!</h4>
+                                <p>Savol ma'lumotlari topilmadi. Iltimos, qaytadan urinib ko'ring.</p>
+                                <button class="btn btn-next mt-3" onclick="resetSurvey()">
+                                    <i class="fas fa-redo me-2"></i>Qayta boshlash
+                                </button>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    const isSelect = category.select && category.select.includes(question);
+                    
+                    const questionKey = `q${currentQuestionIndex}`;
+                    const savedAnswer = categoryAnswers[currentCategoryIndex][questionKey];
+                    
+                    let questionHtml = '';
+                    
+                    if (isSelect) {
+                        questionHtml = `
+                            <div class="mb-4">
+                                <label class="question-text mb-3">${question.question}</label>
+                                ${(question.answer || []).map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer === idx ? 'checked' : '';
+                                    return `
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="answer-radio" id="radio-${idx}" value="${idx}" ${isChecked}>
+                                            <label class="form-check-label" for="radio-${idx}">
+                                                ${ans.name || 'Javob'}
+                                            </label>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                    } else {
+                        questionHtml = `
+                            <div class="mb-4">
+                                <label class="question-text mb-3">${question.question}</label>
+                                ${(question.answer || []).map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer && savedAnswer.answer.includes(idx) ? 'checked' : '';
+                                    return `
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check-${idx}" value="${idx}" ${isChecked}>
+                                            <label class="form-check-label" for="check-${idx}">
+                                                ${ans.name || 'Javob'}
+                                            </label>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                    }
         
-        // Qatlam qalinligini yangilash
-        function updateLayerThickness(section, id, thickness) {
-            let layers;
-            if (section === 'wall') {
-                layers = wallLayers;
-            } else if (section === 'floor') {
-                layers = floorLayers;
-            } else if (section === 'ceiling') {
-                layers = ceilingLayers;
-            }
-            
-            // Qatlamni topish va yangilash
-            const layerIndex = layers.findIndex(layer => layer.id === id);
-            if (layerIndex !== -1) {
-                layers[layerIndex].thickness = thickness;
-                updateTotalThickness(section);
-                updateResistance(section);
-            }
-        }
+                    const isLastQuestion = currentQuestionIndex === getTotalQuestions() - 1;
+                    const isLastCategory = currentCategoryIndex === surveyData.category.length - 1;
+                    
+                    // Keyingi tugma har doim faol bo'ladi
+                    const html = `
+                        ${renderProgressBar()}
+                        <div class="question-card">
+                            ${questionHtml}
+                            <div class="d-flex justify-content-between mt-4">
+                                <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestionIndex === 0 && currentCategoryIndex === 0 ? 'disabled' : ''}>
+                                    <i class="fas fa-arrow-left me-2"></i>Orqaga
+                                </button>
+                                <button class="btn btn-next" onclick="nextQuestion()" id="nextBtn">
+                                    ${isLastQuestion && isLastCategory ? 'Yakunlash' : isLastQuestion ? 'Keyingi bo\'lim' : 'Keyingisi'}
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
         
-        // Qatlamni o'chirish
-        function removeLayer(section, id) {
-            let layers;
-            if (section === 'wall') {
-                layers = wallLayers;
-            } else if (section === 'floor') {
-                layers = floorLayers;
-            } else if (section === 'ceiling') {
-                layers = ceilingLayers;
-            }
-            
-            // Qatlamni olib tashlash
-            const layerIndex = layers.findIndex(layer => layer.id === id);
-            if (layerIndex !== -1) {
-                layers.splice(layerIndex, 1);
-                updateLayerTable(section, layers);
-                
-                // Material display ni yangilash
-                const displayId = `${section}MaterialDisplay`;
-                document.getElementById(displayId).value = layers.length > 0 ? `${layers.length} ta material` : '';
-                
-                // Qarshilikni yangilash
-                updateResistance(section);
-            }
-        }
+                    document.getElementById('app').innerHTML = html;
+                }
         
-        // Jami qalinlikni yangilash
-        function updateTotalThickness(section) {
-            let layers, totalThicknessId, thicknessInputId;
-            
-            if (section === 'wall') {
-                layers = wallLayers;
-                totalThicknessId = 'wallTotalThickness';
-                thicknessInputId = 'wallThickness';
-            } else if (section === 'floor') {
-                layers = floorLayers;
-                totalThicknessId = 'floorTotalThickness';
-                thicknessInputId = 'floorThickness';
-            } else if (section === 'ceiling') {
-                layers = ceilingLayers;
-                totalThicknessId = 'ceilingTotalThickness';
-                thicknessInputId = 'ceilingThickness';
-            }
-            
-            // Jami qalinlikni hisoblash
-            const totalThickness = layers.reduce((sum, layer) => sum + (layer.thickness || 0), 0);
-            
-            // Jami qalinlikni ko'rsatish
-            document.getElementById(totalThicknessId).textContent = `Jami qalinlik: ${totalThickness.toFixed(2)} m`;
-            
-            // Qalinlik inputini yangilash
-            document.getElementById(thicknessInputId).value = totalThickness.toFixed(2);
-        }
-    </script>
+                function calculateScore() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
+                    
+                    if (!category || !question) return 0;
+                    
+                    const isSelect = category.select && category.select.includes(question);
+                    
+                    if (isSelect) {
+                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
+                        if (selectedRadio) {
+                            const selectedIndex = parseInt(selectedRadio.value);
+                            return (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0;
+                        }
+                    } else {
+                        const checkedCount = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).length;
+                        
+                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
+                            const ballConfig = question.ball.find(b => b.status === checkedCount);
+                            return ballConfig ? ballConfig.ball : 0;
+                        }
+                    }
+                    
+                    // Agar javob belgilanmagan bo'lsa, 0 ball
+                    return 0;
+                }
+        
+                function saveCurrentAnswer() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
+                    
+                    if (!category || !question) return;
+                    
+                    const isSelect = category.select && category.select.includes(question);
+                    
+                    const questionKey = `q${currentQuestionIndex}`;
+                    
+                    if (isSelect) {
+                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
+                        if (selectedRadio) {
+                            const selectedIndex = parseInt(selectedRadio.value);
+                            categoryAnswers[currentCategoryIndex][questionKey] = {
+                                type: 'select',
+                                answer: selectedIndex,
+                                ball: (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0
+                            };
+                        } else {
+                            // Agar javob belgilanmagan bo'lsa, 0 ball bilan saqlaymiz
+                            categoryAnswers[currentCategoryIndex][questionKey] = {
+                                type: 'select',
+                                answer: null,
+                                ball: 0
+                            };
+                        }
+                    } else {
+                        const checkedIndices = [];
+                        (question.answer || []).forEach((ans, idx) => {
+                            const checkbox = document.getElementById(`check-${idx}`);
+                            if (checkbox && checkbox.checked) {
+                                checkedIndices.push(idx);
+                            }
+                        });
+                        
+                        const checkedCount = checkedIndices.length;
+                        let ball = 0;
+                        
+                        // Faqat belgilangan javoblar bo'lsa ball hisoblanadi
+                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
+                            const ballConfig = question.ball.find(b => b.status === checkedCount);
+                            ball = ballConfig ? ballConfig.ball : 0;
+                        }
+                        
+                        categoryAnswers[currentCategoryIndex][questionKey] = {
+                            type: 'checkbox',
+                            answer: checkedIndices,
+                            ball: ball
+                        };
+                    }
+                }
+        
+                function nextQuestion() {
+                    saveCurrentAnswer();
+                    
+                    const totalQuestions = getTotalQuestions();
+                    
+                    if (currentQuestionIndex < totalQuestions - 1) {
+                        currentQuestionIndex++;
+                        renderQuestion();
+                    } else if (currentCategoryIndex < surveyData.category.length - 1) {
+                        currentCategoryIndex++;
+                        currentQuestionIndex = 0;
+                        renderQuestion();
+                    } else {
+                        showResults();
+                    }
+                }
+        
+                function prevQuestion() {
+                    saveCurrentAnswer();
+                    
+                    if (currentQuestionIndex > 0) {
+                        currentQuestionIndex--;
+                        renderQuestion();
+                    } else if (currentCategoryIndex > 0) {
+                        currentCategoryIndex--;
+                        const prevCategory = getCurrentCategory();
+                        const prevQuestions = getAllQuestions();
+                        currentQuestionIndex = prevQuestions.length - 1;
+                        renderQuestion();
+                    }
+                }
+        
+                function getGrade(score) {
+                    if (score >= 520) return 'A';
+                    if (score >= 420) return 'B';
+                    if (score >= 340) return 'C';
+                    if (score >= 260) return 'D';
+                    if (score >= 170) return 'E';
+                    if (score >= 100) return 'F';
+                    return 'G';
+                }
+        
+                function getGradeColor(grade) {
+                    const colors = {
+                        'A': '#10b981',
+                        'B': '#84cc16',
+                        'C': '#eab308',
+                        'D': '#f59e0b',
+                        'E': '#f97316',
+                        'F': '#ef4444',
+                        'G': '#dc2626'
+                    };
+                    return colors[grade] || '#718096';
+                }
+        
+                function showResults() {
+                    // Barcha belgilangan javoblardan umumiy ballni hisoblash
+                    totalScore = 0;
+                    categoryAnswers.forEach(categoryAnswer => {
+                        Object.values(categoryAnswer).forEach(answer => {
+                            totalScore += answer.ball || 0;
+                        });
+                    });
+
+                    const grade = getGrade(totalScore);
+                    const gradeColor = getGradeColor(grade);
+                    const needleRotation = -90 + (totalScore / 650) * 180;
+        
+                    const html = `
+                        <div class="result-card">
+                            <h2 class="mb-4">Natijalar</h2>
+                            
+                            <div class="gauge-container">
+                                <svg class="gauge" viewBox="0 0 200 110">
+                                    <defs>
+                                        <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                            <stop offset="20%" style="stop-color:#f97316;stop-opacity:1" />
+                                            <stop offset="40%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                            <stop offset="60%" style="stop-color:#eab308;stop-opacity:1" />
+                                            <stop offset="80%" style="stop-color:#84cc16;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M 20 100 A 80 80 0 0 1 180 100" 
+                                          fill="none" 
+                                          stroke="url(#gaugeGradient)" 
+                                          stroke-width="25" 
+                                          stroke-linecap="round"/>
+                                </svg>
+                                <div class="gauge-needle" id="gaugeNeedle"></div>
+                                <div class="gauge-score" style='margin-bottom:50px;' id="scoreDisplay">0</div>
+                                <br><br>
+                                <div class="gauge-grade" style="color: ${gradeColor}; border-color: ${gradeColor};" id="gradeDisplay">-</div>
+                            </div>
+        
+                            <div class="grade-table">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Ball</th>
+                                            <th>Baholash</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>520-650</td>
+                                            <td><strong style="color: #10b981;">A</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>420-519</td>
+                                            <td><strong style="color: #84cc16;">B</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>340-419</td>
+                                            <td><strong style="color: #eab308;">C</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>260-339</td>
+                                            <td><strong style="color: #f59e0b;">D</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>170-259</td>
+                                            <td><strong style="color: #f97316;">E</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>100-169</td>
+                                            <td><strong style="color: #ef4444;">F</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>0-99</td>
+                                            <td><strong style="color: #dc2626;">G</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+        
+                            <button class="btn btn-next mt-4" onclick="resetSurvey()">
+                                <i class="fas fa-redo me-2"></i>Qayta boshlash
+                            </button>
+                        </div>
+                    `;
+                    
+                    document.getElementById('app').innerHTML = html;
+        
+                    setTimeout(() => {
+                        const needle = document.getElementById('gaugeNeedle');
+                        const scoreDisplay = document.getElementById('scoreDisplay');
+                        const gradeDisplay = document.getElementById('gradeDisplay');
+                        
+                        if (needle) {
+                            needle.style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
+                        }
+                        
+                        let currentScore = 0;
+                        const increment = totalScore / 100;
+                        const timer = setInterval(() => {
+                            currentScore += increment;
+                            if (currentScore >= totalScore) {
+                                currentScore = totalScore;
+                                clearInterval(timer);
+                                setTimeout(() => {
+                                    if (gradeDisplay) {
+                                        gradeDisplay.textContent = grade;
+                                    }
+                                }, 500);
+                            }
+                            if (scoreDisplay) {
+                                scoreDisplay.textContent = Math.round(currentScore);
+                            }
+                        }, 20);
+                    }, 100);
+                }
+        
+                function resetSurvey() {
+                    currentCategoryIndex = 0;
+                    currentQuestionIndex = 0;
+                    totalScore = 0;
+                    categoryAnswers = surveyData.category.map(() => ({}));
+                    renderQuestion();
+                }
+        
+                init();
+            </script>
+        </div>
+        <!-- content close -->
+        <!-- footer begin -->
+        <footer class="section-dark">
+            <div class="subfooter">
+                <div class="container">
+                    <!-- Footer content here -->
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+    </div>
+    
+    <!-- Javascript Files -->
+    <script src="js/designesia.js"></script>
 </body>
 </html>
