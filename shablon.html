@@ -1,966 +1,788 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TMSITI — Yashil qurilish kalkulyatori</title>
-    <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="CoolAir — Yashil qurilish kalkulyatori" name="description">
-    <meta content="" name="keywords">
-    <meta content="" name="author">
-    <!-- CSS Files -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-    <link href="css/plugins.css" rel="stylesheet" type="text/css">
-    <link href="css/swiper.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/coloring.css" rel="stylesheet" type="text/css">
-    <!-- color scheme -->
-    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mukammal 2D/3D Planer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/konva@8.3.5/konva.min.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
         .container {
-            max-width: 900px;
+            max-width: 1600px;
+            margin: 0 auto;
         }
-        .progress-container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
+        
+        header {
+            text-align: center;
             margin-bottom: 30px;
-        }
-        .custom-progress {
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 10px;
-            position: relative;
-            margin: 30px 0;
-        }
-        .progress-bar-custom {
-            height: 100%;
-            background: #234982;
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-        .progress-step {
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            color: #6c757d;
-            transition: all 0.5s ease;
-            z-index: 2;
-            cursor: pointer;
-        }
-        .progress-step.active {
-            border-color: #234982;
-            background: #234982;
-            color: white;
-            transform: translate(-50%, -50%) scale(1.2);
-        }
-        .progress-step.completed {
-            border-color: #28a745;
-            background: #28a745;
-            color: white;
-        }
-        .progress-step-label {
-            position: absolute;
-            top: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            font-weight: 600;
-            color: #6c757d;
-            white-space: nowrap;
-            max-width: 100px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: all 0.3s ease;
-        }
-        .progress-step.active + .progress-step-label {
-            color: #234982;
-            font-size: 13px;
-        }
-        .question-card {
-            background: white;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: fadeIn 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .question-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 25px;
-        }
-        .question-text {
-            font-size: 18px;
-            color: #4a5568;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .form-check {
-            padding: 15px;
+        
+        h1 {
+            font-size: 2.8rem;
             margin-bottom: 10px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            border: 2px solid #e2e8f0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        .form-check:hover {
-            background: #f7fafc;
-            border-color: #cbd5e0;
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
-        .form-check-input:checked ~ .form-check-label {
-            color: #234982;
-            font-weight: 600;
+        
+        .app-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .form-check-input {
-            width: 20px;
-            height: 20px;
-            margin-top: 0.25em;
-            cursor: pointer;
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            flex: 1;
+            min-width: 300px;
         }
-        .form-check-input:checked {
-            background-color: #234982;
-            border-color: #234982;
+        
+        .panel-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .form-check-label {
-            font-size: 16px;
-            color: #4a5568;
-            cursor: pointer;
-            margin-left: 10px;
+        
+        .area-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1rem;
         }
-        .btn-next, .btn-prev {
-            padding: 12px 40px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        .btn-next {
-            background: #234982;
+        
+        button {
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            flex: 1;
+            min-width: 120px;
         }
-        .btn-next:hover {
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-        .btn-next:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        
+        button.primary {
+            background: #4CAF50;
         }
-        .btn-prev {
-            background: white;
-            border: 2px solid #e2e8f0;
-            color: #4a5568;
+        
+        button.primary:hover {
+            background: #45a049;
         }
-        .btn-prev:hover {
-            background: #f7fafc;
-            border-color: #cbd5e0;
+        
+        button.secondary {
+            background: #2196F3;
         }
-        .result-card {
-            background: white;
-            border-radius: 15px;
-            padding: 50px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: scaleIn 0.6s ease;
+        
+        button.secondary:hover {
+            background: #0b7dda;
         }
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .gauge-container {
+        
+        .canvas-container {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            height: 500px;
             position: relative;
-            width: 400px;
-            height: 250px;
-            margin: 30px auto;
         }
-        .gauge {
+        
+        #floorplan-container, #threejs-container {
             width: 100%;
             height: 100%;
         }
-        .gauge-needle {
+        
+        .scale-display {
             position: absolute;
-            bottom: 50%;
-            left: 50%;
-            width: 4px;
-            height: 140px;
-            background: #2d3748;
-            transform-origin: bottom center;
-            transform: translateX(-50%) rotate(-90deg);
-            transition: transform 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 3;
-            border-radius: 2px;
-        }
-        .gauge-needle::before {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 25px;
-            height: 25px;
-            background: #2d3748;
-            border-radius: 50%;
-            border: 4px solid white;
-        }
-        .gauge-score {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 56px;
-            font-weight: bold;
-            color: #2d3748;
-            animation: countUp 2s ease-out;
-        }
-        @keyframes countUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-        .gauge-grade {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 42px;
-            font-weight: bold;
-            color: #718096;
-            background: #e2e8f0;
-            width: 100px;
-            height: 60px;
-            line-height: 60px;
-            border-radius: 10px;
-            animation: fadeInUp 1s ease 1.5s both;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-        .grade-table {
-            margin-top: 80px;
-            animation: fadeIn 1s ease 2s both;
-        }
-        .category-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: #234982;
-            color: white;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
             border-radius: 5px;
-            margin-bottom: 20px;
-            border: 1px solid #f5c6cb;
+            font-size: 0.9rem;
         }
-
-        #logo {
+        
+        .info-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .color-picker {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            max-width: 500px;
-            margin: 10px auto;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
-
-        #logo a {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-        }
-
-        .logo-main {
-            width: 50px;
-            height: 50px;
-            padding: 6px;
-            background: white;
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-            flex-shrink: 0;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
         }
-
-        #logo h6 {
-            color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            font-size: 13px;
-            font-weight: 600;
-            line-height: 1.3;
-            margin: 0;
-            text-align: left;
-            flex: 1;
+        
+        .color-option:hover {
+            transform: scale(1.1);
         }
-
-        .logo-scroll, .logo-mobile {
-            display: none;
+        
+        .color-option.active {
+            border-color: white;
+            box-shadow: 0 0 5px white;
         }
-
-        /* Mobil uchun */
+        
+        .instructions {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .instructions ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
         @media (max-width: 768px) {
-            #logo {
-                padding: 10px 15px;
-                max-width: 90%;
+            .app-container {
+                flex-direction: column;
             }
             
-            .logo-main {
-                width: 45px;
-                height: 45px;
-            }
-            
-            #logo h6 {
-                font-size: 12px;
-                line-height: 1.2;
+            .panel {
+                width: 100%;
             }
         }
     </style>
 </head>
-
 <body>
-    <div id="wrapper">
-        <div class="float-text show-on-scroll">
-            <span><a href="#">Scroll to top</a></span>
-        </div>
-        <div class="scrollbar-v show-on-scroll"></div>
-        
-        <!-- header begin -->
-        <header class="header-light transparent scroll-light has-topbar">
-            <div id="topbar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="d-flex justify-content-between xs-hide">
-                                <div class="header-widget d-flex">
-                                    <div class="topbar-widget"><a href="#"><i class="icofont-phone"></i>+998 71 244-51-84</a></div>
-                                    <div class="topbar-widget"><a href="#"><i class="icofont-envelope"></i>info@tmsiti.uz</a></div>
-                                </div>
-
-                                <div class="social-icons">
-                                    <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
-                                    <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="de-flex sm-pt10">
-                            <div class="de-flex-col">
-                                <!-- logo begin -->
-                                <div id="logo">
-                                    <a href="index.html">
-                                        <img class="logo-main" src="https://tmsiti.uz/icons/brand.svg" alt="Institut Logosi">
-                                        <img class="logo-scroll" src="https://tmsiti.uz/icons/brand.svg" alt="">
-                                        <h6>
-                                            Texnik me'yorlash va<br>
-                                            standartlashtirish<br>
-                                            ilmiy-tadqiqot instituti
-                                        </h6>
-                                        <img class="logo-mobile" src="https://tmsiti.uz/icons/brand.svg" alt="">
-                                    </a>
-                                </div>
-                                <!-- logo close -->
-                            </div>
-                            <div class="de-flex-col header-col-mid">
-                                <ul id="mainmenu">
-                                    <li><a class="menu-item" href="#">Bosh sahifa</a></li>
-                                    <li><a class="menu-item" href="/">Biz haqimizda</a></li>
-                                    <li><a class="menu-item" href="/">Loyihalar</a></li>
-                                    <li><a class="menu-item" href="/">Blog</a></li>
-                                </ul>
-                            </div>
-                            <div class="de-flex-col">
-                                <div class="menu_side_area">          
-                                    <a href="/" class="btn-main bg-color-2">Bog'lanish</a>
-                                    <span id="menu-btn"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <header>
+            <h1>Mukammal 2D/3D Planer</h1>
+            <p class="subtitle">2D reja chizing, 3D natijani ko'ring va ranglar bilan bezang</p>
         </header>
-        <!-- header close -->
-        <!-- content begin -->
-        <div class="no-bottom no-top" id="content">
-            <div id="top"></div>
-            <!-- section begin -->
-            <section id="subheader2">
-                <div class="container relative z-index">
-                    <div class="row align-items-center">
-                        <div class="col-lg-12 offset-lg-3 text-center">
-                            <h1 style="
-                                    font-family: 'Inter', 'Arial', sans-serif;
-                                    font-size: 32px;
-                                    font-weight: 700;
-                                    color: #1a1a1a;
-                                    line-height: 1.3;
-                                    margin: 20px 0;
-                                    text-align: left;
-                                    ">
-                                    Yashil qurilish kalkulyatori
-                                    </h1>
-                        </div>
+        
+        <div class="app-container">
+            <div class="panel">
+                <h2 class="panel-title">
+                    <span>2D Reja Chizish</span>
+                    <span class="area-display">Maydon: <span id="area-value">0 m²</span></span>
+                </h2>
+                <div class="controls">
+                    <button id="add-wall-btn" class="primary">Devor Qo'shish</button>
+                    <button id="add-door-btn">Eshik Qo'shish</button>
+                    <button id="add-window-btn">Deraza Qo'shish</button>
+                    <button id="clear-btn">Tozalash</button>
+                </div>
+                <div class="canvas-container">
+                    <div id="floorplan-container"></div>
+                    <div class="scale-display">Masshtab: 1px = 0.1m</div>
+                </div>
+                <div class="info-panel">
+                    <p><strong>Joriy holat:</strong> <span id="current-mode">Devor qo'shish</span></p>
+                    <p><strong>Obyektlar soni:</strong> <span id="objects-count">0</span></p>
+                </div>
+                <div class="instructions">
+                    <p><strong>Qo'llanma:</strong></p>
+                    <ul>
+                        <li>Devor qo'shish uchun "Devor Qo'shish" tugmasini bosing va sahifada chizing</li>
+                        <li>Eshik yoki deraza qo'shish uchun mos tugmani bosing va devor ustiga joylashtiring</li>
+                        <li>3D ko'rinishni yaratish uchun "3D Ko'rinishga O'tish" tugmasini bosing</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h2 class="panel-title">
+                    <span>3D Vizualizatsiya</span>
+                    <span class="area-display">Xona: <span id="room-name">Xona</span></span>
+                </h2>
+                <div class="controls">
+                    <button id="generate-3d-btn" class="secondary">3D Ko'rinishga O'tish</button>
+                    <button id="reset-view-btn">Kamerani Qayta O'rnatish</button>
+                    <button id="auto-rotate-btn">Aylantirish</button>
+                </div>
+                <div class="canvas-container">
+                    <div id="threejs-container"></div>
+                    <div class="scale-display">Aylantirish: Sichqonchani sudrab</div>
+                </div>
+                <div class="info-panel">
+                    <p><strong>Rang tanlash:</strong></p>
+                    <div class="color-picker">
+                        <div class="color-option active" style="background-color: #8B4513;" data-target="wall" data-color="#8B4513"></div>
+                        <div class="color-option" style="background-color: #654321;" data-target="wall" data-color="#654321"></div>
+                        <div class="color-option" style="background-color: #D2B48C;" data-target="wall" data-color="#D2B48C"></div>
+                        <div class="color-option" style="background-color: #808080;" data-target="floor" data-color="#808080"></div>
+                        <div class="color-option" style="background-color: #A0522D;" data-target="floor" data-color="#A0522D"></div>
+                        <div class="color-option" style="background-color: #F5F5DC;" data-target="floor" data-color="#F5F5DC"></div>
+                        <div class="color-option" style="background-color: #708090;" data-target="roof" data-color="#708090"></div>
+                        <div class="color-option" style="background-color: #2F4F4F;" data-target="roof" data-color="#2F4F4F"></div>
+                        <div class="color-option" style="background-color: #696969;" data-target="roof" data-color="#696969"></div>
                     </div>
                 </div>
-            </section>
-            <!-- section close -->
-
-            <div class="container">
-                <div id="app"></div>
             </div>
-        
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-            <script>
-                let surveyData = null;
-                let currentCategoryIndex = 0;
-                let currentQuestionIndex = 0;
-                let totalScore = 0;
-                let categoryAnswers = [];
-        
-                function init() {
-                    loadData();
-                }
-        
-                async function loadData() {
-                    const appDiv = document.getElementById('app');
-                    appDiv.innerHTML = `
-                        <div class="text-center text-white">
-                            <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
-                                <span class="visually-hidden">Yuklanmoqda...</span>
-                            </div>
-                            <p class="mt-3 fs-5">Ma'lumotlar yuklanmoqda...</p>
-                        </div>
-                    `;
-        
-                    try {
-                        const response = await fetch('yashil.json');
-                        if (!response.ok) {
-                            throw new Error('JSON faylni yuklashda xatolik');
-                        }
-                        surveyData = await response.json();
-                        
-                        // JSON ma'lumotlarini tekshirish
-                        if (!surveyData || !surveyData.category || !Array.isArray(surveyData.category)) {
-                            throw new Error('JSON strukturasi noto\'g\'ri');
-                        }
-                        
-                        categoryAnswers = surveyData.category.map(() => ({}));
-                        renderQuestion();
-                    } catch (error) {
-                        console.error('Xatolik:', error);
-                        appDiv.innerHTML = `
-                            <div class="error-message">
-                                <h4><i class="fas fa-exclamation-triangle me-2"></i>Xatolik!</h4>
-                                <p>JSON faylni yuklab bo'lmadi: ${error.message}</p>
-                                <p><strong>yashil.json</strong> fayli to'g'ri joyda ekanligiga ishonch hosil qiling.</p>
-                            </div>
-                        `;
-                    }
-                }
-        
-                function getCurrentCategory() {
-                    if (!surveyData || !surveyData.category || !surveyData.category[currentCategoryIndex]) {
-                        console.error('Current category not found:', currentCategoryIndex);
-                        return null;
-                    }
-                    return surveyData.category[currentCategoryIndex];
-                }
-        
-                function getAllQuestions() {
-                    const category = getCurrentCategory();
-                    if (!category) return [];
-                    
-                    const selectQuestions = category.select || [];
-                    const checkboxQuestions = category.checkbox || [];
-                    return [...selectQuestions, ...checkboxQuestions];
-                }
-        
-                function getCurrentQuestion() {
-                    const questions = getAllQuestions();
-                    if (questions.length === 0 || currentQuestionIndex >= questions.length) {
-                        console.error('Current question not found:', currentQuestionIndex);
-                        return null;
-                    }
-                    return questions[currentQuestionIndex];
-                }
-        
-                function getTotalQuestions() {
-                    return getAllQuestions().length;
-                }
-        
-                function renderProgressBar() {
-                    if (!surveyData || !surveyData.category) return '';
-                    
-                    const totalCategories = surveyData.category.length;
-                    const progress = ((currentCategoryIndex + 1) / totalCategories) * 100;
-                    
-                    let stepsHtml = '';
-                    
-                    for (let i = 0; i < totalCategories; i++) {
-                        const stepProgress = ((i + 1) / totalCategories) * 100;
-                        let stepClass = '';
-                        if (i < currentCategoryIndex) {
-                            stepClass = 'completed';
-                        } else if (i === currentCategoryIndex) {
-                            stepClass = 'active';
-                        }
-                        
-                        const categoryName = surveyData.category[i].name || `Bo'lim ${i+1}`;
-                        const shortName = categoryName.length > 15 ? categoryName.substring(0, 15) + '...' : categoryName;
-                        
-                        stepsHtml += `
-                            <div style="position: relative; left: ${stepProgress}%;">
-                                <div class="progress-step ${stepClass}" onclick="goToCategory(${i})">
-                                    ${i + 1}
-                                </div>
-                               
-                            </div>
-                        `;
-                    }
-        
-                    return `
-                        <div class="progress-container">
-                            <h5 class="text-center mb-3">Bo'lim ${currentCategoryIndex + 1} / ${totalCategories}</h5>
-                            <div class="custom-progress" style="margin-bottom: 80px;">
-                                <div class="progress-bar-custom" style="width: ${progress}%"></div>
-                                ${stepsHtml}
-                            </div>
-                            <div class="text-center">
-                                <div class="category-badge">${surveyData.category[currentCategoryIndex].name}</div>
-                                <p class="text-muted">Savol ${currentQuestionIndex + 1} / ${getTotalQuestions()}</p>
-                            </div>
-                        </div>
-                    `;
-                }
-        
-                function goToCategory(categoryIndex) {
-                    if (categoryIndex < 0 || categoryIndex >= surveyData.category.length) {
-                        console.error('Invalid category index:', categoryIndex);
-                        return;
-                    }
-                    
-                    saveCurrentAnswer();
-                    currentCategoryIndex = categoryIndex;
-                    currentQuestionIndex = 0;
-                    renderQuestion();
-                }
-        
-                function renderQuestion() {
-                    const category = getCurrentCategory();
-                    const question = getCurrentQuestion();
-                    
-                    if (!category || !question) {
-                        document.getElementById('app').innerHTML = `
-                            <div class="error-message">
-                                <h4>Xatolik!</h4>
-                                <p>Savol ma'lumotlari topilmadi. Iltimos, qaytadan urinib ko'ring.</p>
-                                <button class="btn btn-next mt-3" onclick="resetSurvey()">
-                                    <i class="fas fa-redo me-2"></i>Qayta boshlash
-                                </button>
-                            </div>
-                        `;
-                        return;
-                    }
-                    
-                    const isSelect = category.select && category.select.includes(question);
-                    
-                    const questionKey = `q${currentQuestionIndex}`;
-                    const savedAnswer = categoryAnswers[currentCategoryIndex][questionKey];
-                    
-                    let questionHtml = '';
-                    
-                    if (isSelect) {
-                        questionHtml = `
-                            <div class="mb-4">
-                                <label class="question-text mb-3">${question.question}</label>
-                                ${(question.answer || []).map((ans, idx) => {
-                                    const isChecked = savedAnswer && savedAnswer.answer === idx ? 'checked' : '';
-                                    return `
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="answer-radio" id="radio-${idx}" value="${idx}" ${isChecked}>
-                                            <label class="form-check-label" for="radio-${idx}">
-                                                ${ans.name || 'Javob'}
-                                            </label>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        `;
-                    } else {
-                        questionHtml = `
-                            <div class="mb-4">
-                                <label class="question-text mb-3">${question.question}</label>
-                                ${(question.answer || []).map((ans, idx) => {
-                                    const isChecked = savedAnswer && savedAnswer.answer && savedAnswer.answer.includes(idx) ? 'checked' : '';
-                                    return `
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="check-${idx}" value="${idx}" ${isChecked}>
-                                            <label class="form-check-label" for="check-${idx}">
-                                                ${ans.name || 'Javob'}
-                                            </label>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        `;
-                    }
-        
-                    const isLastQuestion = currentQuestionIndex === getTotalQuestions() - 1;
-                    const isLastCategory = currentCategoryIndex === surveyData.category.length - 1;
-                    
-                    // Keyingi tugma har doim faol bo'ladi
-                    const html = `
-                        ${renderProgressBar()}
-                        <div class="question-card">
-                            ${questionHtml}
-                            <div class="d-flex justify-content-between mt-4">
-                                <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestionIndex === 0 && currentCategoryIndex === 0 ? 'disabled' : ''}>
-                                    <i class="fas fa-arrow-left me-2"></i>Orqaga
-                                </button>
-                                <button class="btn btn-next" onclick="nextQuestion()" id="nextBtn">
-                                    ${isLastQuestion && isLastCategory ? 'Yakunlash' : isLastQuestion ? 'Keyingi bo\'lim' : 'Keyingisi'}
-                                    <i class="fas fa-arrow-right ms-2"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-        
-                    document.getElementById('app').innerHTML = html;
-                }
-        
-                function calculateScore() {
-                    const category = getCurrentCategory();
-                    const question = getCurrentQuestion();
-                    
-                    if (!category || !question) return 0;
-                    
-                    const isSelect = category.select && category.select.includes(question);
-                    
-                    if (isSelect) {
-                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
-                        if (selectedRadio) {
-                            const selectedIndex = parseInt(selectedRadio.value);
-                            return (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0;
-                        }
-                    } else {
-                        const checkedCount = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).length;
-                        
-                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
-                            const ballConfig = question.ball.find(b => b.status === checkedCount);
-                            return ballConfig ? ballConfig.ball : 0;
-                        }
-                    }
-                    
-                    // Agar javob belgilanmagan bo'lsa, 0 ball
-                    return 0;
-                }
-        
-                function saveCurrentAnswer() {
-                    const category = getCurrentCategory();
-                    const question = getCurrentQuestion();
-                    
-                    if (!category || !question) return;
-                    
-                    const isSelect = category.select && category.select.includes(question);
-                    
-                    const questionKey = `q${currentQuestionIndex}`;
-                    
-                    if (isSelect) {
-                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
-                        if (selectedRadio) {
-                            const selectedIndex = parseInt(selectedRadio.value);
-                            categoryAnswers[currentCategoryIndex][questionKey] = {
-                                type: 'select',
-                                answer: selectedIndex,
-                                ball: (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0
-                            };
-                        } else {
-                            // Agar javob belgilanmagan bo'lsa, 0 ball bilan saqlaymiz
-                            categoryAnswers[currentCategoryIndex][questionKey] = {
-                                type: 'select',
-                                answer: null,
-                                ball: 0
-                            };
-                        }
-                    } else {
-                        const checkedIndices = [];
-                        (question.answer || []).forEach((ans, idx) => {
-                            const checkbox = document.getElementById(`check-${idx}`);
-                            if (checkbox && checkbox.checked) {
-                                checkedIndices.push(idx);
-                            }
-                        });
-                        
-                        const checkedCount = checkedIndices.length;
-                        let ball = 0;
-                        
-                        // Faqat belgilangan javoblar bo'lsa ball hisoblanadi
-                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
-                            const ballConfig = question.ball.find(b => b.status === checkedCount);
-                            ball = ballConfig ? ballConfig.ball : 0;
-                        }
-                        
-                        categoryAnswers[currentCategoryIndex][questionKey] = {
-                            type: 'checkbox',
-                            answer: checkedIndices,
-                            ball: ball
-                        };
-                    }
-                }
-        
-                function nextQuestion() {
-                    saveCurrentAnswer();
-                    
-                    const totalQuestions = getTotalQuestions();
-                    
-                    if (currentQuestionIndex < totalQuestions - 1) {
-                        currentQuestionIndex++;
-                        renderQuestion();
-                    } else if (currentCategoryIndex < surveyData.category.length - 1) {
-                        currentCategoryIndex++;
-                        currentQuestionIndex = 0;
-                        renderQuestion();
-                    } else {
-                        showResults();
-                    }
-                }
-        
-                function prevQuestion() {
-                    saveCurrentAnswer();
-                    
-                    if (currentQuestionIndex > 0) {
-                        currentQuestionIndex--;
-                        renderQuestion();
-                    } else if (currentCategoryIndex > 0) {
-                        currentCategoryIndex--;
-                        const prevCategory = getCurrentCategory();
-                        const prevQuestions = getAllQuestions();
-                        currentQuestionIndex = prevQuestions.length - 1;
-                        renderQuestion();
-                    }
-                }
-        
-                function getGrade(score) {
-                    if (score >= 520) return 'A';
-                    if (score >= 420) return 'B';
-                    if (score >= 340) return 'C';
-                    if (score >= 260) return 'D';
-                    if (score >= 170) return 'E';
-                    if (score >= 100) return 'F';
-                    return 'G';
-                }
-        
-                function getGradeColor(grade) {
-                    const colors = {
-                        'A': '#10b981',
-                        'B': '#84cc16',
-                        'C': '#eab308',
-                        'D': '#f59e0b',
-                        'E': '#f97316',
-                        'F': '#ef4444',
-                        'G': '#dc2626'
-                    };
-                    return colors[grade] || '#718096';
-                }
-        
-                function showResults() {
-                    // Barcha belgilangan javoblardan umumiy ballni hisoblash
-                    totalScore = 0;
-                    categoryAnswers.forEach(categoryAnswer => {
-                        Object.values(categoryAnswer).forEach(answer => {
-                            totalScore += answer.ball || 0;
-                        });
-                    });
-
-                    const grade = getGrade(totalScore);
-                    const gradeColor = getGradeColor(grade);
-                    const needleRotation = -90 + (totalScore / 650) * 180;
-        
-                    const html = `
-                        <div class="result-card">
-                            <h2 class="mb-4">Natijalar</h2>
-                            
-                            <div class="gauge-container">
-                                <svg class="gauge" viewBox="0 0 200 110">
-                                    <defs>
-                                        <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
-                                            <stop offset="20%" style="stop-color:#f97316;stop-opacity:1" />
-                                            <stop offset="40%" style="stop-color:#f59e0b;stop-opacity:1" />
-                                            <stop offset="60%" style="stop-color:#eab308;stop-opacity:1" />
-                                            <stop offset="80%" style="stop-color:#84cc16;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <path d="M 20 100 A 80 80 0 0 1 180 100" 
-                                          fill="none" 
-                                          stroke="url(#gaugeGradient)" 
-                                          stroke-width="25" 
-                                          stroke-linecap="round"/>
-                                </svg>
-                                <div class="gauge-needle" id="gaugeNeedle"></div>
-                                <div class="gauge-score" style='margin-bottom:50px;' id="scoreDisplay">0</div>
-                                <br><br>
-                                <div class="gauge-grade" style="color: ${gradeColor}; border-color: ${gradeColor};" id="gradeDisplay">-</div>
-                            </div>
-        
-                            <div class="grade-table">
-                                <table class="table table-bordered">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Ball</th>
-                                            <th>Baholash</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>520-650</td>
-                                            <td><strong style="color: #10b981;">A</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>420-519</td>
-                                            <td><strong style="color: #84cc16;">B</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>340-419</td>
-                                            <td><strong style="color: #eab308;">C</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>260-339</td>
-                                            <td><strong style="color: #f59e0b;">D</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>170-259</td>
-                                            <td><strong style="color: #f97316;">E</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>100-169</td>
-                                            <td><strong style="color: #ef4444;">F</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>0-99</td>
-                                            <td><strong style="color: #dc2626;">G</strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-        
-                            <button class="btn btn-next mt-4" onclick="resetSurvey()">
-                                <i class="fas fa-redo me-2"></i>Qayta boshlash
-                            </button>
-                        </div>
-                    `;
-                    
-                    document.getElementById('app').innerHTML = html;
-        
-                    setTimeout(() => {
-                        const needle = document.getElementById('gaugeNeedle');
-                        const scoreDisplay = document.getElementById('scoreDisplay');
-                        const gradeDisplay = document.getElementById('gradeDisplay');
-                        
-                        if (needle) {
-                            needle.style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
-                        }
-                        
-                        let currentScore = 0;
-                        const increment = totalScore / 100;
-                        const timer = setInterval(() => {
-                            currentScore += increment;
-                            if (currentScore >= totalScore) {
-                                currentScore = totalScore;
-                                clearInterval(timer);
-                                setTimeout(() => {
-                                    if (gradeDisplay) {
-                                        gradeDisplay.textContent = grade;
-                                    }
-                                }, 500);
-                            }
-                            if (scoreDisplay) {
-                                scoreDisplay.textContent = Math.round(currentScore);
-                            }
-                        }, 20);
-                    }, 100);
-                }
-        
-                function resetSurvey() {
-                    currentCategoryIndex = 0;
-                    currentQuestionIndex = 0;
-                    totalScore = 0;
-                    categoryAnswers = surveyData.category.map(() => ({}));
-                    renderQuestion();
-                }
-        
-                init();
-            </script>
         </div>
-        <!-- content close -->
-        <!-- footer begin -->
-        <footer class="section-dark">
-            <div class="subfooter">
-                <div class="container">
-                    <!-- Footer content here -->
-                </div>
-            </div>
+        
+        <footer>
+            <p>Mukammal 2D/3D Planer - Masshtab, o'lchamlar va rang tanlash bilan</p>
         </footer>
-        <!-- footer close -->
     </div>
-    
-    <!-- Javascript Files -->
-    <script src="js/designesia.js"></script>
+
+    <script>
+        // Global o'zgaruvchilar
+        let stage, layer;
+        let currentMode = 'wall';
+        let walls = [];
+        let doors = [];
+        let windows = [];
+        let scene, camera, renderer, controls;
+        let isDrawing = false;
+        let currentLine = null;
+        let wallColor = '#8B4513';
+        let floorColor = '#808080';
+        let roofColor = '#708090';
+        let autoRotate = false;
+        let roomArea = 0;
+        
+        // Dasturni ishga tushirish
+        document.addEventListener('DOMContentLoaded', function() {
+            init2DEditor();
+            init3DViewer();
+            setupEventListeners();
+            updateAreaDisplay();
+        });
+        
+        // 2D Editorni ishga tushirish
+        function init2DEditor() {
+            const container = document.getElementById('floorplan-container');
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            
+            stage = new Konva.Stage({
+                container: 'floorplan-container',
+                width: width,
+                height: height
+            });
+            
+            layer = new Konva.Layer();
+            stage.add(layer);
+            
+            // Sahifaga chizish imkoniyatini qo'shish
+            stage.on('mousedown touchstart', handleMouseDown);
+            stage.on('mousemove touchmove', handleMouseMove);
+            stage.on('mouseup touchend', handleMouseUp);
+            
+            // Sahifa o'lchami o'zgarganda qayta sozlash
+            window.addEventListener('resize', function() {
+                const container = document.getElementById('floorplan-container');
+                stage.width(container.offsetWidth);
+                stage.height(container.offsetHeight);
+            });
+        }
+        
+        // Sichqoncha bosilganda
+        function handleMouseDown(e) {
+            if (currentMode !== 'wall') return;
+            
+            const pos = stage.getPointerPosition();
+            isDrawing = true;
+            
+            currentLine = new Konva.Line({
+                points: [pos.x, pos.y, pos.x, pos.y],
+                stroke: '#4CAF50',
+                strokeWidth: 4,
+                lineCap: 'round',
+                lineJoin: 'round'
+            });
+            
+            layer.add(currentLine);
+        }
+        
+        // Sichqoncha harakatlanganda
+        function handleMouseMove(e) {
+            if (!isDrawing || !currentLine) return;
+            
+            const pos = stage.getPointerPosition();
+            const points = currentLine.points();
+            points[2] = pos.x;
+            points[3] = pos.y;
+            currentLine.points(points);
+            
+            layer.batchDraw();
+        }
+        
+        // Sichqoncha qo'yilganda
+        function handleMouseUp(e) {
+            if (!isDrawing || !currentLine) return;
+            
+            isDrawing = false;
+            const points = currentLine.points();
+            
+            // Devorni saqlash
+            const wall = {
+                x1: points[0],
+                y1: points[1],
+                x2: points[2],
+                y2: points[3],
+                height: 250
+            };
+            
+            walls.push(wall);
+            
+            // O'lcham ko'rsatkichini qo'shish
+            addMeasurement(wall);
+            
+            updateObjectsCount();
+            updateAreaDisplay();
+            currentLine = null;
+        }
+        
+        // O'lcham ko'rsatkichini qo'shish
+        function addMeasurement(wall) {
+            const length = Math.sqrt(
+                Math.pow(wall.x2 - wall.x1, 2) + 
+                Math.pow(wall.y2 - wall.y1, 2)
+            );
+            
+            // Piksellarni metrga aylantirish (1px = 0.1m)
+            const lengthInMeters = (length * 0.1).toFixed(2);
+            
+            const midX = (wall.x1 + wall.x2) / 2;
+            const midY = (wall.y1 + wall.y2) / 2;
+            
+            const measurement = new Konva.Text({
+                x: midX - 20,
+                y: midY - 10,
+                text: lengthInMeters + ' m',
+                fontSize: 14,
+                fontFamily: 'Arial',
+                fill: 'white',
+                padding: 5,
+                align: 'center',
+                background: 'rgba(0, 0, 0, 0.7)',
+                cornerRadius: 5
+            });
+            
+            layer.add(measurement);
+            layer.batchDraw();
+        }
+        
+        // Maydonni hisoblash va ko'rsatish
+        function updateAreaDisplay() {
+            // Oddiy hisoblash - devorlar orasidagi maydonni hisoblash
+            if (walls.length >= 3) {
+                // Xona maydonini taxminiy hisoblash
+                let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+                
+                walls.forEach(wall => {
+                    minX = Math.min(minX, wall.x1, wall.x2);
+                    maxX = Math.max(maxX, wall.x1, wall.x2);
+                    minY = Math.min(minY, wall.y1, wall.y2);
+                    maxY = Math.max(maxY, wall.y1, wall.y2);
+                });
+                
+                const width = (maxX - minX) * 0.1; // metrga o'tkazish
+                const height = (maxY - minY) * 0.1; // metrga o'tkazish
+                
+                roomArea = (width * height).toFixed(2);
+            } else {
+                roomArea = 0;
+            }
+            
+            document.getElementById('area-value').textContent = roomArea + ' m²';
+            document.getElementById('room-name').textContent = 'Xona (' + roomArea + ' m²)';
+        }
+        
+        // 3D Vizualizatorni ishga tushirish
+        function init3DViewer() {
+            const container = document.getElementById('threejs-container');
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            
+            // Sahna yaratish
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f0f0);
+            
+            // Kamera yaratish
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera.position.set(0, 300, 500);
+            
+            // Renderer yaratish
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(width, height);
+            container.appendChild(renderer.domElement);
+            
+            // Yorug'lik qo'shish
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(100, 300, 200);
+            scene.add(directionalLight);
+            
+            // Grid qo'shish
+            const gridHelper = new THREE.GridHelper(1000, 20, 0x000000, 0x000000);
+            gridHelper.material.opacity = 0.2;
+            gridHelper.material.transparent = true;
+            scene.add(gridHelper);
+            
+            // Animatsiya
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                if (autoRotate) {
+                    scene.rotation.y += 0.005;
+                }
+                
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Sahifa o'lchami o'zgarganda qayta sozlash
+            window.addEventListener('resize', function() {
+                const container = document.getElementById('threejs-container');
+                camera.aspect = container.offsetWidth / container.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.offsetWidth, container.offsetHeight);
+            });
+        }
+        
+        // 3D model yaratish
+        function generate3DModel() {
+            // Avvalgi modellarni tozalash
+            while(scene.children.length > 0) { 
+                scene.remove(scene.children[0]); 
+            }
+            
+            // Yorug'lik va gridni qayta qo'shish
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(100, 300, 200);
+            scene.add(directionalLight);
+            
+            const gridHelper = new THREE.GridHelper(1000, 20, 0x000000, 0x000000);
+            gridHelper.material.opacity = 0.2;
+            gridHelper.material.transparent = true;
+            scene.add(gridHelper);
+            
+            // Devorlarni chizish
+            walls.forEach(wall => {
+                const length = Math.sqrt(
+                    Math.pow(wall.x2 - wall.x1, 2) + 
+                    Math.pow(wall.y2 - wall.y1, 2)
+                );
+                
+                const wallGeometry = new THREE.BoxGeometry(length, wall.height, 10);
+                const wallMaterial = new THREE.MeshPhongMaterial({ 
+                    color: wallColor,
+                    shininess: 30
+                });
+                const wallMesh = new THREE.Mesh(wallGeometry, wallMaterial);
+                
+                // Devorni joylashtirish
+                const angle = Math.atan2(wall.y2 - wall.y1, wall.x2 - wall.x1);
+                wallMesh.position.x = (wall.x1 + wall.x2) / 2;
+                wallMesh.position.y = wall.height / 2;
+                wallMesh.position.z = (wall.y1 + wall.y2) / 2;
+                wallMesh.rotation.y = -angle;
+                
+                scene.add(wallMesh);
+            });
+            
+            // Eshiklarni chizish
+            doors.forEach(door => {
+                const doorGeometry = new THREE.BoxGeometry(80, 180, 5);
+                const doorMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0x8B4513,
+                    shininess: 50
+                });
+                const doorMesh = new THREE.Mesh(doorGeometry, doorMaterial);
+                
+                doorMesh.position.x = door.x;
+                doorMesh.position.y = 90;
+                doorMesh.position.z = door.y;
+                
+                scene.add(doorMesh);
+            });
+            
+            // Derazalarni chizish
+            windows.forEach(window => {
+                const windowGeometry = new THREE.BoxGeometry(100, 100, 5);
+                const windowMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0x87CEEB,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                const windowMesh = new THREE.Mesh(windowGeometry, windowMaterial);
+                
+                windowMesh.position.x = window.x;
+                windowMesh.position.y = 150;
+                windowMesh.position.z = window.y;
+                
+                scene.add(windowMesh);
+            });
+            
+            // Pol va tom qo'shish (agar devorlar mavjud bo'lsa)
+            if (walls.length >= 3) {
+                // Pol qo'shish
+                const floorGeometry = new THREE.PlaneGeometry(1000, 1000);
+                const floorMaterial = new THREE.MeshPhongMaterial({ 
+                    color: floorColor,
+                    side: THREE.DoubleSide
+                });
+                const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+                floorMesh.rotation.x = Math.PI / 2;
+                floorMesh.position.y = 0;
+                scene.add(floorMesh);
+                
+                // Tom qo'shish
+                const roofGeometry = new THREE.PlaneGeometry(1000, 1000);
+                const roofMaterial = new THREE.MeshPhongMaterial({ 
+                    color: roofColor,
+                    side: THREE.DoubleSide
+                });
+                const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial);
+                roofMesh.rotation.x = -Math.PI / 2;
+                roofMesh.position.y = 250;
+                scene.add(roofMesh);
+            }
+        }
+        
+        // Eshik qo'shish
+        function addDoor() {
+            currentMode = 'door';
+            document.getElementById('current-mode').textContent = 'Eshik qo\'shish';
+            
+            // Foydalanuvchi sahifada joy tanlaydi
+            stage.on('click tap', function(e) {
+                if (currentMode !== 'door') return;
+                
+                const pos = stage.getPointerPosition();
+                
+                // Eshikni 2D sahifada chizish
+                const door = new Konva.Rect({
+                    x: pos.x - 40,
+                    y: pos.y - 5,
+                    width: 80,
+                    height: 10,
+                    fill: '#FF9800',
+                    stroke: '#E65100',
+                    strokeWidth: 2
+                });
+                
+                layer.add(door);
+                
+                // Eshikni saqlash
+                doors.push({
+                    x: pos.x,
+                    y: pos.y
+                });
+                
+                updateObjectsCount();
+                
+                // Hodisani olib tashlash
+                stage.off('click tap');
+                currentMode = 'wall';
+                document.getElementById('current-mode').textContent = 'Devor qo\'shish';
+            });
+        }
+        
+        // Deraza qo'shish
+        function addWindow() {
+            currentMode = 'window';
+            document.getElementById('current-mode').textContent = 'Deraza qo\'shish';
+            
+            // Foydalanuvchi sahifada joy tanlaydi
+            stage.on('click tap', function(e) {
+                if (currentMode !== 'window') return;
+                
+                const pos = stage.getPointerPosition();
+                
+                // Derazani 2D sahifada chizish
+                const window = new Konva.Rect({
+                    x: pos.x - 50,
+                    y: pos.y - 5,
+                    width: 100,
+                    height: 10,
+                    fill: '#2196F3',
+                    stroke: '#0D47A1',
+                    strokeWidth: 2
+                });
+                
+                layer.add(window);
+                
+                // Derazani saqlash
+                windows.push({
+                    x: pos.x,
+                    y: pos.y
+                });
+                
+                updateObjectsCount();
+                
+                // Hodisani olib tashlash
+                stage.off('click tap');
+                currentMode = 'wall';
+                document.getElementById('current-mode').textContent = 'Devor qo\'shish';
+            });
+        }
+        
+        // Obyektlar sonini yangilash
+        function updateObjectsCount() {
+            const totalObjects = walls.length + doors.length + windows.length;
+            document.getElementById('objects-count').textContent = totalObjects;
+        }
+        
+        // Sahifani tozalash
+        function clearCanvas() {
+            layer.destroyChildren();
+            layer.draw();
+            
+            walls = [];
+            doors = [];
+            windows = [];
+            
+            updateObjectsCount();
+            updateAreaDisplay();
+            
+            // 3D sahifani ham tozalash
+            while(scene.children.length > 0) { 
+                scene.remove(scene.children[0]); 
+            }
+            
+            // Yorug'lik va gridni qayta qo'shish
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(100, 300, 200);
+            scene.add(directionalLight);
+            
+            const gridHelper = new THREE.GridHelper(1000, 20, 0x000000, 0x000000);
+            gridHelper.material.opacity = 0.2;
+            gridHelper.material.transparent = true;
+            scene.add(gridHelper);
+        }
+        
+        // Rang tanlash
+        function setupColorPickers() {
+            const colorOptions = document.querySelectorAll('.color-option');
+            
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    const color = this.getAttribute('data-color');
+                    
+                    // Faqat bir rangni tanlash
+                    colorOptions.forEach(opt => {
+                        if (opt.getAttribute('data-target') === target) {
+                            opt.classList.remove('active');
+                        }
+                    });
+                    
+                    this.classList.add('active');
+                    
+                    // Rangni saqlash
+                    if (target === 'wall') {
+                        wallColor = color;
+                    } else if (target === 'floor') {
+                        floorColor = color;
+                    } else if (target === 'roof') {
+                        roofColor = color;
+                    }
+                    
+                    // Agar 3D model mavjud bo'lsa, yangilash
+                    if (walls.length > 0) {
+                        generate3DModel();
+                    }
+                });
+            });
+        }
+        
+        // Event listenerlarni sozlash
+        function setupEventListeners() {
+            document.getElementById('add-wall-btn').addEventListener('click', function() {
+                currentMode = 'wall';
+                document.getElementById('current-mode').textContent = 'Devor qo\'shish';
+            });
+            
+            document.getElementById('add-door-btn').addEventListener('click', addDoor);
+            document.getElementById('add-window-btn').addEventListener('click', addWindow);
+            document.getElementById('clear-btn').addEventListener('click', clearCanvas);
+            document.getElementById('generate-3d-btn').addEventListener('click', generate3DModel);
+            
+            document.getElementById('reset-view-btn').addEventListener('click', function() {
+                camera.position.set(0, 300, 500);
+                camera.lookAt(0, 0, 0);
+                scene.rotation.y = 0;
+                autoRotate = false;
+            });
+            
+            document.getElementById('auto-rotate-btn').addEventListener('click', function() {
+                autoRotate = !autoRotate;
+                this.textContent = autoRotate ? "To'xtatish" : "Aylantirish";
+            });
+            
+            // Rang tanlashni sozlash
+            setupColorPickers();
+        }
+    </script>
 </body>
 </html>
