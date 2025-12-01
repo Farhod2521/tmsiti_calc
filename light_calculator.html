@@ -831,126 +831,29 @@
                             </div>
                         </div>
                                                 <!-- Rang tanlash bo'limi -->
+                        <!-- Rang tanlash bo'limi -->
                         <div class="row mt-4" id="colorSelectionSection" style="display: none;">
                             <div class="col-12">
                                 <div class="results-container">
-                                    <h5 class="mb-3">XONA RANGLARINI TANLANG</h5>
+                                    <h5 class="mb-3">XONA RANGLAR KOMBINATSIYASINI TANLANG</h5>
                                     
-                                    <!-- Shift (POTOLOK) rangi -->
-                                    <div class="row mb-4">
-                                        <div class="col-md-4">
-                                            <div class="select-container">
-                                                <label class="select-label"><i class="fas fa-arrow-up"></i> Shift (POTOLOK) rangi</label>
-                                                <div class="radio-group">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingWhite" value="80" checked>
-                                                        <label class="form-check-label" for="ceilingWhite">
-                                                            Oq (80%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingLight" value="70">
-                                                        <label class="form-check-label" for="ceilingLight">
-                                                            Ochiq (70%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingGray" value="50">
-                                                        <label class="form-check-label" for="ceilingGray">
-                                                            Kulrang (50%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingDark" value="30">
-                                                        <label class="form-check-label" for="ceilingDark">
-                                                            Qorong'i (30%)
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Devor rangi -->
-                                        <div class="col-md-4">
-                                            <div class="select-container">
-                                                <label class="select-label"><i class="fas fa-border-all"></i> Devor rangi</label>
-                                                <div class="radio-group">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallWhite" value="80" checked>
-                                                        <label class="form-check-label" for="wallWhite">
-                                                            Oq (80%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallLight" value="50">
-                                                        <label class="form-check-label" for="wallLight">
-                                                            Ochiq (50%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallGray" value="30">
-                                                        <label class="form-check-label" for="wallGray">
-                                                            Kulrang (30%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallDark" value="0">
-                                                        <label class="form-check-label" for="wallDark">
-                                                            Qorong'i (0%)
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Pol rangi -->
-                                        <div class="col-md-4">
-                                            <div class="select-container">
-                                                <label class="select-label"><i class="fas fa-square"></i> Pol rangi</label>
-                                                <div class="radio-group">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorGrayLight" value="30">
-                                                        <label class="form-check-label" for="floorGrayLight">
-                                                            Och kulrang (30%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorGrayMedium" value="20">
-                                                        <label class="form-check-label" for="floorGrayMedium">
-                                                            O'rta kulrang (20%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorGrayDark" value="10">
-                                                        <label class="form-check-label" for="floorGrayDark">
-                                                            Qorong'i kulrang (10%)
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorDark" value="0">
-                                                        <label class="form-check-label" for="floorDark">
-                                                            Qorong'i (0%)
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Umumiy aks ettirish koeffitsienti -->
                                     <div class="row">
-                                        <div class="col-12">
-                                            <div class="alert alert-info">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <strong>Umumiy aks ettirish koeffitsienti:</strong>
-                                                        <span id="totalReflectionCoefficient" class="ms-2 fw-bold">0%</span>
-                                                    </div>
-                                                    <button class="btn btn-sm btn-primary" onclick="calculateReflectionCoefficient()">
-                                                        Hisoblash
-                                                    </button>
-                                                </div>
+                                        <div class="col-md-12 ">
+                                            <div class="select-container">
+                                              
+                                                <select class="custom-select" id="colorCombination" onchange="updateReflectionCoefficient()">
+                                                    <option value="">Kombinatsiyani tanlang</option>
+                                                    <option value="80,80,30">Oq, Oq, Kulrang (80/80/30)</option>
+                                                    <option value="70,50,20">Ochiq, Ochiq, O'rta kulrang (70/50/20)</option>
+                                                    <option value="50,50,10">Kulrang, Ochiq, Qorong'i kulrang (50/50/10)</option>
+                                                    <option value="50,30,10">Kulrang, Kulrang, Qorong'i kulrang (50/30/10)</option>
+                                                    <option value="30,30,10">Qorong'i, Kulrang, Qorong'i kulrang (30/30/10)</option>
+                                                    <option value="0,0,0">Qorong'i, Qorong'i, Qorong'i (0/0/0)</option>
+                                                </select>
                                             </div>
+                                            
+
+
                                         </div>
                                     </div>
                                 </div>
