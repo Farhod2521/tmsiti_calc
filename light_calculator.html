@@ -508,7 +508,32 @@
           text-align: left;
           flex: 1;
         }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         .logo-scroll, .logo-mobile {
           display: none;
         }
@@ -530,6 +555,58 @@
             line-height: 1.2;
           }
         }
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            border-radius: 2px;
+        }
+        
+        /* Radio button guruhi uchun yangi stillar */
+        .radio-group {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .form-check {
+            margin-bottom: 10px;
+            padding-left: 30px;
+        }
+
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            margin-left: -30px;
+        }
+
+        .form-check-input:checked {
+            background-color: #234982;
+            border-color: #234982;
+        }
+
+        .form-check-label {
+            font-size: 0.9rem;
+            color: #495057;
+            cursor: pointer;
+        }
+            
     </style>
 </head>
 
@@ -591,10 +668,10 @@
                             </div>
                             <div class="de-flex-col header-col-mid">
                                 <ul id="mainmenu">
-                                    <li><a class="menu-item" href="#">Bosh sahifa</a></li>
-                                    <li><a class="menu-item" href="/">Biz haqimizda</a></li>
-                                    <li><a class="menu-item" href="/">Loyihalar</a></li>
-                                    <li><a class="menu-item" href="/">Blog</a></li>
+                                    <li><a class="menu-item" href="#"><i class="fas fa-home"></i> Bosh sahifa</a></li>
+                                    <li><a class="menu-item" href="#"><i class="fas fa-info-circle"></i> Biz haqimizda</a></li>
+                                    <li><a class="menu-item" href="#"><i class="fas fa-project-diagram"></i> Loyihalar</a></li>
+                                    <li><a class="menu-item" href="#"><i class="fas fa-blog"></i> Blog</a></li>
                                 </ul>
                             </div>
                             <div class="de-flex-col">
@@ -617,15 +694,8 @@
                 <div class="container relative z-index-1000">
                     <div class="row align-items-center">
                         <div class="col-lg-6 offset-lg-3 text-center">
-                            <h1 style="
-                            font-family: 'Inter', 'Arial', sans-serif;
-                            font-size: 32px;
-                            font-weight: 700;
-                            color: #1a1a1a;
-                            line-height: 1.3;
-                            margin: 2px 0;
-                         
-                            ">Yorug'lik kalkulyatori</h1>
+                            <h1 class="section-title slide-in-left">Yorug'lik Kalkulyatori</h1>
+                            <p class="text-muted slide-in-right">Xona parametrlari bo'yicha optimal yorug'likni hisoblang va lampochkalarni joylashtiring</p>
                         </div>
                     </div>
                 </div>
@@ -634,8 +704,8 @@
 
             <section class="no-top">
                 <div class="container-xxl">
-                    <div class="main-container">
-                        <div class="row">
+                    <div class="main-container fade-in">
+                        <div class="row params-section">
                             <!-- Chap tomon: Parametrlar va Selektlar -->
                             <div class="col-lg-6 col-md-12">
                                 <div class="row params-section">
@@ -728,7 +798,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="select-container">
-                                            <label class="select-label">Bino toifasi</label>
+                                            <label class="select-label"><i class="fas fa-building"></i> Bino toifasi</label>
                                             <select class="custom-select" id="buildingCategory" onchange="loadRoomCategories()">
                                                 <option value="">Kategoriyani tanlang</option>
                                                 <!-- API dan yuklanadi -->
@@ -738,7 +808,7 @@
                                     
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="select-container">
-                                            <label class="select-label">Xona turi</label>
+                                            <label class="select-label"><i class="fas fa-door-open"></i> Xona turi</label>
                                             <select class="custom-select" id="roomType" onchange="loadRoomDetails()">
                                                 <option value="">Xona turini tanlang</option>
                                                 <!-- API dan yuklanadi -->
@@ -757,6 +827,132 @@
                                     <div class="dimension-line dimension-line-vertical" id="lengthLine" style="top: 20%; right: 16%;">3.0 m</div>
 
                                     <div class="dimension-line dimension-line-vertical" id="heightLine" style="top: 50%; right: 5%;">3.0 m</div>
+                                </div>
+                            </div>
+                        </div>
+                                                <!-- Rang tanlash bo'limi -->
+                        <div class="row mt-4" id="colorSelectionSection" style="display: none;">
+                            <div class="col-12">
+                                <div class="results-container">
+                                    <h5 class="mb-3">XONA RANGLARINI TANLANG</h5>
+                                    
+                                    <!-- Shift (POTOLOK) rangi -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-4">
+                                            <div class="select-container">
+                                                <label class="select-label"><i class="fas fa-arrow-up"></i> Shift (POTOLOK) rangi</label>
+                                                <div class="radio-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingWhite" value="80" checked>
+                                                        <label class="form-check-label" for="ceilingWhite">
+                                                            Oq (80%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingLight" value="70">
+                                                        <label class="form-check-label" for="ceilingLight">
+                                                            Ochiq (70%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingGray" value="50">
+                                                        <label class="form-check-label" for="ceilingGray">
+                                                            Kulrang (50%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="ceilingColor" id="ceilingDark" value="30">
+                                                        <label class="form-check-label" for="ceilingDark">
+                                                            Qorong'i (30%)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Devor rangi -->
+                                        <div class="col-md-4">
+                                            <div class="select-container">
+                                                <label class="select-label"><i class="fas fa-border-all"></i> Devor rangi</label>
+                                                <div class="radio-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallWhite" value="80" checked>
+                                                        <label class="form-check-label" for="wallWhite">
+                                                            Oq (80%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallLight" value="50">
+                                                        <label class="form-check-label" for="wallLight">
+                                                            Ochiq (50%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallGray" value="30">
+                                                        <label class="form-check-label" for="wallGray">
+                                                            Kulrang (30%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="wallColor" id="wallDark" value="0">
+                                                        <label class="form-check-label" for="wallDark">
+                                                            Qorong'i (0%)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Pol rangi -->
+                                        <div class="col-md-4">
+                                            <div class="select-container">
+                                                <label class="select-label"><i class="fas fa-square"></i> Pol rangi</label>
+                                                <div class="radio-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorGrayLight" value="30">
+                                                        <label class="form-check-label" for="floorGrayLight">
+                                                            Och kulrang (30%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorGrayMedium" value="20">
+                                                        <label class="form-check-label" for="floorGrayMedium">
+                                                            O'rta kulrang (20%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorGrayDark" value="10">
+                                                        <label class="form-check-label" for="floorGrayDark">
+                                                            Qorong'i kulrang (10%)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="floorColor" id="floorDark" value="0">
+                                                        <label class="form-check-label" for="floorDark">
+                                                            Qorong'i (0%)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Umumiy aks ettirish koeffitsienti -->
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="alert alert-info">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <strong>Umumiy aks ettirish koeffitsienti:</strong>
+                                                        <span id="totalReflectionCoefficient" class="ms-2 fw-bold">0%</span>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-primary" onclick="calculateReflectionCoefficient()">
+                                                        Hisoblash
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -789,6 +985,7 @@
                             </div>
                         </div>
                         
+
                         <!-- Lampochka kategoriyalari -->
                         <div class="row mt-4">
                             <div class="col-12">
@@ -953,6 +1150,7 @@
         const lampDetailsContent = document.getElementById('lampDetailsContent');
         const recommendedLampsContainer = document.getElementById('recommendedLampsContainer');
         const recommendedLampsContent = document.getElementById('recommendedLampsContent');
+        const colorSelectionSection = document.getElementById('colorSelectionSection');
         
         // Modal uchun o'zgaruvchilar
         let currentLampData = null;
@@ -969,6 +1167,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadBuildingCategories();
             updateDimensionLines();
+            
+            // Radio button o'zgarishlarini kuzatish
+            document.querySelectorAll('input[type="radio"][name="ceilingColor"], input[type="radio"][name="wallColor"], input[type="radio"][name="floorColor"]').forEach(radio => {
+                radio.addEventListener('change', calculateReflectionCoefficient);
+            });
         });
         
         // Kalkulyator funksiyalari
@@ -1042,7 +1245,18 @@
             const length = parseFloat(document.getElementById('lengthValue').value);
             const area = width * length;
             const coefficient = getCoefficient();
-            const totalLight = lk * area * coefficient;
+            
+            let totalLight = lk * area * coefficient;
+            
+            // Aks ettirish koeffitsientini hisobga olish (agar tanlangan bo'lsa)
+            const reflectionElement = document.getElementById('totalReflectionCoefficient');
+            if (reflectionElement && reflectionElement.textContent !== '0%') {
+                const reflectionValue = parseFloat(reflectionElement.textContent);
+                if (!isNaN(reflectionValue)) {
+                    const reflectionFactor = 1 + (reflectionValue / 100);
+                    totalLight *= reflectionFactor;
+                }
+            }
             
             if (lk > 0) {
                 totalLightDisplay.style.display = 'block';
@@ -1062,7 +1276,11 @@
             rows.forEach(row => {
                 const luminousFluxMin = parseFloat(row.dataset.luminousFluxMin) || 1;
                 if (totalLight > 0 && luminousFluxMin > 0) {
-                    const lampsCount = Math.ceil(totalLight / luminousFluxMin);
+                    let lampsCount = Math.ceil(totalLight / luminousFluxMin);
+                    
+                    // Juft songa yaxlitlash
+                    lampsCount = roundToEven(lampsCount);
+                    
                     const countCell = row.querySelector('.lamps-count');
                     if (countCell) {
                         countCell.innerHTML = `<span class="lamps-count-badge">${lampsCount} ta</span>`;
@@ -1075,110 +1293,131 @@
         }
         
         // Tavsiya qilingan lampochkalarni yangilash
-// Tavsiya qilingan lampochkalarni yangilash
-function updateRecommendedLamps() {
-    const totalLight = parseFloat(totalLightValue.textContent) || 0;
-    
-    if (totalLight <= 0 || !currentLampCategory) {
-        recommendedLampsContainer.style.display = 'none';
-        return;
-    }
-    
-    // Tanlangan kategoriyadagi lampochkalarni olish
-    const lamps = lampCategoriesMap.get(currentLampCategory);
-    if (!lamps || lamps.length === 0) {
-        recommendedLampsContainer.style.display = 'none';
-        return;
-    }
-    
-    // Barcha lampochkalar uchun kerakli sonni hisoblash
-    const lampCalculations = [];
-    lamps.forEach(lamp => {
-        const luminousFluxMin = lamp.luminous_flux_max || 1;
-        if (luminousFluxMin > 0) {
-            let lampsCount = totalLight / luminousFluxMin;
+        function updateRecommendedLamps() {
+            const totalLight = parseFloat(totalLightValue.textContent) || 0;
             
-            // Yaxlitlash qoidasi: faqat juft sonlar
-            lampsCount = roundToEven(lampsCount);
+            if (totalLight <= 0 || !currentLampCategory) {
+                recommendedLampsContainer.style.display = 'none';
+                return;
+            }
             
-            const power = parseFloat(lamp.power) || 0;
-            const totalPower = lampsCount * power;
+            // Tanlangan kategoriyadagi lampochkalarni olish
+            const lamps = lampCategoriesMap.get(currentLampCategory);
+            if (!lamps || lamps.length === 0) {
+                recommendedLampsContainer.style.display = 'none';
+                return;
+            }
             
-            lampCalculations.push({
-                lamp: lamp,
-                count: lampsCount,
-                power: power,
-                totalPower: totalPower,
-                efficiency: lamp.efficiency || 0
+            // Barcha lampochkalar uchun kerakli sonni hisoblash
+            const lampCalculations = [];
+            lamps.forEach(lamp => {
+                const luminousFluxMin = lamp.luminous_flux_max || 1;
+                if (luminousFluxMin > 0) {
+                    let lampsCount = totalLight / luminousFluxMin;
+                    
+                    // Juft songa yaxlitlash
+                    lampsCount = roundToEven(lampsCount);
+                    
+                    const power = parseFloat(lamp.power) || 0;
+                    const totalPower = lampsCount * power;
+                    
+                    lampCalculations.push({
+                        lamp: lamp,
+                        count: lampsCount,
+                        power: power,
+                        totalPower: totalPower,
+                        efficiency: lamp.efficiency || 0
+                    });
+                }
             });
+            
+            // Eng kam UMUMIY QUVVAT (lampochka soni * quvvat) bo'yicha saralash
+            lampCalculations.sort((a, b) => {
+                // Birinchi navbatda eng kam umumiy quvvat
+                if (a.totalPower !== b.totalPower) {
+                    return a.totalPower - b.totalPower;
+                }
+                // Agar umumiy quvvat bir xil bo'lsa, eng kam lampochka soni
+                return a.count - b.count;
+            });
+            
+            // Eng yaxshi 2 ta variantni olish
+            const bestLamps = lampCalculations.slice(0, 2);
+            
+            // Tavsiya qilingan lampochkalarni ko'rsatish
+            if (bestLamps.length > 0) {
+                let html = '';
+                bestLamps.forEach((item, index) => {
+                    const lamp = item.lamp;
+                    html += `
+                        <tr data-luminous-flux-min="${lamp.luminous_flux_max || 1}">
+                            <td>${lamp.name || 'Noma\'lum'}</td>
+                            <td>${lamp.power || 'Noma\'lum'}</td>
+                            <td>${lamp.color_temperature || 'Noma\'lum'}</td>
+                            <td>${lamp.voltage || 'Noma\'lum'}</td>
+                            <td>${lamp.luminous_flux || 'Noma\'lum'}</td>
+                            <td>${lamp.luminous_flux_max || 'Noma\'lum'}</td>
+                            <td>${lamp.efficiency || 'Noma\'lum'}</td>
+                            <td>${lamp.color_rendering_index || 'Noma\'lum'}</td>
+                            <td class="lamps-count">
+                                <span class="lamps-count-badge">${item.count} ta</span>
+                            </td>
+                            <td>
+                                <button class="btn-details" onclick="showPlacementModal(${JSON.stringify(lamp).replace(/"/g, '&quot;')}, ${item.count})">
+                                    Batafsil
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                recommendedLampsContent.innerHTML = html;
+                recommendedLampsContainer.style.display = 'block';
+            } else {
+                recommendedLampsContainer.style.display = 'none';
+            }
         }
-    });
-    
-    // Eng kam UMUMIY QUVVAT (lampochka soni * quvvat) bo'yicha saralash
-    lampCalculations.sort((a, b) => {
-        // Birinchi navbatda eng kam umumiy quvvat
-        if (a.totalPower !== b.totalPower) {
-            return a.totalPower - b.totalPower;
-        }
-        // Agar umumiy quvvat bir xil bo'lsa, eng kam lampochka soni
-        return a.count - b.count;
-    });
-    
-    // Eng yaxshi 2 ta variantni olish
-    const bestLamps = lampCalculations.slice(0, 2);
-    
-    // Tavsiya qilingan lampochkalarni ko'rsatish
-    if (bestLamps.length > 0) {
-        let html = '';
-        bestLamps.forEach((item, index) => {
-            const lamp = item.lamp;
-            html += `
-                <tr data-luminous-flux-min="${lamp.luminous_flux_max || 1}">
-                    <td>${lamp.name || 'Noma\'lum'}</td>
-                    <td>${lamp.power || 'Noma\'lum'}</td>
-                    <td>${lamp.color_temperature || 'Noma\'lum'}</td>
-                    <td>${lamp.voltage || 'Noma\'lum'}</td>
-                    <td>${lamp.luminous_flux || 'Noma\'lum'}</td>
-                    <td>${lamp.luminous_flux_max || 'Noma\'lum'}</td>
-                    <td>${lamp.efficiency || 'Noma\'lum'}</td>
-                    <td>${lamp.color_rendering_index || 'Noma\'lum'}</td>
-                    <td class="lamps-count">
-                        <span class="lamps-count-badge">${item.count} ta</span>
-                    </td>
-                    <td>
-                        <button class="btn-details" onclick="showPlacementModal(${JSON.stringify(lamp).replace(/"/g, '&quot;')}, ${item.count})">
-                            Batafsil
-                        </button>
-                    </td>
-                </tr>
-            `;
-        });
         
-        recommendedLampsContent.innerHTML = html;
-        recommendedLampsContainer.style.display = 'block';
-    } else {
-        recommendedLampsContainer.style.display = 'none';
-    }
-}
-// Juft songa yaxlitlash funksiyasi
-function roundToEven(number) {
-    const rounded = Math.round(number * 10) / 10; // Bir xona aniqlikda yaxlitlash
-    const decimal = rounded % 1;
-    const integer = Math.floor(rounded);
-    
-    // Agar butun qismi toq bo'lsa
-    if (integer % 2 !== 0) {
-        return integer + 1; // Keyingi juft son
-    }
-    // Agar butun qismi juft bo'lsa
-    else {
-        if (decimal <= 0.5) {
-            return integer; // O'zi
-        } else {
-            return integer + 2; // Keyingi juft son
+        // Juft songa yaxlitlash funksiyasi
+        function roundToEven(number) {
+            const rounded = Math.round(number * 10) / 10; // Bir xona aniqlikda yaxlitlash
+            const decimal = rounded % 1;
+            const integer = Math.floor(rounded);
+            
+            // Agar butun qismi toq bo'lsa
+            if (integer % 2 !== 0) {
+                return integer + 1; // Keyingi juft son
+            }
+            // Agar butun qismi juft bo'lsa
+            else {
+                if (decimal <= 0.5) {
+                    return integer; // O'zi
+                } else {
+                    return integer + 2; // Keyingi juft son
+                }
+            }
         }
-    }
-}
+        
+        // Aks ettirish koeffitsientini hisoblash funksiyasi
+        function calculateReflectionCoefficient() {
+            // Tanlangan qiymatlarni olish
+            const ceilingColor = document.querySelector('input[name="ceilingColor"]:checked').value;
+            const wallColor = document.querySelector('input[name="wallColor"]:checked').value;
+            const floorColor = document.querySelector('input[name="floorColor"]:checked').value;
+            
+            // O'rtacha koeffitsientni hisoblash (soddalashtirilgan formula)
+            const avgCoefficient = (parseFloat(ceilingColor) + parseFloat(wallColor) + parseFloat(floorColor)) / 3;
+            
+            // Natijani ko'rsatish
+            document.getElementById('totalReflectionCoefficient').textContent = avgCoefficient.toFixed(1) + '%';
+            
+            // Yorug'likni qayta hisoblash
+            updateTotalLight();
+            
+            // Lampochka sonini yangilash
+            updateLampsCount();
+        }
+        
         // Batafsil tugmasi bosilganda
         function showPlacementModal(lampData, lampsCount) {
             currentLampData = lampData;
@@ -1446,6 +1685,7 @@ function roundToEven(number) {
                 lampCategoriesContainer.style.display = 'none';
                 lampDetailsContainer.style.display = 'none';
                 recommendedLampsContainer.style.display = 'none';
+                colorSelectionSection.style.display = 'none';
                 currentRoomData = null;
                 return;
             }
@@ -1481,6 +1721,9 @@ function roundToEven(number) {
                 
                 roomDetailsContent.innerHTML = html;
                 
+                // Rang tanlash bo'limini ko'rsatish
+                colorSelectionSection.style.display = 'block';
+                
                 // Umumiy yorug'likni yangilash
                 updateTotalLight();
                 
@@ -1490,6 +1733,7 @@ function roundToEven(number) {
             } catch (error) {
                 console.error('Xona ma\'lumotlarini yuklashda xatolik:', error);
                 roomDetailsContent.innerHTML = '<tr><td colspan="8" class="text-center text-danger">Ma\'lumotlarni yuklashda xatolik yuz berdi</td></tr>';
+                colorSelectionSection.style.display = 'none';
             }
         }
         
