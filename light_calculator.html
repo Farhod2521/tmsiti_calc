@@ -22,7 +22,7 @@
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(180deg, #F7F8FA 0%, #F3F4F6 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
@@ -46,7 +46,8 @@
         .parameter-card {
             background-color: #f8f9fa;
             border-radius: 10px;
-            padding: 15px;
+            margin-top: 18px;
+            padding: 25px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             height: 100%;
@@ -727,9 +728,11 @@
                             <!-- O'ng tomon: Xona Rasmi -->
                             <div class="col-lg-6 col-md-12">
                                 <div class="room-image-container">
-                                    <img src="https://light-calc-rust.vercel.app/_next/image?url=%2Fimages%2Fcalculator.webp&w=640&q=75" alt="Xona rasmi" class="img-fluid" id="roomImage">
+                                    <img src="/images/room.jpg" alt="Xona rasmi" class="img-fluid" id="roomImage">
                                     <!-- O'lcham chiziqlari -->
-                                    <div class="dimension-line dimension-line-horizontal" id="widthLine" style="top: 10%; left: 50%;">3.0 m</div>
+                                    <div class="dimension-line dimension-line-horizontal" id="widthLine" style="top: 16%; left: 20%;">3.0 m</div>
+                                    <div class="dimension-line dimension-line-vertical" id="lengthLine" style="top: 20%; right: 16%;">3.0 m</div>
+
                                     <div class="dimension-line dimension-line-vertical" id="heightLine" style="top: 50%; right: 5%;">3.0 m</div>
                                 </div>
                             </div>
@@ -990,9 +993,11 @@
         
         function updateDimensionLines() {
             const width = document.getElementById('widthValue').value;
+            const length = document.getElementById('lengthValue').value;
             const height = document.getElementById('heightValue').value;
             
             widthLine.textContent = `${width} m`;
+            lengthLine.textContent = `${length} m`;
             heightLine.textContent = `${height} m`;
         }
         
