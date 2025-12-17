@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TMSITI — Yashil qurilish kalkulyatori</title>
+    <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="CoolAir — Yashil qurilish kalkulyatori" name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="author">
+    <!-- CSS Files -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/coloring.css" rel="stylesheet" type="text/css">
+    <!-- color scheme -->
+    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .container {
+            max-width: 900px;
+        }
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .custom-progress {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            position: relative;
+            margin: 30px 0;
+        }
+        .progress-bar-custom {
+            height: 100%;
+            background: #234982;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        .progress-step {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: #6c757d;
+            transition: all 0.5s ease;
+            z-index: 2;
+            cursor: pointer;
+        }
+        .progress-step.active {
+            border-color: #234982;
+            background: #234982;
+            color: white;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        .progress-step.completed {
+            border-color: #28a745;
+            background: #28a745;
+            color: white;
+        }
+        .progress-step-label {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            white-space: nowrap;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+        }
+        .progress-step.active + .progress-step-label {
+            color: #234982;
+            font-size: 13px;
+        }
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .question-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 25px;
+        }
+        .question-text {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .form-check {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+        }
+        .form-check:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+        .form-check-input:checked ~ .form-check-label {
+            color: #234982;
+            font-weight: 600;
+        }
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.25em;
+            cursor: pointer;
+        }
+        .form-check-input:checked {
+            background-color: #234982;
+            border-color: #234982;
+        }
+        .form-check-label {
+            font-size: 16px;
+            color: #4a5568;
+            cursor: pointer;
+            margin-left: 10px;
+            width: 100%;
+        }
+        .btn-next, .btn-prev {
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-next {
+            background: #234982;
+            border: none;
+            color: white;
+        }
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-next:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .btn-prev {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #4a5568;
+        }
+        .btn-prev:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+        
+        /* Yangi Natijalar Dizayni */
+        .result-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .overall-score-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .overall-score-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .overall-score-display {
+            display: inline-block;
+            padding: 25px 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #dee2e6;
+        }
+        
+        .overall-score-number {
+            font-size: 64px;
+            font-weight: 800;
+            color: #234982;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .overall-score-grade {
+            font-size: 48px;
+            font-weight: 700;
+            color: #dc2626; /* G bahosi uchun qizil */
+            margin-bottom: 5px;
+        }
+        
+        .overall-score-label {
+            font-size: 18px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .rating-scale-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .rating-scale-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .rating-scale-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .rating-scale-table th {
+            background-color: #234982;
+            color: white;
+            font-weight: 600;
+            padding: 18px 15px;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+        }
+        
+        .rating-scale-table td {
+            padding: 16px 15px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 15px;
+            text-align: center;
+        }
+        
+        .rating-scale-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .rating-scale-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .grade-cell {
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .category-results-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-results-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .category-results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .category-result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .category-result-card:hover {
+            border-color: #234982;
+            box-shadow: 0 6px 12px rgba(35, 73, 130, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .category-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            min-height: 45px;
+        }
+        
+        .category-score {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .score-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #234982;
+        }
+        
+        .score-label {
+            font-size: 14px;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .total-score-section {
+            background: linear-gradient(135deg, #234982 0%, #1a365d 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 10px;
+        }
+        
+        .total-score-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .total-score-label {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .total-score-value {
+            font-size: 48px;
+            font-weight: 800;
+        }
+        
+        .result-actions {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        /* Radio button uchun maxsus style */
+        .radio-item {
+            position: relative;
+        }
+        
+        .double-click-hint {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #6c757d;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .radio-item:hover .double-click-hint {
+            opacity: 0.7;
+        }
+
+        #logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            max-width: 500px;
+            margin: 10px auto;
+        }
+
+        #logo a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+
+        .logo-main {
+            width: 50px;
+            height: 50px;
+            padding: 6px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
+
+        #logo h6 {
+            color: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+            text-align: left;
+            flex: 1;
+        }
+
+        .logo-scroll, .logo-mobile {
+            display: none;
+        }
+
+        /* Mobil uchun */
+        @media (max-width: 768px) {
+            #logo {
+                padding: 10px 15px;
+                max-width: 90%;
+            }
+            
+            .logo-main {
+                width: 45px;
+                height: 45px;
+            }
+            
+            #logo h6 {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+            
+            .overall-score-number {
+                font-size: 48px;
+            }
+            
+            .overall-score-grade {
+                font-size: 36px;
+            }
+            
+            .category-results-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .total-score-value {
+                font-size: 36px;
+            }
+            
+            .total-score-label {
+                font-size: 18px;
+            }
+            
+            .double-click-hint {
+                display: none;
+            }
+            
+            .rating-scale-table th,
+            .rating-scale-table td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .overall-score-display {
+                padding: 20px 30px;
+            }
+            
+            .overall-score-number {
+                font-size: 40px;
+            }
+            
+            .overall-score-grade {
+                font-size: 32px;
+            }
+            
+            .score-value {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="float-text show-on-scroll">
+            <span><a href="#">Scroll to top</a></span>
+        </div>
+        <div class="scrollbar-v show-on-scroll"></div>
+        
+        <!-- header begin -->
+        <header class="header-light transparent scroll-light has-topbar">
+            <div id="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-between xs-hide">
+                                <div class="header-widget d-flex">
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-phone"></i>+998 71 244-51-84</a></div>
+                                    <div class="topbar-widget"><a href="#"><i class="icofont-envelope"></i>info@tmsiti.uz</a></div>
+                                </div>
+
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
+                                    <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="de-flex sm-pt10">
+                            <div class="de-flex-col">
+                                <!-- logo begin -->
+                                <div id="logo">
+                                    <a href="index.html">
+                                        <img class="logo-main" src="https://tmsiti.uz/icons/brand.svg" alt="Institut Logosi">
+                                        <img class="logo-scroll" src="https://tmsiti.uz/icons/brand.svg" alt="">
+                                        <h6>
+                                            Texnik me'yorlash va<br>
+                                            standartlashtirish<br>
+                                            ilmiy-tadqiqot instituti
+                                        </h6>
+                                        <img class="logo-mobile" src="https://tmsiti.uz/icons/brand.svg" alt="">
+                                    </a>
+                                </div>
+                                <!-- logo close -->
+                            </div>
+                            <div class="de-flex-col header-col-mid">
+                                <ul id="mainmenu">
+                                    <li><a class="menu-item" href="#">Bosh sahifa</a></li>
+                                    <li><a class="menu-item" href="/">Biz haqimizda</a></li>
+                                    <li><a class="menu-item" href="/">Loyihalar</a></li>
+                                    <li><a class="menu-item" href="/">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">          
+                                    <a href="/" class="btn-main bg-color-2">Bog'lanish</a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+        <!-- content begin -->
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            <!-- section begin -->
+            <section id="subheader2">
+                <div class="container relative z-index">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 offset-lg-3 text-center">
+                            <h1 style="
+                                    font-family: 'Inter', 'Arial', sans-serif;
+                                    font-size: 32px;
+                                    font-weight: 700;
+                                    color: #1a1a1a;
+                                    line-height: 1.3;
+                                    margin: 20px 0;
+                                    text-align: left;
+                                    ">
+                                    Yashil qurilish kalkulyatori
+                                    </h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+            <div class="container">
+                <div id="app"></div>
+            </div>
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+            <script>
+                let surveyData = null;
+                let currentCategoryIndex = 0;
+                let currentQuestionIndex = 0;
+                let totalScore = 0;
+                let categoryAnswers = [];
+                let lastClickTime = 0;
+                let lastClickedRadio = null;
+        
+                function init() {
+                    loadData();
+                }
+        
+                async function loadData() {
+                    const appDiv = document.getElementById('app');
+                    appDiv.innerHTML = `
+                        <div class="text-center text-white">
+                            <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+                                <span class="visually-hidden">Yuklanmoqda...</span>
+                            </div>
+                            <p class="mt-3 fs-5">Ma'lumotlar yuklanmoqda...</p>
+                        </div>
+                    `;
+        
+                    try {
+                        const response = await fetch('yashil.json');
+                        if (!response.ok) {
+                            throw new Error('JSON faylni yuklashda xatolik');
+                        }
+                        surveyData = await response.json();
+                        
+                        if (!surveyData || !surveyData.category || !Array.isArray(surveyData.category)) {
+                            throw new Error('JSON strukturasi noto\'g\'ri');
+                        }
+                        
+                        categoryAnswers = surveyData.category.map(() => ({}));
+                        renderQuestion();
+                    } catch (error) {
+                        console.error('Xatolik:', error);
+                        appDiv.innerHTML = `
+                            <div class="error-message">
+                                <h4><i class="fas fa-exclamation-triangle me-2"></i>Xatolik!</h4>
+                                <p>JSON faylni yuklab bo'lmadi: ${error.message}</p>
+                                <p><strong>yashil.json</strong> fayli to'g'ri joyda ekanligiga ishonch hosil qiling.</p>
+                            </div>
+                        `;
+                    }
+                }
+        
+                function getCurrentCategory() {
+                    if (!surveyData || !surveyData.category || !surveyData.category[currentCategoryIndex]) {
+                        console.error('Current category not found:', currentCategoryIndex);
+                        return null;
+                    }
+                    return surveyData.category[currentCategoryIndex];
+                }
+        
+                function getAllQuestions() {
+                    const category = getCurrentCategory();
+                    if (!category) return [];
+                    
+                    const selectQuestions = category.select || [];
+                    const checkboxQuestions = category.checkbox || [];
+                    return [...selectQuestions, ...checkboxQuestions];
+                }
+        
+                function getCurrentQuestion() {
+                    const questions = getAllQuestions();
+                    if (questions.length === 0 || currentQuestionIndex >= questions.length) {
+                        console.error('Current question not found:', currentQuestionIndex);
+                        return null;
+                    }
+                    return questions[currentQuestionIndex];
+                }
+        
+                function getTotalQuestions() {
+                    return getAllQuestions().length;
+                }
+        
+                function renderProgressBar() {
+                    if (!surveyData || !surveyData.category) return '';
+                    
+                    const totalCategories = surveyData.category.length;
+                    const progress = ((currentCategoryIndex + 1) / totalCategories) * 100;
+                    
+                    let stepsHtml = '';
+                    
+                    for (let i = 0; i < totalCategories; i++) {
+                        const stepProgress = ((i + 1) / totalCategories) * 100;
+                        let stepClass = '';
+                        if (i < currentCategoryIndex) {
+                            stepClass = 'completed';
+                        } else if (i === currentCategoryIndex) {
+                            stepClass = 'active';
+                        }
+                        
+                        const categoryName = surveyData.category[i].name || `Bo'lim ${i+1}`;
+                        const shortName = categoryName.length > 15 ? categoryName.substring(0, 15) + '...' : categoryName;
+                        
+                        stepsHtml += `
+                            <div style="position: relative; left: ${stepProgress}%;">
+                                <div class="progress-step ${stepClass}" onclick="goToCategory(${i})">
+                                    ${i + 1}
+                                </div>
+                            </div>
+                        `;
+                    }
+        
+                    return `
+                        <div class="progress-container">
+                            <h5 class="text-center mb-3">Bo'lim ${currentCategoryIndex + 1} / ${totalCategories}</h5>
+                            <div class="custom-progress" style="margin-bottom: 80px;">
+                                <div class="progress-bar-custom" style="width: ${progress}%"></div>
+                                ${stepsHtml}
+                            </div>
+                            <div class="text-center">
+                                <div class="category-badge">${surveyData.category[currentCategoryIndex].name}</div>
+                                <p class="text-muted">Savol ${currentQuestionIndex + 1} / ${getTotalQuestions()}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+        
+                function goToCategory(categoryIndex) {
+                    if (categoryIndex < 0 || categoryIndex >= surveyData.category.length) {
+                        console.error('Invalid category index:', categoryIndex);
+                        return;
+                    }
+                    
+                    saveCurrentAnswer();
+                    currentCategoryIndex = categoryIndex;
+                    currentQuestionIndex = 0;
+                    renderQuestion();
+                }
+        
+                function renderQuestion() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
+                    
+                    if (!category || !question) {
+                        document.getElementById('app').innerHTML = `
+                            <div class="error-message">
+                                <h4>Xatolik!</h4>
+                                <p>Savol ma'lumotlari topilmadi. Iltimos, qaytadan urinib ko'ring.</p>
+                                <button class="btn btn-next mt-3" onclick="resetSurvey()">
+                                    <i class="fas fa-redo me-2"></i>Qayta boshlash
+                                </button>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    const isSelect = category.select && category.select.includes(question);
+                    
+                    const questionKey = `q${currentQuestionIndex}`;
+                    const savedAnswer = categoryAnswers[currentCategoryIndex][questionKey];
+                    
+                    let questionHtml = '';
+                    
+                    if (isSelect) {
+                        questionHtml = `
+                            <div class="mb-4">
+                                <label class="question-text mb-3">${question.question}</label>
+                                ${(question.answer || []).map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer === idx ? 'checked' : '';
+                                    return `
+                                        <div class="form-check radio-item" onclick="handleRadioClick(event, ${idx})">
+                                            <input class="form-check-input" 
+                                                   type="radio" 
+                                                   name="answer-radio" 
+                                                   id="radio-${idx}" 
+                                                   value="${idx}" 
+                                                   ${isChecked}>
+                                            <label class="form-check-label" for="radio-${idx}">
+                                                ${ans.name || 'Javob'}
+                                            </label>
+                                            <span class="double-click-hint">Ikki marta bosish bekor qiladi</span>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                    } else {
+                        questionHtml = `
+                            <div class="mb-4">
+                                <label class="question-text mb-3">${question.question}</label>
+                                ${(question.answer || []).map((ans, idx) => {
+                                    const isChecked = savedAnswer && savedAnswer.answer && savedAnswer.answer.includes(idx) ? 'checked' : '';
+                                    return `
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check-${idx}" value="${idx}" ${isChecked}>
+                                            <label class="form-check-label" for="check-${idx}">
+                                                ${ans.name || 'Javob'}
+                                            </label>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                    }
+        
+                    const isLastQuestion = currentQuestionIndex === getTotalQuestions() - 1;
+                    const isLastCategory = currentCategoryIndex === surveyData.category.length - 1;
+                    
+                    const html = `
+                        ${renderProgressBar()}
+                        <div class="question-card">
+                            ${questionHtml}
+                            <div class="d-flex justify-content-between mt-4">
+                                <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestionIndex === 0 && currentCategoryIndex === 0 ? 'disabled' : ''}>
+                                    <i class="fas fa-arrow-left me-2"></i>Orqaga
+                                </button>
+                                <button class="btn btn-next" onclick="nextQuestion()" id="nextBtn">
+                                    ${isLastQuestion && isLastCategory ? 'Yakunlash' : isLastQuestion ? 'Keyingi bo\'lim' : 'Keyingisi'}
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+        
+                    document.getElementById('app').innerHTML = html;
+                }
+        
+                function handleRadioClick(event, idx) {
+                    const currentTime = new Date().getTime();
+                    const timeDiff = currentTime - lastClickTime;
+                    const radioInput = document.getElementById(`radio-${idx}`);
+                    
+                    if (lastClickedRadio === `radio-${idx}` && timeDiff < 300 && radioInput.checked) {
+                        radioInput.checked = false;
+                        
+                        const questionKey = `q${currentQuestionIndex}`;
+                        categoryAnswers[currentCategoryIndex][questionKey] = {
+                            type: 'select',
+                            answer: null,
+                            ball: 0
+                        };
+                        
+                        lastClickTime = 0;
+                        lastClickedRadio = null;
+                    } else {
+                        lastClickTime = currentTime;
+                        lastClickedRadio = `radio-${idx}`;
+                        
+                        radioInput.checked = true;
+                        saveCurrentAnswer();
+                    }
+                    
+                    event.stopPropagation();
+                }
+        
+                function calculateScore() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
+                    
+                    if (!category || !question) return 0;
+                    
+                    const isSelect = category.select && category.select.includes(question);
+                    
+                    if (isSelect) {
+                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
+                        if (selectedRadio) {
+                            const selectedIndex = parseInt(selectedRadio.value);
+                            return (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0;
+                        }
+                    } else {
+                        const checkedCount = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).length;
+                        
+                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
+                            const ballConfig = question.ball.find(b => b.status === checkedCount);
+                            return ballConfig ? ballConfig.ball : 0;
+                        }
+                    }
+                    
+                    return 0;
+                }
+        
+                function saveCurrentAnswer() {
+                    const category = getCurrentCategory();
+                    const question = getCurrentQuestion();
+                    
+                    if (!category || !question) return;
+                    
+                    const isSelect = category.select && category.select.includes(question);
+                    
+                    const questionKey = `q${currentQuestionIndex}`;
+                    
+                    if (isSelect) {
+                        const selectedRadio = document.querySelector('input[name="answer-radio"]:checked');
+                        if (selectedRadio) {
+                            const selectedIndex = parseInt(selectedRadio.value);
+                            categoryAnswers[currentCategoryIndex][questionKey] = {
+                                type: 'select',
+                                answer: selectedIndex,
+                                ball: (question.answer && question.answer[selectedIndex] && question.answer[selectedIndex].ball) || 0
+                            };
+                        } else {
+                            categoryAnswers[currentCategoryIndex][questionKey] = {
+                                type: 'select',
+                                answer: null,
+                                ball: 0
+                            };
+                        }
+                    } else {
+                        const checkedIndices = [];
+                        (question.answer || []).forEach((ans, idx) => {
+                            const checkbox = document.getElementById(`check-${idx}`);
+                            if (checkbox && checkbox.checked) {
+                                checkedIndices.push(idx);
+                            }
+                        });
+                        
+                        const checkedCount = checkedIndices.length;
+                        let ball = 0;
+                        
+                        if (checkedCount > 0 && question.ball && Array.isArray(question.ball)) {
+                            const ballConfig = question.ball.find(b => b.status === checkedCount);
+                            ball = ballConfig ? ballConfig.ball : 0;
+                        }
+                        
+                        categoryAnswers[currentCategoryIndex][questionKey] = {
+                            type: 'checkbox',
+                            answer: checkedIndices,
+                            ball: ball
+                        };
+                    }
+                }
+        
+                function nextQuestion() {
+                    saveCurrentAnswer();
+                    
+                    const totalQuestions = getTotalQuestions();
+                    
+                    if (currentQuestionIndex < totalQuestions - 1) {
+                        currentQuestionIndex++;
+                        renderQuestion();
+                    } else if (currentCategoryIndex < surveyData.category.length - 1) {
+                        currentCategoryIndex++;
+                        currentQuestionIndex = 0;
+                        renderQuestion();
+                    } else {
+                        showResults();
+                    }
+                }
+        
+                function prevQuestion() {
+                    saveCurrentAnswer();
+                    
+                    if (currentQuestionIndex > 0) {
+                        currentQuestionIndex--;
+                        renderQuestion();
+                    } else if (currentCategoryIndex > 0) {
+                        currentCategoryIndex--;
+                        const prevCategory = getCurrentCategory();
+                        const prevQuestions = getAllQuestions();
+                        currentQuestionIndex = prevQuestions.length - 1;
+                        renderQuestion();
+                    }
+                }
+        
+                function getGrade(score) {
+                    if (score >= 520) return 'A';
+                    if (score >= 420) return 'B';
+                    if (score >= 340) return 'C';
+                    if (score >= 260) return 'D';
+                    if (score >= 170) return 'E';
+                    if (score >= 100) return 'F';
+                    return 'G';
+                }
+        
+                function getGradeColor(grade) {
+                    const colors = {
+                        'A': '#10b981',
+                        'B': '#84cc16',
+                        'C': '#eab308',
+                        'D': '#f59e0b',
+                        'E': '#f97316',
+                        'F': '#ef4444',
+                        'G': '#dc2626'
+                    };
+                    return colors[grade] || '#718096';
+                }
+        
+                function calculateCategoryScores() {
+                    const categoryScores = [];
+                    
+                    surveyData.category.forEach((category, catIndex) => {
+                        let categoryScore = 0;
+                        const categoryAnswer = categoryAnswers[catIndex] || {};
+                        
+                        const selectQuestions = category.select || [];
+                        const checkboxQuestions = category.checkbox || [];
+                        const allQuestions = [...selectQuestions, ...checkboxQuestions];
+                        
+                        allQuestions.forEach((question, qIndex) => {
+                            const questionKey = `q${qIndex}`;
+                            const answer = categoryAnswer[questionKey];
+                            
+                            if (answer) {
+                                categoryScore += answer.ball || 0;
+                            }
+                        });
+                        
+                        categoryScores.push({
+                            name: category.name,
+                            score: categoryScore
+                        });
+                    });
+                    
+                    return categoryScores;
+                }
+        
+                function showResults() {
+                    totalScore = 0;
+                    categoryAnswers.forEach(categoryAnswer => {
+                        Object.values(categoryAnswer).forEach(answer => {
+                            totalScore += answer.ball || 0;
+                        });
+                    });
+
+                    const grade = getGrade(totalScore);
+                    const gradeColor = getGradeColor(grade);
+                    
+                    const categoryScores = calculateCategoryScores();
+                    
+                    const categoryResultsHtml = categoryScores.map((category, index) => `
+                        <div class="category-result-card">
+                            <div class="category-name">${category.name || `Bo'lim ${index + 1}`}</div>
+                            <div class="category-score">
+                                <div class="score-value">${category.score}</div>
+                                <span class="score-label">Ball</span>
+                            </div>
+                        </div>
+                    `).join('');
+        
+                    const html = `
+                        <div class="result-container">
+                            <div class="overall-score-section">
+                                <h2 class="overall-score-title">Umumiy Ball</h2>
+                                <div class="overall-score-display">
+                                    <div class="overall-score-number">${totalScore}</div>
+                                    <div class="overall-score-grade" style="color: ${gradeColor}">${grade}</div>
+                                    <div class="overall-score-label">Baholash Darajasi</div>
+                                </div>
+                            </div>
+                            
+                            <div class="rating-scale-section">
+                                <h3 class="rating-scale-title">Baholash Mezonlari</h3>
+                                <table class="rating-scale-table">
+                                    <thead>
+                                        <tr>
+                                            <th>BALL</th>
+                                            <th>BAHOLASH</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>520 - 650</td>
+                                            <td class="grade-cell" style="color: #10b981">A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>420 - 519</td>
+                                            <td class="grade-cell" style="color: #84cc16">B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>340 - 419</td>
+                                            <td class="grade-cell" style="color: #eab308">C</td>
+                                        </tr>
+                                        <tr>
+                                            <td>260 - 339</td>
+                                            <td class="grade-cell" style="color: #f59e0b">D</td>
+                                        </tr>
+                                        <tr>
+                                            <td>170 - 259</td>
+                                            <td class="grade-cell" style="color: #f97316">E</td>
+                                        </tr>
+                                        <tr>
+                                            <td>100 - 169</td>
+                                            <td class="grade-cell" style="color: #ef4444">F</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0 - 99</td>
+                                            <td class="grade-cell" style="color: #dc2626">G</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="category-results-section">
+                                <h3 class="category-results-title">Bo'limlar Bo'yicha Natijalar</h3>
+                                <div class="category-results-container">
+                                    ${categoryResultsHtml}
+                                </div>
+                                
+                                <div class="total-score-section">
+                                    <div class="total-score-content">
+                                        <div class="total-score-label">JAMI BALL</div>
+                                        <div class="total-score-value">${totalScore}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-actions">
+                                <button class="btn btn-next" onclick="resetSurvey()">
+                                    <i class="fas fa-redo me-2"></i>Qayta boshlash
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('app').innerHTML = html;
+                }
+        
+                function resetSurvey() {
+                    currentCategoryIndex = 0;
+                    currentQuestionIndex = 0;
+                    totalScore = 0;
+                    lastClickTime = 0;
+                    lastClickedRadio = null;
+                    categoryAnswers = surveyData.category.map(() => ({}));
+                    renderQuestion();
+                }
+        
+                init();
+            </script>
+        </div>
+        <!-- content close -->
+        <!-- footer begin -->
+        <footer class="section-dark">
+            <div class="subfooter">
+                <div class="container">
+                    <!-- Footer content here -->
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+    </div>
+    
+    <!-- Javascript Files -->
+    <script src="js/designesia.js"></script>
+</body>
+</html>

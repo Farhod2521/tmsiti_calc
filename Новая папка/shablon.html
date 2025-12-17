@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TMSITI - Yorug'lik Kalkulyatori</title>
+    <link rel="icon" href="https://tmsiti.uz/icons/brand.svg" type="image/svg+xml">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Yorug'lik Kalkulyatori - Optimal yoritishni hisoblash va lampochkalarni joylashtirish" name="description">
+    
+    <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #234982;
+            --secondary-color: #28a745;
+            --accent-color: #ff6b35;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* Navbar */
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Main Container */
+        .main-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), #1a3668);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        /* Room Dimensions Cards */
+        .dimension-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: none;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1),
+                        -5px -5px 15px rgba(255,255,255,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dimension-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.15),
+                        -8px -8px 20px rgba(255,255,255,0.8);
+        }
+        
+        .dimension-card .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .dimension-card .card-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .dimension-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .dimension-unit {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .dimension-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .dimension-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dimension-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .dimension-input {
+            width: 80px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            transition: all 0.3s;
+        }
+        
+        .dimension-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(35, 73, 130, 0.2);
+            outline: none;
+        }
+        
+        /* Room Visualization */
+        .room-visualization {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .room-canvas {
+            width: 100%;
+            height: 300px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dimension-label {
+            position: absolute;
+            background: rgba(35, 73, 130, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        /* Info Cards */
+        .info-card {
+            background: linear-gradient(135deg, #234982, #1a3668);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .info-card h5 {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .info-card .value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .info-card .unit {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .info-card.total-light {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+        
+        /* Category Cards */
+        .category-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(35, 73, 130, 0.1);
+        }
+        
+        .category-card.active {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(35, 73, 130, 0.05), rgba(35, 73, 130, 0.1));
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .category-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .category-desc {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        /* Lamp Cards */
+        .lamp-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lamp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .lamp-card.recommended {
+            border: 3px solid var(--secondary-color);
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(32, 201, 151, 0.05));
+        }
+        
+        .lamp-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        
+        .lamp-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .lamp-specs {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .lamp-specs div {
+            margin-bottom: 5px;
+        }
+        
+        .lamp-count {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        /* Tables */
+        .custom-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .custom-table thead {
+            background: linear-gradient(135deg, var(--primary-color), #1a3668);
+            color: white;
+        }
+        
+        .custom-table th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .custom-table td {
+            padding: 15px;
+            vertical-align: middle;
+            text-align: center;
+            border-color: #f0f0f0;
+        }
+        
+        .custom-table tbody tr:hover {
+            background-color: rgba(35, 73, 130, 0.05);
+        }
+        
+        /* Buttons */
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-color), #1a3668);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-custom:hover {
+            background: linear-gradient(135deg, #1a3668, #234982);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(35, 73, 130, 0.3);
+        }
+        
+        .btn-secondary-custom {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary-custom:hover {
+            background: linear-gradient(135deg, #5a6268, #6c757d);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Modal */
+        .modal-header-custom {
+            background: linear-gradient(135deg, var(--primary-color), #1a3668);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+        }
+        
+        .modal-content-custom {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Loading Spinner */
+        .spinner-custom {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(35, 73, 130, 0.1);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .dimension-card {
+                padding: 15px;
+            }
+            
+            .dimension-value {
+                font-size: 1.5rem;
+            }
+            
+            .info-card .value {
+                font-size: 1.8rem;
+            }
+            
+            .custom-table th,
+            .custom-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), #1a3668);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-icons-footer a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons-footer a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a3668;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://tmsiti.uz/icons/brand.svg" alt="TMSITI Logo">
+                <span class="ms-2 fw-bold" style="color: var(--primary-color);">TMSITI</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-home me-1"></i> Bosh sahifa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-info-circle me-1"></i> Biz haqimizda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-project-diagram me-1"></i> Loyihalar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-blog me-1"></i> Blog</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-custom">
+                            <i class="fas fa-phone-alt me-2"></i> Bog'lanish
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-container fade-in">
+            <!-- Header Section -->
+            <div class="page-header">
+                <h1 class="page-title">YORUG'LIK KALKULYATORI</h1>
+                <p class="page-subtitle">Xona parametrlari bo'yicha optimal yoritishni hisoblang va lampochkalarni samarali joylashtiring</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Left Column: Room Parameters -->
+                <div class="col-lg-8">
+                    <!-- Room Dimensions -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h4 class="mb-3" style="color: var(--primary-color);">
+                                <i class="fas fa-ruler-combined me-2"></i> XONA O'LCHAMLARI
+                            </h4>
+                        </div>
+                        
+                        <!-- Width -->
+                        <div class="col-md-4">
+                            <div class="dimension-card slide-in-left">
+                                <div class="card-icon">
+                                    <i class="fas fa-arrows-alt-h"></i>
+                                </div>
+                                <div class="card-label">Kenglik</div>
+                                <div class="dimension-value" id="widthValueDisplay">3.0</div>
+                                <div class="dimension-unit">metr</div>
+                                <div class="dimension-controls">
+                                    <button class="dimension-btn" onclick="changeDimension('width', -0.1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="dimension-input" id="widthInput" value="3.0" step="0.1" min="0.1">
+                                    <button class="dimension-btn" onclick="changeDimension('width', 0.1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Length -->
+                        <div class="col-md-4">
+                            <div class="dimension-card slide-in-left" style="animation-delay: 0.1s;">
+                                <div class="card-icon">
+                                    <i class="fas fa-arrows-alt-v"></i>
+                                </div>
+                                <div class="card-label">Uzunlik</div>
+                                <div class="dimension-value" id="lengthValueDisplay">3.0</div>
+                                <div class="dimension-unit">metr</div>
+                                <div class="dimension-controls">
+                                    <button class="dimension-btn" onclick="changeDimension('length', -0.1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="dimension-input" id="lengthInput" value="3.0" step="0.1" min="0.1">
+                                    <button class="dimension-btn" onclick="changeDimension('length', 0.1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Height -->
+                        <div class="col-md-4">
+                            <div class="dimension-card slide-in-left" style="animation-delay: 0.2s;">
+                                <div class="card-icon">
+                                    <i class="fas fa-arrows-alt"></i>
+                                </div>
+                                <div class="card-label">Balandlik</div>
+                                <div class="dimension-value" id="heightValueDisplay">3.0</div>
+                                <div class="dimension-unit">metr</div>
+                                <div class="dimension-controls">
+                                    <button class="dimension-btn" onclick="changeDimension('height', -0.1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="dimension-input" id="heightInput" value="3.0" step="0.1" min="0.1">
+                                    <button class="dimension-btn" onclick="changeDimension('height', 0.1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Room Visualization -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="room-visualization slide-in-right">
+                                <h5 class="mb-3" style="color: var(--primary-color);">
+                                    <i class="fas fa-eye me-2"></i> XONA VIZUALIZATSIYASI
+                                </h5>
+                                <div class="room-canvas" id="roomCanvas">
+                                    <!-- Canvas will be drawn here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Room Category Selection -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="room-visualization fade-in">
+                                <h5 class="mb-4" style="color: var(--primary-color);">
+                                    <i class="fas fa-building me-2"></i> XONA KATEGORIYASI
+                                </h5>
+                                
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Bino toifasi</label>
+                                            <select class="form-select form-select-lg" id="buildingCategory" onchange="loadRoomCategories()">
+                                                <option value="">Kategoriyani tanlang</option>
+                                                <option value="1">Ma'muriy binolar</option>
+                                                <option value="2">Ta'lim muassasalari</option>
+                                                <option value="3">Sog'liqni saqlash</option>
+                                                <option value="4">Savdo markazlari</option>
+                                                <option value="5">Turar-joy binolari</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Xona turi</label>
+                                            <select class="form-select form-select-lg" id="roomType" onchange="loadRoomDetails()">
+                                                <option value="">Xona turini tanlang</option>
+                                                <!-- Will be loaded dynamically -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Room Details -->
+                                <div id="roomDetails" style="display: none;">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover custom-table mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>Xona nomi</th>
+                                                    <th>LK (lm/m²)</th>
+                                                    <th>RA</th>
+                                                    <th>K</th>
+                                                    <th>UGR</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="roomDetailsContent">
+                                                <!-- Room details will be loaded here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Calculations & Results -->
+                <div class="col-lg-4">
+                    <!-- Total Area Card -->
+                    <div class="info-card slide-in-right">
+                        <h5><i class="fas fa-square me-2"></i> Umumiy maydon</h5>
+                        <div class="value" id="totalArea">9.00</div>
+                        <div class="unit">kvadrat metr</div>
+                    </div>
+                    
+                    <!-- Required Light Card -->
+                    <div class="info-card slide-in-right" style="animation-delay: 0.1s;">
+                        <h5><i class="fas fa-lightbulb me-2"></i> Kerakli yorug'lik</h5>
+                        <div class="value" id="requiredLight">0</div>
+                        <div class="unit">lumen</div>
+                    </div>
+                    
+                    <!-- Recommended Lamps Card -->
+                    <div class="info-card total-light slide-in-right" style="animation-delay: 0.2s;">
+                        <h5><i class="fas fa-star me-2"></i> Tavsiya qilingan</h5>
+                        <div class="value" id="recommendedLampsCount">0</div>
+                        <div class="unit">ta lampochka</div>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="room-visualization mb-4 fade-in">
+                        <h5 class="mb-3" style="color: var(--primary-color);">
+                            <i class="fas fa-palette me-2"></i> RANG KOMBINATSIYASI
+                        </h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Kombinatsiya</label>
+                            <select class="form-select" id="colorCombination" onchange="updateLightCalculation()">
+                                <option value="80,80,30">Oq, Oq, Kulrang (80/80/30)</option>
+                                <option value="70,50,20">Ochiq, Ochiq, O'rta kulrang (70/50/20)</option>
+                                <option value="50,50,10">Kulrang, Ochiq, Qorong'i kulrang (50/50/10)</option>
+                                <option value="50,30,10">Kulrang, Kulrang, Qorong'i kulrang (50/30/10)</option>
+                                <option value="30,30,10">Qorong'i, Kulrang, Qorong'i kulrang (30/30/10)</option>
+                                <option value="0,0,0">Qorong'i, Qorong'i, Qorong'i (0/0/0)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-3 p-3" style="background: #f8f9fa; border-radius: 10px;">
+                            <span class="fw-bold">Aks ettirish koeffitsienti:</span>
+                            <span class="fw-bold text-primary" id="reflectionCoefficient">55%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lamp Selection Section -->
+            <div class="row mt-4 fade-in">
+                <div class="col-12">
+                    <div class="room-visualization">
+                        <h5 class="mb-4" style="color: var(--primary-color);">
+                            <i class="fas fa-lightbulb me-2"></i> LAMPOCHKA TURLARI
+                        </h5>
+                        
+                        <!-- Lamp Categories -->
+                        <div class="row g-3 mb-4" id="lampCategories">
+                            <!-- Lamp categories will be loaded here -->
+                        </div>
+                        
+                        <!-- Selected Lamp Details -->
+                        <div id="selectedLampDetails" style="display: none;">
+                            <h6 class="mb-3" style="color: var(--primary-color);">Tanlangan lampochka tafsilotlari</h6>
+                            <div class="table-responsive">
+                                <table class="table custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nomi</th>
+                                            <th>Quvvat</th>
+                                            <th>Rang harorati</th>
+                                            <th>Yorug'lik oqimi</th>
+                                            <th>Samaradorlik</th>
+                                            <th>Kerakli soni</th>
+                                            <th>Amallar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="lampDetailsContent">
+                                        <!-- Lamp details will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Lamps Section -->
+            <div class="row mt-4 fade-in">
+                <div class="col-12">
+                    <div class="room-visualization" style="border: 2px solid var(--secondary-color);">
+                        <h5 class="mb-4" style="color: var(--secondary-color);">
+                            <i class="fas fa-crown me-2"></i> TAVSIYA QILINGAN LAMPOCHKALAR
+                        </h5>
+                        
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nomi</th>
+                                        <th>Quvvat (W)</th>
+                                        <th>Rang harorati</th>
+                                        <th>Kuchlanish</th>
+                                        <th>Yorug'lik oqimi (lm)</th>
+                                        <th>Minimal oqim (lm)</th>
+                                        <th>Samaradorlik (lm/W)</th>
+                                        <th>Rang indeksi</th>
+                                        <th>Kerakli soni</th>
+                                        <th>Joylashuv</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recommendedLampsContent">
+                                    <tr>
+                                        <td>LED Lampa (Kapsula)</td>
+                                        <td>10</td>
+                                        <td>3000/6500 K</td>
+                                        <td>120-250 V</td>
+                                        <td>800-1000 Lm</td>
+                                        <td>1000</td>
+                                        <td>80-100 Lm/W</td>
+                                        <td>≥70 Ra</td>
+                                        <td><span class="lamp-count">2 ta</span></td>
+                                        <td><button class="btn btn-sm btn-custom" onclick="showPlacement('Led лампы в форме капли', 2)">Ko'rish</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>LED Lampa (Kapsula)</td>
+                                        <td>12</td>
+                                        <td>3000/6500 K</td>
+                                        <td>120-250 V</td>
+                                        <td>960-1200 Lm</td>
+                                        <td>1200</td>
+                                        <td>80-100 Lm/W</td>
+                                        <td>≥70 Ra</td>
+                                        <td><span class="lamp-count">2 ta</span></td>
+                                        <td><button class="btn btn-sm btn-custom" onclick="showPlacement('Led лампы в форме капли', 2)">Ko'rish</button></td>
+                                    </tr>
+                                    <!-- More recommended lamps will be added dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- AI Recommendation -->
+                        <div class="mt-4 p-4" style="background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(32, 201, 151, 0.1)); border-radius: 10px; border-left: 4px solid var(--secondary-color);">
+                            <h6 style="color: var(--secondary-color);">
+                                <i class="fas fa-robot me-2"></i> AI MASLAHATCHI
+                            </h6>
+                            <p class="mb-2">
+                                Ushbu xona uchun <strong>6500K (sovuq oq)</strong> rang harorati tavsiya etiladi. 
+                                Bu diqqatni jamlashga yordam beradi. Agar xona dam olish uchun bo'lsa, 
+                                4000K variantini ko'rib chiqing.
+                            </p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><strong>Tejamkorlik:</strong> Yuqori</span>
+                                <span><strong>Yorug'lik:</strong> 5480 Lm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Placement Modal -->
+    <div class="modal fade" id="placementModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title">
+                        <i class="fas fa-th-large me-2"></i> LAMPOCHKALARNI JOYLASHTIRISH
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="p-4" style="background: #f8f9fa; border-radius: 10px;">
+                                <h6>Xona parametrlari:</h6>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Kenglik:</strong> <span id="modalWidth">3.0</span> m</p>
+                                        <p><strong>Uzunlik:</strong> <span id="modalLength">3.0</span> m</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>Balandlik:</strong> <span id="modalHeight">3.0</span> m</p>
+                                        <p><strong>Lampochkalar:</strong> <span id="modalLampsCount">2</span> ta</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h6>Joylashtirish parametrlari:</h6>
+                                <div class="mb-3">
+                                    <label class="form-label">Joylashtirish usuli</label>
+                                    <select class="form-select" id="placementMethod">
+                                        <option value="uniform">Bir xil taqsimlash</option>
+                                        <option value="grid">To'r ko'rinishida</option>
+                                        <option value="custom">Maxsus joylashtirish</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Lampa o'lchami (m)</label>
+                                    <input type="range" class="form-range" id="lampSize" min="0.1" max="1.0" step="0.1" value="0.3">
+                                    <div class="d-flex justify-content-between">
+                                        <small>0.1 m</small>
+                                        <small id="lampSizeValue">0.3 m</small>
+                                        <small>1.0 m</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-4" style="background: #f8f9fa; border-radius: 10px; height: 100%;">
+                                <h6 class="mb-3">Vizualizatsiya:</h6>
+                                <div class="room-canvas" id="placementCanvas" style="height: 300px;">
+                                    <!-- Placement canvas will be drawn here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="p-4" style="background: linear-gradient(135deg, rgba(35, 73, 130, 0.05), rgba(35, 73, 130, 0.1)); border-radius: 10px;">
+                                <h6><i class="fas fa-info-circle me-2"></i> Joylashtirish tavsiyalari:</h6>
+                                <ul class="mb-0">
+                                    <li>Lampochkalarni devorlardan kamida 0.5-1 metr masofada joylashtiring</li>
+                                    <li>Ish stoli ustidagi yoritish uchun alohida lampochkalardan foydalaning</li>
+                                    <li>Xona markazidagi lampochkalarni balandroq joylashtiring</li>
+                                    <li>Har bir lampochka o'rtasidagi masofa 2-3 metr bo'lishi tavsiya etiladi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary-custom" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i> Yopish
+                    </button>
+                    <button type="button" class="btn btn-custom" onclick="generatePlacement()">
+                        <i class="fas fa-sync-alt me-2"></i> Yangilash
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-logo">
+                        <img src="https://tmsiti.uz/icons/brand.svg" alt="TMSITI Logo">
+                    </div>
+                    <p>
+                        Texnik me'yorlash va standartlashtirish ilmiy-tadqiqot instituti
+                    </p>
+                    <div class="social-icons-footer">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Tez havolalar</h5>
+                    <div class="footer-links">
+                        <a href="#">Bosh sahifa</a>
+                        <a href="#">Biz haqimizda</a>
+                        <a href="#">Loyihalar</a>
+                        <a href="#">Blog</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Aloqa</h5>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-phone me-2"></i> +998 71 244-51-84</a>
+                        <a href="#"><i class="fas fa-envelope me-2"></i> info@tmsiti.uz</a>
+                        <a href="#"><i class="fas fa-map-marker-alt me-2"></i> Toshkent shahri</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Yordam</h5>
+                    <div class="footer-links">
+                        <a href="#">FAQ</a>
+                        <a href="#">Qo'llanma</a>
+                        <a href="#">Texnik yordam</a>
+                        <a href="#">Shartlar va shartlar</a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="text-center pt-3">
+                <p class="mb-0">© 2024 TMSITI. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Global variables
+        let currentLampCategory = null;
+        let currentRoomData = null;
+        let lampCategories = [];
+        let selectedLamps = [];
+        let currentPlacementMethod = 'uniform';
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCalculations();
+            drawRoom();
+            loadLampCategories();
+            setupEventListeners();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Dimension inputs
+            ['widthInput', 'lengthInput', 'heightInput'].forEach(id => {
+                document.getElementById(id).addEventListener('change', updateCalculations);
+            });
+
+            // Color combination
+            document.getElementById('colorCombination').addEventListener('change', updateLightCalculation);
+
+            // Placement method
+            document.getElementById('placementMethod').addEventListener('change', function() {
+                currentPlacementMethod = this.value;
+                if (document.getElementById('placementModal').classList.contains('show')) {
+                    generatePlacement();
+                }
+            });
+
+            // Lamp size slider
+            document.getElementById('lampSize').addEventListener('input', function() {
+                document.getElementById('lampSizeValue').textContent = this.value + ' m';
+                if (document.getElementById('placementModal').classList.contains('show')) {
+                    generatePlacement();
+                }
+            });
+        }
+
+        // Change dimension values
+        function changeDimension(type, delta) {
+            const input = document.getElementById(type + 'Input');
+            let value = parseFloat(input.value);
+            value = Math.max(0.1, value + delta);
+            input.value = value.toFixed(1);
+            updateCalculations();
+        }
+
+        // Update all calculations
+        function updateCalculations() {
+            // Update dimension displays
+            const width = parseFloat(document.getElementById('widthInput').value);
+            const length = parseFloat(document.getElementById('lengthInput').value);
+            const height = parseFloat(document.getElementById('heightInput').value);
+            
+            document.getElementById('widthValueDisplay').textContent = width.toFixed(1);
+            document.getElementById('lengthValueDisplay').textContent = length.toFixed(1);
+            document.getElementById('heightValueDisplay').textContent = height.toFixed(1);
+            
+            // Calculate total area
+            const area = width * length;
+            document.getElementById('totalArea').textContent = area.toFixed(2);
+            
+            // Update light calculation
+            updateLightCalculation();
+            
+            // Redraw room
+            drawRoom();
+        }
+
+        // Update light calculation
+        function updateLightCalculation() {
+            if (!currentRoomData) {
+                document.getElementById('requiredLight').textContent = '0';
+                document.getElementById('recommendedLampsCount').textContent = '0';
+                return;
+            }
+
+            const width = parseFloat(document.getElementById('widthInput').value);
+            const length = parseFloat(document.getElementById('lengthInput').value);
+            const area = width * length;
+            const lk = currentRoomData.lk || 0;
+            
+            // Get reflection coefficient
+            const colorComb = document.getElementById('colorCombination').value;
+            const coefficients = colorComb.split(',').map(Number);
+            const avgCoefficient = coefficients.reduce((a, b) => a + b) / coefficients.length;
+            document.getElementById('reflectionCoefficient').textContent = Math.round(avgCoefficient) + '%';
+            
+            // Calculate required light
+            const height = parseFloat(document.getElementById('heightInput').value);
+            const heightCoefficient = getHeightCoefficient(height);
+            const reflectionFactor = 1 + (avgCoefficient / 100);
+            
+            let requiredLight = lk * area * heightCoefficient * reflectionFactor;
+            document.getElementById('requiredLight').textContent = Math.round(requiredLight);
+            
+            // Update recommended lamps count
+            updateRecommendedLampsCount(requiredLight);
+        }
+
+        // Get height coefficient
+        function getHeightCoefficient(height) {
+            if (height <= 4.0) return 1.3;
+            if (height <= 6.0) return 1.7;
+            return 1.8;
+        }
+
+        // Update recommended lamps count
+        function updateRecommendedLampsCount(requiredLight) {
+            // This would be calculated based on selected lamps
+            // For now, using a simple calculation
+            const avgLumenPerLamp = 1000; // Average lumen per lamp
+            const count = Math.ceil(requiredLight / avgLumenPerLamp);
+            document.getElementById('recommendedLampsCount').textContent = count;
+        }
+
+        // Draw room visualization
+        function drawRoom() {
+            const canvas = document.getElementById('roomCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw room
+            const roomWidth = width * 0.8;
+            const roomHeight = height * 0.8;
+            const roomX = (width - roomWidth) / 2;
+            const roomY = (height - roomHeight) / 2;
+            
+            // Room background
+            ctx.fillStyle = '#f0f8ff';
+            ctx.fillRect(roomX, roomY, roomWidth, roomHeight);
+            
+            // Room border
+            ctx.strokeStyle = '#234982';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(roomX, roomY, roomWidth, roomHeight);
+            
+            // Grid lines
+            ctx.strokeStyle = 'rgba(35, 73, 130, 0.2)';
+            ctx.lineWidth = 1;
+            for (let i = 1; i < 3; i++) {
+                // Vertical lines
+                ctx.beginPath();
+                ctx.moveTo(roomX + (roomWidth / 3) * i, roomY);
+                ctx.lineTo(roomX + (roomWidth / 3) * i, roomY + roomHeight);
+                ctx.stroke();
+                
+                // Horizontal lines
+                ctx.beginPath();
+                ctx.moveTo(roomX, roomY + (roomHeight / 3) * i);
+                ctx.lineTo(roomX + roomWidth, roomY + (roomHeight / 3) * i);
+                ctx.stroke();
+            }
+            
+            // Draw dimensions
+            const actualWidth = parseFloat(document.getElementById('widthInput').value);
+            const actualLength = parseFloat(document.getElementById('lengthInput').value);
+            const actualHeight = parseFloat(document.getElementById('heightInput').value);
+            
+            // Width dimension
+            ctx.fillStyle = '#234982';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(actualWidth + ' m', roomX + roomWidth / 2, roomY - 10);
+            
+            // Length dimension
+            ctx.save();
+            ctx.translate(roomX - 10, roomY + roomHeight / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText(actualLength + ' m', 0, 0);
+            ctx.restore();
+            
+            // Height dimension
+            ctx.fillText(actualHeight + ' m', roomX + roomWidth + 15, roomY + roomHeight / 2);
+        }
+
+        // Load lamp categories
+        function loadLampCategories() {
+            // Simulate API call
+            lampCategories = [
+                {
+                    id: 1,
+                    name: 'LED Lampa (Kapsula)',
+                    icon: 'fas fa-lightbulb',
+                    description: 'Oddiy LED lampochkalar',
+                    lamps: [
+                        { name: 'LED Lampa 10W', power: '10W', colorTemp: '3000/6500K', voltage: '120-250V', lumen: '800-1000', minLumen: 1000, efficiency: '80-100 lm/W', cri: '≥70 Ra' },
+                        { name: 'LED Lampa 12W', power: '12W', colorTemp: '3000/6500K', voltage: '120-250V', lumen: '960-1200', minLumen: 1200, efficiency: '80-100 lm/W', cri: '≥70 Ra' }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: 'LED Panellar',
+                    icon: 'fas fa-th-large',
+                    description: 'Yassi LED panellar',
+                    lamps: [
+                        { name: 'LED Panel 60x60', power: '36W', colorTemp: '4000K', voltage: '220V', lumen: '3200', minLumen: 3200, efficiency: '89 lm/W', cri: '≥80 Ra' }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: 'LED Nurlar',
+                    icon: 'fas fa-sun',
+                    description: 'Yo'naltirilgan LED nurlar',
+                    lamps: [
+                        { name: 'LED Nur 15W', power: '15W', colorTemp: '2700K', voltage: '220V', lumen: '1350', minLumen: 1350, efficiency: '90 lm/W', cri: '≥80 Ra' }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: 'Gorizontal LED',
+                    icon: 'fas fa-grip-lines',
+                    description: 'Uzun gorizontal lampalar',
+                    lamps: [
+                        { name: 'LED Lampa 20W', power: '20W', colorTemp: '6500K', voltage: '220V', lumen: '1800', minLumen: 1800, efficiency: '90 lm/W', cri: '≥80 Ra' }
+                    ]
+                }
+            ];
+
+            // Display categories
+            const container = document.getElementById('lampCategories');
+            container.innerHTML = lampCategories.map(category => `
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" onclick="selectLampCategory(${category.id})">
+                        <div class="category-icon">
+                            <i class="${category.icon}"></i>
+                        </div>
+                        <div class="category-name">${category.name}</div>
+                        <div class="category-desc">${category.description}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select lamp category
+        function selectLampCategory(categoryId) {
+            // Remove active class from all cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Add active class to selected card
+            event.currentTarget.classList.add('active');
+            currentLampCategory = categoryId;
+
+            // Show lamp details
+            const category = lampCategories.find(c => c.id === categoryId);
+            selectedLamps = category.lamps;
+            showLampDetails();
+        }
+
+        // Show lamp details
+        function showLampDetails() {
+            const container = document.getElementById('selectedLampDetails');
+            const content = document.getElementById('lampDetailsContent');
+            
+            if (!selectedLamps.length) {
+                container.style.display = 'none';
+                return;
+            }
+
+            const requiredLight = parseFloat(document.getElementById('requiredLight').textContent) || 0;
+            
+            content.innerHTML = selectedLamps.map(lamp => {
+                const lampsNeeded = requiredLight > 0 ? Math.ceil(requiredLight / lamp.minLumen) : 0;
+                return `
+                    <tr>
+                        <td>${lamp.name}</td>
+                        <td>${lamp.power}</td>
+                        <td>${lamp.colorTemp}</td>
+                        <td>${lamp.lumen} Lm</td>
+                        <td>${lamp.efficiency}</td>
+                        <td><span class="lamp-count">${lampsNeeded} ta</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-custom" onclick="showPlacement('${lamp.name}', ${lampsNeeded})">
+                                Joylashtirish
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            container.style.display = 'block';
+        }
+
+        // Show placement modal
+        function showPlacement(lampName, lampsCount) {
+            // Update modal info
+            document.getElementById('modalWidth').textContent = document.getElementById('widthInput').value;
+            document.getElementById('modalLength').textContent = document.getElementById('lengthInput').value;
+            document.getElementById('modalHeight').textContent = document.getElementById('heightInput').value;
+            document.getElementById('modalLampsCount').textContent = lampsCount;
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('placementModal'));
+            modal.show();
+            
+            // Generate initial placement
+            setTimeout(generatePlacement, 100);
+        }
+
+        // Generate lamp placement
+        function generatePlacement() {
+            const canvas = document.getElementById('placementCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Get room dimensions
+            const roomWidth = parseFloat(document.getElementById('widthInput').value);
+            const roomLength = parseFloat(document.getElementById('lengthInput').value);
+            const lampsCount = parseInt(document.getElementById('modalLampsCount').textContent);
+            const lampSize = parseFloat(document.getElementById('lampSize').value);
+            
+            // Calculate scale
+            const scale = Math.min(width / (roomWidth * 1.2), height / (roomLength * 1.2));
+            const scaledWidth = roomWidth * scale;
+            const scaledLength = roomLength * scale;
+            const offsetX = (width - scaledWidth) / 2;
+            const offsetY = (height - scaledLength) / 2;
+            
+            // Draw room
+            ctx.fillStyle = '#f8f9fa';
+            ctx.fillRect(offsetX, offsetY, scaledWidth, scaledLength);
+            
+            ctx.strokeStyle = '#234982';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(offsetX, offsetY, scaledWidth, scaledLength);
+            
+            // Generate lamp positions based on method
+            let positions = [];
+            switch(currentPlacementMethod) {
+                case 'uniform':
+                    positions = generateUniformPositions(scaledWidth, scaledLength, lampsCount, offsetX, offsetY);
+                    break;
+                case 'grid':
+                    positions = generateGridPositions(scaledWidth, scaledLength, lampsCount, offsetX, offsetY);
+                    break;
+                case 'custom':
+                    positions = generateCustomPositions(scaledWidth, scaledLength, lampsCount, offsetX, offsetY);
+                    break;
+            }
+            
+            // Draw lamps
+            const lampRadius = lampSize * scale * 10;
+            positions.forEach((pos, index) => {
+                // Draw light glow
+                const gradient = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, lampRadius * 2);
+                gradient.addColorStop(0, 'rgba(255, 255, 200, 0.8)');
+                gradient.addColorStop(1, 'rgba(255, 255, 200, 0)');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, lampRadius * 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw lamp
+                ctx.fillStyle = '#FFD700';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, lampRadius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.strokeStyle = '#FFA500';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Draw lamp number
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 12px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(index + 1, pos.x, pos.y);
+            });
+        }
+
+        // Generate uniform positions
+        function generateUniformPositions(roomWidth, roomHeight, count, offsetX, offsetY) {
+            const positions = [];
+            const rows = Math.ceil(Math.sqrt(count));
+            const cols = Math.ceil(count / rows);
+            
+            const cellWidth = roomWidth / cols;
+            const cellHeight = roomHeight / rows;
+            
+            for (let i = 0; i < rows && positions.length < count; i++) {
+                for (let j = 0; j < cols && positions.length < count; j++) {
+                    positions.push({
+                        x: offsetX + (j + 0.5) * cellWidth,
+                        y: offsetY + (i + 0.5) * cellHeight
+                    });
+                }
+            }
+            
+            return positions;
+        }
+
+        // Generate grid positions
+        function generateGridPositions(roomWidth, roomHeight, count, offsetX, offsetY) {
+            const positions = [];
+            const spacingX = roomWidth / (Math.sqrt(count) + 1);
+            const spacingY = roomHeight / (Math.sqrt(count) + 1);
+            
+            for (let i = 1; i <= Math.sqrt(count) && positions.length < count; i++) {
+                for (let j = 1; j <= Math.sqrt(count) && positions.length < count; j++) {
+                    positions.push({
+                        x: offsetX + j * spacingX,
+                        y: offsetY + i * spacingY
+                    });
+                }
+            }
+            
+            return positions;
+        }
+
+        // Generate custom positions
+        function generateCustomPositions(roomWidth, roomHeight, count, offsetX, offsetY) {
+            const positions = [];
+            const centerX = offsetX + roomWidth / 2;
+            const centerY = offsetY + roomHeight / 2;
+            
+            if (count === 1) {
+                positions.push({ x: centerX, y: centerY });
+            } else {
+                const radius = Math.min(roomWidth, roomHeight) * 0.3;
+                for (let i = 0; i < count; i++) {
+                    const angle = (i * 2 * Math.PI) / count;
+                    positions.push({
+                        x: centerX + radius * Math.cos(angle),
+                        y: centerY + radius * Math.sin(angle)
+                    });
+                }
+            }
+            
+            return positions;
+        }
+
+        // Load room details (simulated)
+        function loadRoomDetails() {
+            const roomType = document.getElementById('roomType').value;
+            if (!roomType) {
+                document.getElementById('roomDetails').style.display = 'none';
+                return;
+            }
+
+            // Simulate room data
+            currentRoomData = {
+                name: 'Ofis xonasi',
+                lk: 500,
+                ra: 80,
+                k: 0.7,
+                ugr: 19
+            };
+
+            // Display room details
+            const content = document.getElementById('roomDetailsContent');
+            content.innerHTML = `
+                <tr>
+                    <td>${currentRoomData.name}</td>
+                    <td>${currentRoomData.lk} lm/m²</td>
+                    <td>≥${currentRoomData.ra} Ra</td>
+                    <td>${currentRoomData.k}</td>
+                    <td>${currentRoomData.ugr}</td>
+                </tr>
+            `;
+
+            document.getElementById('roomDetails').style.display = 'block';
+            updateLightCalculation();
+        }
+
+        // Load room categories (simulated)
+        function loadRoomCategories() {
+            const categoryId = document.getElementById('buildingCategory').value;
+            if (!categoryId) {
+                document.getElementById('roomType').innerHTML = '<option value="">Xona turini tanlang</option>';
+                return;
+            }
+
+            // Simulate room types based on category
+            let roomTypes = [];
+            switch(categoryId) {
+                case '1': // Ma'muriy binolar
+                    roomTypes = [
+                        { id: '1-1', name: 'Ofis xonasi' },
+                        { id: '1-2', name: 'Yig'ilish xonasi' },
+                        { id: '1-3', name: 'Kabinet' }
+                    ];
+                    break;
+                case '2': // Ta'lim muassasalari
+                    roomTypes = [
+                        { id: '2-1', name: 'Sinov xonasi' },
+                        { id: '2-2', name: 'Laboratoriya' },
+                        { id: '2-3', name: 'Kutubxona' }
+                    ];
+                    break;
+                case '3': // Sog'liqni saqlash
+                    roomTypes = [
+                        { id: '3-1', name: 'Shifokor kabineti' },
+                        { id: '3-2', name: 'Operatsion xona' },
+                        { id: '3-3', name: 'Kasalxona palatasi' }
+                    ];
+                    break;
+            }
+
+            const select = document.getElementById('roomType');
+            select.innerHTML = '<option value="">Xona turini tanlang</option>';
+            roomTypes.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type.id;
+                option.textContent = type.name;
+                select.appendChild(option);
+            });
+        }
+    </script>
+</body>
+
+</html>

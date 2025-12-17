@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lighting AI Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            padding: 40px;
+        }
+        .box {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        button {
+            padding: 12px 20px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        pre {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+        .loading {
+            color: #2563eb;
+            margin-top: 15px;
+        }
+        .error {
+            color: #dc2626;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>💡 Lighting AI API Test</h2>
+
+    <button id="sendBtn" onclick="sendRequest()">POST yuborish</button>
+
+    <div id="status" class="loading" style="display:none;">⏳ Javob kutilmoqda...</div>
+    <div id="error" class="error"></div>
+
+    <pre id="result"></pre>
+</div>
+
+<script>
+async function sendRequest() {
+    const btn = document.getElementById("sendBtn");
+    const status = document.getElementById("status");
+    const result = document.getElementById("result");
+    const error = document.getElementById("error");
+
+    error.textContent = "";
+    result.textContent = "";
+    status.style.display = "block";
+    btn.disabled = true;
+
+    const data = {
+        width: 3,
+        length: 3,
+        height: 3,
+        reflectance: "80/80/30",
+        required_lux: 400,
+        room_type: "Кассалар зали, кассирлар ва мижозлар маблағини қайта ҳисоблаш учун хоналар"
+    };
+
+    try {
+        const response = await fetch(
+            "https://cal.tmsiti.uz/api/v1/lightbulb/lighting/chat/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(`HTTP ${response.status}: ${text}`);
+        }
+
+        const json = await response.json();
+        result.textContent = JSON.stringify(json, null, 2);
+
+    } catch (err) {
+        error.textContent = "❌ Xatolik: " + err.message;
+    } finally {
+        status.style.display = "none";
+        btn.disabled = false;
+    }
+}
+</script>
+
+</body>
+</html>

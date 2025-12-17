@@ -606,7 +606,13 @@
             color: #495057;
             cursor: pointer;
         }
-            
+        .card-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 60px;
+            opacity: 0.15;
+        }
     </style>
 </head>
 
@@ -784,12 +790,14 @@
                                 
                                 <!-- Maydon ko'rsatkichi -->
                                 <div class="area-display">
+                                    <div class="card-icon">📐</div>
                                     <p class="area-value"><span id="areaValue">9.00</span> m²</p>
                                     <p class="area-label mb-0">Umumiy maydon</p>
                                 </div>
                                 
                                 <!-- Umumiy yorug'lik -->
                                 <div class="total-light-display" id="totalLightDisplay" style="display: none;">
+                                    <div class="card-icon">💡</div>
                                     <p class="total-light-value"><span id="totalLightValue">0</span> lm</p>
                                     <p class="total-light-label mb-0">Umumiy yorug'lik</p>
                                 </div>

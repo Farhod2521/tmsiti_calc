@@ -1,0 +1,740 @@
+        :root {
+            --primary-blue: #4169E1;
+            --success-green: #10B981;
+            --dark-bg: #2C3E50;
+        }
+        
+        body {
+            background: #F1F5F9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            padding-bottom: 2rem;
+        }
+        
+        /* Progress Steps */
+        .progress-box {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #E2E8F0;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+        
+        .step-item:last-child {
+            border-bottom: none;
+        }
+        
+        .step-item:hover {
+            background: #F8FAFC;
+        }
+        
+        .step-item.active {
+            background: #F0F4FF;
+        }
+        
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+        
+        .step-number.completed {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .step-number.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .step-number.pending {
+            background: #E2E8F0;
+            color: #94A3B8;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1E293B;
+            margin-bottom: 0.125rem;
+        }
+        
+        .step-subtitle {
+            font-size: 0.75rem;
+            color: #64748B;
+        }
+        
+        /* Parameters Box */
+        .parameters-box {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .parameters-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #E2E8F0;
+            background: white;
+        }
+        
+        .parameters-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .parameters-title i {
+            margin-right: 0.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .parameters-body {
+            padding: 1.25rem;
+        }
+        
+        .param-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .param-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .param-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1E293B;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .dimension-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .dimension-control:last-child {
+            margin-bottom: 0;
+        }
+        
+        .dimension-label {
+            font-size: 1rem;
+            color: #06080a;
+            width: 50%;
+        }
+        
+        .counter-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        
+        .counter-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            color: #64748B;
+        }
+        
+        .counter-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            background: #F0F4FF;
+        }
+        
+        .counter-value {
+            font-size: 1rem;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            color: #1E293B;
+        }
+        
+        /* Room Preview */
+        .room-preview-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.20rem;
+        }
+        
+        .room-preview {
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dimension-badge.bottom{
+            top: 15%;
+            left: 83%;
+            transform: translateX(-50%);
+        }
+        
+        .dimension-badge.top {
+            top: 50%;
+            right: 0%;
+        }
+        
+        .dimension-badge.right  {
+            top: 15%;
+            right: 76%;
+        }
+        
+        .room-image {
+            width: 95%;
+            max-height: 90%;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .dimension-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            color: #1E293B;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Result Cards */
+        .result-card {
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .result-card.blue {
+            background: linear-gradient(135deg, #3B5BDB 0%, #364FC7 100%);
+        }
+        
+        .result-card.green {
+            background: linear-gradient(135deg, #12B886 0%, #0CA678 100%);
+        }
+        
+        .result-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-unit {
+            font-size: 1.25rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .result-note {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            margin-top: 0.75rem;
+        }
+        
+        /* Tech Table */
+        .tech-table-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-table-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .tech-table-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1E293B;
+            margin: 0;
+        }
+        
+        .tech-table-subtitle {
+            font-size: 0.75rem;
+            color: #64748B;
+            margin: 0;
+        }
+        
+        .tech-table {
+            width: 100%;
+        }
+        
+        .tech-table th {
+            background: #F8FAFC;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748B;
+            text-transform: uppercase;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .tech-table td {
+            padding: 1rem 1.25rem;
+            font-size: 0.875rem;
+            color: #1E293B;
+        }
+        
+        /* Light Cards */
+        .lights-section {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lights-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #64748B;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .light-card {
+            text-align: center;
+            padding: 1.25rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .light-card:hover {
+            border-color: var(--primary-blue);
+            background: #F0F4FF;
+        }
+        
+        .light-card.active {
+            border-color: var(--primary-blue);
+            background: #F0F4FF;
+            box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
+        }
+        
+        .light-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+        }
+        
+        .light-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #1E293B;
+            margin-bottom: 0.25rem;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .light-desc {
+            font-size: 0.75rem;
+            color: #64748B;
+        }
+        
+        /* Info Alert - Boshlang'ichda yashirin */
+        .info-alert {
+            background: #EFF6FF;
+            border: 1px solid #DBEAFE;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 1rem;
+            color: #1E40AF;
+            height: 18vh;
+            display: none;
+        }
+        
+        .info-alert.show {
+            display: block;
+        }
+        
+        .info-alert i {
+            color: #3B82F6;
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Buttons */
+        .btn-custom {
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        
+        /* Select Inputs */
+        .form-select {
+            font-size: 0.875rem;
+            border-color: #E2E8F0;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .form-select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(65, 105, 225, 0.1);
+        }
+        
+        /* Lamps Table */
+        .lamps-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .lamps-table th {
+            background: #F8FAFC;
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748B;
+            text-transform: uppercase;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .lamps-table td {
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #1E293B;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .lamps-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .lamp-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        /* AI Maslahatchi va Tafsiya bo'limlari - Boshlang'ichda yashirin */
+        .ai-section {
+            display: none;
+        }
+        
+        .ai-section.show {
+            display: block;
+        }
+        
+        /* Chap karta - Mahsulot */
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        .product-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+        .product-image {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background: #f8fafc;
+        }
+        .badge-recommend {
+            background: #e8f4fd;
+            color: #2962d4;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .badge-icon {
+            font-size: 18px;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        .product-desc {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .specs-row {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .spec-item {
+            flex: 0 0 auto;
+        }
+        .spec-label {
+            font-size: 12px;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .spec-value {
+            font-size: 40px;
+            font-weight: 700;
+            color: #2962d4;
+            line-height: 1;
+        }
+        .spec-divider {
+            width: 1px;
+            height: 60px;
+            background: #e2e8f0;
+            margin: 0;
+        }
+        .details-toggle {
+            background: #f7fafc;
+            border: none;
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 14px;
+            margin-top: 28px;
+            transition: background 0.2s;
+        }
+        .details-toggle:hover {
+            background: #edf2f7;
+        }
+        
+        /* O'ng karta - AI Maslahatchi */
+        .ai-card {
+            background: #f7f9ff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .ai-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: #e8eeff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .ai-icon {
+            font-size: 24px;
+        }
+        .ai-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 16px;
+        }
+        .ai-message-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .ai-content {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .ai-content strong {
+            color: #2962d4;
+            font-weight: 600;
+        }
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            background: #f0f0f5;
+            color: #6b7280;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .btn-variants {
+            background: white;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .btn-variants:hover {
+            border-color: #cbd5e0;
+            background: #fafafa;
+        }
+        
+        /* Kategoriya bo'yicha lampochkalar jadvali */
+        .category-lamps-section {
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .category-lamps-section.show {
+            display: block;
+        }
+        
+        .category-lamps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .category-lamps-table th {
+            background: #f8fafc;
+            padding: 12px 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748B;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .category-lamps-table td {
+            padding: 15px;
+            font-size: 0.875rem;
+            color: #1E293B;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .category-lamps-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        .category-image {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .result-value {
+                font-size: 2rem;
+            }
+            
+            .dimension-badge {
+                font-size: 0.625rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .room-preview-card {
+                margin-top: 1.5rem;
+            }
+            
+            .specs-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .spec-divider {
+                display: none;
+            }
+            
+            .product-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .product-image {
+                width: 100px;
+                height: 100px;
+            }
+        }

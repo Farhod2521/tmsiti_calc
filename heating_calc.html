@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMSITI Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/heating_calc.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="toggle-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-left" id="toggleIcon"></i>
+        </div>
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-calculator"></i></div>
+            <div class="logo-text">
+                <h1>TMSITI</h1>
+                <p>Texnik me'yorlash va standartlashtirish ilmiy-tadqiqot instituti</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Bosh sahifa</span>
+            </a>
+            <a href="about.html" class="nav-item">
+                <i class="fas fa-info-circle"></i>
+                <span>Biz haqimizda</span>
+            </a>
+            <a href="projects.html" class="nav-item">
+                <i class="fas fa-project-diagram"></i>
+                <span>Loyihalar</span>
+            </a>
+            <a href="news.html" class="nav-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Yangiliklar & Blog</span>
+            </a>
+        </nav>
+        <div class="nav-section">
+            <div class="nav-section-title">Kalkulyatorlar</div>  
+            <a href="light_calc.html" style="text-decoration: none;">
+                <div class="calc-item">
+                    <div class="calc-dot yellow"></div>
+                    <span>Yorug'lik kalkulyatori</span>
+                </div>
+            </a>
+            <a href="heating_calc.html" style="text-decoration: none;">
+                <div class="calc-item">
+                    <div class="calc-dot red"></div>
+                    <span>Isitish tizimi</span>
+                </div>
+            </a>
+            <a href="roof_calc.html" style="text-decoration: none;">
+                <div class="calc-item">
+                    <div class="calc-dot blue"></div>
+                    <span>Tom yopish</span>
+                </div>
+            </a>
+            <a href="green_calc.html" style="text-decoration: none;">
+                <div class="calc-item">
+                    <div class="calc-dot green"></div>
+                    <span>Yashil Qurilish</span>
+                </div>
+            </a>
+        </div>
+        <div class="user-badge">
+            <div class="user-avatar">F</div>
+            <div class="user-info">
+                <p>Foydalanuvchi</p>
+                <span>Chiqish</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-toggle" onclick="toggleMobileSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Kalkulyatorni qidiring...">
+            </div>
+            <div class="header-actions">
+                <div class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-sun" id="themeIcon"></i>
+                </div>
+                <div class="user-profile">O'Z</div>
+                <button class="login-btn">Bog'lanish</button>
+            </div>
+        </div>
+
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            <!-- section begin -->
+            <section id="subheader2">
+                <div class="container relative z-index">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 offset-lg-3 text-center">
+                
+                            <h1 style="
+                            font-family: 'Inter', 'Arial', sans-serif;
+                            font-size: 32px;
+                            font-weight: 700;
+                            color: #1a1a1a;
+                            line-height: 1.3;
+                            margin: 20px 0;
+                         
+                            ">Isitish kalkulyatori</h1>
+                            <p class="lead">Quyidagi formani to'ldirish orqali bino haqida ma'lumotlarni kiritishingiz mumkin</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <!-- Bosqichlar ko'rsatkichi -->
+                <div class="step-indicator">
+                    <div class="step active" data-step="1">
+                        <div class="step-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <div class="step-label">Hudud va Bino</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-icon">
+                            <i class="bi bi-aspect-ratio"></i>
+                        </div>
+                        <div class="step-label">Bino O'lchami</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-icon">
+                            <i class="bi bi-puzzle"></i>
+                        </div>
+                        <div class="step-label">Konstruksiyalar</div>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-icon">
+                            <i class="bi bi-calculator"></i>
+                        </div>
+                        <div class="step-label">Hisoblash</div>
+                    </div>
+                </div>
+                
+                <form id="buildingForm">
+                    <!-- 1. Hudud va bino turi bo'limi -->
+                    <div class="form-section active" id="step-1">
+                        <h3 class="section-title">
+                            <i class="bi bi-geo-alt"></i>
+                            Hudud va Bino Turi
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="region" class="form-label required-field">Viloyat</label>
+                                <select class="form-select" id="region" required>
+                                    <option value="" selected disabled>Viloyatni tanlang</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="district" class="form-label required-field">Tuman</label>
+                                <select class="form-select" id="district" required disabled>
+                                    <option value="" selected disabled>Avval viloyatni tanlang</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Bino turi qismi -->
+                        <div class="building-type-section">
+                            <h5 class="text-primary mb-3">Bino Turi</h5>
+                            <div class="mb-3">
+                                <label for="buildingType" class="form-label required-field">Bino turi</label>
+                                <select class="form-select" id="buildingType" required>
+                                    <option value="" selected disabled>Bino turini tanlang</option>
+                                    <option value="turar-joy" data-base-temp="21">Turar-joy binosi</option>
+                                    <option value="kasalxona" data-base-temp="19">Kasalxona</option>
+                                    <option value="oshxona" data-base-temp="18">Oshxona</option>
+                                    <option value="maktab" data-base-temp="20">Maktab</option>
+                                    <option value="universitet" data-base-temp="20">Universitet</option>
+                                    <option value="ofis" data-base-temp="20">Ofis binosi</option>
+                                    <option value="do'kon" data-base-temp="19">Do'kon</option>
+                                    <option value="sanoat" data-base-temp="18">Sanoat binosi</option>
+                                    <option value="sport" data-base-temp="19">Sport majmuasi</option>
+                                    <option value="madaniyat" data-base-temp="20">Madaniyat markazi</option>
+                                    <option value="boshqa" data-base-temp="20">Boshqa</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="otherBuildingType" style="display: none;">
+                                <label for="customBuildingType" class="form-label">Bino turini kiriting</label>
+                                <input type="text" class="form-control" id="customBuildingType" placeholder="Bino turini kiriting">
+                            </div>
+                        </div>
+                        
+                        <!-- Hudud ma'lumotlari -->
+                        <div class="temperature-info" id="regionInfo" style="display: none;">
+                            <h6>Hudud ma'lumotlari:</h6>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <small>Issiqlik mavsumida o'rtacha havo harorati: <span id="avgTempDisplay">-</span>°C</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Isitish davrining davomiyligi: <span id="timeDisplay">-</span></small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Normativ harorat: <span id="baseTempDisplay">-</span>°C</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Isitish davrining daraja-kunlari soni: <span id="calcValueDisplay">-</span></small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <div></div>
+                            <button type="button" class="btn btn-primary next-step" data-next="2">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Xona o'lchamlari bo'limi -->
+                    <div class="form-section" id="step-2">
+                        <h3 class="section-title">
+                            <i class="bi bi-aspect-ratio"></i>
+                            Bino O'lchami
+                        </h3>
+                        <div class="dimension-inputs">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="length" class="form-label required-field">Uzunlik (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control dimension-input" id="length" min="0" step="0.1" required>
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="width" class="form-label required-field">Eni (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control dimension-input" id="width" min="0" step="0.1" required>
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="height" class="form-label required-field">Balandligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control dimension-input" id="height" min="0" step="0.1" required>
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Avtomatik hisoblanadigan yuzalar -->
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <div class="area-display text-center">
+                                        <h6>Devorlar Yuzasi</h6>
+                                        <div class="area-value" id="wallAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="area-display text-center">
+                                        <h6>Pol Yuzasi</h6>
+                                        <div class="area-value" id="floorAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="area-display text-center">
+                                        <h6>Tom Yuzasi</h6>
+                                        <div class="area-value" id="ceilingAreaDisplay">0 m²</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="volume-display text-center">
+                                        <h6>Bino Hajmi</h6>
+                                        <div class="area-value" id="volumeDisplay">0 m³</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                            <button type="button" class="btn btn-primary next-step" data-next="3">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Konstruksiyalar bo'limi -->
+                    <div class="form-section" id="step-3">
+                        <h3 class="section-title">
+                            <i class="bi bi-puzzle"></i>
+                            Konstruksiyalar
+                        </h3>
+                        
+                        <!-- Eshiklar qismi -->
+                        <div class="door-window-section">
+                            <h5 class="text-primary d-flex justify-content-between align-items-center">
+                                <span>Eshiklar</span>
+                                <button type="button" class="btn btn-sm btn-success add-btn" id="addDoor">
+                                    <i class="bi bi-plus"></i> Qo'shish
+                                </button>
+                            </h5>
+                            <div id="doorsContainer">
+                                <!-- Eshiklar bu yerda yuklanadi -->
+                            </div>
+                        </div>
+                        
+                        <!-- Derazalar qismi -->
+                        <div class="door-window-section">
+                            <h5 class="text-primary d-flex justify-content-between align-items-center">
+                                <span>Derazalar</span>
+                                <button type="button" class="btn btn-sm btn-success add-btn" id="addWindow">
+                                    <i class="bi bi-plus"></i> Qo'shish
+                                </button>
+                            </h5>
+                            <div id="windowsContainer">
+                                <!-- Derazalar bu yerda yuklanadi -->
+                            </div>
+                        </div>
+                        
+                        <!-- Materiallar -->
+                        <!-- Devor qismi -->
+                        <div class="material-section">
+                            <h5 class="text-primary">Devor</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="wallThickness" class="form-label">Devor qalinligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="wallThickness" min="0" step="0.01" readonly>
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="wallMaterial" class="form-label">Devor materiali</label>
+                                    <div class="material-input-group">
+                                        <input type="text" class="form-control" id="wallMaterialDisplay" readonly>
+                                        <button class="btn btn-outline-primary" type="button" id="wallMaterialBtn">
+                                            <i class="bi bi-plus"></i> Material qo'shish
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="wallArea" class="form-label">Devor Yuzasi(m²)</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="wallArea" readonly style="background-color: #e9ecef;">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                    <div class="calculated-area">
+                                        <small>Jami eshiklar yuzasi: <span id="totalDoorsArea">0</span> m²</small><br>
+                                        <small>Jami derazalar yuzasi: <span id="totalWindowsArea">0</span> m²</small><br>
+                                        <small>Yakuniy devor yuzasi: <span id="finalWallArea">0</span> m²</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Devor qatlamlari jadvali -->
+                            <div class="layer-table" id="wallLayerTable">
+                                <h6>Devor qatlamlari:</h6>
+                                <div id="wallLayersContainer">
+                                    <!-- Qatlamlar bu yerda yuklanadi -->
+                                </div>
+                                <div class="total-thickness" id="wallTotalThickness">Jami qalinlik: 0 m</div>
+                                <div class="resistance-display" id="wallResistanceDisplay">
+                                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span id="wallTotalResistance">0</span> m²·°C/W</strong>
+                                    <br>
+                                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span id="wallTotalQ">0</span> kW h/m²y</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pol qismi -->
+                        <div class="material-section">
+                            <h5 class="text-primary">Pol</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="floorThickness" class="form-label">Pol qalinligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="floorThickness" min="0" step="0.01" readonly>
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="floorMaterial" class="form-label">Pol materiali</label>
+                                    <div class="material-input-group">
+                                        <input type="text" class="form-control" id="floorMaterialDisplay" readonly>
+                                        <button class="btn btn-outline-primary" type="button" id="floorMaterialBtn">
+                                            <i class="bi bi-plus"></i> Material qo'shish
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="floorArea" class="form-label">Pol Yuzasi(m²)</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="floorArea" readonly style="background-color: #e9ecef;">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pol qatlamlari jadvali -->
+                            <div class="layer-table" id="floorLayerTable">
+                                <h6>Pol qatlamlari:</h6>
+                                <div id="floorLayersContainer">
+                                    <!-- Qatlamlar bu yerda yuklanadi -->
+                                </div>
+                                <div class="total-thickness" id="floorTotalThickness">Jami qalinlik: 0 m</div>
+                                <div class="resistance-display" id="floorResistanceDisplay">
+                                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span id="floorTotalResistance">0</span> m²·°C/W</strong>
+                                    <br>
+                                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span id="floorTotalQ">0</span> kW h/m²y</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tom qismi -->
+                        <div class="material-section">
+                            <h5 class="text-primary">Tom</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="ceilingThickness" class="form-label">Tom qalinligi (m)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="ceilingThickness" min="0" step="0.01" readonly>
+                                        <span class="input-group-text">m</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="ceilingMaterial" class="form-label">Tom materiali</label>
+                                    <div class="material-input-group">
+                                        <input type="text" class="form-control" id="ceilingMaterialDisplay" readonly>
+                                        <button class="btn btn-outline-primary" type="button" id="ceilingMaterialBtn">
+                                            <i class="bi bi-plus"></i> Material qo'shish
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="ceilingArea" class="form-label">Tom Yuzasi(m²)</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="ceilingArea" readonly style="background-color: #e9ecef;">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tom qatlamlari jadvali -->
+                            <div class="layer-table" id="ceilingLayerTable">
+                                <h6>Tom qatlamlari:</h6>
+                                <div id="ceilingLayersContainer">
+                                    <!-- Qatlamlar bu yerda yuklanadi -->
+                                </div>
+                                <div class="total-thickness" id="ceilingTotalThickness">Jami qalinlik: 0 m</div>
+                                <div class="resistance-display" id="ceilingResistanceDisplay">
+                                    <strong>Umumiy qarshilik (R<span class="r-subscript">um</span>): <span id="ceilingTotalResistance">0</span> m²·°C/W</strong>
+                                    <br>
+                                    <strong>Umumiy Issiqlik (Q<span class="r-subscript">um</span>): <span id="ceilingTotalQ">0</span> kW h/m²y</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                            <button type="button" class="btn btn-primary next-step" data-next="4">Keyingi <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- 4. Hisoblash bo'limi -->
+                    <div class="form-section" id="step-4">
+                        <h3 class="section-title">
+                            <i class="bi bi-calculator"></i>
+                            Hisoblash Natijalari
+                        </h3>
+                        
+                        <!-- Hisoblash natijalari -->
+                        <div class="calculation-result" id="calculationResult">
+                            <h5 class="text-success">Hisoblash natijalari:</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Hudud:</strong> <span id="resultRegion">-</span>, <span id="resultDistrict">-</span></p>
+                                    <p><strong>Bino turi:</strong> <span id="resultBuildingType">-</span></p>
+                                    <p><strong>O'rtacha harorat:</strong> <span id="resultAvgTemp">-</span>°C</p>
+                                    <p><strong>Baza harorat:</strong> <span id="resultBaseTemp">-</span>°C</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Vaqt:</strong> <span id="resultTime">-</span></p>
+                                    <p><strong>Bino o'lchami:</strong> <span id="resultDimensions">-</span></p>
+                                    <p><strong>Bino hajmi:</strong> <span id="resultVolume">-</span> m³</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h6 class="text-primary">Material qarshiliklari:</h6>
+                                    <p><strong>Devor qarshiligi:</strong> <span id="resultWallResistance">-</span> m²·°C/W</p>
+                                    <p><strong>Pol qarshiligi:</strong> <span id="resultFloorResistance">-</span> m²·°C/W</p>
+                                    <p><strong>Tom qarshiligi:</strong> <span id="resultCeilingResistance">-</span> m²·°C/W</p>
+                                    <p><strong>Eshik qarshiligi:</strong> <span id="resultDoorResistance">0.6</span> m²·°C/W</p>
+                                    <p><strong>Deraza qarshiligi:</strong> <span id="resultWindowResistance">0.6</span> m²·°C/W</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h6 class="text-primary">Issiqlik yo'qotilishi (Q):</h6>
+                                    <div class="result-box">
+                                        <p><strong>Devor orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultWallQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Pol orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultFloorQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Tom orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultCeilingQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Eshiklar orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultDoorQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box">
+                                        <p><strong>Derazalar orqali issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultWindowQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="q-ha">
+                                        <p><strong>Havo almashinuv orqali issiqlik yo'qotilishi (Q<span class="r-subscript">H.A</span>):</strong> <span class="q-value" id="resultAirExchangeQ">-</span> kW h/m²y</p>
+                                    </div>
+                                    <div class="result-box bg-success text-white">
+                                        <h5><strong>Umumiy issiqlik yo'qotilishi:</strong> <span class="q-value" id="resultTotalQ" style="color: #fff3cd;">-</span> kW h/m²y</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Radiator hisobi (bu qism avtomatik to'ldiriladi) -->
+                            <div id="heaterResults"></div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3"><i class="bi bi-arrow-left"></i> Oldingi</button>
+                            <button type="button" class="btn btn-success" id="calculateBtn">Hisoblash <i class="bi bi-calculator"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Material tanlash modali -->
+    <div class="modal fade material-modal" id="materialModal" tabindex="-1" aria-labelledby="materialModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="materialModalLabel">Material tanlash</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select" id="categorySelect">
+                                <option value="">Barcha kategoriyalar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="materialSearch" placeholder="Material qidirish...">
+                                <button class="btn btn-outline-secondary" type="button" id="clearSearch">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="materialList">
+                        <!-- Materiallar ro'yxati bu yerda yuklanadi -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                    <button type="button" class="btn btn-primary" id="selectMaterial">Tanlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+<script src="/js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/heating_calc.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+[
+  {
+    "indeks": 0.40,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.45 },
+      { "rang": "80/50/30", "qiymat": 0.25 },
+      { "rang": "70/50/20", "qiymat": 0.23 },
+      { "rang": "50/50/10", "qiymat": 0.22 },
+      { "rang": "50/30/10", "qiymat": 0.18 },
+      { "rang": "30/30/10", "qiymat": 0.18 },
+      { "rang": "0/0/0", "qiymat": 0.14 }
+    ]
+  },
+  {
+    "indeks": 0.60,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.55 },
+      { "rang": "80/50/30", "qiymat": 0.33 },
+      { "rang": "70/50/20", "qiymat": 0.32 },
+      { "rang": "50/50/10", "qiymat": 0.30 },
+      { "rang": "50/30/10", "qiymat": 0.26 },
+      { "rang": "30/30/10", "qiymat": 0.26 },
+      { "rang": "0/0/0", "qiymat": 0.19 }
+    ]
+  },
+  {
+    "indeks": 0.80,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.63 },
+      { "rang": "80/50/30", "qiymat": 0.41 },
+      { "rang": "70/50/20", "qiymat": 0.38 },
+      { "rang": "50/50/10", "qiymat": 0.36 },
+      { "rang": "50/30/10", "qiymat": 0.32 },
+      { "rang": "30/30/10", "qiymat": 0.31 },
+      { "rang": "0/0/0", "qiymat": 0.24 }
+    ]
+  },
+  {
+    "indeks": 1.00,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.68 },
+      { "rang": "80/50/30", "qiymat": 0.45 },
+      { "rang": "70/50/20", "qiymat": 0.43 },
+      { "rang": "50/50/10", "qiymat": 0.41 },
+      { "rang": "50/30/10", "qiymat": 0.34 },
+      { "rang": "30/30/10", "qiymat": 0.34 },
+      { "rang": "0/0/0", "qiymat": 0.27 }
+    ]
+  },
+  {
+    "indeks": 1.25,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.72 },
+      { "rang": "80/50/30", "qiymat": 0.50 },
+      { "rang": "70/50/20", "qiymat": 0.46 },
+      { "rang": "50/50/10", "qiymat": 0.43 },
+      { "rang": "50/30/10", "qiymat": 0.37 },
+      { "rang": "30/30/10", "qiymat": 0.37 },
+      { "rang": "0/0/0", "qiymat": 0.30 }
+    ]
+  },
+  {
+    "indeks": 1.50,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.76 },
+      { "rang": "80/50/30", "qiymat": 0.54 },
+      { "rang": "70/50/20", "qiymat": 0.49 },
+      { "rang": "50/50/10", "qiymat": 0.47 },
+      { "rang": "50/30/10", "qiymat": 0.41 },
+      { "rang": "30/30/10", "qiymat": 0.39 },
+      { "rang": "0/0/0", "qiymat": 0.32 }
+    ]
+  },
+  {
+    "indeks": 2.00,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.79 },
+      { "rang": "80/50/30", "qiymat": 0.58 },
+      { "rang": "70/50/20", "qiymat": 0.55 },
+      { "rang": "50/50/10", "qiymat": 0.49 },
+      { "rang": "50/30/10", "qiymat": 0.46 },
+      { "rang": "30/30/10", "qiymat": 0.45 },
+      { "rang": "0/0/0", "qiymat": 0.37 }
+    ]
+  },
+  {
+    "indeks": 2.50,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.85 },
+      { "rang": "80/50/30", "qiymat": 0.63 },
+      { "rang": "70/50/20", "qiymat": 0.58 },
+      { "rang": "50/50/10", "qiymat": 0.56 },
+      { "rang": "50/30/10", "qiymat": 0.50 },
+      { "rang": "30/30/10", "qiymat": 0.49 },
+      { "rang": "0/0/0", "qiymat": 0.40 }
+    ]
+  },
+  {
+    "indeks": 3.00,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 0.94 },
+      { "rang": "80/50/30", "qiymat": 0.76 },
+      { "rang": "70/50/20", "qiymat": 0.69 },
+      { "rang": "50/50/10", "qiymat": 0.63 },
+      { "rang": "50/30/10", "qiymat": 0.59 },
+      { "rang": "30/30/10", "qiymat": 0.57 },
+      { "rang": "0/0/0", "qiymat": 0.50 }
+    ]
+  },
+  {
+    "indeks": 4.00,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 1.08 },
+      { "rang": "80/50/30", "qiymat": 0.88 },
+      { "rang": "70/50/20", "qiymat": 0.84 },
+      { "rang": "50/50/10", "qiymat": 0.77 },
+      { "rang": "50/30/10", "qiymat": 0.70 },
+      { "rang": "30/30/10", "qiymat": 0.68 },
+      { "rang": "0/0/0", "qiymat": 0.62 }
+    ]
+  },
+  {
+    "indeks": 5.00,
+    "koeffitsientlar": [
+      { "rang": "80/80/30", "qiymat": 1.08 },
+      { "rang": "80/50/30", "qiymat": 0.97 },
+      { "rang": "70/50/20", "qiymat": 0.88 },
+      { "rang": "50/50/10", "qiymat": 0.82 },
+      { "rang": "50/30/10", "qiymat": 0.75 },
+      { "rang": "30/30/10", "qiymat": 0.74 },
+      { "rang": "0/0/0", "qiymat": 0.68 }
+    ]
+  }
+]
