@@ -1,4 +1,4 @@
-    // O'zgaruvchilar
+       // O'zgaruvchilar
         let dimensions = {
             width: 3.0,
             length: 3.0,
@@ -16,9 +16,9 @@
         let currentCleanlinessCoefficient = 1.5;
         // Light indeks ma'lumotlari
         const lightIndices = [
-            {
-                "indeks": 0.40,
-                "koeffitsientlar": [
+                {
+                    "indeks": 0.40,
+                    "koeffitsientlar": [
                     { "rang": "80/80/30", "qiymat": 0.45 },
                     { "rang": "80/50/30", "qiymat": 0.25 },
                     { "rang": "70/50/20", "qiymat": 0.23 },
@@ -26,44 +26,128 @@
                     { "rang": "50/30/10", "qiymat": 0.18 },
                     { "rang": "30/30/10", "qiymat": 0.18 },
                     { "rang": "0/0/0", "qiymat": 0.14 }
-                ]
-            },
-            {
-                "indeks": 0.50,
-                "koeffitsientlar": [
-                    { "rang": "80/80/30", "qiymat": 0.50 },
-                    { "rang": "80/50/30", "qiymat": 0.28 },
-                    { "rang": "70/50/20", "qiymat": 0.25 },
-                    { "rang": "50/50/10", "qiymat": 0.24 },
-                    { "rang": "50/30/10", "qiymat": 0.20 },
-                    { "rang": "30/30/10", "qiymat": 0.20 },
-                    { "rang": "0/0/0", "qiymat": 0.16 }
-                ]
-            },
-            {
-                "indeks": 0.60,
-                "koeffitsientlar": [
+                    ]
+                },
+                {
+                    "indeks": 0.60,
+                    "koeffitsientlar": [
                     { "rang": "80/80/30", "qiymat": 0.55 },
-                    { "rang": "80/50/30", "qiymat": 0.30 },
-                    { "rang": "70/50/20", "qiymat": 0.27 },
-                    { "rang": "50/50/10", "qiymat": 0.26 },
-                    { "rang": "50/30/10", "qiymat": 0.22 },
-                    { "rang": "30/30/10", "qiymat": 0.22 },
-                    { "rang": "0/0/0", "qiymat": 0.18 }
-                ]
-            },
-            {
-                "indeks": 0.70,
-                "koeffitsientlar": [
-                    { "rang": "80/80/30", "qiymat": 0.60 },
-                    { "rang": "80/50/30", "qiymat": 0.32 },
-                    { "rang": "70/50/20", "qiymat": 0.29 },
-                    { "rang": "50/50/10", "qiymat": 0.28 },
-                    { "rang": "50/30/10", "qiymat": 0.24 },
-                    { "rang": "30/30/10", "qiymat": 0.24 },
-                    { "rang": "0/0/0", "qiymat": 0.20 }
-                ]
-            }
+                    { "rang": "80/50/30", "qiymat": 0.33 },
+                    { "rang": "70/50/20", "qiymat": 0.32 },
+                    { "rang": "50/50/10", "qiymat": 0.30 },
+                    { "rang": "50/30/10", "qiymat": 0.26 },
+                    { "rang": "30/30/10", "qiymat": 0.26 },
+                    { "rang": "0/0/0", "qiymat": 0.19 }
+                    ]
+                },
+                {
+                    "indeks": 0.80,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.63 },
+                    { "rang": "80/50/30", "qiymat": 0.41 },
+                    { "rang": "70/50/20", "qiymat": 0.38 },
+                    { "rang": "50/50/10", "qiymat": 0.36 },
+                    { "rang": "50/30/10", "qiymat": 0.32 },
+                    { "rang": "30/30/10", "qiymat": 0.31 },
+                    { "rang": "0/0/0", "qiymat": 0.24 }
+                    ]
+                },
+                {
+                    "indeks": 1.00,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.68 },
+                    { "rang": "80/50/30", "qiymat": 0.45 },
+                    { "rang": "70/50/20", "qiymat": 0.43 },
+                    { "rang": "50/50/10", "qiymat": 0.41 },
+                    { "rang": "50/30/10", "qiymat": 0.34 },
+                    { "rang": "30/30/10", "qiymat": 0.34 },
+                    { "rang": "0/0/0", "qiymat": 0.27 }
+                    ]
+                },
+                {
+                    "indeks": 1.25,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.72 },
+                    { "rang": "80/50/30", "qiymat": 0.50 },
+                    { "rang": "70/50/20", "qiymat": 0.46 },
+                    { "rang": "50/50/10", "qiymat": 0.43 },
+                    { "rang": "50/30/10", "qiymat": 0.37 },
+                    { "rang": "30/30/10", "qiymat": 0.37 },
+                    { "rang": "0/0/0", "qiymat": 0.30 }
+                    ]
+                },
+                {
+                    "indeks": 1.50,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.76 },
+                    { "rang": "80/50/30", "qiymat": 0.54 },
+                    { "rang": "70/50/20", "qiymat": 0.49 },
+                    { "rang": "50/50/10", "qiymat": 0.47 },
+                    { "rang": "50/30/10", "qiymat": 0.41 },
+                    { "rang": "30/30/10", "qiymat": 0.39 },
+                    { "rang": "0/0/0", "qiymat": 0.32 }
+                    ]
+                },
+                {
+                    "indeks": 2.00,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.79 },
+                    { "rang": "80/50/30", "qiymat": 0.58 },
+                    { "rang": "70/50/20", "qiymat": 0.55 },
+                    { "rang": "50/50/10", "qiymat": 0.49 },
+                    { "rang": "50/30/10", "qiymat": 0.46 },
+                    { "rang": "30/30/10", "qiymat": 0.45 },
+                    { "rang": "0/0/0", "qiymat": 0.37 }
+                    ]
+                },
+                {
+                    "indeks": 2.50,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.85 },
+                    { "rang": "80/50/30", "qiymat": 0.63 },
+                    { "rang": "70/50/20", "qiymat": 0.58 },
+                    { "rang": "50/50/10", "qiymat": 0.56 },
+                    { "rang": "50/30/10", "qiymat": 0.50 },
+                    { "rang": "30/30/10", "qiymat": 0.49 },
+                    { "rang": "0/0/0", "qiymat": 0.40 }
+                    ]
+                },
+                {
+                    "indeks": 3.00,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 0.94 },
+                    { "rang": "80/50/30", "qiymat": 0.76 },
+                    { "rang": "70/50/20", "qiymat": 0.69 },
+                    { "rang": "50/50/10", "qiymat": 0.63 },
+                    { "rang": "50/30/10", "qiymat": 0.59 },
+                    { "rang": "30/30/10", "qiymat": 0.57 },
+                    { "rang": "0/0/0", "qiymat": 0.50 }
+                    ]
+                },
+                {
+                    "indeks": 4.00,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 1.08 },
+                    { "rang": "80/50/30", "qiymat": 0.88 },
+                    { "rang": "70/50/20", "qiymat": 0.84 },
+                    { "rang": "50/50/10", "qiymat": 0.77 },
+                    { "rang": "50/30/10", "qiymat": 0.70 },
+                    { "rang": "30/30/10", "qiymat": 0.68 },
+                    { "rang": "0/0/0", "qiymat": 0.62 }
+                    ]
+                },
+                {
+                    "indeks": 5.00,
+                    "koeffitsientlar": [
+                    { "rang": "80/80/30", "qiymat": 1.08 },
+                    { "rang": "80/50/30", "qiymat": 0.97 },
+                    { "rang": "70/50/20", "qiymat": 0.88 },
+                    { "rang": "50/50/10", "qiymat": 0.82 },
+                    { "rang": "50/30/10", "qiymat": 0.75 },
+                    { "rang": "30/30/10", "qiymat": 0.74 },
+                    { "rang": "0/0/0", "qiymat": 0.68 }
+                    ]
+                }
         ];
         // AI Maslahatchi uchun alohida hisoblash funksiyasi
         function calculateAIAdvisor() {
@@ -671,91 +755,79 @@
             document.getElementById('efficiencyTag').textContent = `Tejamkorlik: ${efficiency}`;
             document.getElementById('brightnessTag').textContent = `Yorug'lik: ${brightnessLevel}`;
         }
-        function updateCategoryLampsTable() {
-            const tableBody = document.getElementById('categoryLampsBody');
-            tableBody.innerHTML = '';
-            
-            let rowCount = 0;
-            
-            Object.keys(calculatedLampsByCategory).forEach(category => {
-                const lampData = calculatedLampsByCategory[category];
-                const lamp = lampData.lamp;
-                const count = lampData.count;
-                const powerPerLamp = parseInt(lamp.power) || 0;
-                const totalPower = powerPerLamp * count;
-                const cleanliness = lampData.cleanlinessCoefficient || 1.5;
-                const colorCoeff = lampData.colorCoefficient || 0.5;
-                
-                const row = document.createElement('tr');
-                
-                // Rasmi
-                const imgCell = document.createElement('td');
-                if (lamp.image) {
-                    const img = document.createElement('img');
-                    img.src = lamp.image;
-                    img.alt = lamp.name;
-                    img.className = 'category-image';
-                    imgCell.appendChild(img);
-                } else {
-                    imgCell.textContent = '-';
-                }
-                
-                // Nomi
-                const nameCell = document.createElement('td');
-                nameCell.textContent = lamp.name || '-';
-                
-                // Kategoriya
-                const categoryCell = document.createElement('td');
-                categoryCell.textContent = category;
-                
-                // Kerakli soni
-                const countCell = document.createElement('td');
-                countCell.innerHTML = `<strong>${count} ta</strong>`;
-                
-                // Quvvat (bitta)
-                const powerCell = document.createElement('td');
-                powerCell.textContent = `${powerPerLamp}W`;
-                
-                // Jami quvvat
-                const totalPowerCell = document.createElement('td');
-                totalPowerCell.innerHTML = `<strong>${totalPower}W</strong>`;
-                
-                row.appendChild(imgCell);
-                row.appendChild(nameCell);
-                row.appendChild(categoryCell);
-                row.appendChild(countCell);
-                row.appendChild(powerCell);
-                row.appendChild(totalPowerCell);
-                
-                tableBody.appendChild(row);
-                rowCount++;
-            });
-            
-            // Jadval sarlavhasini yangilash
-            const cleanliness = document.getElementById('roomCleanliness').value;
-            let cleanlinessText = '';
-            switch(cleanliness) {
-                case '1.25': cleanlinessText = 'Juda toza xona'; break;
-                case '1.5': cleanlinessText = 'Toza xona'; break;
-                case '1.75': cleanlinessText = 'O\'rtacha toza'; break;
-                case '2': cleanlinessText = 'Toza emas'; break;
-                default: cleanlinessText = '';
-            }
-            
-            document.getElementById('categoryLampsTitle').textContent = 
-                `Barcha lampochka turlari (${rowCount} ta kategoriya) - ${cleanlinessText}`;
-            
-            // Agar hech narsa bo'lmasa
-            if (rowCount === 0) {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="text-center text-muted">
-                            Iltimos, xona tozaligi va rang kombinatsiyasini tanlang
-                        </td>
-                    </tr>
-                `;
-            }
+function updateCategoryLampsTable() {
+    const tableBody = document.getElementById('categoryLampsBody');
+    tableBody.innerHTML = '';
+
+    let rowCount = 0;
+
+    Object.values(calculatedLampsByCategory).forEach(lampData => {
+        const lamp = lampData.lamp;
+        const count = lampData.count;
+
+        const powerPerLamp = parseInt(lamp.power) || 0;
+        const lumenPerLamp = lamp.luminous_flux_max || 0;
+        const totalPower = powerPerLamp * count;
+
+        const row = document.createElement('tr');
+
+        // 🖼 Rasmi
+        const imgCell = document.createElement('td');
+        if (lamp.image) {
+            const img = document.createElement('img');
+            img.src = lamp.image;
+            img.alt = lamp.name;
+            img.className = 'category-image';
+            imgCell.appendChild(img);
+        } else {
+            imgCell.textContent = '-';
         }
+
+        // 📛 Nomi
+        const nameCell = document.createElement('td');
+        nameCell.textContent = lamp.name || '-';
+
+        // 🔢 Kerakli soni
+        const countCell = document.createElement('td');
+        countCell.innerHTML = `<strong>${count} ta</strong>`;
+
+        // ⚡ Quvvat (bitta)
+        const powerCell = document.createElement('td');
+        powerCell.textContent = `${powerPerLamp} W`;
+
+        // 💡 Lumen (bitta)  ← ASOSIY O‘ZGARISH
+        const lumenCell = document.createElement('td');
+        lumenCell.textContent = `${lumenPerLamp.toLocaleString()} lm`;
+
+        // ⚡⚡ Jami quvvat
+        const totalPowerCell = document.createElement('td');
+        totalPowerCell.innerHTML = `<strong>${totalPower} W</strong>`;
+
+        row.appendChild(imgCell);
+        row.appendChild(nameCell);
+        row.appendChild(countCell);
+        row.appendChild(powerCell);
+        row.appendChild(lumenCell);
+        row.appendChild(totalPowerCell);
+
+        tableBody.appendChild(row);
+        rowCount++;
+    });
+
+    document.getElementById('categoryLampsTitle').textContent =
+        `Barcha lampochka turlari (${rowCount} ta)`;
+
+    if (rowCount === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                    Maʼlumot topilmadi
+                </td>
+            </tr>
+        `;
+    }
+}
+
         // 15. Kategoriya lampochkalarini ko'rsatish/yashirish
         function toggleCategoryLamps() {
             const section = document.getElementById('categoryLampsSection');

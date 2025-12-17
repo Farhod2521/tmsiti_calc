@@ -1781,91 +1781,79 @@
             document.getElementById('efficiencyTag').textContent = `Tejamkorlik: ${efficiency}`;
             document.getElementById('brightnessTag').textContent = `Yorug'lik: ${brightnessLevel}`;
         }
-        function updateCategoryLampsTable() {
-            const tableBody = document.getElementById('categoryLampsBody');
-            tableBody.innerHTML = '';
-            
-            let rowCount = 0;
-            
-            Object.keys(calculatedLampsByCategory).forEach(category => {
-                const lampData = calculatedLampsByCategory[category];
-                const lamp = lampData.lamp;
-                const count = lampData.count;
-                const powerPerLamp = parseInt(lamp.power) || 0;
-                const totalPower = powerPerLamp * count;
-                const cleanliness = lampData.cleanlinessCoefficient || 1.5;
-                const colorCoeff = lampData.colorCoefficient || 0.5;
-                
-                const row = document.createElement('tr');
-                
-                // Rasmi
-                const imgCell = document.createElement('td');
-                if (lamp.image) {
-                    const img = document.createElement('img');
-                    img.src = lamp.image;
-                    img.alt = lamp.name;
-                    img.className = 'category-image';
-                    imgCell.appendChild(img);
-                } else {
-                    imgCell.textContent = '-';
-                }
-                
-                // Nomi
-                const nameCell = document.createElement('td');
-                nameCell.textContent = lamp.name || '-';
-                
-                // Kategoriya
-                const categoryCell = document.createElement('td');
-                categoryCell.textContent = category;
-                
-                // Kerakli soni
-                const countCell = document.createElement('td');
-                countCell.innerHTML = `<strong>${count} ta</strong>`;
-                
-                // Quvvat (bitta)
-                const powerCell = document.createElement('td');
-                powerCell.textContent = `${powerPerLamp}W`;
-                
-                // Jami quvvat
-                const totalPowerCell = document.createElement('td');
-                totalPowerCell.innerHTML = `<strong>${totalPower}W</strong>`;
-                
-                row.appendChild(imgCell);
-                row.appendChild(nameCell);
-                row.appendChild(categoryCell);
-                row.appendChild(countCell);
-                row.appendChild(powerCell);
-                row.appendChild(totalPowerCell);
-                
-                tableBody.appendChild(row);
-                rowCount++;
-            });
-            
-            // Jadval sarlavhasini yangilash
-            const cleanliness = document.getElementById('roomCleanliness').value;
-            let cleanlinessText = '';
-            switch(cleanliness) {
-                case '1.25': cleanlinessText = 'Juda toza xona'; break;
-                case '1.5': cleanlinessText = 'Toza xona'; break;
-                case '1.75': cleanlinessText = 'O\'rtacha toza'; break;
-                case '2': cleanlinessText = 'Toza emas'; break;
-                default: cleanlinessText = '';
-            }
-            
-            document.getElementById('categoryLampsTitle').textContent = 
-                `Barcha lampochka turlari (${rowCount} ta kategoriya) - ${cleanlinessText}`;
-            
-            // Agar hech narsa bo'lmasa
-            if (rowCount === 0) {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="text-center text-muted">
-                            Iltimos, xona tozaligi va rang kombinatsiyasini tanlang
-                        </td>
-                    </tr>
-                `;
-            }
+function updateCategoryLampsTable() {
+    const tableBody = document.getElementById('categoryLampsBody');
+    tableBody.innerHTML = '';
+
+    let rowCount = 0;
+
+    Object.values(calculatedLampsByCategory).forEach(lampData => {
+        const lamp = lampData.lamp;
+        const count = lampData.count;
+
+        const powerPerLamp = parseInt(lamp.power) || 0;
+        const lumenPerLamp = lamp.luminous_flux_max || 0;
+        const totalPower = powerPerLamp * count;
+
+        const row = document.createElement('tr');
+
+        // 🖼 Rasmi
+        const imgCell = document.createElement('td');
+        if (lamp.image) {
+            const img = document.createElement('img');
+            img.src = lamp.image;
+            img.alt = lamp.name;
+            img.className = 'category-image';
+            imgCell.appendChild(img);
+        } else {
+            imgCell.textContent = '-';
         }
+
+        // 📛 Nomi
+        const nameCell = document.createElement('td');
+        nameCell.textContent = lamp.name || '-';
+
+        // 🔢 Kerakli soni
+        const countCell = document.createElement('td');
+        countCell.innerHTML = `<strong>${count} ta</strong>`;
+
+        // ⚡ Quvvat (bitta)
+        const powerCell = document.createElement('td');
+        powerCell.textContent = `${powerPerLamp} W`;
+
+        // 💡 Lumen (bitta)  ← ASOSIY O‘ZGARISH
+        const lumenCell = document.createElement('td');
+        lumenCell.textContent = `${lumenPerLamp.toLocaleString()} lm`;
+
+        // ⚡⚡ Jami quvvat
+        const totalPowerCell = document.createElement('td');
+        totalPowerCell.innerHTML = `<strong>${totalPower} W</strong>`;
+
+        row.appendChild(imgCell);
+        row.appendChild(nameCell);
+        row.appendChild(countCell);
+        row.appendChild(powerCell);
+        row.appendChild(lumenCell);
+        row.appendChild(totalPowerCell);
+
+        tableBody.appendChild(row);
+        rowCount++;
+    });
+
+    document.getElementById('categoryLampsTitle').textContent =
+        `Barcha lampochka turlari (${rowCount} ta)`;
+
+    if (rowCount === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                    Maʼlumot topilmadi
+                </td>
+            </tr>
+        `;
+    }
+}
+
         // 15. Kategoriya lampochkalarini ko'rsatish/yashirish
         function toggleCategoryLamps() {
             const section = document.getElementById('categoryLampsSection');
