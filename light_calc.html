@@ -177,6 +177,16 @@
                                 <option value="0/0/0">Juda qorong'i (0/0/0)</option>
                             </select>
                         </div>
+                        <div class="param-group">
+                            <label class="param-label">Xona tozalik koeffitsienti</label>
+                            <select class="form-select" id="roomCleanliness" onchange="calculateLamps()">
+                                <option value="">-- Xona tozaligini tanlang --</option>
+                                <option value="1.25">Juda toza xona (1.25)</option>
+                                <option value="1.5">Toza xona (1.5)</option>
+                                <option value="1.75">O'rtacha toza (1.75)</option>
+                                <option value="2">Uncha yaxshi emas (2)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 
@@ -281,7 +291,7 @@
                                     
                                     <div class="flex-grow-1">
                                         <div class="badge-recommend">
-                                            <span class="badge-icon"><i class="fa-solid fa-circle-check"></i></span>
+                                            <span class="badge-icon">✓</span>
                                             BIZNING TAVSIYAMIZ
                                         </div>
                                         <h1 class="product-title" id="productTitle">LED Lampa</h1>
@@ -371,10 +381,6 @@
             <div class="col-lg-11">
                 <!-- Technical Requirements Table -->
                 <div class="tech-table-card">
-                    <div class="tech-table-header">
-                        <div class="tech-table-title">Texnik talablar (Normativ)</div>
-                        <div class="tech-table-subtitle">KMK 2.01.05-19</div>
-                    </div>
                     <table class="tech-table">
                         <thead>
                             <tr>
@@ -393,17 +399,17 @@
                 </div>
                 
                 <!-- Recommended Lighting -->
-                <div class="lights-section">
+                <!-- <div class="lights-section">
                     <div class="lights-title">LAMPOCHKA TURLARI</div>
                     <div class="row g-3" id="recommendedLights">
-                        <!-- API dan yuklanadigan lampochkalar shu yerga joylashtiriladi -->
+                      
                         <div class="col-12 text-center">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">Yuklanmoqda...</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

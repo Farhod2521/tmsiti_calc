@@ -1,4 +1,4 @@
-       // O'zgaruvchilar
+    // O'zgaruvchilar
         let dimensions = {
             width: 3.0,
             length: 3.0,
@@ -13,7 +13,7 @@
         let lampGroups = {};
         let selectedLampType = '';
         let calculatedLampsByCategory = {}; // Kategoriya bo'yicha hisoblangan lampochkalar
-        
+        let currentCleanlinessCoefficient = 1.5;
         // Light indeks ma'lumotlari
         const lightIndices = [
             {
@@ -65,8 +65,40 @@
                 ]
             }
         ];
-        
-        // 1. Dastur yuklanganda bino toifalarini va lampochkalarni yuklash
+        // AI Maslahatchi uchun alohida hisoblash funksiyasi
+        function calculateAIAdvisor() {
+            // AI uchun doimiy qiymatlar (rasmdagi kabi)
+            const aiMF = 0.80; // Maintenance Factor
+            const aiUF = 0.60; // Utilization Factor (taxminiy)
+            
+            // Xona parametrlari
+            const width = dimensions.width;
+            const length = dimensions.length;
+            const area = width * length;
+            const lk = currentLk || 150; // Agar currentLk bo'lmasa, 150 lux
+            
+            // Ishchi balandlik (rasmdagi kabi)
+            const workHeight = 0.8; // Ishchi tekislik
+            const ceilingHeight = dimensions.height;
+            const hm = ceilingHeight - workHeight; // Hm = 2.2 m (rasmdagi misolda)
+            
+            // Room Index hisoblash (faqat tekshiruv uchun)
+            const k = (length * width) / (hm * (length + width));
+            
+            // Umumiy yorug'lik oqimini hisoblash (rasmdagi formula)
+            const totalLumens = Math.round((lk * area) / (aiUF * aiMF));
+            
+            return {
+                area: area,
+                requiredLux: lk,
+                roomHeight: hm,
+                roomIndex: k,
+                totalLumens: totalLumens,
+                maintenanceFactor: aiMF,
+                utilizationFactor: aiUF
+            };
+        }
+                // 1. Dastur yuklanganda bino toifalarini va lampochkalarni yuklash
         document.addEventListener('DOMContentLoaded', async function() {
             await Promise.all([
                 loadBuildingCategories(),
@@ -393,46 +425,42 @@
                     `<i class="bi bi-check-circle me-1"></i>Norma-min ${Math.round(area * currentLk)} lm`;
             }
         }
-        
-        // 11. Lampochkalarni hisoblash - ASOSIY FUNKSIYA
+        // 11. Lampochkalarni hisoblash - TO'G'RILANGAN FUNKSIYA
         function calculateLamps() {
-            if (!document.getElementById('roomType').value || roomDetails.length === 0) {
-                hideAIandRecommendation();
-                return;
-            }
-            
+            // Barcha parametrlar tanlangani tekshirish
+            const roomType = document.getElementById('roomType').value;
             const colorScheme = document.getElementById('colorScheme').value;
-            if (!colorScheme) {
+            const roomCleanliness = document.getElementById('roomCleanliness').value;
+            
+            if (!roomType || !colorScheme || !roomCleanliness || roomDetails.length === 0) {
                 hideAIandRecommendation();
+                document.getElementById('lightingInfoAlert').classList.remove('show');
                 return;
             }
             
             // AI bo'limini ko'rsatish
             document.getElementById('aiSection').classList.add('show');
             
+            // Boshlang'ich AI matnini ko'rsatish
+            document.getElementById('aiAdvice').innerHTML = 
+                "Xona parametrlari tahlil qilinmoqda. AI maslahatchi sizga eng yaxshi yoritish variantini tavsiya qiladi.";
+            
             // Xona parametrlari
             const area = dimensions.width * dimensions.length;
-            const h = dimensions.height;
-            const h1 = roomDetails[0].table_height || 0;
             const lk = currentLk;
-            const a = dimensions.width;
-            const b = dimensions.length;
-            const i = area / ((h - h1) * (a + b));
             
-            // Eng yaqin indeksni topish
+            // Eng yaqin indeksni topish (xona tozalik koeffitsienti)
             let closestIndex = lightIndices[0];
-            for (const indexData of lightIndices) {
-                if (Math.abs(indexData.indeks - i) < Math.abs(closestIndex.indeks - i)) {
-                    closestIndex = indexData;
-                }
-            }
+            const x = parseFloat(roomCleanliness); // xona tozalik koeffitsienti
             
             // Rang kombinatsiyasi uchun koeffitsientni topish
             let coefficient = 0.5;
-            for (const koeff of closestIndex.koeffitsientlar) {
-                if (koeff.rang === colorScheme) {
-                    coefficient = koeff.qiymat;
-                    break;
+            for (const indexData of lightIndices) {
+                for (const koeff of indexData.koeffitsientlar) {
+                    if (koeff.rang === colorScheme) {
+                        coefficient = koeff.qiymat;
+                        break;
+                    }
                 }
             }
             
@@ -450,14 +478,17 @@
                     const F = lamp.luminous_flux_max || 0;
                     if (F === 0) return;
                     
-                    const n = Math.ceil((lk * area) / (coefficient * F * i));
+                    // TO'G'RI FORMULA: N = (s × lk) / (ranglar koeffsenti × lampochka lm × X)
+                    const n = Math.ceil((lk * area) / (coefficient * F * x));
                     
                     if (n < minLampsInCategory) {
                         minLampsInCategory = n;
                         bestLampInCategory = {
                             lamp: lamp,
                             count: n,
-                            totalPower: (parseInt(lamp.power) || 0) * n
+                            totalPower: (parseInt(lamp.power) || 0) * n,
+                            cleanlinessCoefficient: x,
+                            colorCoefficient: coefficient
                         };
                     }
                     
@@ -467,7 +498,9 @@
                             lamp: lamp,
                             count: n,
                             totalPower: (parseInt(lamp.power) || 0) * n,
-                            category: category
+                            category: category,
+                            cleanlinessCoefficient: x,
+                            colorCoefficient: coefficient
                         };
                     }
                 });
@@ -479,46 +512,165 @@
             
             // Eng yaxshi lampochkani ko'rsatish
             if (bestLampOverall) {
-                updateProductCard(bestLampOverall.lamp, bestLampOverall.count);
-                updateAIAdvice(bestLampOverall.lamp, bestLampOverall.count);
+                updateProductCard(bestLampOverall.lamp, bestLampOverall.count, bestLampOverall.cleanlinessCoefficient, bestLampOverall.colorCoefficient);
+                
+                // AI maslahatini animatsiya bilan ko'rsatish
+                updateAIAdvice(bestLampOverall.lamp, bestLampOverall.count, bestLampOverall.cleanlinessCoefficient, bestLampOverall.colorCoefficient);
+                
                 updateCategoryLampsTable();
             }
-        }
+        } 
+
         
-        // 12. Mahsulot kartasini yangilash
-        function updateProductCard(lamp, count) {
+        
+        // 12. Mahsulot kartasini yangilash (to'g'rilangan)
+        function updateProductCard(lamp, count, cleanlinessCoefficient, colorCoefficient) {
             document.getElementById('productImage').src = lamp.image || 'https://via.placeholder.com/110x110?text=No+Image';
             document.getElementById('productImage').alt = lamp.name;
             document.getElementById('productTitle').textContent = lamp.name || 'LED Lampa';
-            document.getElementById('productDesc').textContent = 'Xonaning o\'lcham va yoritish talablariga eng mos keladigan variant.';
+            document.getElementById('lightingInfoAlert').classList.add('show');
+            // Koeffitsientlarni hisobga olgan holda tavsiya
+            let cleanlinessText = '';
+            let colorText = '';
+            
+            switch(cleanlinessCoefficient) {
+                case 1.25:
+                    cleanlinessText = 'Juda toza xona';
+                    break;
+                case 1.5:
+                    cleanlinessText = 'Toza xona';
+                    break;
+                case 1.75:
+                    cleanlinessText = 'O\'rtacha toza xona';
+                    break;
+                case 2:
+                    cleanlinessText = 'Toza bo\'lmagan xona';
+                    break;
+                default:
+                    cleanlinessText = 'Xona';
+            }
+            
+            // Rang kombinatsiyasini aniqlash
+            const colorScheme = document.getElementById('colorScheme').value;
+            switch(colorScheme) {
+                case '80/80/30':
+                    colorText = 'Juda och ranglar';
+                    break;
+                case '80/50/30':
+                    colorText = 'Och ranglar';
+                    break;
+                case '70/50/20':
+                    colorText = 'O\'rtacha och ranglar';
+                    break;
+                case '50/50/10':
+                    colorText = 'O\'rtacha ranglar';
+                    break;
+                case '50/30/10':
+                    colorText = 'Kulrang / qorong\'i kulrang';
+                    break;
+                case '30/30/10':
+                    colorText = 'Qorong\'i ranglar';
+                    break;
+                case '0/0/0':
+                    colorText = 'Juda qorong\'i';
+                    break;
+                default:
+                    colorText = '';
+            }
+            
+            document.getElementById('productDesc').textContent = 
+                `${cleanlinessText}, ${colorText} uchun eng optimal variant.`;
+            
             document.getElementById('requiredCount').textContent = `${count} ta`;
             
             const powerPerLamp = parseInt(lamp.power) || 0;
-            const totalPower = powerPerLamp;
+            const totalPower = powerPerLamp * count;
             document.getElementById('totalPower').textContent = `${totalPower}W`;
         }
-        
-        // 13. AI maslahatini yangilash
-        function updateAIAdvice(lamp, count) {
+        // 13. AI maslahatini yangilash (to'g'rilangan)
+        // AI javobini animatsiya bilan chiqarish funksiyasi
+        function typeWriter(text, elementId, speed = 30) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = '';
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+        // AI maslahatchiga so'rov yuborish funksiyasi
+        async function getAIAdvice(data) {
+            try {
+                const response = await fetch('https://cal.tmsiti.uz/api/v1/lightbulb/lighting/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+      
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP xatosi! Status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                return result.recommendation || "Maslahat mavjud emas";
+            } catch (error) {
+                console.error('AI maslahatchidan javob olishda xatolik:', error);
+                return "AI maslahatchi bilan bog'lanishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.";
+            }
+        }
+
+        // AI tavsiyalarini yangilash (to'g'rilangan va animatsiya qo'shilgan)
+        async function updateAIAdvice(lamp, count, cleanlinessCoefficient, colorCoefficient) {
             const powerPerLamp = parseInt(lamp.power) || 0;
             const totalPower = powerPerLamp * count;
             const flux = lamp.luminous_flux_max || 0;
             
-            const aiText = `Ushbu xona uchun <strong>${lamp.name}</strong> lampochkasi eng optimal variant. 
-                           <strong>${count} ta</strong> lampochka o'rnatilsa, jami <strong>${totalPower}W</strong> quvvat iste'mol qilinadi. 
-                           Har bir lampochka <strong>${flux} Lm</strong> yorug'lik oqimini ta'minlaydi.`;
+            // AI ga yuboriladigan ma'lumotlar
+            const aiData = {
+                "width": dimensions.width,
+                "length": dimensions.length,
+                "height": dimensions.height,
+                "reflectance": document.getElementById('colorScheme').value || "70/50/20",
+                "required_lux": currentLk || 150,
+                "room_type": document.getElementById('roomType').options[document.getElementById('roomType').selectedIndex]?.text || "turar joy xonasi"
+            };
             
-            document.getElementById('aiAdvice').innerHTML = aiText;
+            // AI javobini so'rash
+            const aiMessage = await getAIAdvice(aiData);
             
+            // Animatsiya boshlash uchun loading holati
+            const aiAdviceElement = document.getElementById('aiAdvice');
+            aiAdviceElement.innerHTML = '<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>';
+            
+            // 1.5 soniya kutib, keyin animatsiya bilan chiqarish
+            setTimeout(() => {
+                typeWriter(aiMessage, 'aiAdvice', 20);
+            }, 1500);
+            
+            // Tejamkorlikni baholash
             let efficiency = "O'rtacha";
-            if (powerPerLamp <= 20) efficiency = "Yuqori";
-            else if (powerPerLamp <= 40) efficiency = "Yaxshi";
+            if (powerPerLamp <= 15) efficiency = "Yuqori tejamkor";
+            else if (powerPerLamp <= 30) efficiency = "Tejamkor";
+            else if (powerPerLamp <= 50) efficiency = "O'rtacha";
+            else efficiency = "Ko'p quvvat";
+            
+            // Yorug'lik darajasi
+            let brightnessLevel = "O'rtacha";
+            if (flux >= 3000) brightnessLevel = "Yuqori";
+            else if (flux >= 1500) brightnessLevel = "Yaxshi";
+            else brightnessLevel = "Past";
             
             document.getElementById('efficiencyTag').textContent = `Tejamkorlik: ${efficiency}`;
-            document.getElementById('brightnessTag').textContent = `Yorug'lik: ${flux}Lm`;
+            document.getElementById('brightnessTag').textContent = `Yorug'lik: ${brightnessLevel}`;
         }
-        
-        // 14. Kategoriya bo'yicha lampochkalar jadvalini yangilash
         function updateCategoryLampsTable() {
             const tableBody = document.getElementById('categoryLampsBody');
             tableBody.innerHTML = '';
@@ -531,6 +683,8 @@
                 const count = lampData.count;
                 const powerPerLamp = parseInt(lamp.power) || 0;
                 const totalPower = powerPerLamp * count;
+                const cleanliness = lampData.cleanlinessCoefficient || 1.5;
+                const colorCoeff = lampData.colorCoefficient || 0.5;
                 
                 const row = document.createElement('tr');
                 
@@ -578,20 +732,30 @@
             });
             
             // Jadval sarlavhasini yangilash
-            document.getElementById('categoryLampsTitle').textContent = `Barcha lampochka turlari (${rowCount} ta kategoriya)`;
+            const cleanliness = document.getElementById('roomCleanliness').value;
+            let cleanlinessText = '';
+            switch(cleanliness) {
+                case '1.25': cleanlinessText = 'Juda toza xona'; break;
+                case '1.5': cleanlinessText = 'Toza xona'; break;
+                case '1.75': cleanlinessText = 'O\'rtacha toza'; break;
+                case '2': cleanlinessText = 'Toza emas'; break;
+                default: cleanlinessText = '';
+            }
+            
+            document.getElementById('categoryLampsTitle').textContent = 
+                `Barcha lampochka turlari (${rowCount} ta kategoriya) - ${cleanlinessText}`;
             
             // Agar hech narsa bo'lmasa
             if (rowCount === 0) {
                 tableBody.innerHTML = `
                     <tr>
                         <td colspan="6" class="text-center text-muted">
-                            Hech qanday lampochka topilmadi
+                            Iltimos, xona tozaligi va rang kombinatsiyasini tanlang
                         </td>
                     </tr>
                 `;
             }
         }
-        
         // 15. Kategoriya lampochkalarini ko'rsatish/yashirish
         function toggleCategoryLamps() {
             const section = document.getElementById('categoryLampsSection');
@@ -699,23 +863,58 @@
             document.getElementById('luxValue').textContent = '---';
         }
         
-        // 19. Yorug'lik oqimini nolga qaytarish
+        // 19. Yorug'lik oqimini nolga qaytarish (o'zgartirilgan)
         function resetLumen() {
             document.getElementById('lumen').textContent = '0';
             document.querySelector('.result-card.green .result-note').innerHTML = 
                 '<i class="bi bi-check-circle me-1"></i>Bino va xona turini tanlang';
+            
+            // Xona tozalik koeffitsientini ham reset qilish
+            document.getElementById('roomCleanliness').selectedIndex = 0;
+            document.getElementById('colorScheme').selectedIndex = 0;
         }
-        
-        // 20. AI va tavsiya bo'limlarini yashirish
+
+        // 20. AI va tavsiya bo'limlarini yashirish (o'zgartirilgan)
         function hideAIandRecommendation() {
-            document.getElementById('aiSection').classList.remove('show');
+            toggleAISection(false);
             document.getElementById('lightingInfoAlert').classList.remove('show');
             document.getElementById('categoryLampsSection').classList.remove('show');
+            document.getElementById('lampsTableContainer').style.display = 'none';
+            
+            // Tozalik koeffitsientiga mos ravishda xabarlar
+            document.querySelectorAll('.light-card').forEach(card => {
+                card.classList.remove('active');
+            });
         }
-        
-        // 21. Qoshimcha variantlarni ko'rsatish
+
+        // 21. Qoshimcha variantlarni ko'rsatish (o'zgartirilgan)
         function showAlternativeVariants() {
-            alert("Boshqa variantlar funktsiyasi ishlaydi. Bu joyda boshqa lampochka turlari ko'rsatiladi.");
+            const cleanliness = document.getElementById('roomCleanliness').value;
+            const colorScheme = document.getElementById('colorScheme').value;
+            
+            if (!cleanliness || !colorScheme) {
+                alert("Iltimos, avval xona tozaligi va rang kombinatsiyasini tanlang!");
+                return;
+            }
+            
+            // Tozalik darajasi bo'yicha qo'shimcha maslahatlar
+            let advice = '';
+            switch(cleanliness) {
+                case '1.25':
+                    advice = 'Juda toza xonalar uchun past quvvatli, ammo yuqori samarali lampochkalarni tanlang.';
+                    break;
+                case '1.5':
+                    advice = 'Toza xonalar uchun standart LED lampochkalar yetarli bo\'ladi.';
+                    break;
+                case '1.75':
+                    advice = 'O\'rtacha tozalikdagi xonalar uchun qo\'shimcha yorug\'lik beradigan lampochkalarni tanlang.';
+                    break;
+                case '2':
+                    advice = 'Toza bo\'lmagan xonalar uchun kuchliroq va changga chidamli lampochkalar tavsiya etiladi.';
+                    break;
+            }
+            
+            alert(`Boshqa variantlar:\n\n${advice}\n\nTozalik koeffitsienti: ${cleanliness}\nRang kombinatsiyasi: ${colorScheme}`);
         }
         
         // 22. Qadamlar uchun bosish qobiliyati

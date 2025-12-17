@@ -1,4 +1,4 @@
-        :root {
+ :root {
             --primary-blue: #4169E1;
             --success-green: #10B981;
             --dark-bg: #2C3E50;
@@ -401,9 +401,9 @@
             border: 1px solid #DBEAFE;
             border-radius: 8px;
             padding: 1rem;
-            font-size: 1rem;
+            font-size: 0.75rem;
             color: #1E40AF;
-            height: 18vh;
+            height: 12vh;
             display: none;
         }
         
@@ -627,6 +627,41 @@
         .ai-content strong {
             color: #2962d4;
             font-weight: 600;
+        }
+        /* Typing animatsiyasi uchun */
+        .typing-dots {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .typing-dots span {
+            animation: typing 1.4s infinite;
+            opacity: 0;
+            margin: 0 2px;
+        }
+
+        .typing-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* AI bo'limi uchun qo'shimcha stillar */
+        .ai-loading {
+            color: #666;
+            font-style: italic;
         }
         .tags-container {
             display: flex;
