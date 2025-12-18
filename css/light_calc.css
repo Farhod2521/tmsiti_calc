@@ -401,9 +401,9 @@
             border: 1px solid #DBEAFE;
             border-radius: 8px;
             padding: 1rem;
-            font-size: 0.75rem;
+            font-size: 1rem;
             color: #1E40AF;
-            height: 12vh;
+            height: 18vh;
             display: none;
         }
         
