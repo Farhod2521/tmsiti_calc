@@ -564,7 +564,7 @@
                     
                     // TO'G'RI FORMULA: N = (s × lk) / (ranglar koeffsenti × lampochka lm × X)
                     const n = Math.ceil((lk * area) / (coefficient * F * x));
-                    
+                    const total_P  = (parseInt(lamp.power) || 0) * n;
                     if (n < minLampsInCategory) {
                         minLampsInCategory = n;
                         bestLampInCategory = {
@@ -577,15 +577,18 @@
                     }
                     
                     if (n < minLampsOverall) {
-                        minLampsOverall = n;
-                        bestLampOverall = {
-                            lamp: lamp,
-                            count: n,
-                            totalPower: (parseInt(lamp.power) || 0) * n,
-                            category: category,
-                            cleanlinessCoefficient: x,
-                            colorCoefficient: coefficient
-                        };
+                        // Faqat "Led лампы в форме капли" turidagi lampochkani hisobga olish
+                        if (lamp.name && lamp.name.includes("Led лампы в форме капли")) {
+                            minLampsOverall = n;
+                            bestLampOverall = {
+                                lamp: lamp,
+                                count: n,
+                                totalPower: (parseInt(lamp.power) || 0) * n,
+                                category: category,
+                                cleanlinessCoefficient: x,
+                                colorCoefficient: coefficient
+                            };
+                        }
                     }
                 });
                 
