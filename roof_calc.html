@@ -223,7 +223,149 @@
 
     
     </div>
+    <script>
+        // Viloyat va tuman ma'lumotlari
+        const regionsData = [
+            {
+                name: "Namangan viloyati",
+                districts: [
+                    { name: "Pop tumani", K: 0.7, H: 0.38 },
+                    { name: "Yangikoʻrgʻon tumani", K: 0.7, H: 0.38 },
+                    { name: "Chortoq tumani", K: 0.7, H: 0.38 }
+                ]
+            },
+            {
+                name: "Toshkent viloyati",
+                districts: [
+                    { name: "Ohangaron tumani", K: 0.7, H: 0.38 },
+                    { name: "Boʻstonliq tumani", K: 0.7, H: 0.38 },
+                    { name: "Qibray tumani", K: 0.7, H: 0.38 },
+                    { name: "Toshkent tumani", K: 0.7, H: 0.38 }
+                ]
+            },
+            {
+                name: "Fargʻona viloyati",
+                districts: [
+                    { name: "Quva tumani", K: 0.7, H: 0.38 },
+                    { name: "Soh tumani", K: 0.7, H: 0.38 },
+                    { name: "Fargʻona tumani", K: 0.7, H: 0.38 }
+                ]
+            },
+            {
+                name: "Qashqadaryo viloyati",
+                districts: [
+                    { name: "Dexqonobod tumani", K: 0.7, H: 0.38 },
+                    { name: "Qamashi tumani", K: 0.7, H: 0.38 },
+                    { name: "Kitob tumani", K: 0.7, H: 0.38 },
+                    { name: "Shahrisabz tumani", K: 0.7, H: 0.38 },
+                    { name: "Yakkabog tumani", K: 0.7, H: 0.38 }
+                ]
+            },
+            {
+                name: "Samarqand viloyati",
+                districts: [
+                    { name: "Nurabod tumani", K: 0.7, H: 0.38 },
+                    { name: "Samarqand tumani", K: 0.7, H: 0.38 },
+                    { name: "Urgut tumani", K: 0.7, H: 0.38 }
+                ]
+            },
+            {
+                name: "Surxondaryo viloyati",
+                districts: [
+                    { name: "Oltinsoy tumani", K: 0.7, H: 0.38 },
+                    { name: "Boysun tumani", K: 0.7, H: 0.38 },
+                    { name: "Sariosiyo tumani", K: 0.7, H: 0.38 },
+                    { name: "Sherobod tumani", K: 0.7, H: 0.38 },
+                    { name: "Uzun tumani", K: 0.7, H: 0.38 }
+                ]
+            }
+        ];
 
+        // Viloyat tanlanganda tumanlarni yuklash
+        document.getElementById('region').addEventListener('change', function() {
+            const regionName = this.value;
+            const districtSelect = document.getElementById('district');
+            
+            districtSelect.innerHTML = '<option value="">Tumanni tanlang</option>';
+            
+            if (regionName) {
+                const region = regionsData.find(r => r.name === regionName);
+                if (region) {
+                    region.districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.name;
+                        option.textContent = district.name;
+                        option.setAttribute('data-k', district.K);
+                        option.setAttribute('data-h', district.H);
+                        districtSelect.appendChild(option);
+                    });
+                    districtSelect.disabled = false;
+                }
+            } else {
+                districtSelect.disabled = true;
+            }
+        });
+
+        // Hisoblash funksiyasi
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            // 1. Tom o'lchamlari
+            const width = parseFloat(document.getElementById('roofWidth').value) || 0;
+            const length = parseFloat(document.getElementById('roofLength').value) || 0;
+            const area = width * length;
+            
+            // 2. Tom turi (yassi yoki nishabli)
+            const roofTypeSelect = document.getElementById('roofType');
+            const roofTypeValue = parseFloat(roofTypeSelect.value);
+            const roofTypeName = roofTypeSelect.options[roofTypeSelect.selectedIndex].text;
+            
+            // 3. Metal turi
+            const metalTypeSelect = document.getElementById('metalType');
+            const metalWeight = parseFloat(metalTypeSelect.value);
+            const metalTypeName = metalTypeSelect.options[metalTypeSelect.selectedIndex].text;
+            
+            // 4. Viloyat va tuman
+            const regionSelect = document.getElementById('region');
+            const districtSelect = document.getElementById('district');
+            const selectedDistrict = districtSelect.options[districtSelect.selectedIndex];
+            
+            // Validatsiya
+            if (width <= 0 || length <= 0) {
+                alert('Iltimos, tomning eni va bo\'yini to\'g\'ri kiriting!');
+                return;
+            }
+            
+            if (!regionSelect.value || !districtSelect.value) {
+                alert('Iltimos, viloyat va tumanni tanlang!');
+                return;
+            }
+            
+            // K va H qiymatlarini olish
+            const K = parseFloat(selectedDistrict.getAttribute('data-k'));
+            const H = parseFloat(selectedDistrict.getAttribute('data-h'));
+            
+            // 4. Qor yuki hisoblash: K * Tom_turi
+            const snowLoad = K * roofTypeValue;
+            
+            // 5. Shamol yuki hisoblash: H * Metal_turi
+            const windLoad = H * metalWeight;
+            
+            // 6. Yakuniy yuk hisoblash
+            const finalLoad = (area * (metalWeight + snowLoad + windLoad)) / 1000;
+            
+            // Natijalarni ko'rsatish
+            document.getElementById('resultArea').textContent = area.toFixed(2);
+            document.getElementById('resultRoofType').textContent = roofTypeName;
+            document.getElementById('resultMetalType').textContent = metalTypeName;
+            document.getElementById('resultLocation').textContent = `${regionSelect.value}, ${districtSelect.value}`;
+            document.getElementById('resultSnowLoad').textContent = snowLoad.toFixed(2);
+            document.getElementById('resultWindLoad').textContent = windLoad.toFixed(2);
+            document.getElementById('resultMaterialWeight').textContent = metalWeight;
+            document.getElementById('resultFinalLoad').textContent = finalLoad.toFixed(2);
+            
+            // Natija qismini ko'rsatish
+            document.getElementById('resultSection').style.display = 'block';
+        });
+    </script>
 <script src="/js/scripts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
