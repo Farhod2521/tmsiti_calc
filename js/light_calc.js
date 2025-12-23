@@ -671,7 +671,7 @@
             document.getElementById('requiredCount').textContent = `${count} ta`;
             
             const powerPerLamp = parseInt(lamp.power) || 0;
-            const totalPower = powerPerLamp * count;
+            const totalPower = powerPerLamp;
             document.getElementById('totalPower').textContent = `${totalPower}W`;
         }
         // 13. AI maslahatini yangilash (to'g'rilangan)
@@ -717,7 +717,7 @@
         // AI tavsiyalarini yangilash (to'g'rilangan va animatsiya qo'shilgan)
         async function updateAIAdvice(lamp, count, cleanlinessCoefficient, colorCoefficient) {
             const powerPerLamp = parseInt(lamp.power) || 0;
-            const totalPower = powerPerLamp * count;
+            const totalPower = powerPerLamp;
             const flux = lamp.luminous_flux_max || 0;
             
             // AI ga yuboriladigan ma'lumotlar
