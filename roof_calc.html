@@ -161,58 +161,118 @@
                         <!-- Hisoblash tugmasi -->
                         <div class="d-grid gap-2 mt-4">
                             <button type="button" class="btn-calculate" id="calculateBtn">
-                                <i class="fas fa-calculator me-2"></i>Hisobla
+                                <i class="fas fa-calculator me-2"></i>Hisoblash
                             </button>
                         </div>
                     </form>
                     
                     <!-- Natijalar -->
-                    <div class="result-box mt-4" id="resultSection" style="display: none;">
-                        <h4 class="result-title"><i class="fas fa-chart-bar me-2"></i>Hisoblash natijalari</h4>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <strong>Tom maydoni:</strong> 
-                                    <span class="result-value" id="resultArea">0</span> m²
+                        <div class="mt-4" id="resultSection" style="display: none;">
+                            <div class="result-header">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>Hisoblash natijalari</h4>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <div class="result-card">
+                                        <div class="result-card-icon" style="background: #2196f3; color: #e3f2fd;">
+                                            <i class="fas fa-th"></i>
+                                        </div>
+                                        <div class="result-card-content">
+                                            <div class="result-card-label">TOM MAYDONI</div>
+                                            <div class="result-card-value">
+                                                <span id="resultArea">0</span> <span class="result-card-unit">m²</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <strong>Tom turi:</strong> 
-                                    <span class="result-value" id="resultRoofType">-</span>
+                                
+                                <div class="col-md-3">
+                                    <div class="result-card">
+                                        <div class="result-card-icon" style="background: #2196f3; color: #e3f2fd;">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                        <div class="result-card-content">
+                                            <div class="result-card-label">TOM TURI</div>
+                                            <div class="result-card-value" style="font-size: 1rem;">
+                                                <span id="resultRoofType">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <strong>Metal turi:</strong> 
-                                    <span class="result-value" id="resultMetalType">-</span>
+                                
+                                <div class="col-md-3">
+                                    <div class="result-card">
+                                        <div class="result-card-icon" style="background: #2196f3; color: #e3f2fd;">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                        <div class="result-card-content">
+                                            <div class="result-card-label">METAL TURI</div>
+                                            <div class="result-card-value" style="font-size: 0.95rem;">
+                                                <span id="resultMetalType">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="result-card"  style="background-color: #e8f5e9;">
+                                        <div class="result-card-icon"   style="background: #4caf50; color: #e8f5e9;">
+                                            <i class="fas fa-weight-hanging"></i>
+                                        </div>
+                                        <div class="result-card-content">
+                                            <div class="result-card-label">YAKUNIY YUK</div>
+                                            <div class="result-card-value">
+                                                <span id="resultFinalLoad">0</span> <span class="result-card-unit">tonna</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <strong>Manzil:</strong> 
-                                    <span class="result-value" id="resultLocation">-</span>
+                            
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-4">
+                                    <div class="result-info-card">
+                                        <div class="result-info-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="result-info-content">
+                                            <div class="result-info-label">Joylashuv</div>
+                                            <div class="result-info-value" id="resultLocation">-</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <strong>Qor yuki (K):</strong> 
-                                    <span class="result-value" id="resultSnowLoad">-</span>
+                                
+                                <div class="col-md-4">
+                                    <div class="result-info-card">
+                                        <div class="result-info-icon">
+                                            <i class="fas fa-snowflake"></i>
+                                        </div>
+                                        <div class="result-info-content">
+                                            <div class="result-info-label">Qor yuki (K)</div>
+                                            <div class="result-info-value">
+                                                <span id="resultSnowLoad">-</span> kN/m²
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <strong>Shamol yuki (H):</strong> 
-                                    <span class="result-value" id="resultWindLoad">-</span>
+                                
+                                <div class="col-md-4">
+                                    <div class="result-info-card">
+                                        <div class="result-info-icon">
+                                            <i class="fas fa-wind"></i>
+                                        </div>
+                                        <div class="result-info-content">
+                                            <div class="result-info-label">Shamol yuki (H)</div>
+                                            <div class="result-info-value">
+                                                <span id="resultWindLoad">-</span> kPa
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="mt-3 pt-3 border-top">
-                            <div class="mb-2" hidden>
-                                <strong>Material vazni:</strong> 
-                                <span class="result-value" id="resultMaterialWeight">-</span> kg/m²
-                            </div>
-                            <div class="mb-2">
-                                <strong>Yakuniy yuk:</strong> 
-                                <span class="result-value" id="resultFinalLoad">-</span> tonna
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- Ma'lumot qismi
                     <div class="info-box">
                         <h5><i class="fas fa-info-circle me-2"></i>Formulalar:</h5>
@@ -228,7 +288,7 @@
 
     
     </div>
-    <script>
+   <script>
         // Viloyat va tuman ma'lumotlari
         const regionsData = [
             {
@@ -311,29 +371,30 @@
             }
         });
 
+        // Sahifa yuklanganda Toshkent viloyati uchun tumanlarni yuklash
+        window.addEventListener('DOMContentLoaded', function() {
+            const regionSelect = document.getElementById('region');
+            regionSelect.dispatchEvent(new Event('change'));
+        });
+
         // Hisoblash funksiyasi
         document.getElementById('calculateBtn').addEventListener('click', function() {
-            // 1. Tom o'lchamlari
             const width = parseFloat(document.getElementById('roofWidth').value) || 0;
             const length = parseFloat(document.getElementById('roofLength').value) || 0;
             const area = width * length;
             
-            // 2. Tom turi (yassi yoki nishabli)
             const roofTypeSelect = document.getElementById('roofType');
             const roofTypeValue = parseFloat(roofTypeSelect.value);
             const roofTypeName = roofTypeSelect.options[roofTypeSelect.selectedIndex].text;
             
-            // 3. Metal turi
             const metalTypeSelect = document.getElementById('metalType');
             const metalWeight = parseFloat(metalTypeSelect.value);
             const metalTypeName = metalTypeSelect.options[metalTypeSelect.selectedIndex].text;
             
-            // 4. Viloyat va tuman
             const regionSelect = document.getElementById('region');
             const districtSelect = document.getElementById('district');
             const selectedDistrict = districtSelect.options[districtSelect.selectedIndex];
             
-            // Validatsiya
             if (width <= 0 || length <= 0) {
                 alert('Iltimos, tomning eni va bo\'yini to\'g\'ri kiriting!');
                 return;
@@ -344,31 +405,25 @@
                 return;
             }
             
-            // K va H qiymatlarini olish
             const K = parseFloat(selectedDistrict.getAttribute('data-k'));
             const H = parseFloat(selectedDistrict.getAttribute('data-h'));
             
-            // 4. Qor yuki hisoblash: K * Tom_turi
             const snowLoad = K * roofTypeValue;
-            
-            // 5. Shamol yuki hisoblash: H * Metal_turi
             const windLoad = H * metalWeight;
-            
-            // 6. Yakuniy yuk hisoblash
             const finalLoad = (area * (metalWeight + snowLoad + windLoad)) / 1000;
             
-            // Natijalarni ko'rsatish
             document.getElementById('resultArea').textContent = area.toFixed(2);
             document.getElementById('resultRoofType').textContent = roofTypeName;
             document.getElementById('resultMetalType').textContent = metalTypeName;
             document.getElementById('resultLocation').textContent = `${regionSelect.value}, ${districtSelect.value}`;
             document.getElementById('resultSnowLoad').textContent = snowLoad.toFixed(2);
             document.getElementById('resultWindLoad').textContent = windLoad.toFixed(2);
-            document.getElementById('resultMaterialWeight').textContent = metalWeight;
             document.getElementById('resultFinalLoad').textContent = finalLoad.toFixed(2);
             
-            // Natija qismini ko'rsatish
             document.getElementById('resultSection').style.display = 'block';
+            
+            // Smooth scroll to results
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
     </script>
 <script src="/js/scripts.js"></script>
