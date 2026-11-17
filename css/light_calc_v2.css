@@ -1,0 +1,393 @@
+/* ===== Yorug'lik kalkulyatori — yangi dizayn ===== */
+
+.lc-page {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+.lc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+.lc-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ---- Kartalar ---- */
+.lc-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #e8eef8;
+    border-radius: 22px;
+    padding: 16px;
+    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.06);
+    overflow: hidden;
+}
+
+.lc-card-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 4px 6px 16px;
+    z-index: 1;
+}
+
+/* o'ng yuqori burchakdagi "shisha" bezak */
+.lc-card::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 150px;
+    height: 80px;
+    border-radius: 0 16px 0 80px;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.lc-card-blue::before {
+    background: linear-gradient(135deg, rgba(219, 234, 254, 0) 20%, #bfdbfe 70%, #dbeafe 100%);
+}
+
+.lc-card-green::before {
+    background: linear-gradient(135deg, rgba(209, 250, 229, 0) 20%, #a7f3d0 70%, #d1fae5 100%);
+}
+
+.lc-head-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #e0ecff 0%, #c7dbff 100%);
+    color: #1d6ff2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.lc-card-head h2 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 4px;
+}
+
+.lc-card-head p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.lc-card-inner {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid #edf1f7;
+    border-radius: 16px;
+    padding: 10px 18px;
+}
+
+.lc-row-icon {
+    color: #475569;
+    width: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* ---- O'lcham qatorlari ---- */
+.lc-dim-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 0;
+}
+
+.lc-row-label {
+    flex: 1;
+    font-size: 16px;
+    color: #0f172a;
+}
+
+.lc-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lc-counter button {
+    width: 40px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid #dbe5f3;
+    background: #f5f8fd;
+    color: #1d6ff2;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lc-counter button:hover {
+    background: #1d6ff2;
+    border-color: #1d6ff2;
+    color: #fff;
+}
+
+.lc-counter-value {
+    width: 76px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+    border-bottom: 1px solid #e5eaf2;
+    padding: 4px 0;
+}
+
+/* ---- Parametr qatorlari ---- */
+.lc-param-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+}
+
+.lc-param-row label {
+    flex: 0 0 42%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+}
+
+.lc-param-row .form-select {
+    flex: 1;
+    min-width: 0;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #dfe6f1;
+    padding-left: 18px;
+    font-size: 15px;
+    color: #475569;
+    background-color: #fff;
+    box-shadow: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lc-param-row .form-select:disabled {
+    background-color: #eef3fb;
+    border-color: #eef3fb;
+    color: #64748b;
+}
+
+.lc-param-row .form-select:focus {
+    border-color: #1d6ff2;
+    box-shadow: 0 0 0 4px rgba(29, 111, 242, 0.12);
+}
+
+.lc-param-row .form-select.lc-invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+}
+
+/* ---- Xona ko'rinishi ---- */
+.lc-preview-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.lc-preview {
+    position: relative;
+    flex: 1;
+    min-height: 380px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(to top right, #edf2fa 0%, #d4e3f9 55%, #a9c9f7 100%);
+}
+
+/* Rasm doim kvadrat — badge'lar strelkalar ustida aniq turadi */
+.lc-room-box {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+}
+
+.lc-room-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.lc-badge {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #0f172a;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.10);
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.lc-badge-left   { left: 25%; top: 19%; }
+.lc-badge-right  { left: 75%; top: 18%; }
+.lc-badge-height { left: 93%; top: 48%; }
+
+.lc-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.lc-btn {
+    height: 58px;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.lc-btn-reset {
+    background: #d6e6fd;
+    color: #1d4ed8;
+}
+
+.lc-btn-reset:hover {
+    background: #c3d9fb;
+}
+
+.lc-btn-reset:hover i {
+    transform: rotate(-180deg);
+}
+
+.lc-btn i {
+    transition: transform 0.4s ease;
+}
+
+.lc-btn-calc {
+    background: linear-gradient(135deg, #10c47a 0%, #0aa866 100%);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.30);
+}
+
+.lc-btn-calc:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(16, 185, 129, 0.38);
+}
+
+/* ---- Natija kartalari ---- */
+.lc-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.lc-results .result-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: none;
+    border-radius: 20px;
+    padding: 22px 26px;
+    height: auto;
+}
+
+.lc-results .result-card.blue {
+    background: linear-gradient(135deg, #2f6df0 0%, #1d4ed8 100%);
+    box-shadow: 0 10px 26px rgba(29, 78, 216, 0.25);
+}
+
+.lc-results .result-card.green {
+    background: linear-gradient(135deg, #12c287 0%, #0a9f6b 100%);
+    box-shadow: 0 10px 26px rgba(16, 185, 129, 0.25);
+}
+
+.result-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+}
+
+.lc-page .info-alert {
+    margin-top: 20px;
+    border-radius: 16px;
+}
+
+/* ---- Dark mode ---- */
+body.dark-mode .lc-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+body.dark-mode .lc-card-inner {
+    background: #0f172a;
+    border-color: #334155;
+}
+body.dark-mode .lc-card-head h2,
+body.dark-mode .lc-row-label,
+body.dark-mode .lc-counter-value,
+body.dark-mode .lc-param-row label { color: #f1f5f9; }
+body.dark-mode .lc-card-head p,
+body.dark-mode .lc-row-icon { color: #94a3b8; }
+body.dark-mode .lc-card::before { opacity: 0.15; }
+body.dark-mode .lc-counter button {
+    background: #1e293b;
+    border-color: #334155;
+    color: #60a5fa;
+}
+body.dark-mode .lc-param-row .form-select {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+body.dark-mode .lc-btn-reset { background: #1e3a8a; color: #dbeafe; }
+
+/* ---- Responsive ---- */
+@media (max-width: 1200px) {
+    .lc-grid { grid-template-columns: 1fr; }
+    .lc-preview { min-height: 0; aspect-ratio: 1.25 / 1; flex: none; }
+}
+
+@media (max-width: 576px) {
+    .lc-param-row { flex-direction: column; align-items: stretch; gap: 8px; }
+    .lc-param-row label { flex: none; }
+    .lc-row-label { font-size: 15px; }
+    .lc-counter-value { width: 52px; }
+    .lc-counter button { width: 36px; }
+    .lc-results { grid-template-columns: 1fr; }
+    .lc-badge { font-size: 12px; padding: 5px 10px; }
+    .lc-btn { height: 50px; font-size: 15px; }
+}

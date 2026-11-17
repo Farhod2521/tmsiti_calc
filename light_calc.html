@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="css/light_calc.css">
+    <link rel="stylesheet" href="css/light_calc_v2.css">
 </head>
 <body>
     <div class="sidebar" id="sidebar">
@@ -95,80 +96,76 @@
                 <button class="login-btn">Bog'lanish</button>
             </div>
         </div>
-    <div class="container-fluid py-4">
-        <div class="row g-4">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-5">
-                <div class="parameters-box">
-                    <div class="parameters-header">
-                        <h2 class="parameters-title">
-                            <i class="bi bi-rulers"></i>
-                            Xona o'lchamlari (Metr)
-                        </h2>
+    <div class="lc-page">
+        <div class="lc-grid">
+            <!-- ===== Chap ustun: parametrlar ===== -->
+            <div class="lc-left">
+                <div class="lc-card lc-card-blue">
+                    <div class="lc-card-head">
+                        <div class="lc-head-icon"><i class="fas fa-cube"></i></div>
+                        <div>
+                            <h2>Xona o'lchamlari (metr)</h2>
+                            <p>Xonaning asosiy o'lchamlarini kiriting</p>
+                        </div>
                     </div>
-                    
-                    <div class="parameters-body">
-                        <div class="param-group">
-                            <div class="dimension-control">
-                                <span class="dimension-label">Xona kenglikgi</span>
-                                <div class="counter-wrapper">
-                                    <button class="counter-btn" onclick="changeDimension('width', -0.1)">−</button>
-                                    <div class="counter-value" id="width">3.0</div>
-                                    <button class="counter-btn" onclick="changeDimension('width', 0.1)">+</button>
-                                </div>
+                    <div class="lc-card-inner">
+                        <div class="lc-dim-row">
+                            <i class="fas fa-left-right lc-row-icon"></i>
+                            <span class="lc-row-label">Xona kengligi</span>
+                            <div class="lc-counter">
+                                <button type="button" onclick="changeDimension('width', -0.1)"><i class="fas fa-minus"></i></button>
+                                <div class="lc-counter-value" id="width">3.0</div>
+                                <button type="button" onclick="changeDimension('width', 0.1)"><i class="fas fa-plus"></i></button>
                             </div>
-                            
-                            <div class="dimension-control">
-                                <span class="dimension-label">Xona uzunligi</span>
-                                <div class="counter-wrapper">
-                                    <button class="counter-btn" onclick="changeDimension('length', -0.1)">−</button>
-                                    <div class="counter-value" id="length">3.0</div>
-                                    <button class="counter-btn" onclick="changeDimension('length', 0.1)">+</button>
-                                </div>
+                        </div>
+                        <div class="lc-dim-row">
+                            <i class="fas fa-up-down lc-row-icon"></i>
+                            <span class="lc-row-label">Xona uzunligi</span>
+                            <div class="lc-counter">
+                                <button type="button" onclick="changeDimension('length', -0.1)"><i class="fas fa-minus"></i></button>
+                                <div class="lc-counter-value" id="length">3.0</div>
+                                <button type="button" onclick="changeDimension('length', 0.1)"><i class="fas fa-plus"></i></button>
                             </div>
-                            
-                            <div class="dimension-control">
-                                <span class="dimension-label">Xona balandligi</span>
-                                <div class="counter-wrapper">
-                                    <button class="counter-btn" onclick="changeDimension('height', -0.1)">−</button>
-                                    <div class="counter-value" id="height">3.0</div>
-                                    <button class="counter-btn" onclick="changeDimension('height', 0.1)">+</button>
-                                </div>
+                        </div>
+                        <div class="lc-dim-row">
+                            <i class="fas fa-layer-group lc-row-icon"></i>
+                            <span class="lc-row-label">Xona balandligi</span>
+                            <div class="lc-counter">
+                                <button type="button" onclick="changeDimension('height', -0.1)"><i class="fas fa-minus"></i></button>
+                                <div class="lc-counter-value" id="height">3.0</div>
+                                <button type="button" onclick="changeDimension('height', 0.1)"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Parameters Box 2 -->
-                <div class="parameters-box">
-                    <div class="parameters-header">
-                        <h2 class="parameters-title">
-                            <i class="bi bi-sliders"></i>
-                            Qo'shimcha parametrlar
-                        </h2>
+
+                <div class="lc-card lc-card-green">
+                    <div class="lc-card-head">
+                        <div class="lc-head-icon"><i class="fas fa-gear"></i></div>
+                        <div>
+                            <h2>Qo'shimcha parametrlar</h2>
+                            <p>Hisoblash uchun qo'shimcha ma'lumotlar</p>
+                        </div>
                     </div>
-                    
-                    <div class="parameters-body">
-                        <div class="param-group">
-                            <label class="param-label">Bino toifasi</label>
+                    <div class="lc-card-inner">
+                        <div class="lc-param-row">
+                            <label for="buildingType"><i class="fas fa-building lc-row-icon"></i> Bino toifasi</label>
                             <select class="form-select" id="buildingType" onchange="onBuildingTypeChange()">
-                                <option value="">-- Bino toifasini tanlang --</option>
+                                <option value="">Bino toifasini tanlang...</option>
                                 <!-- API dan yuklanadi -->
                             </select>
                         </div>
-                        
-                        <div class="param-group">
-                            <label class="param-label">Xona turi</label>
+                        <div class="lc-param-row">
+                            <label for="roomType"><i class="fas fa-couch lc-row-icon"></i> Xona turi</label>
                             <select class="form-select" id="roomType" onchange="onRoomTypeChange()" disabled>
-                                <option value="">-- Avval bino turini tanlang --</option>
+                                <option value="">Avval bino turini tanlang...</option>
                                 <!-- API dan yuklanadi -->
                             </select>
                         </div>
-                        
-                        <div class="param-group">
-                            <label class="param-label">Ranglar kombinatsiyasi</label>
+                        <div class="lc-param-row">
+                            <label for="colorScheme"><i class="fas fa-palette lc-row-icon"></i> Ranglar kombinatsiyasi</label>
                             <select class="form-select" id="colorScheme" onchange="calculateLamps()">
-                                <option value="">-- Rang kombinatsiyasini tanlang --</option>
+                                <option value="">Rang kombinatsiyasini tanlang...</option>
                                 <option value="80/80/30">Juda och ranglar (80/80/30)</option>
                                 <option value="80/50/30">Och ranglar (80/50/30)</option>
                                 <option value="70/50/20">O'rtacha och ranglar (70/50/20)</option>
@@ -178,10 +175,10 @@
                                 <option value="0/0/0">Juda qorong'i (0/0/0)</option>
                             </select>
                         </div>
-                        <div class="param-group">
-                            <label class="param-label">Xona tozalik koeffitsienti</label>
+                        <div class="lc-param-row">
+                            <label for="roomCleanliness"><i class="fas fa-broom lc-row-icon"></i> Xona tozalik koeffitsienti</label>
                             <select class="form-select" id="roomCleanliness" onchange="calculateLamps()">
-                                <option value="">-- Xona tozaligini tanlang --</option>
+                                <option value="">Xona tozaligini tanlang...</option>
                                 <option value="1.25">Juda toza xona (1.25)</option>
                                 <option value="1.5">Toza xona (1.5)</option>
                                 <option value="1.75">O'rtacha toza (1.75)</option>
@@ -190,229 +187,197 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Info Alert - Boshlang'ichda yashirin -->
-                <div class="info-alert" id="lightingInfoAlert">
-                    <div class="d-flex align-items-start">
-                        <i class="bi bi-info-circle flex-shrink-0"></i>
-                        <div id="lightingInfo">
-                            <i class="fas fa-info-circle"></i>
-                            <strong>SHNQ 2.01.05-19 ("Tabiiy va sun'iy yoritish") talablariga muvofiq</strong>,
-                            <span id="buildingTypeText">tanlangan bino toifasi</span>ga mansub
-                            <span id="roomTypeText">tanlangan xona turi</span> uchun
-                            minimal yoritish darajasi
-                            <strong><span id="luxValue">---</span> Lk</strong>
-                            bo'lishi talab etiladi.
+            </div>
+
+            <!-- ===== O'ng ustun: xona ko'rinishi ===== -->
+            <div class="lc-card lc-preview-card">
+                <div class="lc-preview">
+                    <div class="lc-room-box">
+                        <img src="images/room_blue.webp" class="lc-room-img" alt="Xona rasmi">
+                        <div class="lc-badge lc-badge-left"><span id="dimRight">3.0 m</span></div>
+                        <div class="lc-badge lc-badge-right"><span id="dimBottom">3.0 m</span></div>
+                        <div class="lc-badge lc-badge-height"><span id="dimTop">3.0 m</span></div>
+                    </div>
+                </div>
+                <div class="lc-actions">
+                    <button type="button" class="lc-btn lc-btn-reset" onclick="resetLightCalc()">
+                        <i class="fas fa-rotate"></i> Qayta tiklash
+                    </button>
+                    <button type="button" class="lc-btn lc-btn-calc" onclick="runLightCalc()">
+                        <i class="fas fa-calculator"></i> Hisoblash
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Natijalar ===== -->
+        <div class="lc-results" id="lcResults">
+            <div class="result-card blue">
+                <div class="result-icon"><i class="fas fa-vector-square"></i></div>
+                <div>
+                    <div class="result-label">Umumiy maydon</div>
+                    <div class="d-flex align-items-baseline">
+                        <div class="result-value" id="area">9.00</div>
+                        <div class="result-unit ms-2">m²</div>
+                    </div>
+                    <div class="result-note"><i class="fas fa-ruler-combined me-1"></i>Kvadrat metrda</div>
+                </div>
+            </div>
+            <div class="result-card green">
+                <div class="result-icon"><i class="fas fa-lightbulb"></i></div>
+                <div>
+                    <div class="result-label">Umumiy yorug'lik oqimi</div>
+                    <div class="d-flex align-items-baseline">
+                        <div class="result-value" id="lumen">0</div>
+                        <div class="result-unit ms-2">lm</div>
+                    </div>
+                    <div class="result-note"><i class="bi bi-check-circle me-1"></i>Bino va xona turini tanlang</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Alert - Boshlang'ichda yashirin -->
+        <div class="info-alert" id="lightingInfoAlert">
+            <div class="d-flex align-items-start">
+                <div id="lightingInfo">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>SHNQ 2.01.05-19 ("Tabiiy va sun'iy yoritish") talablariga muvofiq</strong>,
+                    <span id="buildingTypeText">tanlangan bino toifasi</span>ga mansub
+                    <span id="roomTypeText">tanlangan xona turi</span> uchun
+                    minimal yoritish darajasi
+                    <strong><span id="luxValue">---</span> Lk</strong>
+                    bo'lishi talab etiladi.
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Maslahatchi va Tavsiya bo'limlari - Boshlang'ichda yashirin -->
+        <div class="ai-section" id="aiSection">
+            <div class="row g-3 mt-2">
+                <div class="col-lg-8">
+                    <div class="product-card" id="productCard">
+                        <div class="product-header">
+                            <img src="" alt="LED Lampa" class="product-image" id="productImage">
+                            <div class="flex-grow-1">
+                                <div class="badge-recommend">
+                                    <span class="material-symbols-outlined text-blue-600 text-[20px] shrink-0 mt-0.5">verified</span>
+                                    BIZNING TAVSIYAMIZ
+                                </div>
+                                <h1 class="product-title" id="productTitle">LED Lampa</h1>
+                                <p class="product-desc" id="productDesc">Xonaning o'lcham va yoritish talablariga eng mos keladigan variant.</p>
+                                <div class="specs-row">
+                                    <div class="spec-item">
+                                        <div class="spec-label">KERAKLI SONI</div>
+                                        <div class="spec-value" id="requiredCount">---</div>
+                                    </div>
+                                    <div class="spec-divider"></div>
+                                    <div class="spec-item">
+                                        <div class="spec-label">QUVVAT</div>
+                                        <div class="spec-value" id="totalPower">---</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <button class="details-toggle" onclick="toggleCategoryLamps()">
+                            <span>Barcha lampochka turlarini ko'rish</span>
+                            <span>▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ai-card">
+                        <div class="ai-header">
+                            <div class="ai-icon-wrapper">
+                                <span class="ai-icon">🤖</span>
+                            </div>
+                            <div class="ai-title">AI Maslahatchi</div>
+                        </div>
+                        <div class="ai-message-box">
+                            <div class="ai-content" id="aiAdvice">
+                                Xona turi va ranglar kombinatsiyasi tanlang. AI maslahatchi sizga eng yaxshi yoritish variantini tavsiya qiladi.
+                            </div>
+                            <div class="tags-container">
+                                <span class="tag" id="efficiencyTag">Tejamkorlik: ---</span>
+                                <span class="tag" id="brightnessTag">Yorug'lik: ---</span>
+                            </div>
+                        </div>
+                        <button class="btn-variants" onclick="showAlternativeVariants()">
+                            <span>Boshqa variantlarni ko'rish</span>
+                            <span>→</span>
+                        </button>
                     </div>
                 </div>
             </div>
-            
-            <!-- Center Column - Room Preview -->
-            <div class="col-lg-6">
-                <div class="room-preview-card">
-                    <div class="room-preview">
-                        <img src="images/room.jpg" class="room-image" alt="Xona rasmi">
 
-                        <div class="dimension-badge top">
-                            <span id="dimTop">3.0 m</span>
-                        </div>
-
-                        <div class="dimension-badge right">
-                            <span id="dimRight">3.0 m</span>
-                        </div>
-
-                        <div class="dimension-badge bottom">
-                           <span id="dimBottom">3.0 m</span>
-                        </div>
-                    </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6 col-lg-6">
-                            <div class="result-card blue">
-                                <div class="result-label">Umumiy maydon</div>
-                                <div class="d-flex align-items-baseline">
-                                    <div class="result-value" id="area">9.00</div>
-                                    <div class="result-unit ms-2">m²</div>
-                                </div>
-                                <div class="result-note">
-                                    <i class="bi bi-calendar-check me-1"></i>Kvadrat metrda
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="result-card green">
-                                <div class="result-label">Umumiy yorug'lik oqimi</div>
-                                <div class="d-flex align-items-baseline">
-                                    <div class="result-value" id="lumen">0</div>
-                                    <div class="result-unit ms-2">lm</div>
-                                </div>
-                                <div class="result-note">
-                                    <i class="bi bi-check-circle me-1"></i>Bino va xona turini tanlang
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- AI Maslahatchi va Tavsiya bo'limlari - Boshlang'ichda yashirin -->
-
-                
-                <!-- Lamps Table Section (PASTDA joylashadi) -->
-                <div class="tech-table-card" id="lampsTableContainer" style="display: none;">
+            <!-- Kategoriya bo'yicha lampochkalar jadvali -->
+            <div class="category-lamps-section" id="categoryLampsSection">
+                <div class="tech-table-card mt-4">
                     <div class="tech-table-header">
-                        <div class="tech-table-title" id="lampsTableTitle">Lampochkalar ro'yxati</div>
-                        <div class="tech-table-subtitle">Quvvat bo'yicha tartiblangan</div>
+                        <div class="tech-table-title" id="categoryLampsTitle">Barcha lampochka turlari</div>
+                        <div class="tech-table-subtitle">Kategoriya bo'yicha tartiblangan</div>
                     </div>
                     <div class="table-responsive">
-                        <table class="lamps-table" id="lampsTable">
+                        <table class="category-lamps-table" id="categoryLampsTable">
                             <thead>
                                 <tr>
                                     <th>Rasmi</th>
                                     <th>Nomi</th>
-                                    <th>Quvvat</th>
-                                    <th>Yorug'lik oqimi</th>
-                                    <th>O'lchamlari</th>
+                                    <th>Kerakli soni</th>
+                                    <th>Quvvat (bitta)</th>
+                                    <th>Lumen (bitta)</th>
+                                    <th>Jami quvvat</th>
                                 </tr>
                             </thead>
-                            <tbody id="lampsTableBody">
-                                <!-- Lampochkalar shu yerga joylashtiriladi -->
+                            <tbody id="categoryLampsBody">
+                                <!-- Kategoriya lampochkalari shu yerga joylashtiriladi -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-11">
-                                <div class="ai-section" id="aiSection">
-                    <div class="row g-3 mt-4">
-                        <!-- Chap - Mahsulot kartasi (col-lg-8) -->
-                        <div class="col-lg-8">
-                            <div class="product-card" id="productCard">
-                                <div class="product-header">
-                                    <img src="" alt="LED Lampa" class="product-image" id="productImage">
-                                    
-                                    <div class="flex-grow-1">
-                                        <div class="badge-recommend">
-                                            <span class="material-symbols-outlined text-blue-600 text-[20px] shrink-0 mt-0.5">verified</span>
-                                            BIZNING TAVSIYAMIZ
-                                        </div>
-                                        <h1 class="product-title" id="productTitle">LED Lampa</h1>
-                                        <p class="product-desc" id="productDesc">Xonaning o'lcham va yoritish talablariga eng mos keladigan variant.</p>
-                                        
-                                        <div class="specs-row">
-                                            <div class="spec-item">
-                                                <div class="spec-label">KERAKLI SONI</div>
-                                                <div class="spec-value" id="requiredCount">---</div>
-                                            </div>
-                                            <div class="spec-divider"></div>
-                                            <div class="spec-item">
-                                                <div class="spec-label">QUVVAT</div>
-                                                <div class="spec-value" id="totalPower">---</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <button class="details-toggle" onclick="toggleCategoryLamps()">
-                                    <span>Barcha lampochka turlarini ko'rish</span>
-                                    <span>▼</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- O'ng - AI Maslahatchi (col-lg-4) -->
-                        <div class="col-lg-4">
-                            <div class="ai-card">
-                                <div class="ai-header">
-                                    <div class="ai-icon-wrapper">
-                                        <span class="ai-icon">🤖</span>
-                                    </div>
-                                    <div class="ai-title">AI Maslahatchi</div>
-                                </div>
-                                
-                                <div class="ai-message-box">
-                                    <div class="ai-content" id="aiAdvice">
-                                        Xona turi va ranglar kombinatsiyasi tanlang. AI maslahatchi sizga eng yaxshi yoritish variantini tavsiya qiladi.
-                                    </div>
-                                    
-                                    <div class="tags-container">
-                                        <span class="tag" id="efficiencyTag">Tejamkorlik: ---</span>
-                                        <span class="tag" id="brightnessTag">Yorug'lik: ---</span>
-                                    </div>
-                                </div>
-                                
-                                <button class="btn-variants" onclick="showAlternativeVariants()">
-                                    <span>Boshqa variantlarni ko'rish</span>
-                                    <span>→</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Kategoriya bo'yicha lampochkalar jadvali -->
-                    <div class="category-lamps-section" id="categoryLampsSection">
-                        <div class="tech-table-card mt-4">
-                            <div class="tech-table-header">
-                                <div class="tech-table-title" id="categoryLampsTitle">Barcha lampochka turlari</div>
-                                <div class="tech-table-subtitle">Kategoriya bo'yicha tartiblangan</div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="category-lamps-table" id="categoryLampsTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Rasmi</th>
-                                            <th>Nomi</th>
-                                            <th>Kerakli soni</th>
-                                            <th>Quvvat (bitta)</th>
-                                            <th>Lumen (bitta)</th>
-                                            <th>Jami quvvat</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="categoryLampsBody">
-                                        <!-- Kategoriya lampochkalari shu yerga joylashtiriladi -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
+
+        <!-- Lampochkalar jadvali -->
+        <div class="tech-table-card mt-4" id="lampsTableContainer" style="display: none;">
+            <div class="tech-table-header">
+                <div class="tech-table-title" id="lampsTableTitle">Lampochkalar ro'yxati</div>
+                <div class="tech-table-subtitle">Quvvat bo'yicha tartiblangan</div>
             </div>
-            <div class="col-lg-1"></div>
-            
-            <!-- Right Column - Results -->
-            <div class="col-lg-11">
-                <!-- Technical Requirements Table -->
-                <div class="tech-table-card">
-                    <table class="tech-table">
-                        <thead>
-                            <tr>
-                                <th>KATEGORIYA</th>
-                                <th>LK (LM/M²)</th>
-                                <th>RA (CRI)</th>
-                                <th>UGR</th>
-                            </tr>
-                        </thead>
-                        <tbody id="techTableBody">
-                            <tr>
-                                <td colspan="4" class="text-center text-muted">Bino va xona turini tanlang</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!-- Recommended Lighting -->
-                <!-- <div class="lights-section">
-                    <div class="lights-title">LAMPOCHKA TURLARI</div>
-                    <div class="row g-3" id="recommendedLights">
-                      
-                        <div class="col-12 text-center">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Yuklanmoqda...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+            <div class="table-responsive">
+                <table class="lamps-table" id="lampsTable">
+                    <thead>
+                        <tr>
+                            <th>Rasmi</th>
+                            <th>Nomi</th>
+                            <th>Quvvat</th>
+                            <th>Yorug'lik oqimi</th>
+                            <th>O'lchamlari</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lampsTableBody">
+                        <!-- Lampochkalar shu yerga joylashtiriladi -->
+                    </tbody>
+                </table>
             </div>
+        </div>
+
+        <!-- Texnik talablar jadvali -->
+        <div class="tech-table-card mt-4">
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>KATEGORIYA</th>
+                        <th>LK (LM/M²)</th>
+                        <th>RA (CRI)</th>
+                        <th>UGR</th>
+                    </tr>
+                </thead>
+                <tbody id="techTableBody">
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Bino va xona turini tanlang</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -420,6 +385,43 @@
 
 <script src="/js/scripts.js"></script>
 <script src="/js/light_calc.js"></script>
+<script>
+    // light_calc.js da chaqiriladi, lekin e'lon qilinmagan edi
+    if (typeof toggleAISection !== 'function') {
+        window.toggleAISection = function (show) {
+            document.getElementById('aiSection').classList.toggle('show', !!show);
+        };
+    }
+
+    // "Qayta tiklash": o'lchamlar va tanlovlarni boshlang'ich holatga qaytaradi
+    function resetLightCalc() {
+        ['width', 'length', 'height'].forEach(t => changeDimension(t, 3.0 - dimensions[t]));
+        document.getElementById('buildingType').value = '';
+        onBuildingTypeChange();
+        document.querySelectorAll('.lc-invalid').forEach(el => el.classList.remove('lc-invalid'));
+    }
+
+    // "Hisoblash": to'ldirilmagan maydonlarni belgilaydi, aks holda natijaga o'tadi
+    function runLightCalc() {
+        const ids = ['buildingType', 'roomType', 'colorScheme', 'roomCleanliness'];
+        const empty = ids.map(id => document.getElementById(id)).filter(el => !el.value);
+        ids.forEach(id => document.getElementById(id).classList.remove('lc-invalid'));
+        if (empty.length) {
+            empty.forEach(el => el.classList.add('lc-invalid'));
+            empty[0].focus();
+            return;
+        }
+        calculate();
+        calculateLamps();
+        document.getElementById('lcResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.addEventListener('change', e => {
+        if (e.target.classList && e.target.classList.contains('lc-invalid') && e.target.value) {
+            e.target.classList.remove('lc-invalid');
+        }
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
