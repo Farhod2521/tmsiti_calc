@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
     <div class="sidebar" id="sidebar">
@@ -94,70 +97,79 @@
             </div>
         </div>
 
-        <div class="hero">
-            <div class="hero-content">
-                <span class="version-badge">
-                    <i class="fas fa-circle" style="font-size: 8px; color: #10b981;"></i>
-                    Yangi interfeys versiyasi 2.0
-                </span>
-                <h1>Qurilish<br>Kalkulyatorlari</h1>
-                <p>Loyihangiz uchun barcha hisob-kitoblarni bir joyda, aniq va tez bajaring. Zamonaviy standartlar asosida ishlab chiqilgan.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary">Boshlash</button>
-                    <button class="btn-secondary">Qanday ishlaydi?</button>
+        <section class="home-hero">
+            <div class="home-hero-content">
+                <span class="home-badge"><span class="dot"></span> Yangi interfeys versiyasi 2.0</span>
+                <h1>Qurilish<br><span>Kalkulyatorlari</span></h1>
+                <p class="lead-text">Loyihangiz uchun barcha hisob-kitoblarni bir joyda, aniq va tez bajaring. Zamonaviy standartlar asosida ishlab chiqilgan.</p>
+                <div class="home-hero-buttons">
+                    <a href="#calculators" class="home-btn primary"><i class="fas fa-calculator"></i> Boshlash <i class="fas fa-arrow-right"></i></a>
+                    <a href="#calculators" class="home-btn ghost"><i class="far fa-circle-play"></i> Qanday ishlaydi?</a>
+                </div>
+                <div class="home-features">
+                    <div class="home-feature">
+                        <div class="home-feature-icon orange"><i class="fas fa-bolt"></i></div>
+                        <div><b>Tez hisoblash</b><small>Bir necha soniyada natija</small></div>
+                    </div>
+                    <div class="home-feature">
+                        <div class="home-feature-icon blue"><i class="fas fa-shield-halved"></i></div>
+                        <div><b>Ishonchli</b><small>Normativlarga asoslangan</small></div>
+                    </div>
+                    <div class="home-feature">
+                        <div class="home-feature-icon blue"><i class="fas fa-layer-group"></i></div>
+                        <div><b>Ko'p vositalar</b><small>Barcha hisob-kitoblar bir joyda</small></div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section-header">
+        <div class="section-header" id="calculators">
             <div>
                 <h2>Ommabop Kalkulyatorlar</h2>
                 <p>Eng ko'p ishlatiladigan hisob-kitob vositalari</p>
             </div>
-            <a href="#" class="view-all">
+            <a href="#calculators" class="view-all">
                 Barchasini ko'rish <i class="fas fa-arrow-right"></i>
             </a>
         </div>
 
-        <div class="calculators-grid">
-           
-            <div class="calc-card yellow" style="background-color: #fffbeb;">
-                <div class="calc-icon-wrapper">
-                    <div class="calc-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="home-cards">
+            <a href="light_calc.html" class="home-card yellow">
+                <img class="home-card-img" src="images/home/light.webp" alt="Yorug'lik">
+                <div class="home-card-body">
+                    <div class="home-card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3>Yorug'lik Kalkulyatori</h3>
+                    <p>Xona o'lchami va turiga qarab kerakli yoritish quvvatini hisoblang.</p>
+                    <span class="home-card-btn">Hisoblash <i class="fas fa-arrow-right"></i></span>
                 </div>
-                <h3>Yorug'lik Kalkulyatori</h3>
-                <p>Xona o'lchami va turiga qarab kerakli yorlitish quvvatini hisoblang.</p>
-                <a href="light_calc.html"><span class="calc-link">Hisoblash <i class="fas fa-arrow-right"></i></span></a>
-            </div>
-
-            <div class="calc-card red" style="background-color: #fef2f2;">
-                <div class="calc-icon-wrapper">
-                    <div class="calc-icon"><i class="fas fa-fire"></i></div>
+            </a>
+            <a href="heating_calc.html" class="home-card red">
+                <img class="home-card-img" src="images/home/heating.webp" alt="Isitish">
+                <div class="home-card-body">
+                    <div class="home-card-icon"><i class="fas fa-fire"></i></div>
+                    <h3>Isitish Tizimi</h3>
+                    <p>Binodagi issiqlik yo'qotishlari va radiatorlar sonini aniqlash.</p>
+                    <span class="home-card-btn">Hisoblash <i class="fas fa-arrow-right"></i></span>
                 </div>
-                <h3>Isitish Tizimi</h3>
-                <p>Binodagi isiqlik yo'qotishlari va radiatorlar sonini aniqlash.</p>
-                <a href="heating_calc.html"><span class="calc-link">Hisoblash <i class="fas fa-arrow-right"></i></span></a>
-            </div>
-
-            <div class="calc-card blue" style="background-color: #e0ecfc;">
-                <div class="calc-icon-wrapper">
-                    <div class="calc-icon"><i class="fa-solid fa-house-chimney"></i></div>
+            </a>
+            <a href="roof_calc.html" class="home-card blue">
+                <img class="home-card-img" src="images/home/roof.webp" alt="Tom yopish">
+                <div class="home-card-body">
+                    <div class="home-card-icon"><i class="fa-solid fa-house"></i></div>
+                    <h3>Tom Yopish</h3>
+                    <p>Tom yuzasi va kerakli qurilish materiallari sarfini hisoblash.</p>
+                    <span class="home-card-btn">Hisoblash <i class="fas fa-arrow-right"></i></span>
                 </div>
-                <h3>Tom Yopish</h3>
-                <p>Tom yuzasi va kerakli qurilish materiallari sarfini hisoblash.</p>
-                <a href="roof_calc.html"><span class="calc-link">Hisoblash <i class="fas fa-arrow-right"></i></span></a>
-            </div>
-
-            <div class="calc-card green" style="background-color: #f0fdfa;">
-                <div class="calc-icon-wrapper">
-                    <div class="calc-icon"><i class="fas fa-leaf"></i></div>
+            </a>
+            <a href="green_calc.html" class="home-card green">
+                <img class="home-card-img" src="images/home/green.webp" alt="Yashil qurilish">
+                <div class="home-card-body">
+                    <div class="home-card-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Yashil Qurilish</h3>
+                    <p>Energiya tejamkor va ekologik toza qurilish yechimlarini hisoblash.</p>
+                    <span class="home-card-btn">Hisoblash <i class="fas fa-arrow-right"></i></span>
                 </div>
-                <h3>Yashil Qurilish</h3>
-                <p>Energiya tejamkor va ekologik toza qurilish yechimlarini hisoblash.</p>
-                <a href="green_calc.html"><span class="calc-link">Hisoblash <i class="fas fa-arrow-right"></i></span></a>
-            </div>
-
-
+            </a>
         </div>
     </div>
 
